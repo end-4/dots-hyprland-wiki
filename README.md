@@ -22,7 +22,16 @@ URL: <https://end-4.github.io/dots-hyprland-wiki/en>
 - [Expressive-code](https://expressive-code.com/key-features/text-markers/)
 
 ## Howto
-- Edit sidebar: `astro.config.mjs`
+- Edit/add pages: Under `src/content/docs/en/`.
+- Edit sidebar: Edit `astro.config.mjs`.
+
+### l10n
+- Manage languages: Edit `astro.config.mjs`.
+- Translate pages: Under `src/content/docs/<lang>/`.
+
+> [!IMPORTANT]
+> Always prioritize updating the English documents,
+> so that other languages can be uniformly updated through English translation.
 
 ## Notes
 - Every link will be converted to lowercase, even if the original markdown filename contains uppercase. A uppercase inside path of link will result in a `404`.
