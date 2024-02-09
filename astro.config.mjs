@@ -15,26 +15,54 @@ export default defineConfig({
           baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
       },
       customCss: ['./src/styles/custom.css'],
+      tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 2, },
       favicon: '/favicon.ico',
       defaultLocale: 'en',
+      // English docs in `src/content/docs/en/`
+      // Other lang docs in `src/content/docs/<lang>/`
       locales: {
-        // English docs in `src/content/docs/en/`
         'en': {
-          label: 'English',
+          label: 'English', // Engligh
           lang: 'en',
         },
-        // Simplified Chinese docs in `src/content/docs/zh-CN/`
+        'ru': {
+          label: 'Russian', //Russian
+          lang: 'ru',
+        },
+        'pl': {
+          label: 'Polish', //Polish
+          lang: 'pl',
+        },
+        'ro': {
+          label: 'Romanian', //Romanian
+          lang: 'ro',
+        },
+        'fr': {
+          label: 'French', //French
+          lang: 'fr',
+        },
+        'tr': {
+          label: 'Turkish', //Turkish
+          lang: 'tr',
+        },
+        'jp': {
+          label: 'Japanese', //Japanese
+          lang: 'jp',
+        },
         'zh-CN': {
-          label: '简体中文',
+          label: '简体中文', //Simplified Chinese
           lang: 'zh-CN',
         },
-        // Vietnamese docs in `src/content/docs/vn/`
         'vn': {
-          label: 'Tiếng Việt',
+          label: 'Tiếng Việt', // Vietnamese
           lang: 'vn',
         },
       },
 			sidebar: [
+				{
+					label: 'General',
+					autogenerate: { directory: 'general' },
+				},
 				{
 					label: 'Illogical Impulse',
           // idk why but it won't work when using `illogical-impulse'

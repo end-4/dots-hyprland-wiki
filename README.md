@@ -36,7 +36,7 @@ The website is hosted on GitHub Pages.
 
 - Edit sidebar: Edit `astro.config.mjs`.
 
-- Edit theme: Edit `src/styles/custom.css`.
+- Edit theme: Edit `src/styles/custom.css` ([Reference](https://starlight.astro.build/guides/css-and-tailwind/)).
 
 > [!IMPORTANT]
 > When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
