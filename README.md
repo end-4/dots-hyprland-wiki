@@ -2,7 +2,7 @@
 
 Documentation for [dots-hyprland](https://github.com/end-4/dots-hyprland).
 
-URL: <https://end-4.github.io/dots-hyprland-wiki/en>
+URL: <https://end-4.github.io/dots-hyprland-wiki>
 
 # Development
 
@@ -36,13 +36,15 @@ The website is hosted on GitHub Pages.
 
 - Edit sidebar: Edit `astro.config.mjs`.
 
+- Edit theme: Edit `src/styles/custom.css`.
+
 > [!IMPORTANT]
-> The character in link path are all lowercase, even if the original markdown filename contains uppercase characters. Any uppercase character inside the path of link will result in a `404`.
+> When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
 
 ### l10n
 
 - Manage languages: Edit `astro.config.mjs`.
-- Translate pages: Under `src/content/docs/<lang>/`.
+- Translate pages: Under `src/content/docs/<lang>/`. Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
 
 > [!IMPORTANT]
 > Always prioritize updating the English documents,
