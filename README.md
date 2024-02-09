@@ -25,8 +25,8 @@ The website is hosted on GitHub Pages.
 > If this error occured: `vips/vips8: no such file or directory`, you may install `libvips` manually, e.g. on Arch Linux: `sudo pacman -S libvips`
 
 > [!IMPORTANT]
-> When running locally, there seems to be a bug that it does NOT obey base url. But it seems okay on GitHub Pages.
-> Therefore, do NOT easily modify a relative link just because a `404` happened locally.
+> When running locally, there seems to be a bug that it does NOT apply a proper base url. But it seems okay on GitHub Pages.
+> Therefore, do NOT easily "fix" a relative link just because a `404` happened locally. Otherwise, while the link for locally hosted site is "fixed", the site on GitHub Pages will be broken.
 
 ## How to
 
