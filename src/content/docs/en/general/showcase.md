@@ -5,7 +5,7 @@ title: Showcase
 # Maintained
 
 ## illogical_impulse
-[Quick Start](/i-i/01setup)
+[Quick Start](../i-i/01setup)
 [GitHub Repo](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
 
 ![image](https://github.com/end-4/dots-hyprland/assets/97237370/abd05702-a248-4f53-ac82-500219aa19f1)
