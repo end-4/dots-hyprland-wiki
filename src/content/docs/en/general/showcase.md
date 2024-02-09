@@ -2,9 +2,12 @@
 title: Showcase
 ---
 
-# Currently maintained
+# Maintained
 
-## [illogical_impulse](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
+## illogical_impulse
+[Quick Start](/i-i/01setup)
+[GitHub Repo](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
+
 ![image](https://github.com/end-4/dots-hyprland/assets/97237370/abd05702-a248-4f53-ac82-500219aa19f1)
 ![image](https://github.com/end-4/dots-hyprland/assets/97237370/9e7adedd-fae8-4cc8-9c81-d7ad489d7559)
 ![image](https://github.com/end-4/dots-hyprland/assets/97237370/354431f6-8939-487f-9292-0bac71cf9ca8)
