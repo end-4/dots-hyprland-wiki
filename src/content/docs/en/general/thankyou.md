@@ -3,6 +3,7 @@ title: Credits
 ---
 
 ## Thank you
+ - [@end-4](https://github.com/end-4) (author and repo owner) for **major work**, including creating sets of awesome config, actively maintaining them and help on solving issues, etc.
  - [@clsty](https://github.com/clsty) for major improvements to the install script, [documentation site](https://github.com/end-4/dots-hyprland-wiki) and their other contributions
  - AGS: [Aylur's config](https://github.com/Aylur/dotfiles), [kotontrion's config](https://github.com/kotontrion/dotfiles)
  - EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw)
@@ -16,4 +17,3 @@ title: Credits
 
 ## Inspirations
  - osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
-
