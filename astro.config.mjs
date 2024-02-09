@@ -12,25 +12,25 @@ export default defineConfig({
 				github: 'https://github.com/end-4/dots-hyprland',
 			},
       editLink: {
-          baseUrl: 'https://github.com/end-4/dots-hyprland/tree/main',
+          baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
       },
       customCss: ['./src/styles/custom.css'],
       favicon: '/favicon.ico',
       defaultLocale: 'en',
       locales: {
-        // en docs in `src/content/docs/en/`
+        // English docs in `src/content/docs/en/`
         'en': {
           label: 'English',
           lang: 'en',
         },
-        // zh-CN docs in `src/content/docs/zh-CN/`
+        // Simplified Chinese docs in `src/content/docs/zh-CN/`
         'zh-CN': {
           label: '简体中文',
           lang: 'zh-CN',
         },
-        // vn docs in `src/content/docs/vn/`
+        // Vietnamese docs in `src/content/docs/vn/`
         'vn': {
-          label: 'Vietnamese',
+          label: 'Tiếng Việt',
           lang: 'vn',
         },
       },
@@ -43,8 +43,13 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Illogical Impulse',
+          // idk why but it won't work when using `illogical-impulse'
+					autogenerate: { directory: 'i-i' },
+				},
+				{
+					label: 'Archives (Not maintained)',
+					autogenerate: { directory: 'archives' },
 				},
 			],
 		}),
