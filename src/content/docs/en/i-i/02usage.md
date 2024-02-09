@@ -5,7 +5,9 @@ layout: /src/layouts/autonum.astro
 
 - For a list of keybinds, hit `Super`+`/`
 - just play around with it a bit and click everywhere ;) this just documents some non-obvious stuff
-# Overview/launcher [ press `Super` to open ]
+
+---
+- Overview/launcher [ press `Super` to open ]
   - **Windows**
     - Drag to move them to different workspaces
     - Right-click for a few options
@@ -19,7 +21,9 @@ layout: /src/layouts/autonum.astro
       - Hit enter directly on the entry to open the typed folder/file
     - <u>Actions</u>: An actions starts with `>`. See the keybind cheatsheet for a list of actions
     - <u>Apps</u> by default, of course!
-# Bar controls:
+
+---
+- **Bar controls:**
   - Media: 
     - Top-right corner
       - Middle-click to play/pause media, Right-click for next track

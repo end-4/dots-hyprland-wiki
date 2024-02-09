@@ -3,8 +3,7 @@ title: Eww
 layout: /src/layouts/autonum.astro
 ---
 
-> [!WARNING]
-> My Eww configs are no longer maintained. I recommend against using them
+> WARNING: This config are no longer maintained. It's recommended against using them.
 
 # Installation
 - Dependencies: See branch-specific dependency list

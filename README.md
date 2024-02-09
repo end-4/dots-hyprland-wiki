@@ -24,12 +24,16 @@ The website is hosted on GitHub Pages.
 > [!NOTE]
 > If this error occured: `vips/vips8: no such file or directory`, you may install `libvips` manually, e.g. on Arch Linux: `sudo pacman -S libvips`
 
-> [!NOTE]
+> [!IMPORTANT]
 > When running locally, there seems to be a bug that it does NOT obey base url. But it seems okay on GitHub Pages.
+> Therefore, do NOT easily modify a relative link just because a `404` happened locally.
 
 ## How to
 
 - Edit/add pages: Edit markdown files under `src/content/docs/en/`.
+
+> To publish HTML files, put it under `src/pages`.
+
 - Edit sidebar: Edit `astro.config.mjs`.
 
 > [!IMPORTANT]

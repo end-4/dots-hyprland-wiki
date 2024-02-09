@@ -3,9 +3,9 @@ title: Installation
 layout: /src/layouts/autonum.astro
 ---
 
-> [!IMPORTANT]
-> - My config only provides user-level customization and is NOT a complete solution for a fresh install. You have to set up network, bluetooth, nvidia stuff, etc. yourself
-> - I personally use (and highly recommend) EndeavourOS GNOME to not have to deal with all that hassle. Though you can use regular Arch just fine. **It's never necessary to reinstall your system for this!** If your distro isn't Arch(-based), you'll have to figure out the equivalents of packages below
+**NOTE**: Below process only provides user-level customization and is NOT a complete solution for a fresh install. You have to set up network, bluetooth, nvidia stuff, etc. yourself
+
+** - I personally use (and highly recommend) EndeavourOS GNOME to not have to deal with all that hassle. Though you can use regular Arch just fine. **It's never necessary to reinstall your system for this!** If your distro isn't Arch(-based), you'll have to figure out the equivalents of packages below
 
 > [!TIP]
 > If you only have 8Gb of ram like me, you might wanna [set up zram](https://forum.endeavouros.com/t/enabling-zram-in-endeavouros/37746) (or swap) before starting the installation, since compiling Hyprland takes quite a bit of resources
