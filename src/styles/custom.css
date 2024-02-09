@@ -1,0 +1,30 @@
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #000000;
+    --sl-color-accent: #81a1c1;
+    --sl-color-accent-high: #81a1c1; /* hyperlinks, selection bg, left-top corner title, etc. */
+    --sl-color-white: #a3be8c; /* highlighted text */
+    --sl-color-gray-1: #eceff4; /* text on top bar */
+    --sl-color-gray-2: #e5e9f0; /* normal text */
+    --sl-color-gray-3: #81a1c1; /* TOC on right side */
+    --sl-color-gray-4: #4c566a;
+    --sl-color-gray-5: #434c5e; /* bullet line on side bar */
+    --sl-color-gray-6: #222632; /* sidebar, topbar */
+    --sl-color-black: #2e3440;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #c5d9f2;
+    --sl-color-accent: #156ac7;
+    --sl-color-accent-high: #11325b;
+    --sl-color-white: #181818;
+    --sl-color-gray-1: #272727;
+    --sl-color-gray-2: #383838;
+    --sl-color-gray-3: #585858;
+    --sl-color-gray-4: #8b8b8b;
+    --sl-color-gray-5: #c2c2c2;
+    --sl-color-gray-6: #eeeeee;
+    --sl-color-gray-7: #f6f6f6;
+    --sl-color-black: #ffffff;
+}
