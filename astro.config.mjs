@@ -36,19 +36,12 @@ export default defineConfig({
       },
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
-				},
-				{
 					label: 'Illogical Impulse',
           // idk why but it won't work when using `illogical-impulse'
 					autogenerate: { directory: 'i-i' },
 				},
 				{
-					label: 'Archives (Not maintained)',
+					label: 'Archives (NOT maintained)',
 					autogenerate: { directory: 'archives' },
 				},
 			],
