@@ -1,5 +1,5 @@
 /* Dark mode colors. */
-:root {
+:root[data-theme='dark'] {
     --sl-color-accent-low: #000000;
     --sl-color-accent: #81a1c1;
     --sl-color-accent-high: #81a1c1; /* hyperlinks, selection bg, left-top corner title, etc. */
@@ -11,6 +11,36 @@
     --sl-color-gray-5: #434c5e; /* bullet line on side bar */
     --sl-color-gray-6: #222632; /* sidebar, topbar */
     --sl-color-black: #2e3440;
+}
+
+/* Page title */
+:root[data-theme='dark'] h1:is(#_top) {
+  color: #a3be8c;
+}
+/* Headings */
+:root[data-theme='dark'] .sl-markdown-content h1 {
+  color: #CD8D7A;
+  font-size: 200%;
+}
+:root[data-theme='dark'] .sl-markdown-content h2 {
+  color: #F6B17A;
+  font-size: 165%;
+}
+:root[data-theme='dark'] .sl-markdown-content h3 {
+  color: #F6ECA9;
+  font-size: 140%;
+}
+:root[data-theme='dark'] .sl-markdown-content h4 {
+  color: #AAD9BB;
+  font-size: 125%;
+}
+:root[data-theme='dark'] .sl-markdown-content h5 {
+  color: #6DA4AA;
+  font-size: 116%;
+}
+:root[data-theme='dark'] .sl-markdown-content h6 {
+  color: #BF90DD;
+  font-size: 110%;
 }
 
 /* Light mode colors. */
@@ -28,3 +58,33 @@
     --sl-color-gray-7: #f6f6f6;
     --sl-color-black: #ffffff;
 }
+/* Page title */
+:root[data-theme='light'] h1:is(#_top) {
+  color: #839e6c;
+}
+/* Headings */
+:root[data-theme='light'] .sl-markdown-content h1 {
+  color: #AD6D5A;
+  font-size: 200%;
+}
+:root[data-theme='light'] .sl-markdown-content h2 {
+  color: #E6A16A;
+  font-size: 165%;
+}
+:root[data-theme='light'] .sl-markdown-content h3 {
+  color: #D6CC99;
+  font-size: 140%;
+}
+:root[data-theme='light'] .sl-markdown-content h4 {
+  color: #8AB99B;
+  font-size: 125%;
+}
+:root[data-theme='light'] .sl-markdown-content h5 {
+  color: #4D848A;
+  font-size: 116%;
+}
+:root[data-theme='light'] .sl-markdown-content h6 {
+  color: #9F70BD;
+  font-size: 110%;
+}
+

@@ -21,6 +21,7 @@ export default defineConfig({
       defaultLocale: 'en',
       // English docs in `src/content/docs/en/`
       // Other lang docs in `src/content/docs/<lang>/`
+      // See also https://github.com/CloudCannon/pagefind/tree/main/pagefind_ui/translations
       locales: {
         'en': {
           label: 'English', // Engligh
@@ -34,10 +35,6 @@ export default defineConfig({
           label: 'Polish', //Polish
           lang: 'pl',
         },
-        'ro': {
-          label: 'Romanian', //Romanian
-          lang: 'ro',
-        },
         'fr': {
           label: 'French', //French
           lang: 'fr',
@@ -46,17 +43,17 @@ export default defineConfig({
           label: 'Turkish', //Turkish
           lang: 'tr',
         },
-        'jp': {
+        'ja': {
           label: 'Japanese', //Japanese
-          lang: 'jp',
+          lang: 'ja',
         },
         'zh-CN': {
           label: '简体中文', //Simplified Chinese
           lang: 'zh-CN',
         },
-        'vn': {
+        'vi': {
           label: 'Tiếng Việt', // Vietnamese
-          lang: 'vn',
+          lang: 'vi',
         },
       },
 			sidebar: [

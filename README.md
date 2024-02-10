@@ -30,13 +30,18 @@ The website is hosted on GitHub Pages.
 
 ## How to
 
-- Edit/add pages: Edit markdown files under `src/content/docs/en/`.
+- Edit/add pages: Edit markdown files under `src/content/docs/en/` (Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content)).
 
 > To publish HTML files, put it under `src/pages`.
 
 - Edit sidebar: Edit `astro.config.mjs`.
 
 - Edit theme: Edit `src/styles/custom.css` ([Reference](https://starlight.astro.build/guides/css-and-tailwind/)).
+
+- Edit homepage: Edit `src/content/docs/en/index.mdx`
+
+> [!NOTE]
+> For Hero component, see <https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro>
 
 > [!IMPORTANT]
 > When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
