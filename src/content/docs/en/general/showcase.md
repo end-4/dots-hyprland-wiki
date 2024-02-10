@@ -2,18 +2,23 @@
 title: Showcase
 ---
 
-# Maintained
+<div align="center">
+    <h1>Maintained</h1>
+</div>
 
 ## illogical_impulse
-[Quick Start](../../i-i/01setup)
-[GitHub](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
+[Quick Start](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
 
 ![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.3.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.4.png)
 
-# Unmaintained
+---
+
+<div align="center">
+    <h1>Unmaintained</h1>
+</div>
 
 :::caution[Warning]
 Stuff below:
