@@ -2,6 +2,8 @@
 title: Showcase
 ---
 
+![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
+
 # Maintained
 
 ## illogical_impulse

@@ -16,7 +16,7 @@ export default defineConfig({
       },
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 2, },
-      favicon: '/favicon.ico',
+      favicon: './favicon.ico',
       lastUpdated: true,
       defaultLocale: 'en',
       // English docs in `src/content/docs/en/`
