@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
+// https://starlight.astro.build/reference/configuration
 export default defineConfig({
   site: 'https://end-4.github.io',
   base: '/dots-hyprland-wiki',
@@ -17,6 +17,7 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 2, },
       favicon: '/favicon.ico',
+      lastUpdated: true,
       defaultLocale: 'en',
       // English docs in `src/content/docs/en/`
       // Other lang docs in `src/content/docs/<lang>/`
