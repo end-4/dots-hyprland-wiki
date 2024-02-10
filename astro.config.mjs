@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/dots-hyprland-wiki',
 	integrations: [
 		starlight({
-			title: 'end-4/dots-hyprland Wiki',
+			title: 'end-4/dots-hyprland',
 			social: {
 				github: 'https://github.com/end-4/dots-hyprland',
 			},
@@ -47,14 +47,14 @@ export default defineConfig({
         //   label: 'Japanese', //Japanese
         //   lang: 'ja',
         // },
-        // 'zh-CN': {
-        //   label: '简体中文', //Simplified Chinese
-        //   lang: 'zh-CN',
-        // },
-        // 'vi': {
-        //   label: 'Tiếng Việt', // Vietnamese
-        //   lang: 'vi',
-        // },
+        'zh-CN': {
+          label: '简体中文', //Simplified Chinese
+          lang: 'zh-CN',
+        },
+        'vi': {
+          label: 'Tiếng Việt', // Vietnamese
+          lang: 'vi',
+        },
       },
 			sidebar: [
 				{
