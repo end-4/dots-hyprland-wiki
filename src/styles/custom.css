@@ -60,31 +60,31 @@
 }
 /* Page title */
 :root[data-theme='light'] h1:is(#_top) {
-  color: #839e6c;
+  color: #261623;
 }
 /* Headings */
 :root[data-theme='light'] .sl-markdown-content h1 {
-  color: #AD6D5A;
+  color: #261623;
   font-size: 200%;
 }
 :root[data-theme='light'] .sl-markdown-content h2 {
-  color: #E6A16A;
+  color: #261623;
   font-size: 165%;
 }
 :root[data-theme='light'] .sl-markdown-content h3 {
-  color: #D6CC99;
+  color: #261623;
   font-size: 140%;
 }
 :root[data-theme='light'] .sl-markdown-content h4 {
-  color: #8AB99B;
+  color: #261623;
   font-size: 125%;
 }
 :root[data-theme='light'] .sl-markdown-content h5 {
-  color: #4D848A;
+  color: #261623;
   font-size: 116%;
 }
 :root[data-theme='light'] .sl-markdown-content h6 {
-  color: #9F70BD;
+  color: #261623;
   font-size: 110%;
 }
 
