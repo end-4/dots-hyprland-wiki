@@ -1,62 +1,62 @@
 /* Dark mode colors. */
 :root[data-theme='dark'] {
-    --sl-color-accent-low: #000000;
-    --sl-color-accent: #81a1c1;
-    --sl-color-accent-high: #81a1c1; /* hyperlinks, selection bg, left-top corner title, etc. */
-    --sl-color-white: #a3be8c; /* highlighted text */
+    --sl-color-accent-low: #551251;
+    --sl-color-accent: #DBBED2;
+    --sl-color-accent-high: #FFC4F5; /* hyperlinks, selection bg, left-top corner title, etc. */
+    --sl-color-white: #D1C2CB; /* highlighted text */
     --sl-color-gray-1: #eceff4; /* text on top bar */
-    --sl-color-gray-2: #e5e9f0; /* normal text */
-    --sl-color-gray-3: #81a1c1; /* TOC on right side */
-    --sl-color-gray-4: #4c566a;
-    --sl-color-gray-5: #434c5e; /* bullet line on side bar */
-    --sl-color-gray-6: #222632; /* sidebar, topbar */
-    --sl-color-black: #2e3440;
+    --sl-color-gray-2: #EAE0E4; /* normal text */
+    --sl-color-gray-3: #DBBED2; /* TOC on right side */
+    --sl-color-gray-4: #554050;
+    --sl-color-gray-5: #3B3338; /* bullet line on side bar */
+    --sl-color-gray-6: #211B1F; /* sidebar, topbar */
+    --sl-color-black: #100D10;
 }
 
 /* Page title */
 :root[data-theme='dark'] h1:is(#_top) {
-  color: #a3be8c;
+  color: #F8DAEE;
 }
 /* Headings */
 :root[data-theme='dark'] .sl-markdown-content h1 {
-  color: #CD8D7A;
+  color: #F8DAEE;
   font-size: 200%;
 }
 :root[data-theme='dark'] .sl-markdown-content h2 {
-  color: #F6B17A;
+  color: #F8DAEE;
   font-size: 165%;
 }
 :root[data-theme='dark'] .sl-markdown-content h3 {
-  color: #F6ECA9;
+  color: #F8DAEE;
   font-size: 140%;
 }
 :root[data-theme='dark'] .sl-markdown-content h4 {
-  color: #AAD9BB;
+  color: #F8DAEE;
   font-size: 125%;
 }
 :root[data-theme='dark'] .sl-markdown-content h5 {
-  color: #6DA4AA;
+  color: #F8DAEE;
   font-size: 116%;
 }
 :root[data-theme='dark'] .sl-markdown-content h6 {
-  color: #BF90DD;
+  color: #F8DAEE;
   font-size: 110%;
 }
 
 /* Light mode colors. */
 :root[data-theme='light'] {
-    --sl-color-accent-low: #c5d9f2;
-    --sl-color-accent: #156ac7;
-    --sl-color-accent-high: #11325b;
-    --sl-color-white: #181818;
-    --sl-color-gray-1: #272727;
-    --sl-color-gray-2: #383838;
-    --sl-color-gray-3: #585858;
+    --sl-color-accent-low: #FFFFFF;
+    --sl-color-accent: #6E5768;
+    --sl-color-accent-high: #8C4483;
+    --sl-color-white: #1F1A1D;
+    --sl-color-gray-1: #1F1A1D;
+    --sl-color-gray-2: #1F1A1D;
+    --sl-color-gray-3: #4E444B;
     --sl-color-gray-4: #8b8b8b;
-    --sl-color-gray-5: #c2c2c2;
-    --sl-color-gray-6: #eeeeee;
-    --sl-color-gray-7: #f6f6f6;
-    --sl-color-black: #ffffff;
+    --sl-color-gray-5: #F8DAEE;
+    --sl-color-gray-6: #FBF7F9;
+    --sl-color-gray-7: #F4EFF4;
+    --sl-color-black: #EDE4EC;
 }
 /* Page title */
 :root[data-theme='light'] h1:is(#_top) {
