@@ -3,7 +3,7 @@ title: m3ww
 layout: /src/layouts/autonum.astro
 ---
 
-> WARNING: This config are no longer maintained. It's recommended against using them.
+> WARNING: My Eww configs are no longer maintained. I recommend against using them
 
 # Description
 - The latest Eww-powered setup that follows the style of [Material Design 3](https://m3.material.io/)
