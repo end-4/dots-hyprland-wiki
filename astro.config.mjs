@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/dots-hyprland-wiki',
 	integrations: [
 		starlight({
-			title: 'dots-hyprland wiki',
+			title: 'end-4/dots-hyprland Wiki',
 			social: {
 				github: 'https://github.com/end-4/dots-hyprland',
 			},
@@ -27,34 +27,34 @@ export default defineConfig({
           label: 'English', // Engligh
           lang: 'en',
         },
-        'ru': {
-          label: 'Russian', //Russian
-          lang: 'ru',
-        },
-        'pl': {
-          label: 'Polish', //Polish
-          lang: 'pl',
-        },
-        'fr': {
-          label: 'French', //French
-          lang: 'fr',
-        },
-        'tr': {
-          label: 'Turkish', //Turkish
-          lang: 'tr',
-        },
-        'ja': {
-          label: 'Japanese', //Japanese
-          lang: 'ja',
-        },
-        'zh-CN': {
-          label: '简体中文', //Simplified Chinese
-          lang: 'zh-CN',
-        },
-        'vi': {
-          label: 'Tiếng Việt', // Vietnamese
-          lang: 'vi',
-        },
+        // 'ru': {
+        //   label: 'Russian', //Russian
+        //   lang: 'ru',
+        // },
+        // 'pl': {
+        //   label: 'Polish', //Polish
+        //   lang: 'pl',
+        // },
+        // 'fr': {
+        //   label: 'French', //French
+        //   lang: 'fr',
+        // },
+        // 'tr': {
+        //   label: 'Turkish', //Turkish
+        //   lang: 'tr',
+        // },
+        // 'ja': {
+        //   label: 'Japanese', //Japanese
+        //   lang: 'ja',
+        // },
+        // 'zh-CN': {
+        //   label: '简体中文', //Simplified Chinese
+        //   lang: 'zh-CN',
+        // },
+        // 'vi': {
+        //   label: 'Tiếng Việt', // Vietnamese
+        //   lang: 'vi',
+        // },
       },
 			sidebar: [
 				{
@@ -67,7 +67,7 @@ export default defineConfig({
 					autogenerate: { directory: 'i-i' },
 				},
 				{
-					label: 'Archives (NOT maintained)',
+					label: 'Archives (unmaintained)',
 					autogenerate: { directory: 'archives' },
 				},
 			],
