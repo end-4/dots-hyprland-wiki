@@ -27,33 +27,33 @@ export default defineConfig({
           label: 'English', // Engligh
           lang: 'en',
         },
-        // 'ru': {
-        //   label: 'Russian', //Russian
-        //   lang: 'ru',
-        // },
-        // 'pl': {
-        //   label: 'Polish', //Polish
-        //   lang: 'pl',
-        // },
         // 'fr': {
         //   label: 'French', //French
         //   lang: 'fr',
-        // },
-        // 'tr': {
-        //   label: 'Turkish', //Turkish
-        //   lang: 'tr',
         // },
         // 'ja': {
         //   label: 'Japanese', //Japanese
         //   lang: 'ja',
         // },
-        'zh-CN': {
-          label: '简体中文', //Simplified Chinese
-          lang: 'zh-CN',
-        },
+        // 'pl': {
+        //   label: 'Polish', //Polish
+        //   lang: 'pl',
+        // },
+        // 'ru': {
+        //   label: 'Russian', //Russian
+        //   lang: 'ru',
+        // },
+        // 'tr': {
+        //   label: 'Turkish', //Turkish
+        //   lang: 'tr',
+        // },
         'vi': {
           label: 'Tiếng Việt', // Vietnamese
           lang: 'vi',
+        },
+        'zh-CN': {
+          label: '简体中文', //Simplified Chinese
+          lang: 'zh-CN',
         },
       },
 			sidebar: [
