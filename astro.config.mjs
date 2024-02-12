@@ -90,6 +90,15 @@ export default defineConfig({
           },
 					autogenerate: { directory: 'dev' },
 				},
+				{
+					label: 'Translate this wiki',
+          collapsed: true,
+          badge: { text: 'Help wanted', variant: 'note' },
+          translations: {
+            'zh-CN': '翻译此文档',
+          },
+          link: '/dev/doc-site/#translation',
+				},
 			],
 		}),
 	],

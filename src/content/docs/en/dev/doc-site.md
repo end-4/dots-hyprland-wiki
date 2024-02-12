@@ -32,13 +32,54 @@ Troubleshooting related contents are also welcomed.
 
 ## Translation
 
-This site has i18n support, and it's our thing to do rest of work, i.e. l10n.
+This site has i18n support, and we need your help to finish l10n (i.e. translation).
 
 :::note
 Please don't waste your time on translating Dev Notes. See [#1](https://github.com/end-4/dots-hyprland-wiki/issues/1#issuecomment-1938696111) for reason.
 :::
 
-**See more under the section [How to - l10n](#l10n) below.**
+**Steps:**
+
+1. Ensure that you have GitHub SSH configured well on your local machine.
+To test this, run `ssh -T git@github.com` in terminal, and if you see:
+```plain
+Hi <Your GitHub username>! You've successfully authenticated, but GitHub does not provide shell access.
+```
+Then you're all set.
+
+2. Fork this repo online, and clone the forked repo to your local machine.
+
+3. Add a language: Edit `astro.config.mjs`.
+:::caution
+Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
+:::
+
+4. Translate pages: Go to directory `src/content/docs/<lang>/`.
+Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
+
+:::caution
+Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
+Take `zh-CN` as Example (in astro.config.mjs):
+```js
+        'zh-cn': {
+          label: '简体中文', //Simplified Chinese
+          lang: 'zh-CN',
+        },
+...
+        label: 'General',
+        translations: {
+          'zh-CN': '通用',
+        },
+```
+As well for the directory name, e.g. `src/content/docs/zh-cn`
+:::
+
+5. When you've finished translation:
+  - `git add .` to track untracked changes under current directory
+  - `git commit -am'Update translation'` to create a commit with description.
+  - `git push` to push to GitHub
+6. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
+Remember to detail what you have done (i.e. which language did you translted to) when you submit.
 
 # Development
 
@@ -85,29 +126,6 @@ There some numbers before the markdown files, but normally they do not have any 
 
 :::caution
 > When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
-:::
-
-### l10n
-
-- Manage languages: Edit `astro.config.mjs`.
-- Translate group labels on sidebar: Edit `astro.config.mjs`.
-- Translate pages: Under `src/content/docs/<lang>/`. Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
-
-:::caution
-Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
-Example: in astro.config.mjs:
-```mjs
-        'zh-cn': {
-          label: '简体中文', //Simplified Chinese
-          lang: 'zh-CN',
-        },
-...
-        label: 'General',
-        translations: {
-          'zh-CN': '通用',
-        },
-```
-As well for the directory name, e.g. `src/content/docs/zh-cn`
 :::
 
 ## References
