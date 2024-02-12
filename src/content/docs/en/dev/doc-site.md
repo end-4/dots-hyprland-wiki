@@ -98,7 +98,7 @@ Then you're all set.
 
 3. Edit `astro.config.mjs` and find the languages under `locales: `. If your language is not listed or is commented, add your language.
 Example:
-```js title="astro.config.mjs" ins={6-9}
+```js title="astro.config.mjs" ins={7-10}
 ...
       locales: {
         'en': {
@@ -113,7 +113,7 @@ Example:
 ```
 You may also add translation for the labels on sidebar under the `sidebar: `.
 Example:
-```js title="astro.config.mjs" ins={5}
+```js title="astro.config.mjs" ins={6}
 ...
       sidebar: [
         {
@@ -135,7 +135,7 @@ Filenames and folder structure are exact the same as which under `src/content/do
 :::caution
 Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
 Take `zh-CN` as Example (in astro.config.mjs):
-```js title="astro.config.mjs" {1,3,8}
+```js title="astro.config.mjs" {2,4,9}
 ...
         'zh-cn': {
           label: '简体中文', //Simplified Chinese
