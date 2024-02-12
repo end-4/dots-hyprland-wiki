@@ -130,8 +130,20 @@ Example:
 Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
 :::
 
-4. Translate pages: Go to directory `src/content/docs/<lang>/`.
-Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
+4. Translate pages: Go to directory `src/content/docs/`.
+- Source language (English): `src/content/docs/en/`.
+- Target language (your language): `src/content/docs/<lang>/`.
+
+If target language directory does not exists, `mkdir` to create it first.
+
+Target language directory has exact the same folder structure and filename as the source language directory,
+and non-existing files and directory in target language directory will fallback to source language (English).
+
+E.g. for Simplified Chinese, `src/content/docs/zh-cn/general/showcase.md` is the translated version of `src/content/docs/en/general/showcase.md`.
+
+:::note
+Again, don't translate Dev Notes under `src/content/docs/en/dev/`, i.e. let them fallback to English.
+:::
 
 :::caution
 Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
