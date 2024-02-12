@@ -38,5 +38,10 @@ References: [Arch Wiki](https://wiki.archlinux.org/title/List_of_applications/Ot
 # AGS
 - Links: [GitHub](https://github.com/Aylur/ags) [Docs](https://aylur.github.io/ags-docs)
 
+AGS is more capable and is more performant than EWW.
+Cool possible stuff include:
+- Swipe-to-dismiss notifications
+- Drag and drop support
+
 # Fabric
 - Links: [GitHub](https://github.com/Fabric-Development/fabric)
