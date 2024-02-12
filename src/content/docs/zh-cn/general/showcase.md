@@ -13,6 +13,7 @@ title: 展示区
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.3.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.4.png)
+![image](/dots-hyprland-wiki/screenshots/i-i.5.png)
 
 ---
 
