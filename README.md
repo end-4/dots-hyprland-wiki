@@ -51,6 +51,16 @@ The website is hosted on GitHub Pages.
 
 - Manage languages: Edit `astro.config.mjs`.
 - Translate pages: Under `src/content/docs/<lang>/`. Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
+> [!DANGER]
+> Use **lowercase** for language labels, except for the `lang:` in `astro.config.mjs`.
+> Example: in astro.config.mjs:
+> ```mjs
+>         'zh-cn': {
+>           label: '简体中文', //Simplified Chinese
+>           lang: 'zh-CN',
+>         },
+> ```
+> As well for the directory name, e.g. `src/content/docs/zh-cn`
 
 > [!IMPORTANT]
 > Always prioritize updating the English documents,

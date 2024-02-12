@@ -51,7 +51,7 @@ export default defineConfig({
           label: 'Tiếng Việt', // Vietnamese
           lang: 'vi',
         },
-        'zh-CN': {
+        'zh-cn': {
           label: '简体中文', //Simplified Chinese
           lang: 'zh-CN',
         },
