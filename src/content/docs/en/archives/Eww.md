@@ -1,10 +1,14 @@
 ---
-title: Eww
+title: Eww (multiple)
 layout: /src/layouts/autonum.astro
 ---
 
-> WARNING: This config are no longer maintained. It's recommended against using them.
+:::danger[Alert]
+These sets of configs are no longer maintained. We recommend against using them.
+:::
 
+# Description
+Several sets of configs, including `windoes`, `hybrid` and `NovelKnock`, etc.
 # Installation
 - Dependencies: See branch-specific dependency list
 - Copy these
