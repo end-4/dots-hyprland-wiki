@@ -60,6 +60,7 @@ export default defineConfig({
 				{
 					label: 'General',
           translations: {
+            'vi': 'Chung',
             'zh-CN': '通用',
           },
 					autogenerate: { directory: 'general' },
@@ -72,6 +73,7 @@ export default defineConfig({
 				{
 					label: 'Archives (unmaintained)',
           translations: {
+            'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
           },
 					autogenerate: { directory: 'archives' },
