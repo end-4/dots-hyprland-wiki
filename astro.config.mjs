@@ -56,17 +56,17 @@ export default defineConfig({
           lang: 'zh-CN',
         },
       },
-			sidebar: [
-				{
-					label: 'General',
+      sidebar: [
+        {
+          label: 'General',
           translations: {
             'vi': 'Chung',
             'zh-CN': '通用',
           },
-					autogenerate: { directory: 'general' },
-				},
-				{
-					label: 'Illogical Impulse',
+          autogenerate: { directory: 'general' },
+        },
+        {
+          label: 'Illogical Impulse',
           // idk how to translate badge for group label, guess just a "New" should be ok to everyone though.
           badge: { text: 'New', variant: 'success' },
           // idk why but it won't work when using `illogical-impulse'

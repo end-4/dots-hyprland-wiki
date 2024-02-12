@@ -10,76 +10,7 @@ sidebar:
 
 This page "documents" this "document site" itself.
 
-The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki) and it's open to contribution.
-
-# Contribute to dots-hyprland-wiki
-We sincerely thanks for all contributors.
-
-You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
-
-If you're unsure about a possible PR, you may create a Discussion before you work on it.
-
-:::caution
-Always prioritize updating the English documents,
-so that other languages can be uniformly updated through English translation.
-:::
-
-## Content
-Typically, if you have successfully contributed a new function/workflow/... to [dots-hyprland](https://github.com/end-4/dots-hyprland),
-and if it needs documentation, then you're very welcomed to submit a PR here to document it.
-
-Troubleshooting related contents are also welcomed.
-
-## Translation
-
-This site has i18n support, and we need your help to finish l10n (i.e. translation).
-
-:::note
-Please don't waste your time on translating Dev Notes. See [#1](https://github.com/end-4/dots-hyprland-wiki/issues/1#issuecomment-1938696111) for reason.
-:::
-
-**Steps:**
-
-1. Ensure that you have GitHub SSH configured well on your local machine.
-To test this, run `ssh -T git@github.com` in terminal, and if you see:
-```plain
-Hi <Your GitHub username>! You've successfully authenticated, but GitHub does not provide shell access.
-```
-Then you're all set.
-
-2. Fork this repo online, and clone the forked repo to your local machine.
-
-3. Add a language: Edit `astro.config.mjs`.
-:::caution
-Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
-:::
-
-4. Translate pages: Go to directory `src/content/docs/<lang>/`.
-Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
-
-:::caution
-Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
-Take `zh-CN` as Example (in astro.config.mjs):
-```js
-        'zh-cn': {
-          label: '简体中文', //Simplified Chinese
-          lang: 'zh-CN',
-        },
-...
-        label: 'General',
-        translations: {
-          'zh-CN': '通用',
-        },
-```
-As well for the directory name, e.g. `src/content/docs/zh-cn`
-:::
-
-5. When you've finished translation:
-  - `git add .` to track untracked changes under current directory
-  - `git commit -am'Update translation'` to create a commit with description.
-  - `git push` to push to GitHub
-6. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
-Remember to detail what you have done (i.e. which language did you translted to) when you submit.
+The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki) and it's open to [contribution](#contribute-to-dots-hyprland-wiki).
 
 # Development
 
@@ -128,7 +59,106 @@ There some numbers before the markdown files, but normally they do not have any 
 > When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
 :::
 
-## References
+# Contribute to dots-hyprland-wiki
+We sincerely thanks for all contributors.
+
+You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
+
+If you're unsure about a possible PR, you may create a Discussion before you work on it.
+
+:::caution
+Always prioritize updating the English documents,
+so that other languages can be uniformly updated through English translation.
+:::
+
+## Content
+Typically, if you have successfully contributed a new function/workflow/... to [dots-hyprland](https://github.com/end-4/dots-hyprland),
+and if it needs documentation, then you're very welcomed to submit a PR here to document it.
+
+Troubleshooting related contents are also welcomed.
+
+## Translation
+
+This site has i18n support, and we need your help to finish l10n (i.e. translation).
+
+:::note
+Please don't waste your time on translating Dev Notes. See [#1](https://github.com/end-4/dots-hyprland-wiki/issues/1#issuecomment-1938696111) for reason.
+:::
+
+**Steps:**
+
+1. Ensure that you have GitHub SSH configured well on your local machine.
+To test this, run `ssh -T git@github.com` in terminal, and if you see:
+```plain
+Hi <Your GitHub username>! You've successfully authenticated, but GitHub does not provide shell access.
+```
+Then you're all set.
+
+2. Fork this repo online, and clone the forked repo to your local machine.
+
+3. Edit `astro.config.mjs` and find the languages under `locales: `. If your language is not listed or is commented, add your language.
+Example:
+```js title="astro.config.mjs" ins={6-9}
+...
+      locales: {
+        'en': {
+          label: 'English', // Engligh
+          lang: 'en',
+        },
+        'zh-cn': {
+          label: '简体中文', //Simplified Chinese
+          lang: 'zh-CN',
+        },
+...
+```
+You may also add translation for the labels on sidebar under the `sidebar: `.
+Example:
+```js title="astro.config.mjs" ins={5}
+...
+      sidebar: [
+        {
+          label: 'General',
+          translations: {
+            'zh-CN': '通用',
+          },
+          autogenerate: { directory: 'general' },
+        },
+...
+```
+:::caution
+Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
+:::
+
+4. Translate pages: Go to directory `src/content/docs/<lang>/`.
+Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
+
+:::caution
+Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
+Take `zh-CN` as Example (in astro.config.mjs):
+```js title="astro.config.mjs" {1,3,8}
+...
+        'zh-cn': {
+          label: '简体中文', //Simplified Chinese
+          lang: 'zh-CN',
+        },
+...
+        label: 'General',
+        translations: {
+          'zh-CN': '通用',
+        },
+...
+```
+As well for the directory name, e.g. `src/content/docs/zh-cn`
+:::
+
+5. When you've finished translation:
+  - `git add .` to track untracked changes under current directory
+  - `git commit -am'Update translation'` to create a commit with description.
+  - `git push` to push to GitHub
+6. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
+Remember to detail what you have done (i.e. which language did you translted to) when you submit.
+
+# References
 
 - [Astro documentation](https://docs.astro.build)
 - [Starlight’s docs](https://starlight.astro.build/)
