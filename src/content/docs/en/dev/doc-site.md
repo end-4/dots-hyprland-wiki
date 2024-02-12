@@ -94,9 +94,10 @@ Hi <Your GitHub username>! You've successfully authenticated, but GitHub does no
 ```
 Then you're all set.
 
-2. Fork this repo online, and clone the forked repo to your local machine.
+2. [Fork this repo online](https://github.com/end-4/dots-hyprland-wiki/fork), and then `git clone` the forked repo to your local machine.
 
-3. Edit `astro.config.mjs` and find the languages under `locales: `. If your language is not listed or is commented, add your language.
+3. On your local machine, go to the forked repo, edit `astro.config.mjs` and find the languages under `locales: `.
+If your language is not listed or is commented, add your language.
 Example:
 ```js title="astro.config.mjs" ins={7-10}
 ...
