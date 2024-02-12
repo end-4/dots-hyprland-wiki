@@ -1,6 +1,10 @@
 ---
 title: Eww (multiple)
 layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Deprecated
+    variant: caution
 ---
 
 :::danger[Alert]

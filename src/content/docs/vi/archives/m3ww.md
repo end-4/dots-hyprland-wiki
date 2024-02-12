@@ -1,6 +1,10 @@
 ---
 title: m3ww
 layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Deprecated
+    variant: caution
 ---
 
 :::caution[Cảnh báo]

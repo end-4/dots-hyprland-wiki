@@ -1,6 +1,10 @@
 ---
 title: m3ww
 layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: 过时
+    variant: caution
 ---
 
 :::danger[重要警告]

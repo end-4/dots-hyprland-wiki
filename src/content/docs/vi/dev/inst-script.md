@@ -1,16 +1,15 @@
 ---
-title: Ghi chú cho dev
+title: Script cài đặt
 layout: /src/layouts/autonum.astro
+sidebar:
+  order: 20
+  badge:
+    text: Dev
 ---
 
-# Script cài đặt
-
-## Chạy lại được
+# Chạy lại được
 - Có thể chạy nhiều lần và chọn chỉ thao tác một số thao tác nhất định
 
-## Cấu trúc
+# Cấu trúc
 - Script chứa dữ liệu trong thư mục `./scriptdata/`
 - Nếu nó compile gì thì sẽ chứa trong thư mục `./cache/`, được liệt kê trong `.gitignore`.
-
-# Mẹo khác
-- Để git-ignore a file/thư mục, liệt kê vào `.gitignore` **và** `git rm <file/thư mục>` nếu đã `git add` trước đây

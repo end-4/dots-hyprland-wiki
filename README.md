@@ -56,6 +56,9 @@ The website is hosted on GitHub Pages.
 
 - Edit/add pages: Edit markdown files under `src/content/docs/en/` (Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content)).
 
+> [!NOTE]
+> There some numbers before the markdown files, but normally they do not have any meanings, just for auto arranging on sidebar.
+
 > To publish HTML files, put it under `src/pages`.
 
 - Edit sidebar: Edit `astro.config.mjs`.

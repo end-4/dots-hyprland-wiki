@@ -67,16 +67,28 @@ export default defineConfig({
 				},
 				{
 					label: 'Illogical Impulse',
+          // idk how to translate badge for group label, guess just a "New" should be ok to everyone though.
+          badge: { text: 'New', variant: 'success' },
           // idk why but it won't work when using `illogical-impulse'
 					autogenerate: { directory: 'i-i' },
 				},
 				{
 					label: 'Archives (unmaintained)',
+          collapsed: true,
           translations: {
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
           },
 					autogenerate: { directory: 'archives' },
+				},
+				{
+					label: 'Dev Notes',
+          collapsed: true,
+          translations: {
+            'vi': 'Ghi chú cho dev',
+            'zh-CN': '开发者笔记',
+          },
+					autogenerate: { directory: 'dev' },
 				},
 			],
 		}),

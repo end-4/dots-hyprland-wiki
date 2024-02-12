@@ -1,21 +1,17 @@
 ---
-title: Dev notes
+title: Installation script
 layout: /src/layouts/autonum.astro
+sidebar:
+  order: 20
+  badge:
+    text: Dev
 ---
 
-# Installation script
-
-## Idempotent
+# Idempotent
 The script is and should be **idempotent**, which means that user can run this script for multiple times.
 
 This is useful for debugging and a resumable installation, and also provide updater function somehow.
 
-## Structrue
+# Structrue
 - The script keeps its "data" part under `./scriptdata/`.
 - When the script build something from source, they're stored under `./cache/`, which is listed on `.gitignore`.
-
-# Misc tips
-The tips below are not very specific for this repo.
-They're just for quick notes for developing.
-
-- To git-ignore a file/dir, it should be included in `.gitignore` and **also** `git rm <file/dir>` if `git add` (git-tracked) before.
