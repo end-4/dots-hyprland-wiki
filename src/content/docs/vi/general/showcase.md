@@ -17,7 +17,7 @@ title: Ảnh chụp
 ---
 
 <div align="center">
-    <h1>Bị bỏ hoang</h1>
+    <h1>Không được duy trì</h1>
 </div>
 
 :::caution[Cảnh báo]

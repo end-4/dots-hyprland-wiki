@@ -14,10 +14,10 @@ Các config này mình không dùng nữa mà nó cũng không hoạt động n�
     - Stuff in `Import manually` folder if you need them
 
 ## Hiệu năng
-|  ⌄  | Dùng | Không khuyến khích | Ghi chú                 |
-| --- | ------ | ----------- | ------------------------- |
-| Kernel |     | cachyos, xanmod | Đừng lạm đụng mấy cái tiết kiệm điện |
-| Login shell  | bash/zsh | fish | Dùng fish trong terminal không sao cả |
+|  ⌄           | Nên dùng | Không nên dùng  | Ghi chú                               |
+| ------------ | -------- | --------------- | ------------------------------------- |
+| Kernel       |          | cachyos, xanmod | Đừng lạm đụng mấy cái tiết kiệm điện  |
+| Login shell  | bash/zsh | fish            | Dùng fish trong terminal không sao cả |
 
  ## Setup
  - Các eww config chỉ hoạt động tử tế trong `~/.config/eww`
