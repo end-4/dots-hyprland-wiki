@@ -4,6 +4,29 @@ Documentation for [dots-hyprland](https://github.com/end-4/dots-hyprland).
 
 URL: <https://end-4.github.io/dots-hyprland-wiki>
 
+# Contribution
+We sincerely thanks for all contributors.
+
+You're welcomed to submit any kinds of beneficial Pull Request, though it's our final decision to merge it or not.
+
+If you're unsure about a possible PR, you may create a Discussion before you work on it.
+
+> [!IMPORTANT]
+> Always prioritize updating the English documents,
+> so that other languages can be uniformly updated through English translation.
+
+## Content
+Typically, if you have successfully contributed a new function/workflow/... to [dots-hyprland](https://github.com/end-4/dots-hyprland),
+and if it needs documentation, then you're very welcomed to submit a PR here to document it.
+
+Troubleshooting related contents are also welcomed.
+
+## Translation
+
+This site has i18n support, and it's our thing to do rest of work, i.e. l10n.
+
+**See more under the section [How to - l10n](#l10n) below.**
+
 # Development
 
 Currently, this project is based on Starlight, which is based on Astro.
@@ -65,10 +88,6 @@ The website is hosted on GitHub Pages.
 >         },
 > ```
 > As well for the directory name, e.g. `src/content/docs/zh-cn`
-
-> [!IMPORTANT]
-> Always prioritize updating the English documents,
-> so that other languages can be uniformly updated through English translation.
 
 ## References
 
