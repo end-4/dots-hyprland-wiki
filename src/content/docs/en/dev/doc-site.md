@@ -8,11 +8,11 @@ sidebar:
     text: Dev
 ---
 
-Documentation for [dots-hyprland](https://github.com/end-4/dots-hyprland).
+This page "documents" this "document site" itself.
 
-URL: <https://end-4.github.io/dots-hyprland-wiki>
+The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki) and it's open to contribution.
 
-# Contribution
+# Contribute to dots-hyprland-wiki
 We sincerely thanks for all contributors.
 
 You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
