@@ -3,7 +3,7 @@ title: 展示区
 ---
 
 <div align="center">
-    <h1>正在维护</h1>
+    <h1>持续维护中</h1>
 </div>
 
 ## illogical_impulse
@@ -17,7 +17,7 @@ title: 展示区
 ---
 
 <div align="center">
-    <h1>不再维护</h1>
+    <h1>缺乏维护</h1>
 </div>
 
 :::caution[警告]

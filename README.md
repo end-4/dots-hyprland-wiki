@@ -24,7 +24,7 @@ The website is hosted on GitHub Pages.
 > [!TIP]
 > If this error occured: `vips/vips8: no such file or directory`, you may install `libvips` manually, e.g. on Arch Linux: `sudo pacman -S libvips`
 
-> [!CAUTION]
+> [!IMPORTANT]
 > When running locally, there seems to be a bug that it does NOT apply a proper base url. But it seems okay on GitHub Pages.
 > Therefore, do NOT easily "fix" a relative link just because a `404` happened locally. Otherwise, while the link for locally hosted site is "fixed", the site on GitHub Pages will be broken.
 > Similarly, open <http://localhost:4321/dots-hyprland-wiki/en>, NOT <http://localhost:4321/dots-hyprland-wiki> when running locally.
@@ -47,15 +47,21 @@ The website is hosted on GitHub Pages.
 ### l10n
 
 - Manage languages: Edit `astro.config.mjs`.
+- Translate group labels on sidebar: Edit `astro.config.mjs`.
 - Translate pages: Under `src/content/docs/<lang>/`. Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
 
-> [!CAUTION]
-> Use **lowercase** for language labels, except for the `lang:` in `astro.config.mjs`.
+> [!IMPORTANT]
+> Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
 > Example: in astro.config.mjs:
 > ```mjs
 >         'zh-cn': {
 >           label: '简体中文', //Simplified Chinese
 >           lang: 'zh-CN',
+>         },
+> ...
+>         label: 'General',
+>         translations: {
+>           'zh-CN': '通用',
 >         },
 > ```
 > As well for the directory name, e.g. `src/content/docs/zh-cn`

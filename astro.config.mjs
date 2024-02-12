@@ -59,6 +59,9 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'General',
+          translations: {
+            'zh-CN': '通用',
+          },
 					autogenerate: { directory: 'general' },
 				},
 				{
@@ -68,6 +71,9 @@ export default defineConfig({
 				},
 				{
 					label: 'Archives (unmaintained)',
+          translations: {
+            'zh-CN': '存档（不再维护）',
+          },
 					autogenerate: { directory: 'archives' },
 				},
 			],
