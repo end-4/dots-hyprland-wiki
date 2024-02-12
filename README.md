@@ -7,7 +7,7 @@ URL: <https://end-4.github.io/dots-hyprland-wiki>
 # Contribution
 We sincerely thanks for all contributors.
 
-You're welcomed to submit any kinds of beneficial Pull Request, though it's our final decision to merge it or not.
+You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
 
 If you're unsure about a possible PR, you may create a Discussion before you work on it.
 
