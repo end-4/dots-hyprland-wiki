@@ -59,15 +59,15 @@
 /* Light mode colors. */
 :root[data-theme='light'] {
   --sl-color-accent-low: #FFFFFF;
-  --sl-color-accent: #6E5768;
-  --sl-color-accent-high: #8C4483;
+  --sl-color-accent: #8C4483;
+  --sl-color-accent-high: #6E5768;
   --sl-color-white: #1F1A1D;
   --sl-color-gray-1: #1F1A1D;
   --sl-color-gray-2: #1F1A1D;
   --sl-color-gray-3: #4E444B;
   --sl-color-gray-4: #8b8b8b;
-  --sl-color-gray-5: #5a4754;
-  --sl-color-gray-6: #fadfed;
+  --sl-color-gray-5: #b691aa;
+  --sl-color-gray-6: #f3e2ef;
   --sl-color-gray-7: #F4EFF4;
   --sl-color-black: #EDE4EC;
 }
@@ -118,5 +118,14 @@ code {
 }
 
 .card {
+  background-color: var(--sl-color-gray-6) !important;
   border-radius: 25px;
+}
+
+header {
+  border-bottom: 1px solid var(--sl-color-gray-5) !important;
+}
+
+blockquote {
+  border-left: 4px solid var(--sl-color-gray-5) !important;
 }
