@@ -152,9 +152,9 @@ As well for the directory name, e.g. `src/content/docs/zh-cn`
 :::
 
 5. When you've finished translation:
-  - `git add .` to track untracked changes under current directory
-  - `git commit -am'Update translation'` to create a commit with description.
-  - `git push` to push to GitHub
+  - `git add .` to track untracked changes under current directory.
+  - `git commit -am'Update translation'` to commit the tracked changes with description.
+  - `git push` to push new commits to GitHub.
 6. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
 Remember to detail what you have done (i.e. which language did you translted to) when you submit.
 
