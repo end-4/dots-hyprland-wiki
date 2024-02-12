@@ -1,7 +1,7 @@
 ---
 title: 致谢
 ---
- - end_4 （作为作者；当然）
+ - [end_4](https://github.com/end-4) （作为作者；当然）
 
 ## 谢谢你
  - [@clsty](https://github.com/clsty)：大幅优化了安装脚本，提出与创建了[文档站点](https://github.com/end-4/dots-hyprland-wiki)，以及其他贡献

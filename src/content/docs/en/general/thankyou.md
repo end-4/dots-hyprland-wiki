@@ -1,7 +1,7 @@
 ---
 title: Credits
 ---
- - end_4 of course hehee
+ - [end_4](https://github.com/end-4) of course hehee
 
 ## Thank you
  - [@clsty](https://github.com/clsty) for major improvements to the install script, [documentation site](https://github.com/end-4/dots-hyprland-wiki) and their other contributions
