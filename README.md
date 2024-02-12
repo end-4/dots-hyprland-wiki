@@ -21,10 +21,10 @@ The website is hosted on GitHub Pages.
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-> [!NOTE]
+> [!TIP]
 > If this error occured: `vips/vips8: no such file or directory`, you may install `libvips` manually, e.g. on Arch Linux: `sudo pacman -S libvips`
 
-> [!IMPORTANT]
+> [!CAUTION]
 > When running locally, there seems to be a bug that it does NOT apply a proper base url. But it seems okay on GitHub Pages.
 > Therefore, do NOT easily "fix" a relative link just because a `404` happened locally. Otherwise, while the link for locally hosted site is "fixed", the site on GitHub Pages will be broken.
 > Similarly, open <http://localhost:4321/dots-hyprland-wiki/en>, NOT <http://localhost:4321/dots-hyprland-wiki> when running locally.
@@ -41,9 +41,6 @@ The website is hosted on GitHub Pages.
 
 - Edit homepage: Edit `src/content/docs/en/index.mdx`
 
-> [!NOTE]
-> For Hero component, see <https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro>
-
 > [!IMPORTANT]
 > When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
 
@@ -51,7 +48,8 @@ The website is hosted on GitHub Pages.
 
 - Manage languages: Edit `astro.config.mjs`.
 - Translate pages: Under `src/content/docs/<lang>/`. Filenames and folder structure are exact the same as which under `src/content/docs/en/`.
-> [!DANGER]
+
+> [!CAUTION]
 > Use **lowercase** for language labels, except for the `lang:` in `astro.config.mjs`.
 > Example: in astro.config.mjs:
 > ```mjs
