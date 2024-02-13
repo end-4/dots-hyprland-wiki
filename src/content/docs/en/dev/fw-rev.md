@@ -17,7 +17,7 @@ Simple "bar" program will still be called a "Framework" here, despite it's actua
 
 :::caution[Clarification]
 This note may contain personal subjective opinions, although objectivity is not excluded, it is still difficult to guarantee.
-Also, it mainly comes from personal experiences, and it is also difficult to guarantee topicality and correctness.
+Some contents come from personal experiences, so it is difficult to guarantee topicality and correctness.
 However, feel free to discuss it [here](https://github.com/end-4/dots-hyprland-wiki/discussions).
 :::
 
