@@ -4,7 +4,7 @@ title: Credits
  - Tất nhiên là [end_4](https://github.com/end-4)
 
 ## Cảm ơn
- - [@clsty](https://github.com/clsty) vì làm script cài đặt, [documentation site](https://github.com/end-4/dots-hyprland-wiki) và nhiều việc khác
+ - [clsty](https://github.com/clsty) vì làm script cài đặt, [wiki này](https://github.com/end-4/dots-hyprland-wiki) và nhiều việc khác
  - AGS: [Aylur](https://github.com/Aylur/dotfiles), [kotontrion](https://github.com/kotontrion/dotfiles)
  - EWW: [fufexan](https://github.com/fufexan/dotfiles)
  - AI vì viết cho nhiều thứ
