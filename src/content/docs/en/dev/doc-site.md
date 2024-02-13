@@ -161,14 +161,21 @@ Take `zh-CN` as Example (in astro.config.mjs):
         },
 ...
 ```
-As well for the directory name, e.g. `src/content/docs/zh-cn`
+As well for the directory name, e.g. `src/content/docs/zh-cn`.
+However, as for UI translation filename, e.g. `src/content/i18n/zh-CN.json`.
 :::
+5. Translate UI (Optional)
+Starlight UI already has built-in translation for some languages.
+You may still translate to override it if you think it's necessary.
 
-5. When you've finished translation:
+- The source file in English: see [here](https://starlight.astro.build/guides/i18n/#translate-starlights-ui).
+- To translate, edit the file under `src/content/i18n/`, eg. for Simplified Chinese: `src/content/i18n/zh-CN.json`.
+
+6. When you've finished translation:
   - `git add .` to track untracked changes under current directory.
   - `git commit -am'Update translation'` to commit the tracked changes with description.
   - `git push` to push new commits to GitHub.
-6. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
+7. Go to the forked repo online, click on `Contribute` and then `Open pull request` to submit a Pull Request.
 Remember to detail what you have done (i.e. which language did you translted to) when you submit.
 
 # References
