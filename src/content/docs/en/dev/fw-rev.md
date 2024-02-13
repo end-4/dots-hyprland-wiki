@@ -16,32 +16,54 @@ Simple "bar" program will still be called a "Framework" here, despite it's actua
 :::
 
 :::caution[Clarification]
-This note may contain personal subjective opinions, although objectivity is not excluded, it is still difficult to guarantee.
+This note may contain personal subjective opinions. Objectivity is not excluded, but it is still difficult to guarantee.
 Some contents come from personal experiences, so it is difficult to guarantee topicality and correctness.
 However, feel free to discuss it [here](https://github.com/end-4/dots-hyprland-wiki/discussions).
 :::
 
 References: [Arch Wiki](https://wiki.archlinux.org/title/List_of_applications/Other#Taskbars)
 
-# Waybar
-- Links: [GitHub](https://github.com/Alexays/Waybar) [Docs](https://github.com/Alexays/Waybar/wiki)
+# Widget systems
+_These widget systems provide a declarative way to create (mostly GTK, QT ones might be coming soon) widgets and put them on Layer Shells (and, if possible, whatever the equivalent on X11 is)._
 
-# EWW
-- Links: [GitHub](https://github.com/elkowar/eww) [Docs](https://elkowar.github.io/eww)
+## EWW
+- [GitHub](https://github.com/elkowar/eww) • [Docs](https://elkowar.github.io/eww)
+- Pros
+  - An all-rounder widget system suitable for anyone with a little bit of programming experience.
+  - It supports X11 and Wayland.
+  - It's incredibly easy to use
+- Cons
+  - ...but at the same time incredibly slow when you create complex widgets. This is because it destroys and recreates the widgets every time their used variables are updated. It's worst when you use loops...
+  - No internal way to update variables. It's all done through shell.
 
-# HybridBar
-- Links: [GitHub](https://github.com/vars1ty/HybridBar)
+## AGS
+- [GitHub](https://github.com/Aylur/ags) • [Docs](https://aylur.github.io/ags-docs)
 
-# Polybar
-- Links: [GitHub](https://github.com/polybar/polybar)
+- Pros
+  - AGS is more capable and performant than EWW, since it doesn't unnecessarily destroy and recreate widgets. 
+  - Configured in GJS, it's flexible enough so you don't have to rely on scripts (the listening/polling of which adds some delay)
+  - In contrary to what people think, JS-powered does not mean power-consuming. For some people (me, end_4, included), it's even more power-saving than Waybar.
+- Cons
+  - For icon sizes, it's often a pain having to wait for the CSS to load before being able to retrieve some font-size-scalable data.
+  - Working with looped widgets in an imperative way could be a pain if you forget to set a widget reference to null after destroying.
 
-# AGS
-- Links: [GitHub](https://github.com/Aylur/ags) [Docs](https://aylur.github.io/ags-docs)
+## Fabric
+- [GitHub](https://github.com/Fabric-Development/fabric)
+- A GTK Python widget framework
 
-AGS is more capable and is more performant than EWW.
-Cool possible stuff include:
-- Swipe-to-dismiss notifications
-- Drag and drop support
+## Potato
+- [GitHub](https://github.com/T0kyoB0y/PotatoWidgets)
+- Another GTK Python widget framework
 
-# Fabric
-- Links: [GitHub](https://github.com/Fabric-Development/fabric)
+# Simple bars
+_These are simple bars with premade modules. You can change the order of the widgets fully horizontally or vertically and give them some styles, but that's about it._
+
+## Waybar
+- [GitHub](https://github.com/Alexays/Waybar) • [Docs](https://github.com/Alexays/Waybar/wiki)
+- A simple, widely used bar for Wayland.
+
+## HybridBar
+- [GitHub](https://github.com/vars1ty/HybridBar)
+
+## Polybar
+- [GitHub](https://github.com/polybar/polybar)
