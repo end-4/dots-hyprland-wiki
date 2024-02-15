@@ -4,8 +4,6 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Doc Site
   order: 60
-  badge:
-    text: Dev
 ---
 
 This page "documents" this "document site" itself.

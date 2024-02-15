@@ -4,8 +4,6 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Styling
   order: 40
-  badge:
-    text: Dev
 ---
 
 Here are a few things to keep in mind when styling.

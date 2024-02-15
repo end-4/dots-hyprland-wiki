@@ -4,8 +4,6 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Frameworks Rev.
   order: 50
-  badge:
-    text: Dev
 ---
 
 This note contains some references, experiences and opinions on the frameworks.
