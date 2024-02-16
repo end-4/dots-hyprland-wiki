@@ -7,7 +7,7 @@ title: Ảnh chụp
 </div>
 
 ## illogical_impulse
-[Setup](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
+[Setup](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland)
 
 ![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)

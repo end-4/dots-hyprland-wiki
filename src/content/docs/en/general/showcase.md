@@ -7,7 +7,7 @@ title: Showcase
 </div>
 
 ## illogical_impulse
-[Quick Start](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland/tree/illogical-impulse)
+[Quick Start](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland)
 
 ![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)
