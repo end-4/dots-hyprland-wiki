@@ -3,8 +3,6 @@ title: Installation script
 layout: /src/layouts/autonum.astro
 sidebar:
   order: 20
-  badge:
-    text: Dev
 ---
 
 # Idempotent

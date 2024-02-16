@@ -84,6 +84,7 @@ export default defineConfig({
 				{
 					label: 'Dev Notes',
           collapsed: true,
+          badge: { text: 'Dev' },
           translations: {
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
