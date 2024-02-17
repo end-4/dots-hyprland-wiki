@@ -43,10 +43,12 @@ notif=($(jq -r 'to_entries | .[] | .value' $json_file))
 echo "[$0]: Notifications for different locales have been loaded. Here they are:"
 for ((i=0; i<${#locale[@]}; i++)); do
   echo "locale = \"${locale[i]}\", notif = \"${notif[i]}\", dir = \"$base/${locale[i]}\""
+  if [ "${locale[i]}" = "en" ]; then echo "[$0]: Translation directory \"$base/${locale[i]}\" is of English, skipping..."; continue ; fi
   test -d "$base/${locale[i]}" || { echo "[$0]: Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
   for path in "${abs_paths[@]}";do
     loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/en/" "$path")
     test -f $loc_path || { echo "[$0]: The translated file \"$loc_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
     echo "[$0]: Processing file \"$loc_path\"..."
+    # Processing code WIP...
   done
 done
