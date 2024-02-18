@@ -21,9 +21,9 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
-      - name: Remove l10n-notify to prevent build failure.
-        run: |
-          rm src/content/docs/l10n-notify.{json,sh}
+#     - name: Remove l10n-notify to prevent build failure.
+#       run: |
+#         rm src/content/docs/l10n-notify.{json,sh}
       - name: Install, build, and upload your site
         uses: withastro/action@v1
         # with:
