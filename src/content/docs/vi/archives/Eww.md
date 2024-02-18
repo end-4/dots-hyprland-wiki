@@ -6,9 +6,6 @@ sidebar:
     text: Deprecated
     variant: caution
 ---
-:::caution[L10N-NOTIFY]
-Bản dịch này đã cũ và cần được cập nhật. Bản gốc (tiếng Anh) được sửa lần cuối vào: 2024-02-18
-:::
 
 :::caution[Cảnh báo]
 Các config này mình không dùng nữa mà nó cũng không hoạt động nên tốt nhất đừng dùng
