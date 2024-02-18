@@ -45,8 +45,10 @@ for key in "${locale[@]}"; do
   value=$(jq -r ".\"$key\"" $json_file)
   notif+=("$value""$(date +%F)")
 done
-
-echo "[$0]: Notifications for different locales have been loaded."
+echo "--------------------------------"
+echo "-------------------------------- Result of STEP 2"
+echo "--------------------------------"
+echo "[$0]: json parsed, notifications for different locales have been loaded. Here they are:"
 for ((i=0; i<${#locale[@]}; i++)); do
   echo "-- Entry $i: "
   echo "--   ├─locale = \"${locale[i]}\""
@@ -61,7 +63,7 @@ h="       │   └─"
 h2="       │   ├─"
 for ((i=0; i<${#locale[@]}; i++)); do
 echo "--------------------------"
-echo "-- Processing: "
+echo "-- Now processing: "
 echo "--   ├─locale = \"${locale[i]}\""
 echo "--   ├─notif  = \"${notif[i]}\""
 echo "--   └─root   = \"$base/${locale[i]}\""
