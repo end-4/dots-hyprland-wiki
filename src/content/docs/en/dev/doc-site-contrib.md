@@ -51,12 +51,14 @@ Then you're all set.
 ## Get this repo
 [Fork this repo online](https://github.com/end-4/dots-hyprland-wiki/fork), and then `git clone` the forked repo to your local machine.
 
-## Working on this repo
+## Make changes (with l10n example)
 `cd` to the folder of the cloned repo so that you can make futher changes.
 
-Of course, before making every changes, you should know what you're doing.
+:::caution
+Of course, before making every change, you should know what you're doing.
+:::
 
-As for l10n (translation), follow the steps below:
+**As for l10n (translation), follow the steps below:**
 ### Manage locales
 On your local machine, go to the forked repo, edit `astro.config.mjs` and find the languages under `locales: `.
 
@@ -75,6 +77,13 @@ Example:
         },
 ...
 ```
+:::caution
+- Sometimes you should use lowercase for the key (or name) for the locale, e.g. `zh-cn`.
+- But sometimes not, e.g. `zh-CN`.
+
+It's complicated to detail the rule, please just follow the example.
+:::
+
 You may also add translation for the labels on sidebar under the `sidebar: `.
 Example:
 ```js title="astro.config.mjs" ins={6}
@@ -94,7 +103,7 @@ Please pay attention to the formatting of `mjs` and do not omit commas, quotatio
 :::
 
 You should also translate the message in `l10n-notify.json`, e.g. for `zh-CN`:
-```json title="l10n-notify.json" ins={3}
+```json title="l10n-notify.json" ins={4}
 {
   "en": "This page is an outdated translation. The original version in English was last updated on: ",
   ...
@@ -120,31 +129,19 @@ Again, don't translate Dev Notes under `src/content/docs/en/dev/`, i.e. let them
 :::
 
 :::caution
-Use **lowercase** for language labels, except for the `lang:` and group-label on sidebar in `astro.config.mjs`.
-Take `zh-CN` as Example (in astro.config.mjs):
-```js title="astro.config.mjs" {2,4,9}
-...
-        'zh-cn': {
-          label: '简体中文', //Simplified Chinese
-          lang: 'zh-CN',
-        },
-...
-        label: 'General',
-        translations: {
-          'zh-CN': '通用',
-        },
-...
-```
-As well for the directory name, e.g. `src/content/docs/zh-cn`.
-However, as for UI translation filename, e.g. `src/content/i18n/zh-CN.json`.
+Again, please pay attention to lowercase problem, e.g. `zh-cn` and `zh-CN`.
 :::
 
-If you see the "L10N-NOTIFY" at the top of a document, after you've finished updating its translation, please delete these 3 lines, e.g. for `zh-cn`:
-```md del{6-8}
+**After you've finished translation for a document,**
+if you see the "caution[L10N-NOTIFY]" lines at the top of it,
+please delete these 3 lines.
+
+Example:
+```md title="foo.md" del={6-8}
 ---
-title: illogical-impulse 简介
+title: 示例文档
 sidebar:
-  label: 简介
+  label: 示例
 ---
 :::caution[L10N-NOTIFY]
 此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-18
