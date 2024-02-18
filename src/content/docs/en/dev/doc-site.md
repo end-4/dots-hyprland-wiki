@@ -47,7 +47,7 @@ so that other languages can be uniformly updated through English translation.
 
 And, to apply notification for other languages about the source file (English) has updated, use the script `l10n-notify`, which syntax is:
 ```bash
-l10n-notify <file1> [file2] ...
+./l10n-notify <file1> [file2] ...
 ```
 This script is not perfect yet, but it's robust and idempotent.
 :::
