@@ -73,7 +73,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$path")
     test -f $loc_path || { echo "   The translation file \"$loc_path\" does not exists. No worry since there will be a auto fallback anyway. Skipping..." ; continue ; }
     echo "++     ├─file = \"$loc_path\""
-    line_beg=$(awk '/^:::caution$/{print NR;exit}' $loc_path)
+    line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $loc_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
     if [ -z "$line_beg" ]; then
       echo "${h2}Mark string not found."
@@ -84,7 +84,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
         echo "${h}Frontmatter end at $fr_end ."
         sed -i "$((fr_end+1))i:::" "$loc_path"
         sed -i "$((fr_end+1))i${notif[i]}" "$loc_path"
-        sed -i "$((fr_end+1))i:::caution[L10N-NOTIFY]" "$loc_path"
+        sed -i "$((fr_end+1))i:::caution[l10n-notify]" "$loc_path"
       fi
     elif [ -z "$line_end" ]; then
       echo "${h}Mark string found at line $line_beg, but the aside has no end, something must be wrong. Aborting..."; exit 1
