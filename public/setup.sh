@@ -1,4 +1,5 @@
 #!/bin/bash
+# Online script for install dots-hyprland.
 
 set -e
 function try { "$@" || sleep 0; }
