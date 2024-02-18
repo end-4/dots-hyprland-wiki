@@ -133,7 +133,7 @@ Again, please pay attention to lowercase problem, e.g. `zh-cn` and `zh-CN`.
 :::
 
 **After you've finished translation for a document,**
-if you see the "caution[L10N-NOTIFY]" lines at the top of it,
+if you see the "caution[l10n-notify]" lines at the top of it,
 please delete these 3 lines.
 
 Example:
@@ -143,7 +143,7 @@ title: 示例文档
 sidebar:
   label: 示例
 ---
-:::caution[L10N-NOTIFY]
+:::caution[l10n-notify]
 此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-18
 :::
 ```
