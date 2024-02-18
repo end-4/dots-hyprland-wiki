@@ -6,6 +6,9 @@ sidebar:
     text: 过时
     variant: caution
 ---
+:::caution[L10N-NOTIFY]
+此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-18
+:::
 
 :::danger[重要警告]
 这几套配置已不再维护，建议不要使用。

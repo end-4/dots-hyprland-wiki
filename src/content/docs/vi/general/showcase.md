@@ -1,6 +1,9 @@
 ---
 title: Ảnh chụp
 ---
+:::caution[L10N-NOTIFY]
+Bản dịch này đã cũ và cần được cập nhật. Bản gốc (tiếng Anh) được sửa lần cuối vào: 2024-02-18
+:::
 
 <div align="center">
     <h1>Được duy trì</h1>
