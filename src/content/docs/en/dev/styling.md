@@ -13,7 +13,7 @@ Here are a few things to keep in mind when styling.
 - _**But why are those values so weird?**_ 
   - Originally, I style everything using px, but then I decided to use rem
   - I often use values 5, 10, 15, etc. px
-  - My font size is 11pt = 14.6667px, so 1rem = 14.6667px. I think you see where this is going
+  - end_4's font size is 11pt = 14.6667px, so 1rem = 14.6667px. I think you see where this is going
 - **I recommend this `px` to/from `rem` converter: [NekoCalc](https://nekocalc.com/px-to-rem-converter)**
   - I might make a converter like that on the sidebar soon
 
