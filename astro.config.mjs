@@ -98,7 +98,7 @@ export default defineConfig({
           translations: {
             'zh-CN': '翻译此文档',
           },
-          link: '/dev/doc-site/#translation',
+          link: '/dev/doc-site-contrib',
 				},
 			],
 		}),
