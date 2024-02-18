@@ -9,10 +9,10 @@ sidebar:
 This page will help you know what to look into when you wanna hack up something
 
 # Repo structure
-- `Import manually`: My misc config files
+- `Import manually`: Misc config files
 - `scriptdata`: Stores data for install script
 - `.config`: This is the main folder where normal config files are stored. (ags, hyprland, etc.)
-- `.local/bin`: My utility scripts. I might move them to ags folder later.
+- `.local/bin`: Utility scripts. I might move them to ags folder later.
 
 # AGS config folder structure
 - `assets`: SVGs that are used as custom icons

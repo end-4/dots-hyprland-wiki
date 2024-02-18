@@ -73,7 +73,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$path")
     test -f $loc_path || { echo "   The translation file \"$loc_path\" does not exists. No worry since there will be a auto fallback anyway. Skipping..." ; continue ; }
     echo "++     ├─file = \"$loc_path\""
-    line_beg=$(awk '/^:::caution\[L10N-NOTIFY\]$/{print NR;exit}' $loc_path)
+    line_beg=$(awk '/^:::caution$/{print NR;exit}' $loc_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
     if [ -z "$line_beg" ]; then
       echo "${h2}Mark string not found."
