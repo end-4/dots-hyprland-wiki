@@ -30,7 +30,7 @@ function x() {
 command -v pacman || { echo "\"pacman\" not found. This script only work for Arch(-based) Linux distros. Aborting..."; exit 1 ; }
 
 if [ -z "$1" ]; then
-  path=~/.local/share/dots-hyprland
+  path=~/.cache/dots-hyprland
 else
   path="$1"
 fi
