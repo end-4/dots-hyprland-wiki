@@ -69,8 +69,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
   test -d "$base/${locale[i]}" || { echo "   Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
   for path in "${abs_paths[@]}";do
     loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$path")
-    # TODO: better handling when target file does not exists
-    test -f $loc_path || { echo "   The translation file \"$loc_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
+    test -f $loc_path || { echo "   The translation file \"$loc_path\" does not exists. No worry since there will be a auto fallback anyway. Skipping..." ; continue ; }
     echo "++     ├─file = \"$loc_path\""
     line_beg=$(awk '/^:::caution\[L10N-NOTIFY\]$/{print NR;exit}' $loc_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
