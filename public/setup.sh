@@ -1,13 +1,13 @@
 #!/bin/bash
 # Online script for install dots-hyprland.
 
-me="online-setup"
+me="-->online-setup<--"
 set -e
 function try { "$@" || sleep 0; }
 function x() {
   if "$@";then cmdstatus=0;else cmdstatus=1;fi # 0=normal; 1=failed; 2=failed but ignored
   while [ $cmdstatus == 1 ] ;do
-    echo -e "\e[31m[$me]: Command \"\e[32m$@\e[31m\" has failed."
+    echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed."
     echo -e "You may need to resolve the problem manually BEFORE repeating this command.\e[0m"
     echo "  r = Repeat this command (DEFAULT)"
     echo "  e = Exit now"
@@ -22,9 +22,9 @@ function x() {
     esac
   done
   case $cmdstatus in
-    0) echo -e "\e[34m[$me]: Command \"\e[32m$@\e[34m\" finished.\e[0m";;
-    1) echo -e "\e[31m[$me]: Command \"\e[32m$@\e[31m\" has failed. Exiting...\e[0m";exit 1;;
-    2) echo -e "\e[31m[$me]: Command \"\e[32m$@\e[31m\" has failed but ignored by user.\e[0m";;
+    0) echo -e "\e[34m$me: Command \"\e[32m$@\e[34m\" finished.\e[0m";;
+    1) echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed. Exiting...\e[0m";exit 1;;
+    2) echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed but ignored by user.\e[0m";;
   esac
 }
 
@@ -36,14 +36,15 @@ else
   path="$1"
 fi
 
-echo "[$me]: Downloading repo to $path ..."
+echo "$me: Downloading repo to $path ..."
 x mkdir -p $path
 x cd $path
 if [ -z "$(ls -A)" ]; then
   x git init -b main
   x git remote add origin https://github.com/end-4/dots-hyprland
 fi
+x git remote get-url origin|grep -q end-4/dots-hyprland
 x git pull origin main && git submodule update --init --recursive
-echo "[$me]: Downloaded."
-echo "[$me]: Running \"install.sh\"."
-x ./install.sh || { echo "[$me]: Error occured when running \"install.sh\"."; exit 1 ; }
+echo "$me: Downloaded."
+echo "$me: Running \"install.sh\"."
+x ./install.sh || { echo "$me: Error occured when running \"install.sh\"."; exit 1 ; }
