@@ -11,10 +11,8 @@ function x() {
     echo -e "You may need to resolve the problem manually BEFORE repeating this command.\e[0m"
     echo "  r = Repeat this command (DEFAULT)"
     echo "  e = Exit now"
-    echo "  i = Ignore this error and continue (your setup might not work correctly)"
-    read -p " [R/e/i]: " p
+    read -p " [R/e]: " p
     case $p in
-      [iI]) echo -e "\e[34mAlright, ignore and continue...\e[0m";cmdstatus=2;;
       [eE]) echo -e "\e[34mAlright, will exit.\e[0m";break;;
       *) echo -e "\e[34mOK, repeating...\e[0m"
          if "$@";then cmdstatus=0;else cmdstatus=1;fi
@@ -24,7 +22,6 @@ function x() {
   case $cmdstatus in
     0) echo -e "\e[34m$me: Command \"\e[32m$@\e[34m\" finished.\e[0m";;
     1) echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed. Exiting...\e[0m";exit 1;;
-    2) echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed but ignored by user.\e[0m";;
   esac
 }
 
@@ -43,7 +40,8 @@ if [ -z "$(ls -A)" ]; then
   x git init -b main
   x git remote add origin https://github.com/end-4/dots-hyprland
 fi
-x git remote get-url origin|grep -q end-4/dots-hyprland
+remote_repo=end-4/dots-hyprland
+git remote get-url origin|grep -q $remote_repo || { echo "Dir \"$path\" is not empty, nor a git repo of $remote_repo. Aborting..."; exit 1 ; }
 x git pull origin main && git submodule update --init --recursive
 echo "$me: Downloaded."
 echo "$me: Running \"install.sh\"."
