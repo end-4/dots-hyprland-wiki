@@ -133,19 +133,22 @@ Again, don't translate Dev Notes under `src/content/docs/en/dev/`, i.e. let them
 Again, please pay attention to lowercase problem, e.g. `zh-cn` and `zh-CN`.
 :::
 
-**After you've finished translation for a document,**
-if you see the "caution[l10n-notify]" lines at the top of it,
+**After you've finished translation for a document:**
+1. Update the value of `lastUpdated` entry in frontmatter to **your current time** in `yyyy-mm-dd`, e.g. `lastUpdated: 2024-02-18`.
+2. If you see the "caution[l10n-notify]" lines at the top of it,
 please delete these 3 lines.
 
 Example:
-```md title="foo.md" del={6-8}
+```md title="foo.md" del={5,8-10} ins={6}
 ---
 title: 示例文档
 sidebar:
   label: 示例
+lastUpdated: 2024-02-16
+lastUpdated: 2024-02-18
 ---
 :::caution[l10n-notify]
-此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-18
+此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-17
 :::
 ```
 
