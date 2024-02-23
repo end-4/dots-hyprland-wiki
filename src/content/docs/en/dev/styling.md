@@ -4,6 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Styling
   order: 40
+lastUpdated: 2024-02-18
 ---
 
 Here are a few things to keep in mind when styling.

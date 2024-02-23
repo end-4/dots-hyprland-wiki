@@ -5,6 +5,7 @@ sidebar:
   badge:
     text: 过时
     variant: caution
+lastUpdated: 2024-02-18
 ---
 :::danger[重要警告]
 这套配置已不再维护，建议不要使用。

@@ -4,6 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Folder Structure
   order: 30
+lastUpdated: 2024-02-18
 ---
 
 This page will help you know what to look into when you wanna hack up something

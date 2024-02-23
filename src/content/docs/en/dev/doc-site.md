@@ -4,6 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Doc Site
   order: 60
+lastUpdated: 2024-02-24
 ---
 
 This page "documents" this "documentation site" itself.
@@ -39,20 +40,25 @@ Similarly, open <http://localhost:4321/dots-hyprland-wiki/en>, NOT <http://local
 
 ## How to
 
-- Edit/add pages: Edit markdown files under `src/content/docs/en/` (Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content)).
-
+### Edit/add pages
 :::caution
 Always prioritize updating the English documents,
 so that other languages can be uniformly updated through English translation.
+:::
 
-And, to apply notification for other languages about the source file (English) has updated, use the script `l10n-notify`, which syntax is:
+1. Edit markdown files under `src/content/docs/en/` .
+   - **Update the value of `lastUpdated` in frontmatter manually,** e.g. `lastUpdated: 2024-02-10`.
+   - Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content).
+
+2. After editing, apply notification for other languages about the source file (English) has updated.
+To achive this, use the script `l10n-notify`, which syntax is:
 ```bash
 ./l10n-notify <file1> [file2] ...
 ```
 This script is not perfect yet, but it's robust and idempotent.
-:::
 
-> To publish HTML files, put it under `src/pages`.
+### Misc
+- Publish HTML files: Put it under `src/pages`.
 
 - Edit sidebar: Edit `astro.config.mjs`.
 

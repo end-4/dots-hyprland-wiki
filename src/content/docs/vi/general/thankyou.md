@@ -1,5 +1,6 @@
 ---
 title: Credits
+lastUpdated: 2024-02-18
 ---
 
  - Tất nhiên là [end_4](https://github.com/end-4)

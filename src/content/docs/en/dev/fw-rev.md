@@ -4,6 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Frameworks Rev.
   order: 50
+lastUpdated: 2024-02-18
 ---
 
 This note contains some references, experiences and opinions on the frameworks.

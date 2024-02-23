@@ -5,6 +5,7 @@ sidebar:
   badge:
     text: Deprecated
     variant: caution
+lastUpdated: 2024-02-18
 ---
 
 :::caution[Cảnh báo]

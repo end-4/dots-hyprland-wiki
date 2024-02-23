@@ -3,6 +3,7 @@ title: Installation script
 layout: /src/layouts/autonum.astro
 sidebar:
   order: 20
+lastUpdated: 2024-02-18
 ---
 
 # Idempotent

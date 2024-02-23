@@ -4,6 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Contribute to this site
   order: 05
+lastUpdated: 2024-02-18
 ---
 
 The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki) and it's open to contribution.
