@@ -52,12 +52,10 @@ Always prioritize updating the English documents,
 so that other languages can be uniformly updated through English translation.
 :::
 
-1. Edit markdown files under `src/content/docs/en/` .
-   - **Update the value of `lastUpdated` in frontmatter manually,** e.g. `lastUpdated: 2024-02-10`.
-   - Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content).
-
-2. After editing, apply notification for other languages about the source file (English) has updated.
-To achive this, use the script `l10n-notify`, which syntax is:
+Edit markdown files under `src/content/docs/en/` .
+- **Update the value of `lastUpdated` in frontmatter manually,** e.g. `lastUpdated: 2024-02-10`.
+- Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content).
+- After editing, apply notification for other languages about the source file (English) has updated. To achive this, use the script `l10n-notify`, which syntax is:
 ```bash
 ./l10n-notify <file1> [file2] ...
 ```
@@ -73,7 +71,7 @@ This script is not perfect yet, but it's robust and idempotent.
 - Edit homepage: Edit `src/content/docs/en/index.mdx`
 
 :::caution
-> When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
+When generating link paths, the uppercase characters inside original markdown filename will be converted to lowercase, and the `.` will be removed. If you still use the original filename as link path, it may result in a `404`.
 :::
 
 # References

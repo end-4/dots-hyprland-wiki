@@ -166,6 +166,7 @@ You may still translate to override it if you think it's necessary.
 When you've finished making changes to the repo:
   - `git add .` to track untracked changes under current directory.
   - `git status` to re-check what you have changed.
+    - If you have unexpectedly changed a file, run `git restore <file>` to restore it.
   - `git commit -m '<Commit message>'` to commit the tracked changes with your customed `<Commit message>`.
   - `git push` to push new commits to the repo on GitHub.
 
