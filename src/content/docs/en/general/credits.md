@@ -1,15 +1,21 @@
 ---
 title: Credits
-lastUpdated: 2024-02-18
+lastUpdated: 2024-02-24
 ---
- - [end_4](https://github.com/end-4) of course hehee
+## Developers
+- [end_4](https://github.com/end-4): The repo owner and author.
+  - Designed, created the main parts of this project such as the setup of Hyprland and AGS and maintains them.
+  - Since Jan. 2023 until now.
+- [clsty](https://github.com/clsty): The assistant dev.
+  - Reworked install script, created this doc site and maintains them.
+  - Since Jan. 2024 until now.
 
 ## Thank you
- - [@clsty](https://github.com/clsty) for major improvements to the install script, [documentation site](https://github.com/end-4/dots-hyprland-wiki) and their other contributions
- - AGS: [Aylur's config](https://github.com/Aylur/dotfiles), [kotontrion's config](https://github.com/kotontrion/dotfiles)
- - EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw)
- - AI bots for providing useful examples
- - Open source contributors for their software and ricers for their insipration (would be a too long list to put here!)
+- [@midn8hustlr](https://github.com/midn8hustlr): Designed and implemented "workspace groups" workflow.
+- AGS: [Aylur's config](https://github.com/Aylur/dotfiles), [kotontrion's config](https://github.com/kotontrion/dotfiles)
+- EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw)
+- AI bots for providing useful examples
+- Open source contributors for their software and ricers for their insipration (would be a too long list to put here!)
 
 ## Stonks
 - _thank you_
@@ -17,4 +23,4 @@ lastUpdated: 2024-02-18
 
 
 ## Inspirations
- - osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
+- osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
