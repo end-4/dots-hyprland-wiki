@@ -162,7 +162,7 @@ You may still translate to override it if you think it's necessary.
 ## Upload changes
 When you've finished making changes to the repo:
   - `git add .` to track untracked changes under current directory.
-  - `git commit` to commit the tracked changes with description.
+  - `git commit -m 'Commit message'` to commit the tracked changes.
   - `git push` to push new commits to the repo on GitHub.
 
 ## Create a Pull Request
