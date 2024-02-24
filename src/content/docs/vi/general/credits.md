@@ -2,6 +2,9 @@
 title: Credits
 lastUpdated: 2024-02-18
 ---
+:::caution[l10n-notify]
+Bản dịch này đã cũ và cần được cập nhật. Bản gốc (tiếng Anh) được sửa lần cuối vào: 2024-02-24
+:::
 
  - Tất nhiên là [end_4](https://github.com/end-4)
 

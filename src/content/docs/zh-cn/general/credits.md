@@ -2,6 +2,9 @@
 title: 致谢
 lastUpdated: 2024-02-18
 ---
+:::caution[l10n-notify]
+此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-24
+:::
  - [end_4](https://github.com/end-4) （作为作者；当然）
 
 ## 谢谢你
