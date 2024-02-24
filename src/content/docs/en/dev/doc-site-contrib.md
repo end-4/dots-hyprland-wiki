@@ -16,6 +16,15 @@ You're welcomed to submit any kind of beneficial Pull Request, though it's our f
 
 If you're unsure about a possible PR, you may create a Discussion before you work on it.
 
+**Here are some common types of contribution:**
+
+## Translation
+This site has i18n support, and we need your help to finish l10n (i.e. translation).
+
+:::note
+Please don't waste your time on translating Dev Notes. See [#1](https://github.com/end-4/dots-hyprland-wiki/issues/1#issuecomment-1938696111) for reason.
+:::
+
 ## Content
 Typically, if you have successfully contributed a new function/workflow/... to [dots-hyprland](https://github.com/end-4/dots-hyprland),
 and if it needs documentation, then you're very welcomed to submit a PR here to document it.
@@ -26,14 +35,6 @@ Troubleshooting related contents are also welcomed.
 :::caution
 Always prioritize updating the English documents,
 so that other languages can be uniformly updated through English translation.
-:::
-
-## Translation
-
-This site has i18n support, and we need your help to finish l10n (i.e. translation).
-
-:::note
-Please don't waste your time on translating Dev Notes. See [#1](https://github.com/end-4/dots-hyprland-wiki/issues/1#issuecomment-1938696111) for reason.
 :::
 
 # How to contribute
@@ -162,7 +163,8 @@ You may still translate to override it if you think it's necessary.
 ## Upload changes
 When you've finished making changes to the repo:
   - `git add .` to track untracked changes under current directory.
-  - `git commit -m 'Commit message'` to commit the tracked changes.
+  - `git status` to re-check what you have changed.
+  - `git commit -m '<Commit message>'` to commit the tracked changes with your customed `<Commit message>`.
   - `git push` to push new commits to the repo on GitHub.
 
 ## Create a Pull Request
