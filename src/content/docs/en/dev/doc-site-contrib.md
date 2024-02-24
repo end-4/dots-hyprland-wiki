@@ -40,8 +40,10 @@ so that other languages can be uniformly updated through English translation.
 # How to contribute
 The following steps details on how to contribute using Git and GitHub.
 
+You must have a GitHub account to proceed.
+
 ## Setup GitHub SSH
-See <https://docs.github.com/en/authentication/connecting-to-github-with-ssh> for instructions.
+See [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for instructions.
 
 Or, to ensure that you have GitHub SSH configured well on your local machine,
 run `ssh -T git@github.com` in terminal, and if you see:
