@@ -22,7 +22,7 @@ for path in "$@";do
   test -f $abs_path || { echo "[$0]: The file \"$abs_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
   # Determine if $abs_path is a Dev Note
   echo $abs_path|grep -q "$base/$src_locale/dev/" && { echo "[$0]: The file \"$abs_path\" seems to be a Dev Note. Skipping..." ; continue ; }
-  # Determine if $abs_path is a English doc
+  # Determine if $abs_path is a doc inn $src_locale_name
   echo $abs_path|grep -q "$base/$src_locale/" || { echo "[$0]: The file \"$abs_path\" seems not to be a doc in $src_locale_name. Aborting..." ; exit 1 ; }
   # save path to array $abs_paths
   abs_paths+=("$abs_path")
@@ -80,7 +80,7 @@ echo "--   ├─locale = \"${locale[i]}\""
 echo "--   ├─notif  = \"${notif[i]}\""
 echo "--   └─root   = \"$base/${locale[i]}\""
   # Skipping source language
-  if [ "${locale[i]}" = "$src_locale" ]; then echo "   Translation directory \"$base/${locale[i]}\" is of English, skipping..."; continue ; fi
+  if [ "${locale[i]}" = "$src_locale" ]; then echo "   Translation directory \"$base/${locale[i]}\" is of ${src_locale_name}, skipping..."; continue ; fi
   # Skipping none-existence translation directory
   test -d "$base/${locale[i]}" || { echo "   Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
 

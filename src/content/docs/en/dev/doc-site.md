@@ -15,7 +15,13 @@ The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki)
 
 Currently, this project is based on Starlight, which is based on Astro.
 
-The website is hosted on GitHub Pages.
+The website is hosted on GitHub Pages using a workflow for GitHub Actions.
+
+The workflow is triggered when a push involves changing under following paths:
+- `src/`
+- `public/`
+
+It can also be triggered manually.
 
 ## Run Locally
 
