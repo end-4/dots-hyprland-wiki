@@ -9,7 +9,7 @@ lastUpdated: 2024-02-18
 
 The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki) and it's open to contribution.
 
-**We sincerely thanks for all contributors.**
+**We sincerely thank all contributors.**
 
 # What to contribute
 You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
