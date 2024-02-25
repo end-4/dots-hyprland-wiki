@@ -2,8 +2,6 @@
 title: 致谢
 lastUpdated: 2024-02-25
 ---
- - [end_4](https://github.com/end-4) （作为作者；当然）
-
 ## 开发者
 - [end_4](https://github.com/end-4): 仓库持有者以及作者。
   - 设计创造了此项目的主体部分，比如 Hyprland 和 AGS 的配置，并且维护它们。
