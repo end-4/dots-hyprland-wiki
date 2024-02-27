@@ -2,6 +2,7 @@
 # Online script for install dots-hyprland.
 
 me="-->online-setup<--"
+remote_repo=end-4/dots-hyprland
 set -e
 function try { "$@" || sleep 0; }
 function x() {
@@ -38,9 +39,8 @@ x mkdir -p $path
 x cd $path
 if [ -z "$(ls -A)" ]; then
   x git init -b main
-  x git remote add origin https://github.com/end-4/dots-hyprland
+  x git remote add origin https://github.com/$remote_repo
 fi
-remote_repo=end-4/dots-hyprland
 git remote get-url origin|grep -q $remote_repo || { echo "Dir \"$path\" is not empty, nor a git repo of $remote_repo. Aborting..."; exit 1 ; }
 x git pull origin main && git submodule update --init --recursive
 echo "$me: Downloaded."
