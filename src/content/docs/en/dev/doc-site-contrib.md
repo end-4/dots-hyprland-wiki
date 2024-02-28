@@ -14,7 +14,7 @@ The repo of this doc site is [here](https://github.com/end-4/dots-hyprland-wiki)
 # What to contribute
 You're welcomed to submit any kind of beneficial Pull Request, though it's our final decision to merge it or not.
 
-If you're unsure about a possible PR, you may create a Discussion before you work on it.
+If you're unsure about a possible PR, you may create a [Discussion](https://github.com/end-4/dots-hyprland-wiki/discussions) before you work on it.
 
 **Here are some common types of contribution:**
 
