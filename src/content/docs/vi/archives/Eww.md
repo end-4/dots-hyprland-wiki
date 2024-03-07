@@ -33,7 +33,7 @@ Các config này mình không dùng nữa mà nó cũng không hoạt động n�
  - Mở overview (click chuột giữa vào workspace indicator trên top bar) và dợi 10s (để nó sinh cache, không thì icon không hiện hết)
  ## Sử dụng
  - Điều khiển nhạc: Middle-click: Play/Pause, Right-click: Next track, lăn chuột để chỉnh âm thanh
- - Mở overview: clickchuoojt giữa/phải vào workspace indicators hoặc chạy `eww open overview`
+ - Mở overview: click chuột giữa/phải vào workspace indicators hoặc chạy `eww open overview`
  - Trong overview, gõ để tìm kiếm
  ## Tìm kiếm
  - Gõ dể tìm kiếm ứng dụng
