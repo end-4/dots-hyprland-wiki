@@ -23,7 +23,7 @@ However, feel free to discuss it [here](https://github.com/end-4/dots-hyprland-w
 References: [Arch Wiki](https://wiki.archlinux.org/title/List_of_applications/Other#Taskbars)
 
 # Widget systems
-_These widget systems provide a declarative way to create (mostly GTK, QT ones might be coming soon) widgets and put them on Layer Shells (and, if possible, whatever the equivalent on X11 is)._
+_These widget systems provide a declarative way to create widgets and put them on Layer Shells (and, if possible, whatever the equivalent on X11 is)._
 
 ## EWW
 - [GitHub](https://github.com/elkowar/eww) • [Docs](https://elkowar.github.io/eww)
@@ -45,6 +45,12 @@ _These widget systems provide a declarative way to create (mostly GTK, QT ones m
 - Cons
   - For icon sizes, it's often a pain having to wait for the CSS to load before being able to retrieve some font-size-scalable data.
   - Working with looped widgets in an imperative way could be a pain if you forget to set a widget reference to null after destroying.
+
+## Quickshell
+- [GitHub](https://github.com/outfoxxed/quickshell)
+- A QtQuick-based desktop shell toolkit inspired by AGS
+- This is something I'm excited about, but haven't tried yet and will soon. It's largely WIP, and is actively being developed.
+- Dev guy says he has plans for window thumbnails, which would be a killer feature.
 
 ## Fabric
 - [GitHub](https://github.com/Fabric-Development/fabric)
