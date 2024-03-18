@@ -4,7 +4,7 @@ lastUpdated: 2024-02-24
 ---
 ## Developers
 - [end_4](https://github.com/end-4): The repo owner and author.
-  - Designed, created the main parts of this project such as the setup of Hyprland and AGS and maintains them.
+  - Created the main parts of this project such as the setup of Hyprland and AGS and maintains them.
   - Since Jan. 2023 until now.
 - [clsty](https://github.com/clsty): The assistant dev.
   - Reworked install script, created this doc site and maintains them.
