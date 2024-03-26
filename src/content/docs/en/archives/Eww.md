@@ -25,7 +25,7 @@ Several sets of configs, including `windoes`, `hybrid` and `NovelKnock`, etc.
 |  ⌄  | Do use | Not recommended | Notes                 |
 | --- | ------ | ----------- | ------------------------- |
 | Kernel |     | cachyos, xanmod | Don't abuse power savers. Also I'm not sure what the hell I'm saying - this is just from personal experience. |
-| Login shell  | bash/zsh | fish | It's okay to use fish in a terminal - that's what I do |
+| Login shell  | bash/zsh | fish | It's okay to use fish in a terminal - that's what end_4 does |
 
  ## Setup
  - eww configs only work properly in `~/.config/eww`
