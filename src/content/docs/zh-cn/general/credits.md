@@ -1,10 +1,10 @@
 ---
 title: 致谢
-lastUpdated: 2024-02-25
+lastUpdated: 2024-03-31
 ---
 ## 开发者
 - [end_4](https://github.com/end-4): 仓库持有者以及作者。
-  - 设计创造了此项目的主体部分，比如 Hyprland 和 AGS 的配置，并且维护它们。
+  - 创造了此项目的主体部分，比如 Hyprland 和 AGS 的配置，并且维护它们。
   - 自 2023 年 1 月至今。
 - [clsty](https://github.com/clsty): 辅助开发者。
   - 重构了安装脚本，创建了此文档站，并且维护它们。
