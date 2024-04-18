@@ -1,5 +1,5 @@
 ---
-title: Installer scripts
+title: Install scripts
 layout: /src/layouts/autonum.astro
 sidebar:
   order: 20
