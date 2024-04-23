@@ -10,7 +10,7 @@ lastUpdated: 2024-02-18
 This page will help you know what to look into when you wanna hack up something
 
 # Repo structure
-- `Import manually`: Misc config files
+- `Extras`: Misc config files
 - `scriptdata`: Stores data for install script
 - `.config`: This is the main folder where normal config files are stored. (ags, hyprland, etc.)
 - `.local/bin`: Utility scripts. I might move them to ags folder later.
