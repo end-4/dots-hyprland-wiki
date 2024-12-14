@@ -27,6 +27,12 @@ export default defineConfig({
           label: 'English', // Engligh
           lang: 'en',
         },
+
+        'es': {
+          label: 'Español', //Spanish
+          lang: 'es',
+        },
+
         // 'fr': {
         //   label: 'French', //French
         //   lang: 'fr',
@@ -62,6 +68,7 @@ export default defineConfig({
           translations: {
             'vi': 'Chung',
             'zh-CN': '通用',
+            'es': 'General',
           },
           autogenerate: { directory: 'general' },
         },
@@ -78,6 +85,7 @@ export default defineConfig({
           translations: {
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
+            'es': 'Archivos (no mantenidos)',
           },
 					autogenerate: { directory: 'archives' },
 				},
@@ -88,6 +96,7 @@ export default defineConfig({
           translations: {
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
+            'es': 'Notas de desarrollo'
           },
 					autogenerate: { directory: 'dev' },
 				},
@@ -97,6 +106,7 @@ export default defineConfig({
           badge: { text: 'Help wanted', variant: 'note' },
           translations: {
             'zh-CN': '翻译此文档',
+            'es': 'Traducir esta wiki',
           },
           link: '/dev/doc-site-contrib',
 				},
