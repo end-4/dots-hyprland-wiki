@@ -19,7 +19,15 @@ There is also a `checkdeps.sh`:
   - It somehow fixes [the problem caused by yay](https://github.com/end-4/dots-hyprland/discussions/204).
 
 ## Current Dependency Installation
-Local PKGBUILDs under `./arch-packages/` are used to install dependencies. It enables a workable `uninstall.sh` script.
+Local PKGBUILDs under `./arch-packages/` are used to install dependencies.
+:::note[history]
+The mechanism is introduced by Makrennel in [PR#570](https://github.com/end-4/dots-hyprland/pull/570).
+
+Why is this awesome?
+- It makes it possible to control version since some packages may involve breaking changes from time to time.
+- It makes the dependency trackable for package manager, so that you always know why you have installed some package.
+- As a result, it enables a workable `uninstall.sh` script.
+:::
 
 The PKGBUILDs contains two forms of dependencies:
 - Package name written in dependencies, like a "meta" package.
