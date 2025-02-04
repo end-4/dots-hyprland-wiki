@@ -37,6 +37,12 @@ Why is this awesome?
 The PKGBUILDs contains two forms of dependencies:
 - Package name written in dependencies, like a "meta" package.
 - Normal PKGBUILD content to build dependencies, e.g. AGS, which is often for version controlling.
+
+### Future Dependency Installation
+See [issue#1061](https://github.com/end-4/dots-hyprland/issues/1061) for detail.
+
+Use Guix/Nix package. This is planned but clsty needs to learn Guix/Nix usage and packaging first.
+
 ### Configuration Files Sync
 Mainly use rsync.
 
