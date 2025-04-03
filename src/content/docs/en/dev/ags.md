@@ -4,14 +4,13 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: AGS
   order: 40
-lastUpdated: 2024-02-18
+lastUpdated: 2025-04-03
 ---
 
 # General
 ## User options
-- Defaults are in `.config/ags/modules/.configuration/user_options.js`
-  - If you wanna add a new config option, add it to the `configOptions` object
-  - It's available globally in the config
+- Defaults are in `.config/ags/modules/.configuration/default_options.jsonc`
+- Config options are available globally in the config as `userOptions`
 
 ## Code formatting
 - Indentation: 4 spaces
