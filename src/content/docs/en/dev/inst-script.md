@@ -50,9 +50,3 @@ Mainly use rsync.
 `setup.sh`:
 - Stored in the repo of dots-hyprland-wiki to be served by the doc site directly.
 - When executed, it downloads the dots-hyprland repo and then executes the `install.sh`.
-# Alternative Update Method
-`update-dots.sh`, created by [H0mire](https://github.com/H0mire) in [PR#473](https://github.com/end-4/dots-hyprland/pull/473).
-
-:::note[background]
-This script is optional since the `install.sh` is already capable for upgrading, while keeping some customed files unchanged. 
-:::
