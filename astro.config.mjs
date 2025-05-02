@@ -115,6 +115,6 @@ export default defineConfig({
           link: '/dev/doc-site-contrib',
 				},
 			],
-		}),
+		},),
 	],
 });
