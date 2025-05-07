@@ -45,9 +45,9 @@ export default defineConfig({
         //   label: 'Polish', //Polish
         //   lang: 'pl',
         // },
-        // 'ru': {
-        //   label: 'Russian', //Russian
-        //   lang: 'ru',
+         'ru': {
+           label: 'Русский', //Russian
+           lang: 'ru',
         // },
         // 'tr': {
         //   label: 'Turkish', //Turkish
@@ -69,6 +69,7 @@ export default defineConfig({
             'vi': 'Chung',
             'zh-CN': '通用',
             'es': 'General',
+	    'ru': 'Общее',
           },
           autogenerate: { directory: 'general' },
         },
@@ -86,6 +87,7 @@ export default defineConfig({
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
             'es': 'Archivos (no mantenidos)',
+	    'ru': 'Прошлые версии (не поддерживаются)',
           },
 					autogenerate: { directory: 'archives' },
 				},
@@ -96,7 +98,8 @@ export default defineConfig({
           translations: {
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
-            'es': 'Notas de desarrollo'
+            'es': 'Notas de desarrollo',
+	    'ru': 'Для разработчиков',
           },
 					autogenerate: { directory: 'dev' },
 				},
@@ -107,10 +110,11 @@ export default defineConfig({
           translations: {
             'zh-CN': '翻译此文档',
             'es': 'Traducir esta wiki',
+	    'ru': 'Помогите перевести вики',
           },
           link: '/dev/doc-site-contrib',
 				},
 			],
-		}),
+		},),
 	],
 });
