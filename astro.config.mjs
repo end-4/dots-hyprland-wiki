@@ -48,7 +48,7 @@ export default defineConfig({
          'ru': {
            label: 'Русский', //Russian
            lang: 'ru',
-        // },
+         },
         // 'tr': {
         //   label: 'Turkish', //Turkish
         //   lang: 'tr',
@@ -69,7 +69,7 @@ export default defineConfig({
             'vi': 'Chung',
             'zh-CN': '通用',
             'es': 'General',
-	    'ru': 'Общее',
+	           'ru': 'Общее'
           },
           autogenerate: { directory: 'general' },
         },
@@ -87,7 +87,7 @@ export default defineConfig({
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
             'es': 'Archivos (no mantenidos)',
-	    'ru': 'Прошлые версии (не поддерживаются)',
+	           'ru': 'Прошлые версии (не поддерживаются)'
           },
 					autogenerate: { directory: 'archives' },
 				},
@@ -99,7 +99,7 @@ export default defineConfig({
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
             'es': 'Notas de desarrollo',
-	    'ru': 'Для разработчиков',
+	           'ru': 'Для разработчиков'
           },
 					autogenerate: { directory: 'dev' },
 				},
@@ -115,6 +115,6 @@ export default defineConfig({
           link: '/dev/doc-site-contrib',
 				},
 			],
-		},),
+		}),
 	],
 });
