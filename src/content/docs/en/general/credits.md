@@ -11,16 +11,16 @@ lastUpdated: 2024-03-18
   - Since Jan. 2024 until now.
 
 ## Thank you
-- [@midn8hustlr](https://github.com/midn8hustlr): Designed and implemented "workspace groups" workflow.
-- AGS: [Aylur's config](https://github.com/Aylur/dotfiles), [kotontrion's config](https://github.com/kotontrion/dotfiles)
-- EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw)
-- AI bots for providing useful examples
-- Open source contributors for their software and ricers for their insipration (would be a too long list to put here!)
-
-## Stonks
-- _thank you_
-[![Stargazers over time](https://starchart.cc/end-4/dots-hyprland.svg?background=%230d1117&axis=%23e6edf3&line=%234759e7)](https://starchart.cc/end-4/dots-hyprland)
+- [@midn8hustlr](https://github.com/midn8hustlr) for greatly improving the color generation system
+- [@outfoxxed](https://github.com/outfoxxed/) for his invaluable support in the creation of the Quickshell version of the dotfiles
+ - Quickshell: [Soramane](https://github.com/caelestia-dots/shell/), [FridayFaerie](https://github.com/FridayFaerie/quickshell), [nydragon](https://github.com/nydragon/nysh)
+ - AGS: [Aylur's config](https://github.com/Aylur/dotfiles/tree/ags-pre-ts), [kotontrion's config](https://github.com/kotontrion/dotfiles)
+ - EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw)
+ - AI bots for providing useful examples
 
 
-## Inspirations
-- osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
+## Inspirations/copying
+
+ - Inspiration: osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
+ - Copying: The license allows you to. Personally I have absolutely no problem with others redistributing/recreating my work. There's no "stealing" (unless you do weird stuff and violate the license). (this note is here because some people actually asked)
+
