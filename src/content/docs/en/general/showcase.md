@@ -8,7 +8,7 @@ lastUpdated: 2024-02-18
 </div>
 
 
-## illogical_impulse<sup>Quickshell</sup>
+## illogical-impulse<sup>Quickshell</sup>
 [GitHub](https://github.com/end-4/dots-hyprland)
 
 ![image](https://github.com/user-attachments/assets/08d26785-b54d-4ad1-875b-bb08cc6757f5)
@@ -17,7 +17,7 @@ lastUpdated: 2024-02-18
 ![image](https://github.com/user-attachments/assets/e402f74a-6bd8-4ebe-bcf4-3a4a4846de10)
 
 
-## illogical_impulse<sup>AGS</sup>
+## illogical-impulse<sup>AGS</sup>
 ![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.3.png)
