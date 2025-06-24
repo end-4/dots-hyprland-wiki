@@ -1,0 +1,133 @@
+#!/bin/bash
+
+# See more at
+# https://github.com/end-4/dots-hyprland-wiki/issues/3
+
+set -e
+script=$(readlink -f "$0")
+base=$(dirname "$script")/src/content/docs
+json_file=$(dirname "$script")/l10n-notify.json
+
+src_locale=en
+src_locale_name=English
+
+echo "================================"
+echo "================================ STEP 1: Path detection and transforming"
+echo "================================"
+abs_paths=()
+for path in "$@";do
+  # Transform relative path to absolute path
+  abs_path=$(readlink -f "$path") || { echo "[$0]: Failed to get the absolute path of file \"$path\". Aborting..." ; exit 1 ; }
+  # Test $abs_path existence
+  test -f $abs_path || { echo "[$0]: The file \"$abs_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
+  # Determine if $abs_path is a Dev Note
+  echo $abs_path|grep -q "$base/$src_locale/dev/" && { echo "[$0]: The file \"$abs_path\" seems to be a Dev Note. Skipping..." ; continue ; }
+  # Determine if $abs_path is a doc in $src_locale_name
+  echo $abs_path|grep -q "$base/$src_locale/" || { echo "[$0]: The file \"$abs_path\" seems not to be a doc in $src_locale_name. Aborting..." ; exit 1 ; }
+  # save path to array $abs_paths
+  abs_paths+=("$abs_path")
+done
+
+echo "--------------------------------"
+echo "-------------------------------- Result of STEP 1"
+echo "--------------------------------"
+echo "[$0]: Every file path has been transformed into absolute path. Here they are:"
+for path in "${abs_paths[@]}";do
+  echo "    $path"
+done
+
+
+echo "================================"
+echo "================================ STEP 2: Parsing json"
+echo "================================"
+# Read keys (locale)
+while read -r string; do
+  # Save to array $locale
+  locale+=("$string")
+done < <(gojq -r 'keys[]' $json_file)
+
+# Find value (notif) corresponding to the key (locale)
+notif=()
+for key in "${locale[@]}"; do
+  echo $key
+  value=$(gojq -r ".\"$key\"" $json_file)
+  # Save to array $notif
+  notif+=("$value""$(date +%F)")
+done
+
+echo "--------------------------------"
+echo "-------------------------------- Result of STEP 2"
+echo "--------------------------------"
+echo "[$0]: json parsed, notifications for different locales have been loaded. Here they are:"
+for ((i=0; i<${#locale[@]}; i++)); do
+  echo "-- Entry $i: "
+  echo "--   ├─locale = \"${locale[i]}\""
+  echo "--   ├─notif  = \"${notif[i]}\""
+  echo "--   └─root   = \"$base/${locale[i]}\""
+done
+
+
+echo "================================"
+echo "================================ STEP 3: Processing translation file"
+echo "================================"
+h="       │   └─"
+h2="       │   ├─"
+# For every element in array $locale
+for ((i=0; i<${#locale[@]}; i++)); do
+echo "--------------------------"
+echo "-- Now processing: "
+echo "--   ├─locale = \"${locale[i]}\""
+echo "--   ├─notif  = \"${notif[i]}\""
+echo "--   └─root   = \"$base/${locale[i]}\""
+  # Skipping source language
+  if [ "${locale[i]}" = "$src_locale" ]; then echo "   Translation directory \"$base/${locale[i]}\" is of ${src_locale_name}, skipping..."; continue ; fi
+  # Skipping none-existence translation directory
+  test -d "$base/${locale[i]}" || { echo "   Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
+
+  # For every element in array $abs_paths
+  for path in "${abs_paths[@]}";do
+    # Transform from source path to translated path (loc_path)
+    loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$path")
+    echo "++     ├─file = \"$loc_path\""
+    # Skipping non-existent $loc_path
+    test -f $loc_path || { echo "${h2}The translation file \"$loc_path\" does not exists. No worry since there will be a auto fallback anyway. Skipping..." ; continue ; }
+    # Match unique marks
+    line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $loc_path)
+    line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
+
+    # If unique mark not found
+    if [ -z "$line_beg" ]; then
+      echo "${h2}Mark string not found."
+      # Then find the frontmatter, which both starts and ends with "---"
+      fr_end=$(awk '/^---$/{count++; if(count==2) {print NR; exit}}' "$loc_path")
+      if [ -z "$fr_end" ]; then
+        echo "${h}Frontmatter not found or not ended. Aborting...";exit 1
+      else
+        echo "${h}Frontmatter end at $fr_end ."
+      # And create the caution aside right after the frontmatter, which ends with "---"
+        sed -i "$((fr_end+1))i:::" "$loc_path"
+        sed -i "$((fr_end+1))i${notif[i]}" "$loc_path"
+        sed -i "$((fr_end+1))i:::caution[l10n-notify]" "$loc_path"
+      fi
+
+    # If unique mark found, but it has no end (weird...), then abort
+    elif [ -z "$line_end" ]; then
+      echo "${h}Mark string found at line $line_beg, but the aside has no end, something must be wrong. Aborting..."; exit 1
+    # If unique mark found, and this aside contains nothing,
+    elif [ $line_end -eq $(($line_beg+1)) ]; then
+      echo "${h}Mark string found at line $line_beg, and the aside end at line $line_end, i.e. it contains nothing."
+      # Then directly add the notification.
+      sed -i "${line_end}i${notif[i]}" "$loc_path"
+    # If unique mark found, and this aside contains one line,
+    elif [ $line_end -eq $(($line_beg+2)) ]; then
+      echo "${h}Mark string found at line $line_beg, and the aside end at line $line_end, i.e. it contains one line."
+      # Then replace this line with newest notif.
+      sed -i "${line_end}i${notif[i]}" "$loc_path"
+      sed -i "$((line_beg+1))d" "$loc_path"
+    # If unique mark found, and this aside contains multiple lines
+    else
+      # Then sth is wrong... Abort.
+      echo "${h}Mark string found at line $line_beg, but the aside end at line $line_end, something must be wrong. Aborting..."; exit 1
+    fi
+  done
+done
