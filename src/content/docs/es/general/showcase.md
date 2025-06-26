@@ -10,7 +10,7 @@ lastUpdated: 2024-12-13
 ## illogical_impulse
 [Inicio rápido](../../i-i/01setup)    •    [GitHub](https://github.com/end-4/dots-hyprland)
 
-![image](/dots-hyprland-wiki/screenshots/i-i.1.png)
+![image](https://repository-images.githubusercontent.com/583820372/55988d08-a8db-421a-8761-f6e98ea89ce3)
 ![image](/dots-hyprland-wiki/screenshots/i-i.2.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.3.png)
 ![image](/dots-hyprland-wiki/screenshots/i-i.4.png)
