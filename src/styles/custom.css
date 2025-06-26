@@ -1,110 +1,110 @@
 /* Dark mode colors. */
 :root[data-theme='dark'] {
   --sl-color-accent-low: #551251;
-  --sl-color-accent: #DBBED2;
-  --sl-color-accent-high: #FFC4F5;
+  --sl-color-accent: #eadef1;
+  --sl-color-accent-high: #cdc3d4;
   /* hyperlinks, selection bg, left-top corner title, etc. */
-  --sl-color-white: #D1C2CB;
+  --sl-color-white: #e6e1e3;
   /* highlighted text */
-  --sl-color-gray-1: #eceff4;
+  --sl-color-gray-1: #ccc4cf;
   /* text on top bar */
-  --sl-color-gray-2: #EAE0E4;
+  --sl-color-gray-2: #e6e1e3;
   /* normal text */
-  --sl-color-gray-3: #DBBED2;
+  --sl-color-gray-3: #211f21;
   /* TOC on right side */
   --sl-color-gray-4: #554050;
-  --sl-color-gray-5: #3B3338;
+  --sl-color-gray-5: #1c1b1d;
   /* bullet line on side bar */
-  --sl-color-gray-6: #211B1F;
+  --sl-color-gray-6: #1c1b1d;
   /* sidebar, topbar */
-  --sl-color-black: #100D10;
+  --sl-color-black: #141314;
 }
 
 /* Page title */
 :root[data-theme='dark'] h1:is(#_top) {
-  color: #F8DAEE;
+  color: #cdc3d4;
 }
 
 /* Headings */
 :root[data-theme='dark'] .sl-markdown-content h1 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 200%;
 }
 
 :root[data-theme='dark'] .sl-markdown-content h2 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 165%;
 }
 
 :root[data-theme='dark'] .sl-markdown-content h3 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 140%;
 }
 
 :root[data-theme='dark'] .sl-markdown-content h4 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 125%;
 }
 
 :root[data-theme='dark'] .sl-markdown-content h5 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 116%;
 }
 
 :root[data-theme='dark'] .sl-markdown-content h6 {
-  color: #F8DAEE;
+  color: #cdc3d4;
   font-size: 110%;
 }
 
 /* Light mode colors. */
 :root[data-theme='light'] {
   --sl-color-accent-low: #FFFFFF;
-  --sl-color-accent: #8C4483;
+  --sl-color-accent: #635b6a;
   --sl-color-accent-high: #6E5768;
-  --sl-color-white: #1F1A1D;
-  --sl-color-gray-1: #1F1A1D;
-  --sl-color-gray-2: #1F1A1D;
+  --sl-color-white: #1c1b1d;
+  --sl-color-gray-1: #625c66;
+  --sl-color-gray-2: #1c1b1d;
   --sl-color-gray-3: #4E444B;
-  --sl-color-gray-4: #8b8b8b;
-  --sl-color-gray-5: #b691aa;
-  --sl-color-gray-6: #f3e2ef;
-  --sl-color-gray-7: #F4EFF4;
-  --sl-color-black: #EDE4EC;
+  --sl-color-gray-4: #ece7e9;
+  --sl-color-gray-5: #f2ecee;
+  --sl-color-gray-6: #f7f2f4;
+  --sl-color-gray-7: #ffffff;
+  --sl-color-black: #fdf8fa;
 }
 
 /* Page title */
 :root[data-theme='light'] h1:is(#_top) {
-  color: #261623;
+  color: #1c1b1d;
 }
 
 /* Headings */
 :root[data-theme='light'] .sl-markdown-content h1 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 200%;
 }
 
 :root[data-theme='light'] .sl-markdown-content h2 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 165%;
 }
 
 :root[data-theme='light'] .sl-markdown-content h3 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 140%;
 }
 
 :root[data-theme='light'] .sl-markdown-content h4 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 125%;
 }
 
 :root[data-theme='light'] .sl-markdown-content h5 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 116%;
 }
 
 :root[data-theme='light'] .sl-markdown-content h6 {
-  color: #261623;
+  color: #1c1b1d;
   font-size: 110%;
 }
 
