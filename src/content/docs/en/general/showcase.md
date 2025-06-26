@@ -13,7 +13,6 @@ lastUpdated: 2024-02-18
 
 ![image](https://repository-images.githubusercontent.com/583820372/55988d08-a8db-421a-8761-f6e98ea89ce3)
 ![image](https://github.com/user-attachments/assets/08d26785-b54d-4ad1-875b-bb08cc6757f5)
-![image](https://repository-images.githubusercontent.com/583820372/55988d08-a8db-421a-8761-f6e98ea89ce3)
 ![image](https://github.com/user-attachments/assets/86cc511b-0d33-4c78-bcc0-3037d02a17da)
 ![image](https://github.com/user-attachments/assets/e402f74a-6bd8-4ebe-bcf4-3a4a4846de10)
 
