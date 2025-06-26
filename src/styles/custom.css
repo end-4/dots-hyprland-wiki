@@ -10,7 +10,7 @@
   /* text on top bar */
   --sl-color-gray-2: #e6e1e3;
   /* normal text */
-  --sl-color-gray-3: #211f21;
+  --sl-color-gray-3: #e6e1e3;
   /* TOC on right side */
   --sl-color-gray-4: #554050;
   --sl-color-gray-5: #1c1b1d;
@@ -119,7 +119,7 @@ code {
 
 .card {
   background-color: var(--sl-color-gray-6) !important;
-  border-radius: 25px;
+  border-radius: 40px;
 }
 
 header {
@@ -128,4 +128,17 @@ header {
 
 blockquote {
   border-left: 4px solid var(--sl-color-gray-5) !important;
+}
+
+.primary {
+  border-radius: 20px;
+  transition: border-radius 0.2s ease;
+}
+
+.primary:hover {
+  background-color: var(--sl-color-accent-high) !important;
+}
+
+.primary:active {
+  border-radius: 30px;
 }
