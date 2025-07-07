@@ -46,7 +46,7 @@ export default defineConfig({
         //   lang: 'pl',
         // },
          'ru': {
-           label: 'Русский', //Russian
+           label: 'Русский', //Russian*
            lang: 'ru',
          },
         // 'tr': {
