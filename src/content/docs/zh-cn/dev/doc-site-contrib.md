@@ -191,6 +191,6 @@ Starlight UI 已经内置了一些语言的翻译。如果认为有必要，您�
 
 ## 创建 Pull Request
 
-在线进入 Fork 的仓库，点击 `Contribute`，然后点击 `Open pull request` 以提交 Pull Request。
+进入你 Fork 出来的仓库主页，点击 `Contribute`，然后选择 `Open pull request` 来提交你的 PR。
 
 提交时请务必详细说明您所做的工作。例如，如果您进行了翻译，请说明您翻译了哪种语言。
