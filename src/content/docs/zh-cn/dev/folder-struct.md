@@ -26,4 +26,3 @@ lastUpdated: 2024-02-18
 - `widgets`：核心JS代码文件夹，定义小部件布局与行为
   - 每个小部件窗口的源代码存放于子文件夹中，均包含需由`.config/ags/config.js`导入的`main.js`文件
 
-通过DeepL.com（免费版）翻译
