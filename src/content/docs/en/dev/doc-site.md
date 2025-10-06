@@ -4,7 +4,7 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Doc Site
   order: 60
-lastUpdated: 2024-02-24
+lastUpdated: 2025-10-06
 ---
 
 This page "documents" this "documentation site" itself.

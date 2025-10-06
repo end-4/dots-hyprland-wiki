@@ -34,6 +34,8 @@ This is useful for debugging and a resumable installation, and also provide upda
   - `scriptdata/lib/`: Reusable codes to be sourced at the beginning.
   - `scriptdata/step/`: The actual steps for installting.
   - `scriptdata/uv/`: For python and uv dependencies.
+- `dist-<DISTRO_ID>/`: The core is the distro specific install scripts which `install.sh` select to use according to current distro. It also contains other files related to the distro specific scripts.
+- `dist-nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
 ## Online script
