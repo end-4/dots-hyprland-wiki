@@ -6,7 +6,7 @@ remote_repo=end-4/dots-hyprland
 set -e
 function try { "$@" || sleep 0; }
 function x() {
-  if "$@";then cmdstatus=0;else cmdstatus=1;fi # 0=normal; 1=failed; 2=failed but ignored
+  if "$@";then local cmdstatus=0;else local cmdstatus=1;fi # 0=normal; 1=failed; 2=failed but ignored
   while [ $cmdstatus == 1 ] ;do
     echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed."
     echo -e "You may need to resolve the problem manually BEFORE repeating this command.\e[0m"
@@ -16,7 +16,7 @@ function x() {
     case $p in
       [eE]) echo -e "\e[34mAlright, will exit.\e[0m";break;;
       *) echo -e "\e[34mOK, repeating...\e[0m"
-         if "$@";then cmdstatus=0;else cmdstatus=1;fi
+         if "$@";then local cmdstatus=0;else local cmdstatus=1;fi
          ;;
     esac
   done
