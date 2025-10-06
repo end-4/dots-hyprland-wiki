@@ -7,7 +7,8 @@ export default defineConfig({
   base: '/dots-hyprland-wiki',
 	integrations: [
 		starlight({
-			title: 'end-4/dots-hyprland',
+			title: 'illogical-impulse',
+      logo: { src: './src/assets/illogical-impulse.svg', replacesTitle: false, },
 			social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/end-4/dots-hyprland', },
         { icon: 'pen', label: 'GitHub (wiki)', href: 'https://github.com/end-4/dots-hyprland-wiki', },
