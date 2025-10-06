@@ -1,20 +1,17 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-// Support <Collapsible> html tag
-import { webcore } from 'webcoreui/integration';
-import { Button, Collapsible } from 'webcoreui/astro';
 
 // https://starlight.astro.build/reference/configuration
 export default defineConfig({
   site: 'https://end-4.github.io',
   base: '/dots-hyprland-wiki',
 	integrations: [
-    webcore()
 		starlight({
 			title: 'end-4/dots-hyprland',
-			social: {
-				github: 'https://github.com/end-4/dots-hyprland',
-			},
+			social: [
+        { icon: 'pen', label: 'GitHub (wiki)', href: 'https://github.com/end-4/dots-hyprland-wiki', },
+        { icon: 'github', label: 'GitHub (project)', href: 'https://github.com/end-4/dots-hyprland', },
+      ],
       editLink: {
           baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
       },
