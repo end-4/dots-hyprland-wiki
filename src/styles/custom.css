@@ -28,32 +28,32 @@
 /* Headings */
 :root[data-theme='dark'] .sl-heading-wrapper h1 {
   color: #cdc3d4;
-  font-size: 200%;
+  font-size: 100%;
 }
 
 :root[data-theme='dark'] .sl-heading-wrapper h2 {
   color: #cdc3d4;
-  font-size: 165%;
+  font-size: 100%;
 }
 
 :root[data-theme='dark'] .sl-heading-wrapper h3 {
   color: #cdc3d4;
-  font-size: 140%;
+  font-size: 100%;
 }
 
 :root[data-theme='dark'] .sl-heading-wrapper h4 {
   color: #cdc3d4;
-  font-size: 125%;
+  font-size: 100%;
 }
 
 :root[data-theme='dark'] .sl-heading-wrapper h5 {
   color: #cdc3d4;
-  font-size: 116%;
+  font-size: 100%;
 }
 
 :root[data-theme='dark'] .sl-heading-wrapper h6 {
   color: #cdc3d4;
-  font-size: 110%;
+  font-size: 100%;
 }
 
 /* Light mode colors. */
@@ -80,32 +80,32 @@
 /* Headings */
 :root[data-theme='light'] .sl-heading-wrapper h1 {
   color: #1c1b1d;
-  font-size: 200%;
+  font-size: 100%;
 }
 
 :root[data-theme='light'] .sl-heading-wrapper h2 {
   color: #1c1b1d;
-  font-size: 165%;
+  font-size: 100%;
 }
 
 :root[data-theme='light'] .sl-heading-wrapper h3 {
   color: #1c1b1d;
-  font-size: 140%;
+  font-size: 100%;
 }
 
 :root[data-theme='light'] .sl-heading-wrapper h4 {
   color: #1c1b1d;
-  font-size: 125%;
+  font-size: 100%;
 }
 
 :root[data-theme='light'] .sl-heading-wrapper h5 {
   color: #1c1b1d;
-  font-size: 116%;
+  font-size: 100%;
 }
 
 :root[data-theme='light'] .sl-heading-wrapper h6 {
   color: #1c1b1d;
-  font-size: 110%;
+  font-size: 100%;
 }
 
 
