@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+// Support <Collapsible> html tag
+import { Button, Collapsible } from 'webcoreui/astro';
 
 // https://starlight.astro.build/reference/configuration
 export default defineConfig({
