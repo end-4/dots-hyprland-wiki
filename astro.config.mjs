@@ -77,19 +77,19 @@ export default defineConfig({
         {
           label: '[Qs] illogical-impulse',
           // idk why but it won't work when using `illogical-impulse'
-          collapsed: false,
+          //collapsed: false,
           badge: { text: 'New', variant: 'success' },
 					autogenerate: { directory: 'ii-qs' },
 				},
         {
           label: '[AGS] illogical-impulse',
           // idk why but it won't work when using `illogical-impulse'
-          collapsed: true,
+          //collapsed: true,
 					autogenerate: { directory: 'i-i' },
 				},
 				{
 					label: '[EWW] Old stuff',
-          collapsed: true,
+          //collapsed: true,
           translations: {
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
@@ -100,7 +100,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Dev Notes',
-          collapsed: true,
+          //collapsed: true,
           badge: { text: 'Dev' },
           translations: {
             'vi': 'Ghi chú cho dev',
@@ -112,7 +112,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Translate this wiki',
-          collapsed: true,
+          //collapsed: true,
           badge: { text: 'Help wanted', variant: 'note' },
           translations: {
             'zh-CN': '翻译此文档',
