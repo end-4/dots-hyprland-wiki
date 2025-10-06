@@ -8,18 +8,37 @@ lastUpdated: 2025-10-06
 # Help wanted
 ## Support on each distro
 `./install.sh` detects the distro ID and try to use `./dist-<DISTRO_ID>/install-deps.sh` for dependency installation if it exists.
-  - **We need more scripts `dist-<DISTRO_ID>/install-deps.sh`** to support specific distro using their system package manager.
-    - Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`, such as `fedora`.
-    - This script should be idempotent.
-    - This script should reflect the equivalents of the packages which `./dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./dist-arch/*/PKGBUILD`.
-      - To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
-    - If possible, please create "meta packages" using the prefix `illogical-impulse-`, so that user can remove them easily without unexpectedly removing the packages that installed by the user for other purposes.
 
-P.S. similar for `./dist-<DISTRO_ID>/install-setup.sh`, but generally most distros can just use the `./dist-fallback/install-setup.sh` for this part, so it's not a big deal.
+**We need more scripts `dist-<DISTRO_ID>/install-deps.sh`** to support specific distro using their system package manager.
+
+:::tip[Tips]
+- Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`, such as `fedora`.
+:::
+
+Requirements:
+- This script should be written in Bash.
+- This script should be idempotent.
+- This script should reflect the equivalents of the packages which `./dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./dist-arch/*/PKGBUILD`.
+- If needed, also create `./dist-<DISTRO_ID>/install-setups.sh`. When it does not exist, `install.sh` will use `./dist-fallback/install-setups.sh` instead, which may be not suitable for your distro.
+
+:::tip[Get package information]
+- Environment variables and functions defined inside `scriptdata/lib/` can be used.
+  - The functions `v()`, `showfun()` and `x()` are especially important.
+- Run `./install.sh --skip-allgreeting --skip-allfiles --skip-allsetups` to test `dist-<DISTRO_ID>/install-deps.sh` quickly.
+- To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
+- (WIP) Helpful information inside `scriptdata/deps-info.md`: [issue#2102](https://github.com/end-4/dots-hyprland/issues/2102)
+:::
+
+Optional:
+- Create "meta packages" using the prefix `illogical-impulse-`, so that user can remove them easily without unexpectedly removing the packages that installed by the user for other purposes.
+- Create `dist-<DISTRO_ID>/README.md`.
 
 ## Cross-distro support via Nix
 When `--via-nix` is passed to `install.sh`, `./dist-nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
-  - **We need help on `dist-nix/install-deps.sh`.** See [issue #1061](https://github.com/end-4/dots-hyprland/issues/1061).
+
+**We need help on `dist-nix/install-deps.sh`.**
+
+See [issue #1061](https://github.com/end-4/dots-hyprland/issues/1061).
 
 
 # Main method
@@ -31,9 +50,9 @@ This is useful for debugging and a resumable installation, and also provide upda
 ## Structure
 - Main script: `install.sh`
 - `scriptdata/`: 
-  - `scriptdata/lib/`: Reusable codes to be sourced at the beginning.
-  - `scriptdata/step/`: The actual steps for installting.
-  - `scriptdata/uv/`: For python and uv dependencies.
+  - `scriptdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
+  - `scriptdata/step/`: Scripts containing the actual steps for installting to be sourced when proceeding.
+  - `scriptdata/uv/`: For python dependencies handled by uv.
 - `dist-<DISTRO_ID>/`: The core is the distro specific install scripts which `install.sh` select to use according to current distro. It also contains other files related to the distro specific scripts.
 - `dist-nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
