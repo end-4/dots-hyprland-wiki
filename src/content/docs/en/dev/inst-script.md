@@ -3,7 +3,7 @@ title: Install scripts
 layout: /src/layouts/autonum.astro
 sidebar:
   order: 20
-lastUpdated: 2025-02-04
+lastUpdated: 2025-10-06
 ---
 # Help wanted
 ## Support on each distro
@@ -28,7 +28,7 @@ The related scripts and files around `install.sh` belongs to "main method", whic
 The scripts are and should be **idempotent**, i.e. capable for running multiple times.
 
 This is useful for debugging and a resumable installation, and also provide updating function somehow.
-## Structrue
+## Structure
 - Main script: `install.sh`
 - `scriptdata/`: 
   - `scriptdata/lib/`: Reusable codes to be sourced at the beginning.
