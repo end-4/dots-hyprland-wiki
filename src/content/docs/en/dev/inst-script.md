@@ -53,9 +53,9 @@ This is useful for debugging and a resumable installation, and also provide upda
 - Main script: `install.sh`
 - `scriptdata/`: 
   - `scriptdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
-  - `scriptdata/step/`: Scripts containing the actual steps for installting to be sourced when proceeding.
+  - `scriptdata/step/`: Scripts containing the actual steps for installing to be sourced when proceeding.
   - `scriptdata/uv/`: For python dependencies handled by uv.
-- `dist-<DISTRO_ID>/`: The core is collection of the distro specific install scripts which `install.sh` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
+- `dist-<DISTRO_ID>/`: The core part is collection of the distro specific install scripts which `install.sh` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
 - `dist-nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
