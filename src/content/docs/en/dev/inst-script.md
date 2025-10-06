@@ -11,17 +11,19 @@ lastUpdated: 2025-10-06
 
 **We need more scripts `dist-<DISTRO_ID>/install-deps.sh`** to support specific distro using their system package manager.
 
-:::tip[Tips]
+:::tip[Distro ID]
 - Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`, such as `fedora`.
 :::
 
 Requirements:
 - This script should be written in Bash.
 - This script should be idempotent.
-- This script should reflect the equivalents of the packages which `./dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./dist-arch/*/PKGBUILD`.
+- This script should reflect or cover the equivalents of the packages which `./dist-arch/install-deps.sh` installed.
+  - They are mainly from the value of array `depends` inside those `./dist-arch/*/PKGBUILD`.
+  - Some of them are built locally following the PKGBUILD.
 - If needed, also create `./dist-<DISTRO_ID>/install-setups.sh`. When it does not exist, `install.sh` will use `./dist-fallback/install-setups.sh` instead, which may be not suitable for your distro.
 
-:::tip[Get package information]
+:::tip[Tips when writing the script]
 - Environment variables and functions defined inside `scriptdata/lib/` can be used.
   - The functions `v()`, `showfun()` and `x()` are especially important.
 - Run `./install.sh --skip-allgreeting --skip-allfiles --skip-allsetups` to test `dist-<DISTRO_ID>/install-deps.sh` quickly.
@@ -53,7 +55,7 @@ This is useful for debugging and a resumable installation, and also provide upda
   - `scriptdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
   - `scriptdata/step/`: Scripts containing the actual steps for installting to be sourced when proceeding.
   - `scriptdata/uv/`: For python dependencies handled by uv.
-- `dist-<DISTRO_ID>/`: The core is the distro specific install scripts which `install.sh` select to use according to current distro. It also contains other files related to the distro specific scripts.
+- `dist-<DISTRO_ID>/`: The core is collection of the distro specific install scripts which `install.sh` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
 - `dist-nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
