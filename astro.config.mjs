@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 // Support <Collapsible> html tag
+import { webcore } from 'webcoreui/integration';
 import { Button, Collapsible } from 'webcoreui/astro';
 
 // https://starlight.astro.build/reference/configuration
@@ -8,6 +9,7 @@ export default defineConfig({
   site: 'https://end-4.github.io',
   base: '/dots-hyprland-wiki',
 	integrations: [
+    webcore()
 		starlight({
 			title: 'end-4/dots-hyprland',
 			social: {
