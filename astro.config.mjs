@@ -77,14 +77,12 @@ export default defineConfig({
         },
         {
           label: 'illogical-impulse',
-          // idk why but it won't work when using `illogical-impulse'
           collapsed: false,
           badge: { text: 'New', variant: 'success' },
 					autogenerate: { directory: 'ii-qs' },
 				},
         {
           label: 'illogical-impulse (on AGS)',
-          // idk why but it won't work when using `illogical-impulse'
           collapsed: true,
 					autogenerate: { directory: 'i-i' },
 				},
