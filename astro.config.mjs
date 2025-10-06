@@ -9,8 +9,8 @@ export default defineConfig({
 		starlight({
 			title: 'end-4/dots-hyprland',
 			social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/end-4/dots-hyprland', },
         { icon: 'pen', label: 'GitHub (wiki)', href: 'https://github.com/end-4/dots-hyprland-wiki', },
-        { icon: 'github', label: 'GitHub (project)', href: 'https://github.com/end-4/dots-hyprland', },
       ],
       editLink: {
           baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
