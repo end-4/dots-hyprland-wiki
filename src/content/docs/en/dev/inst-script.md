@@ -34,6 +34,7 @@ Requirements:
 Optional:
 - Create "meta packages" using the prefix `illogical-impulse-`, so that user can remove them easily without unexpectedly removing the packages that installed by the user for other purposes.
 - Create `dist-<DISTRO_ID>/README.md`.
+- Create `dist-<DISTRO_ID>/.gitignore` if files generated during building should not be tracked by git, for example binary, cache, fetched source tree or archive.
 
 ## Cross-distro support via Nix
 When `--via-nix` is passed to `install.sh`, `./dist-nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
