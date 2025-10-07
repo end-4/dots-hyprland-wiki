@@ -7,9 +7,12 @@ Allow: /
 Sitemap: ${sitemapURL.href}
 `;
 
-export const GET: APIRoute = ({ site, base }) => {
-  // Remove the first slash from base
-  const normalizedBase = base.startsWith('/') ? base.slice(1, -0) : base;
-  const sitemapURL = new URL(`${normalizedBase}/sitemap-index.xml`, site);
+export const GET: APIRoute = ({ site }) => {
+  const base = import.meta.env.BASE_URL;
+  // Ensure base does not start with "//" or missing slash.
+  const sitemapPath = `${base.replace(/\/$/, '')}/sitemap-index.xml`;
+  const sitemapURL = site
+    ? new URL(sitemapPath, site)
+    : new URL(sitemapPath, 'http://localhost');
   return new Response(getRobotsTxt(sitemapURL));
 };
