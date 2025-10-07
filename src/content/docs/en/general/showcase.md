@@ -11,10 +11,10 @@ lastUpdated: 2024-02-18
 ## illogical-impulse<sup>Quickshell</sup>
 [GitHub](https://github.com/end-4/dots-hyprland)
 
-![image](https://repository-images.githubusercontent.com/583820372/55988d08-a8db-421a-8761-f6e98ea89ce3)
-![image](https://github.com/user-attachments/assets/08d26785-b54d-4ad1-875b-bb08cc6757f5)
-![image](https://github.com/user-attachments/assets/86cc511b-0d33-4c78-bcc0-3037d02a17da)
-![image](https://github.com/user-attachments/assets/e402f74a-6bd8-4ebe-bcf4-3a4a4846de10)
+![image](/screenshots/iiqs.2.jpg)
+![image](/screenshots/iiqs.3.jpg)
+![image](/screenshots/iiqs.4.jpg)
+![image](/screenshots/iiqs.5.jpg)
 
 
 ## illogical-impulse<sup>AGS</sup>
