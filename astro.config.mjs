@@ -3,8 +3,8 @@ import starlight from '@astrojs/starlight';
 
 // https://starlight.astro.build/reference/configuration
 export default defineConfig({
-  site: 'https://end-4.github.io',
-  base: '/dots-hyprland-wiki',
+  site: 'https://ii.clsty.link',
+  base: '',
 	integrations: [
 		starlight({
 			title: 'illogical-impulse',

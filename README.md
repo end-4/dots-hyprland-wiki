@@ -1,11 +1,11 @@
 # dots-hyprland-wiki
 
-The repo of documentation site for [dots-hyprland](https://github.com/end-4/dots-hyprland), hosted [here](https://end-4.github.io/dots-hyprland-wiki).
+The repo of documentation site for [dots-hyprland](https://github.com/end-4/dots-hyprland), hosted [here](https://ii.clsty.link).
 
 > Currently, this project is based on Starlight, which is based on Astro.
 > The website is hosted on GitHub Pages.
 
-**The development and contribution about this repo is documented [here](https://end-4.github.io/dots-hyprland-wiki/en/dev/doc-site).**
+**The development and contribution about this repo is documented [here](https://ii.clsty.link/en/dev/doc-site).**
 
 > If the site is unavailable for some reason, see its source file [here](https://github.com/end-4/dots-hyprland-wiki/blob/main/src/content/docs/en/dev/doc-site.md).
 

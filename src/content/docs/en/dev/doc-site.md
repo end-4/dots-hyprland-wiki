@@ -41,7 +41,7 @@ If this error occured: `vips/vips8: no such file or directory`, you may install 
 :::caution
 When running locally, there seems to be a bug that it doesn't apply a proper base url. But it seems okay on GitHub Pages.
 Therefore, do NOT easily "fix" a relative link just because a `404` happened locally. Otherwise, while the link for locally hosted site is "fixed", the site on GitHub Pages will be broken.
-Similarly, open <http://localhost:4321/dots-hyprland-wiki/en>, NOT <http://localhost:4321/dots-hyprland-wiki> when running locally.
+Similarly, open <http://localhost:4321/en>, NOT <http://localhost:4321> when running locally.
 :::
 
 ## How to
