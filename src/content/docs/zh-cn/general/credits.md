@@ -11,16 +11,13 @@ lastUpdated: 2024-03-31
   - 自 2024 年 1 月至今。
 
 ## 谢谢你
- - [@midn8hustlr](https://github.com/midn8hustlr): 设计并实现了“工作区组”工作流。
- - AGS：[Aylur 的配置](https://github.com/Aylur/dotfiles)，[kotontrion 的配置](https://github.com/kotontrion/dotfiles)
- - EWW: [fufexan 的配置](https://github.com/fufexan/dotfiles)（顺便他在那里感谢了更多人）
- - 人工智能：提供了有用的例子
- - 提供软件的开源贡献者们、提供灵感的美化折腾家们（放在这里将是一个很长的列表！）
+- [@midn8hustlr](https://github.com/midn8hustlr): 大幅改善了颜色生成系统，设计并实现了“工作区组”工作流。
+- [@outfoxxed](https://github.com/outfoxxed/) 在创建 Quickshell 版本的配置文件时提供的无价支持。
+- Quickshell：[Soramane](https://github.com/caelestia-dots/shell/)，[FridayFaerie](https://github.com/FridayFaerie/quickshell)，[nydragon](https://github.com/nydragon/nysh)。
+- AGS：[Aylur's config](https://github.com/Aylur/dotfiles/tree/ags-pre-ts)，[kotontrion's config](https://github.com/kotontrion/dotfiles)。
+- EWW：[fufexan 的配置](https://github.com/fufexan/dotfiles)（顺便他在那里感谢了更多人）。
+- 人工智能：提供了有用的例子。
 
-## 星之折线图
-- _谢谢你们_
-[![Star 数按时间的变化](https://starchart.cc/end-4/dots-hyprland.svg?background=%230d1117&axis=%23e6edf3&line=%234759e7)](https://starchart.cc/end-4/dots-hyprland)
-
-
-## 灵感来源
- - osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
+## 灵感来源/复制
+ - 灵感来源：osu!lazer, Windows 11, Material Design 3, AvdanOS（概念）
+ - 复制：再分发与二次创作都是完全可以的，只要你遵照许可（GNU GPL v3.0）。
