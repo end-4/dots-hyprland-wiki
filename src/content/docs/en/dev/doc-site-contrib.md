@@ -109,12 +109,13 @@ Please pay attention to the formatting of `mjs` and do not omit commas, quotatio
 You should also translate the message in `l10n-notify.json`, e.g. for `zh-CN`:
 ```json title="l10n-notify.json" ins={4}
 {
-  "en": "This page is an outdated translation. The original version in English was last updated on: ",
+  "en": "**This page is an outdated translation.** The original version in English was last updated on LASTUPDATED_OF_ORIGINAL, but this translated version was last updated on LASTUPDATED_OF_TRANSLATED.",
   ...
-  "zh-cn": "此页面的翻译已过时。其英语原文的最新版本的时间是：",
+  "zh-cn": "**此页面的翻译已过时。** 其英语原文的最近更新于 LASTUPDATED_OF_ORIGINAL，而此译文最近更新于 LASTUPDATED_OF_TRANSLATED。",
   ...
 }
 ```
+The `LASTUPDATED_OF_ORIGINAL` and `LASTUPDATED_OF_TRANSLATED` are to be replaced when deploying. Please preserve them as they are.
 
 ### Translate pages
 Go to directory `src/content/docs/`.
