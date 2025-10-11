@@ -137,12 +137,11 @@ Again, please pay attention to lowercase problem, e.g. `zh-cn` and `zh-CN`.
 :::
 
 **After you've finished translation for a document:**
-1. Update the value of `lastUpdated` entry in frontmatter to **your current time** in `yyyy-mm-dd`, e.g. `lastUpdated: 2024-02-18`.
-2. If you see the "caution[l10n-notify]" lines at the top of it,
-please delete these 3 lines.
+- Update the value of `lastUpdated` entry in frontmatter to **your current time** in `yyyy-mm-dd`, e.g. `lastUpdated: 2024-02-18`.
+  - This value is used for comparison with the original document by GitHub Action to automatically generate outdated notice when applicable.
 
 Example:
-```md title="foo.md" del={5,8-10} ins={6}
+```md title="foo.md" del={5} ins={6}
 ---
 title: 示例文档
 sidebar:
@@ -150,9 +149,6 @@ sidebar:
 lastUpdated: 2024-02-16
 lastUpdated: 2024-02-18
 ---
-:::caution[l10n-notify]
-此页面的翻译已过时。其英语原文的最新版本的时间是：2024-02-17
-:::
 ```
 
 ### Translate UI (Optional)

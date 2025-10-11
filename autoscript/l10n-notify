@@ -13,31 +13,33 @@ script_dir=$(dirname $(readlink -f "$0"))
 base=$(dirname "$script_dir")/src/content/docs
 json_file=$(dirname "$script_dir")/l10n-notify.json
 
-src_locale=en
-src_locale_name=English
+# ori: Original
+# trl: Translated
+ori_locale=en
+ori_locale_name=English
 
 echo "================================"
 echo "================================ STEP 1: Path detection and transforming"
 echo "================================"
 
-src_md_files=()
+ori_md_files=()
 while IFS= read -r -d $'\0' file; do
     relative_path="${file#./}"
-    src_md_files+=("$relative_path")
-done < <(find ./src/content/docs/$src_locale/ -type f \( -name "*.md" -o -name "*.mdx" \) -print0)
+    ori_md_files+=("$relative_path")
+done < <(find ./src/content/docs/$ori_locale/ -type f \( -name "*.md" -o -name "*.mdx" \) -print0)
 
 abs_paths=()
-for path in "${src_md_files[@]}";do
+for path in "${ori_md_files[@]}";do
   # Transform relative path to absolute path
   abs_path=$(readlink -f "$path") || { echo "[$0]: Failed to get the absolute path of file \"$path\". Aborting..." ; exit 1 ; }
   # Test $abs_path existence
   test -f $abs_path || { echo "[$0]: The file \"$abs_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
   # Determine if $abs_path is a index.mdx
-  echo $abs_path|grep -q "$base/$src_locale/index.mdx" && { echo "[$0]: The file \"$abs_path\" seems to be index.mdx. Skipping..." ; continue ; }
+  echo $abs_path|grep -q "$base/$ori_locale/index.mdx" && { echo "[$0]: The file \"$abs_path\" seems to be index.mdx. Skipping..." ; continue ; }
   # Determine if $abs_path is a Dev Note
-  echo $abs_path|grep -q "$base/$src_locale/dev/" && { echo "[$0]: The file \"$abs_path\" seems to be a Dev Note. Skipping..." ; continue ; }
-  # Determine if $abs_path is a doc in $src_locale_name
-  echo $abs_path|grep -q "$base/$src_locale/" || { echo "[$0]: The file \"$abs_path\" seems not to be a doc in $src_locale_name. Aborting..." ; exit 1 ; }
+  echo $abs_path|grep -q "$base/$ori_locale/dev/" && { echo "[$0]: The file \"$abs_path\" seems to be a Dev Note. Skipping..." ; continue ; }
+  # Determine if $abs_path is a doc in $ori_locale_name
+  echo $abs_path|grep -q "$base/$ori_locale/" || { echo "[$0]: The file \"$abs_path\" seems not to be a doc in $ori_locale_name. Aborting..." ; exit 1 ; }
   # save path to array $abs_paths
   abs_paths+=("$abs_path")
 done
@@ -65,7 +67,7 @@ for key in "${locale[@]}"; do
   echo $key
   value=$($jq -r ".\"$key\"" $json_file)
   # Save to array $notif
-  notif+=("$value""$(date +%F)")
+  notif+=("$value")
 done
 
 echo "--------------------------------"
@@ -91,52 +93,58 @@ echo "-- Now processing: "
 echo "--   ├─locale = \"${locale[i]}\""
 echo "--   ├─notif  = \"${notif[i]}\""
 echo "--   └─root   = \"$base/${locale[i]}\""
-  # Skipping source language
-  if [ "${locale[i]}" = "$src_locale" ]; then echo "   Translation directory \"$base/${locale[i]}\" is of ${src_locale_name}, skipping..."; continue ; fi
+  # Skipping original language
+  if [ "${locale[i]}" = "$ori_locale" ]; then echo "   Translation directory \"$base/${locale[i]}\" is of ${ori_locale_name}, skipping..."; continue ; fi
   # Skipping none-existence translation directory
   test -d "$base/${locale[i]}" || { echo "   Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
 
   # For every element in array $abs_paths
-  for src_path in "${abs_paths[@]}";do
-    # Get src_lastUpdated
-    src_frontmatter=$(sed -n '/^---$/,/^---$/p' "$src_path")
-    src_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$src_frontmatter")
-    if [[ ! "$src_lastUpdated" =~ ^[0-9]{8}$ ]]; then
-      echo "Error: \"$src_path\" has a weird lastUpdated value: $src_lastUpdated" >&2 ;exit 1
+  for ori_path in "${abs_paths[@]}";do
+    # Get ori_lastUpdated
+    ori_frontmatter=$(sed -n '/^---$/,/^---$/p' "$ori_path")
+    ori_lastUpdated=$(awk '/^lastUpdated:/ {print $2}' <<< "$ori_frontmatter")
+    ori_lastUpdated_norm=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$ori_frontmatter")
+    if [[ ! "$ori_lastUpdated_norm" =~ ^[0-9]{8}$ ]]; then
+      echo "Error: \"$ori_path\" has a weird lastUpdated value: $ori_lastUpdated" >&2 ;exit 1
     fi
-    # Transform from source path to translated path (loc_path)
-    loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$src_path")
-    echo "++     ├─file = \"$loc_path\""
-    # Skipping non-existent $loc_path
-    test -f $loc_path || { echo "${h}loc file not exists. Skipping..." ; continue ; }
-    # Get loc_lastUpdated
-    loc_frontmatter=$(sed -n '/^---$/,/^---$/p' "$loc_path")
-    loc_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$loc_frontmatter")
-    if [[ ! "$loc_lastUpdated" =~ ^[0-9]{8}$ ]]; then
-      echo "Error: \"$loc_path\" has a weird lastUpdated value: $loc_lastUpdated" >&2 ;exit 1
+    # Transform from original path to translated path (trl_path)
+    trl_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$ori_locale/" "$ori_path")
+    echo "++     ├─file = \"$trl_path\""
+    # Skipping non-existent $trl_path
+    test -f $trl_path || { echo "${h}loc file not exists. Skipping..." ; continue ; }
+    # Get trl_lastUpdated
+    trl_frontmatter=$(sed -n '/^---$/,/^---$/p' "$trl_path")
+    trl_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$trl_frontmatter")
+    trl_lastUpdated_norm=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$trl_frontmatter")
+    if [[ ! "$trl_lastUpdated_norm" =~ ^[0-9]{8}$ ]]; then
+      echo "Error: \"$trl_path\" has a weird lastUpdated value: $trl_lastUpdated" >&2 ;exit 1
     fi
-    # If loc_lastUpdated less than src_lastUpdated, it's outdated.
-    echo "${h2}src_lastUpdated: $src_lastUpdated"
-    echo "${h2}loc_lastUpdated: $loc_lastUpdated"
-    [ $loc_lastUpdated -lt $src_lastUpdated ] || { echo "${h}Outdated: False. Skipping..." ; continue ; }
+    # If trl_lastUpdated less than ori_lastUpdated, it's outdated.
+    echo "${h2}ori_lastUpdated: $ori_lastUpdated"
+    echo "${h2}trl_lastUpdated: $trl_lastUpdated"
+    [ $trl_lastUpdated_norm -lt $ori_lastUpdated_norm ] || { echo "${h}Outdated: False. Skipping..." ; continue ; }
     echo "${h2}Outdated: True"
+    notif_final=${notif[i]}
+    notif_final=${notif_final/LASTUPDATED_OF_ORIGINAL/$ori_lastUpdated}
+    notif_final=${notif_final/LASTUPDATED_OF_TRANSLATED/$trl_lastUpdated}
+    echo "${h2}notif_final: ${notif_final}"
     # Match unique marks
-    line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $loc_path)
-    line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
+    line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $trl_path)
+    line_end=$(awk '/^:::$/{print NR;exit}' $trl_path)
 
     # If unique mark not found
     if [ -z "$line_beg" ]; then
       echo "${h2}Mark string not found."
       # Then find the frontmatter, which both starts and ends with "---"
-      fr_end=$(awk '/^---$/{count++; if(count==2) {print NR; exit}}' "$loc_path")
+      fr_end=$(awk '/^---$/{count++; if(count==2) {print NR; exit}}' "$trl_path")
       if [ -z "$fr_end" ]; then
         echo "${h}Frontmatter not found or not ended. Aborting...";exit 1
       else
         echo "${h}Frontmatter end at $fr_end ."
       # And create the caution aside right after the frontmatter, which ends with "---"
-        sed -i "$((fr_end+1))i:::" "$loc_path"
-        sed -i "$((fr_end+1))i${notif[i]}" "$loc_path"
-        sed -i "$((fr_end+1))i:::caution[l10n-notify]" "$loc_path"
+        sed -i "$((fr_end+1))i:::" "$trl_path"
+        sed -i "$((fr_end+1))i${notif_final}" "$trl_path"
+        sed -i "$((fr_end+1))i:::caution[l10n-notify]" "$trl_path"
       fi
 
     # If unique mark found, but it has no end (weird...), then abort
@@ -146,13 +154,13 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     elif [ $line_end -eq $(($line_beg+1)) ]; then
       echo "${h}Mark string found at line $line_beg, and the aside end at line $line_end, i.e. it contains nothing."
       # Then directly add the notification.
-      sed -i "${line_end}i${notif[i]}" "$loc_path"
+      sed -i "${line_end}i${notif_final}" "$trl_path"
     # If unique mark found, and this aside contains one line,
     elif [ $line_end -eq $(($line_beg+2)) ]; then
       echo "${h}Mark string found at line $line_beg, and the aside end at line $line_end, i.e. it contains one line."
       # Then replace this line with newest notif.
-      sed -i "${line_end}i${notif[i]}" "$loc_path"
-      sed -i "$((line_beg+1))d" "$loc_path"
+      sed -i "${line_end}i${notif_final}" "$trl_path"
+      sed -i "$((line_beg+1))d" "$trl_path"
     # If unique mark found, and this aside contains multiple lines
     else
       # Then sth is wrong... Abort.
