@@ -120,7 +120,6 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     echo "${h2}loc_lastUpdated: $loc_lastUpdated"
     [ $loc_lastUpdated -lt $src_lastUpdated ] || { echo "${h}Outdated: False. Skipping..." ; continue ; }
     echo "${h2}Outdated: True"
-    continue
     # Match unique marks
     line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $loc_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
