@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# WARNING:
+# This script is designed to be executed only when deploying the site using GitHub Actions
+# and normally should NOT be executed locally, i.e. on your system.
+
+# This script will perform modifications on the markdown files
+# to implement translation outdated notice.
+
 # See more at
 # https://github.com/end-4/dots-hyprland-wiki/issues/3
 

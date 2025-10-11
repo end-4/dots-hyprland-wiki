@@ -1,6 +1,6 @@
 ---
 title: 致谢
-lastUpdated: 2024-03-31
+lastUpdated: 2025-10-10
 ---
 ## 开发者
 - [end_4](https://github.com/end-4): 仓库持有者以及作者。
