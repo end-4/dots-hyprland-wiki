@@ -114,7 +114,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     test -f $trl_path || { echo "${h}loc file not exists. Skipping..." ; continue ; }
     # Get trl_lastUpdated
     trl_frontmatter=$(sed -n '/^---$/,/^---$/p' "$trl_path")
-    trl_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$trl_frontmatter")
+    trl_lastUpdated=$(awk '/^lastUpdated:/ {print $2}' <<< "$trl_frontmatter")
     trl_lastUpdated_norm=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$trl_frontmatter")
     if [[ ! "$trl_lastUpdated_norm" =~ ^[0-9]{8}$ ]]; then
       echo "Error: \"$trl_path\" has a weird lastUpdated value: $trl_lastUpdated" >&2 ;exit 1
