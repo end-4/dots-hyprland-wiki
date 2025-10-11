@@ -1,12 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # See more at
 # https://github.com/end-4/dots-hyprland-wiki/issues/3
 
 set -e
-script=$(readlink -f "$0")
-base=$(dirname "$script")/src/content/docs
-json_file=$(dirname "$script")/l10n-notify.json
+
+# Use gojq if possible; else use jq
+jq=gojq
+which gojq||jq=jq
+
+script_dir=$(dirname $(readlink -f "$0"))
+base=$(dirname "$script_dir")/src/content/docs
+json_file=$(dirname "$script_dir")/l10n-notify.json
 
 src_locale=en
 src_locale_name=English
@@ -14,12 +19,21 @@ src_locale_name=English
 echo "================================"
 echo "================================ STEP 1: Path detection and transforming"
 echo "================================"
+
+src_md_files=()
+while IFS= read -r -d $'\0' file; do
+    relative_path="${file#./}"
+    src_md_files+=("$relative_path")
+done < <(find ./src/content/docs/$src_locale/ -type f \( -name "*.md" -o -name "*.mdx" \) -print0)
+
 abs_paths=()
-for path in "$@";do
+for path in "${src_md_files[@]}";do
   # Transform relative path to absolute path
   abs_path=$(readlink -f "$path") || { echo "[$0]: Failed to get the absolute path of file \"$path\". Aborting..." ; exit 1 ; }
   # Test $abs_path existence
   test -f $abs_path || { echo "[$0]: The file \"$abs_path\" does not exists or is a directory. Aborting..." ; exit 1 ; }
+  # Determine if $abs_path is a index.mdx
+  echo $abs_path|grep -q "$base/$src_locale/index.mdx" && { echo "[$0]: The file \"$abs_path\" seems to be index.mdx. Skipping..." ; continue ; }
   # Determine if $abs_path is a Dev Note
   echo $abs_path|grep -q "$base/$src_locale/dev/" && { echo "[$0]: The file \"$abs_path\" seems to be a Dev Note. Skipping..." ; continue ; }
   # Determine if $abs_path is a doc in $src_locale_name
@@ -36,7 +50,6 @@ for path in "${abs_paths[@]}";do
   echo "    $path"
 done
 
-
 echo "================================"
 echo "================================ STEP 2: Parsing json"
 echo "================================"
@@ -44,13 +57,13 @@ echo "================================"
 while read -r string; do
   # Save to array $locale
   locale+=("$string")
-done < <(gojq -r 'keys[]' $json_file)
+done < <($jq -r 'keys[]' $json_file)
 
 # Find value (notif) corresponding to the key (locale)
 notif=()
 for key in "${locale[@]}"; do
   echo $key
-  value=$(gojq -r ".\"$key\"" $json_file)
+  value=$($jq -r ".\"$key\"" $json_file)
   # Save to array $notif
   notif+=("$value""$(date +%F)")
 done
@@ -65,7 +78,6 @@ for ((i=0; i<${#locale[@]}; i++)); do
   echo "--   ├─notif  = \"${notif[i]}\""
   echo "--   └─root   = \"$base/${locale[i]}\""
 done
-
 
 echo "================================"
 echo "================================ STEP 3: Processing translation file"
@@ -85,12 +97,30 @@ echo "--   └─root   = \"$base/${locale[i]}\""
   test -d "$base/${locale[i]}" || { echo "   Translation directory \"$base/${locale[i]}\" does not exists, skipping..."; continue ; }
 
   # For every element in array $abs_paths
-  for path in "${abs_paths[@]}";do
+  for src_path in "${abs_paths[@]}";do
+    # Get src_lastUpdated
+    src_frontmatter=$(sed -n '/^---$/,/^---$/p' "$src_path")
+    src_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$src_frontmatter")
+    if [[ ! "$src_lastUpdated" =~ ^[0-9]{8}$ ]]; then
+      echo "Error: \"$src_path\" has a weird lastUpdated value: $src_lastUpdated" >&2 ;exit 1
+    fi
     # Transform from source path to translated path (loc_path)
-    loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$path")
+    loc_path="$base/${locale[i]}/"$(realpath --relative-to="$base/$src_locale/" "$src_path")
     echo "++     ├─file = \"$loc_path\""
     # Skipping non-existent $loc_path
-    test -f $loc_path || { echo "${h2}The translation file \"$loc_path\" does not exists. No worry since there will be a auto fallback anyway. Skipping..." ; continue ; }
+    test -f $loc_path || { echo "${h}loc file not exists. Skipping..." ; continue ; }
+    # Get loc_lastUpdated
+    loc_frontmatter=$(sed -n '/^---$/,/^---$/p' "$loc_path")
+    loc_lastUpdated=$(awk '/^lastUpdated:/ {gsub(/[^0-9]/,"",$2); print $2}' <<< "$loc_frontmatter")
+    if [[ ! "$loc_lastUpdated" =~ ^[0-9]{8}$ ]]; then
+      echo "Error: \"$loc_path\" has a weird lastUpdated value: $loc_lastUpdated" >&2 ;exit 1
+    fi
+    # If loc_lastUpdated less than src_lastUpdated, it's outdated.
+    echo "${h2}src_lastUpdated: $src_lastUpdated"
+    echo "${h2}loc_lastUpdated: $loc_lastUpdated"
+    [ $loc_lastUpdated -lt $src_lastUpdated ] || { echo "${h}Outdated: False. Skipping..." ; continue ; }
+    echo "${h2}Outdated: True"
+    continue
     # Match unique marks
     line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $loc_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $loc_path)
