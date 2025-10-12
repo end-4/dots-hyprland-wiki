@@ -16,6 +16,19 @@ lastUpdated: 2025-10-10
 ![image](/screenshots/iiqs.4.jpg)
 ![image](/screenshots/iiqs.5.jpg)
 
+---
+
+<div align="center">
+    <h1>Unmaintained</h1>
+</div>
+
+:::caution
+The AGS version of illogical impulse is no longer supported.
+
+Although it may still work you'll have to deal with problems by yourself.
+
+New issue about AGS version will very likely get closed as not planned.
+:::
 
 ## illogical-impulse <sup>AGS</sup>
 ![image](/screenshots/i-i.2.png)
@@ -26,7 +39,7 @@ lastUpdated: 2025-10-10
 ---
 
 <div align="center">
-    <h1>Unmaintained</h1>
+    <h1>Broken</h1>
 </div>
 
 :::caution[Warning]
