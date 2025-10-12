@@ -1,14 +1,19 @@
 ---
 title: Credits
-lastUpdated: 2025-10-10
+lastUpdated: 2025-10-12
 ---
 
 ## Developers
 - [end_4](https://github.com/end-4): The repo owner and author.
-  - Created the main parts of this project such as the setup of Hyprland and AGS and maintains them.
+  - Developed several variants of ricing as the major part of this project.
+    - Now maintaining the latest variant, i.e. illogical-impulse on Quickshell.
+  - Chores like dealing with issues/PRs/discussions, updating/translating the document, etc.
+  - Other things like creating the illogical-impulse logo, etc.
   - Since Jan. 2023 until now.
-- [clsty](https://github.com/clsty): The assistant dev.
-  - Reworked install script, created this doc site and maintains them.
+- [clsty](https://github.com/clsty): The repo collaborator.
+  - Developed and has been maintaining the install scripts and this website.
+  - Chores like dealing with issues/PRs/discussions, updating/translating the document, etc.
+  - Other things like issue templates via diagnose, l10n-notify workflow, providing domain `ii.clsty.link`, etc.
   - Since Jan. 2024 until now.
 
 ## Thank you
