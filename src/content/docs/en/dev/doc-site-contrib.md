@@ -106,8 +106,8 @@ Example:
 Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
 :::
 
-You should also translate the message in `l10n-notify.json`, e.g. for `zh-CN`:
-```json title="l10n-notify.json" ins={4}
+You should also translate the message in `l10n-notify/l10n-notify.json`, e.g. for `zh-CN`:
+```json title="l10n-notify/l10n-notify.json" ins={4}
 {
   "en": "**This page is an outdated translation.** The original version in English was last updated on LASTUPDATED_OF_ORIGINAL, but this translated version was last updated on LASTUPDATED_OF_TRANSLATED.",
   ...

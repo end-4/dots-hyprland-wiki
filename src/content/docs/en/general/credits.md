@@ -2,6 +2,7 @@
 title: Credits
 lastUpdated: 2025-10-10
 ---
+
 ## Developers
 - [end_4](https://github.com/end-4): The repo owner and author.
   - Created the main parts of this project such as the setup of Hyprland and AGS and maintains them.

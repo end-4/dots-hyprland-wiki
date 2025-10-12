@@ -22,7 +22,7 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Run l10n-notify
-        run: chmod +x autoscript/l10n-notify && autoscript/l10n-notify
+        run: chmod +x l10n-notify/l10n-notify.sh && l10n-notify/l10n-notify.sh
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:

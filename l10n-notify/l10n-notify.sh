@@ -18,7 +18,7 @@ which gojq||jq=jq
 
 script_dir=$(dirname $(readlink -f "$0"))
 base=$(dirname "$script_dir")/src/content/docs
-json_file=$(dirname "$script_dir")/l10n-notify.json
+json_file=$(dirname "$script_dir")/l10n-notify/l10n-notify.json
 
 # ori: Original
 # trl: Translated

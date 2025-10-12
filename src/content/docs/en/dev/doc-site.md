@@ -54,7 +54,7 @@ so that other languages can be uniformly updated through English translation.
 
 Edit markdown files under `src/content/docs/en/` .
 - **Update the value of `lastUpdated` in frontmatter manually,** e.g. `lastUpdated: 2024-02-10`.
-  - When publishing this site by GitHub Action, this value is used by `l10-notify` to determine whether a translated version is outdated.
+  - When publishing this site by GitHub Action, this value is used by `l10n-notify` to determine whether a translated version is outdated.
   - If you think your update on the original page does not make the translated page out of sync, such as typo or grammar fix which only involes the natural language part of the original page, then it's OK to skip this step.
 - Somehow different to the markdown on GitHub. [Reference](https://starlight.astro.build/guides/authoring-content).
 

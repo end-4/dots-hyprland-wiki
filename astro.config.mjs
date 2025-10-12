@@ -5,16 +5,16 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://ii.clsty.link',
   base: '',
-	integrations: [
-		starlight({
-			title: 'illogical-impulse',
+  integrations: [
+    starlight({
+      title: 'illogical-impulse',
       logo: { src: './src/assets/illogical-impulse.svg', replacesTitle: false, },
-			social: [
+      social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/end-4/dots-hyprland', },
         { icon: 'pen', label: 'GitHub (wiki)', href: 'https://github.com/end-4/dots-hyprland-wiki', },
       ],
       editLink: {
-          baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
+        baseUrl: 'https://github.com/end-4/dots-hyprland-wiki/tree/main',
       },
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1, maxHeadingLevel: 2, },
@@ -47,10 +47,10 @@ export default defineConfig({
         //   label: 'Polish', //Polish
         //   lang: 'pl',
         // },
-         'ru': {
-           label: 'Русский', //Russian
-           lang: 'ru',
-         },
+        'ru': {
+          label: 'Русский', //Russian
+          lang: 'ru',
+        },
         // 'tr': {
         //   label: 'Turkish', //Turkish
         //   lang: 'tr',
@@ -71,7 +71,7 @@ export default defineConfig({
             'vi': 'Chung',
             'zh-CN': '通用',
             'es': 'General',
-	           'ru': 'Общее'
+            'ru': 'Общее'
           },
           autogenerate: { directory: 'general' },
         },
@@ -79,15 +79,15 @@ export default defineConfig({
           label: 'illogical-impulse',
           collapsed: false,
           badge: { text: 'New', variant: 'success' },
-					autogenerate: { directory: 'ii-qs' },
-				},
+          autogenerate: { directory: 'ii-qs' },
+        },
         {
           label: 'illogical-impulse (on AGS)',
           collapsed: true,
-					autogenerate: { directory: 'i-i' },
-				},
-				{
-					label: 'Old stuff',
+          autogenerate: { directory: 'i-i' },
+        },
+        {
+          label: 'Old stuff',
           collapsed: true,
           translations: {
             'vi': 'Kho lưu trữ (ko đc duy trì)',
@@ -95,31 +95,31 @@ export default defineConfig({
             'es': 'Archivos (no mantenidos)',
             'ru': 'Прошлые версии (не поддерживаются)'
           },
-					autogenerate: { directory: 'archives' },
-				},
-				{
-					label: 'Dev Notes',
+          autogenerate: { directory: 'archives' },
+        },
+        {
+          label: 'Dev Notes',
           collapsed: true,
           badge: { text: 'Dev' },
           translations: {
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
             'es': 'Notas de desarrollo',
-	           'ru': 'Для разработчиков'
+            'ru': 'Для разработчиков'
           },
-					autogenerate: { directory: 'dev' },
-				},
-				{
-					label: 'Translate this wiki',
+          autogenerate: { directory: 'dev' },
+        },
+        {
+          label: 'Translate this wiki',
           badge: { text: 'Help wanted', variant: 'note' },
           translations: {
             'zh-CN': '翻译此文档',
             'es': 'Traducir esta wiki',
-	    'ru': 'Помогите перевести вики',
+            'ru': 'Помогите перевести вики',
           },
           link: '/dev/doc-site-contrib',
-				},
-			],
-		}),
-	],
+        },
+      ],
+    }),
+  ],
 });
