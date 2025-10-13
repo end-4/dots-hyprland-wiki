@@ -18,7 +18,7 @@ lastUpdated: 2025-10-12
 
 ## Acknowledgements
 
-:::tip{icon="heart"}Thank you
+:::tip[Thank you]{icon="heart"}
 This project would not have reached its current state without the following people.
 :::
 
