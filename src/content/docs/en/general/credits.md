@@ -16,9 +16,11 @@ lastUpdated: 2025-10-12
   - Other things like issue templates via diagnose, l10n-notify workflow, providing domain `ii.clsty.link`, etc.
   - Since Jan. 2024 until now.
 
-## Thank you
+## Acknowledgements
 
-***This project would not have reached its current state without the following people:***
+:::tip{icon="heart"}Thank you
+This project would not have reached its current state without the following people.
+:::
 
 **The dedicated developers:** _See the previous section._
 
