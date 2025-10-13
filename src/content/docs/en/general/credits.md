@@ -49,5 +49,7 @@ This project would not have reached its current state without the following peop
 - Inspiration: osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
 - Copying: Redistribution and re-creation are definitely OK as long as you follow the License (GNU GPL v3.0).
 
+---
+
 [^1]: Thanks to [PR#1060](https://github.com/end-4/dots-hyprland/pull/1060) and futher work by clsty, it eventually rescued the dots-hyprland project from a nearly broken status as many users can not complete dependency installation due to the failure of installing python dependencies from AUR.
 [^2]: These configs provide helpful references. They thanked more people in their repos btw.
