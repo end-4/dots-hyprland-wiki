@@ -17,17 +17,35 @@ lastUpdated: 2025-10-12
   - Since Jan. 2024 until now.
 
 ## Thank you
+
+***This project would not have reached its current state without the following people:***
+
+**The dedicated developers:** _See the previous section._
+
+**The passionate contributors:**
 - [@midn8hustlr](https://github.com/midn8hustlr) for greatly improving the color generation system and implement workspace groups workflow.
-- [@outfoxxed](https://github.com/outfoxxed/) for his invaluable support in the creation of the Quickshell version of the dotfiles.
-- [@ZeyadMoustafaKamal](https://github.com/ZeyadMoustafaKamal) for introducing `uv` to create virtual environment for python stuff.
+- [@ZeyadMoustafaKamal](https://github.com/ZeyadMoustafaKamal) for introducing `uv` to create virtual environment for python stuff.[^1]
+- [@xiaomeng2004](https://github.com/xiaomeng2004) for multilingual implementation on both AGS and Quickshell versions of illogical-impulse.
+- Cross-distro support:
+  - `dist-gentoo` by [@jwihardi](https://github.com/jwihardi)
+- And [many other people](https://github.com/end-4/dots-hyprland/graphs/contributors) (also [for doc site](https://github.com/end-4/dots-hyprland-wiki/graphs/contributors)) whose names not listed above but also spent their time making this project better than ever.
+
+**People sharing their configs:**[^2]
 - Quickshell: [Soramane](https://github.com/caelestia-dots/shell/), [FridayFaerie](https://github.com/FridayFaerie/quickshell), [nydragon](https://github.com/nydragon/nysh).
-- AGS: [Aylur's config](https://github.com/Aylur/dotfiles/tree/ags-pre-ts), [kotontrion's config](https://github.com/kotontrion/dotfiles).
-- EWW: [fufexan's config](https://github.com/fufexan/dotfiles) (he thanks more people there btw).
+- AGS: [Aylur](https://github.com/Aylur/dotfiles/tree/ags-pre-ts), [kotontrion](https://github.com/kotontrion/dotfiles).
+- EWW: [fufexan](https://github.com/fufexan/dotfiles).
+
+**Last but not least:**
+- [The generous sponsors of end_4](https://github.com/sponsors/end-4) for their instrumental support in sustaining long-term development.
+- [@outfoxxed](https://github.com/outfoxxed/) for his invaluable support in the creation of the Quickshell version of the dotfiles.
+- Developers of every open source project listed as dependencies.
 - AI bots for providing useful examples.
+- Everyone in the community with kind spirit helping in discussions and support, fostering a welcoming environment.
 
+## Inspirations/Copying
 
-## Inspirations/copying
+- Inspiration: osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
+- Copying: Redistribution and re-creation are definitely OK as long as you follow the License (GNU GPL v3.0).
 
- - Inspiration: osu!lazer, Windows 11, Material Design 3, AvdanOS (concept)
- - Copying: Redistribution and re-creation are definitely OK as long as you follow the License (GNU GPL v3.0).
-
+[^1]: Thanks to [PR#1060](https://github.com/end-4/dots-hyprland/pull/1060) and futher work by clsty, it eventually rescued the dots-hyprland project from a nearly broken status as many users can not complete dependency installation due to the failure of installing python dependencies from AUR.
+[^2]: These configs provide helpful references. They thanked more people in their repos btw.

@@ -1,0 +1,10 @@
+---
+title: Contribute to dots-hyprland
+layout: /src/layouts/autonum.astro
+sidebar:
+  label: Contribute to dots-hyprland
+  order: 06
+lastUpdated: 2024-02-24
+---
+
+Please read the [CONTRIBUTING.md](https://github.com/end-4/dots-hyprland/blob/main/CONTRIBUTING.md) in dots-hyprland repo.
