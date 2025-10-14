@@ -28,6 +28,7 @@ This project would not have reached its current state without the following peop
 - [@midn8hustlr](https://github.com/midn8hustlr) for greatly improving the color generation system and implement workspace groups workflow.
 - [@ZeyadMoustafaKamal](https://github.com/ZeyadMoustafaKamal) for introducing `uv` to create virtual environment for python stuff.[^1]
 - [@xiaomeng2004](https://github.com/xiaomeng2004) for multilingual implementation on both AGS and Quickshell versions of illogical-impulse.
+- [@Makrennel](https://github.com/Makrennel) for introducing meta packages with local PKGBUILDs for Arch Linux.
 - Cross-distro support:
   - `dist-gentoo` by [@jwihardi](https://github.com/jwihardi)
 - And [many other people](https://github.com/end-4/dots-hyprland/graphs/contributors) (also [for doc site](https://github.com/end-4/dots-hyprland-wiki/graphs/contributors)) whose names not listed above but also spent their time making this project better than ever.
