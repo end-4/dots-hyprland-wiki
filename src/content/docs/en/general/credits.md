@@ -32,9 +32,9 @@ This project would not have reached its current state without the following peop
 - [@moetayuko](https://github.com/moetayuko) for many PRs applying fixes on AGS/Hyprland/Quickshell configs.
 - Cross-distro support:
   - `dist-gentoo` by [@jwihardi](https://github.com/jwihardi)
-- And [many other people](https://github.com/end-4/dots-hyprland/graphs/contributors) (also [for doc site](https://github.com/end-4/dots-hyprland-wiki/graphs/contributors)) whose names not listed above but also spent their time making this project better than ever.
+- And [many other people](https://github.com/end-4/dots-hyprland/graphs/contributors) (also [for doc site](https://github.com/end-4/dots-hyprland-wiki/graphs/contributors)) whose names are not listed above but also spent their time making this project better than ever.
 
-**People sharing their configs:**[^2]
+**People who shared their configs:**[^2]
 - Quickshell: [Soramane](https://github.com/caelestia-dots/shell/), [FridayFaerie](https://github.com/FridayFaerie/quickshell), [nydragon](https://github.com/nydragon/nysh).
 - AGS: [Aylur](https://github.com/Aylur/dotfiles/tree/ags-pre-ts), [kotontrion](https://github.com/kotontrion/dotfiles).
 - EWW: [fufexan](https://github.com/fufexan/dotfiles).
