@@ -142,3 +142,15 @@ blockquote {
 .primary:active {
   border-radius: 30px;
 }
+
+:root[data-theme='dark'] a {
+  color: #7dcfff;
+  text-decoration: underline;
+}
+:root[data-theme='light'] a {
+  color: #1565c0;
+  text-decoration: underline;
+}
+a:hover, a:focus {
+  color: #ffb300;
+}
