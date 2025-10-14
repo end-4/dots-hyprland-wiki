@@ -37,6 +37,12 @@ Optional:
 - Create `dist-<DISTRO_ID>/.gitignore` if files generated during building should not be tracked by git, for example binary, cache, fetched source tree or archive.
 - Subscribe [discussion#2140](https://github.com/end-4/dots-hyprland/discussions/2140) to get notifications about updates on `dist-arch/` by GitHub Action bot in future.
 
+:::tip[outdate-detect-mode]
+`dist-<DISTRO_ID>/outdate-detect-mode` is a text file. Just use `AUTO` as its content in your PR.
+
+For possible values, see the definition of function `outdate_detect()` in [1.install-deps-selector.sh](https://github.com/end-4/dots-hyprland/blob/main/scriptdata/step/1.install-deps-selector.sh).
+:::
+
 ## Cross-distro support via Nix
 When `--via-nix` is passed to `install.sh`, `./dist-nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
 
