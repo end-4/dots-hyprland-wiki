@@ -9,8 +9,6 @@ lastUpdated: 2025-10-10
 
 
 ## illogical-impulse <sup>Quickshell</sup>
-[GitHub](https://github.com/end-4/dots-hyprland)
-
 ![image](/screenshots/iiqs.2.jpg)
 ![image](/screenshots/iiqs.3.jpg)
 ![image](/screenshots/iiqs.4.jpg)
@@ -54,25 +52,21 @@ Click image to view showcase videos.
 :::
 
 ## m3ww
-[GitHub](https://github.com/end-4/dots-hyprland/tree/archive)
 <a href="https://streamable.com/85ch8x">
  <img src="/screenshots/m3ww.1.png" alt="Material Eww!">
 </a>
 
 ## NovelKnock
-[GitHub](https://github.com/end-4/dots-hyprland/tree/archive)
 <a href="https://streamable.com/7vo61k">
  <img src="/screenshots/n-k.1.png" alt="Desktop Preview">
 </a>
 
 ## Hybrid
-[GitHub](https://github.com/end-4/dots-hyprland/tree/archive)
 <a href="https://streamable.com/4oogot">
  <img src="/screenshots/hybrid.1.png" alt="click the circles!">
 </a>
 
 ## Windoes
-[GitHub](https://github.com/end-4/dots-hyprland/tree/archive)
 <a href="https://streamable.com/5qx614">
  <img src="/screenshots/windoes.1.png" alt="Desktop Preview">
 </a>
