@@ -142,3 +142,12 @@ blockquote {
 .primary:active {
   border-radius: 30px;
 }
+
+:root[data-theme='dark'] .sl-markdown-content a {
+  color: #7dcfff;
+  text-decoration: underline;
+}
+:root[data-theme='light'] .sl-markdown-content a {
+  color: #1565c0;
+  text-decoration: underline;
+}
