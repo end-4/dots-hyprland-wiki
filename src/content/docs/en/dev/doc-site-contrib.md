@@ -109,9 +109,9 @@ Please pay attention to the formatting of `mjs` and do not omit commas, quotatio
 You should also translate the message in `l10n-notify/l10n-notify.json`, e.g. for `zh-CN`:
 ```json title="l10n-notify/l10n-notify.json" ins={4}
 {
-  "en": "**This page is an outdated translation.** The original version in English was last updated on LASTUPDATED_OF_ORIGINAL, but this translated version was last updated on LASTUPDATED_OF_TRANSLATED.",
+  "en": "<b>This page is an outdated translation.</b> The original version in English was last updated on <b>LASTUPDATED_OF_ORIGINAL</b>, but this translated version was last updated on <b>LASTUPDATED_OF_TRANSLATED</b>.",
   ...
-  "zh-cn": "**此页面的翻译已过时。** 其英语原文的最近更新于 LASTUPDATED_OF_ORIGINAL，而此译文最近更新于 LASTUPDATED_OF_TRANSLATED。",
+  "zh-cn": "<b>此页面的翻译已过时。</b>其英语原文最近更新于 <b>LASTUPDATED_OF_ORIGINAL</b>，而此译文最近更新于 <b>LASTUPDATED_OF_TRANSLATED</b>。",
   ...
 }
 ```
