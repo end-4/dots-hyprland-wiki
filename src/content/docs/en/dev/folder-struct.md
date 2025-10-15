@@ -4,18 +4,18 @@ layout: /src/layouts/autonum.astro
 sidebar:
   label: Folder Structure
   order: 30
-lastUpdated: 2024-02-18
+lastUpdated: 2025-10-16
 ---
 
 This page will help you know what to look into when you wanna hack up something
 
 # Repo structure
-- `Extras`: Misc config files
-- `scriptdata`: Stores data for install script
-- `.config`: This is the main folder where normal config files are stored. (ags, hyprland, etc.)
-- `.local/bin`: Utility scripts. I might move them to ags folder later.
+- `dots/.config`: The main folder where normal config files are stored.
+- `dots-extra`: Misc config files
+- `sdata`: Stores data for install script
+- `sdist`: Stores data for install script but distro specific
 
-# AGS config folder structure
+# (Deprecated) AGS config folder structure
 - `assets`: SVGs that are used as custom icons
 - `data`: Data that I believe should be separated from code
 - `lib`: Shared parts used by widgets of the config
