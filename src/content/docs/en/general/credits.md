@@ -1,6 +1,6 @@
 ---
 title: Credits
-lastUpdated: 2025-10-12
+lastUpdated: 2025-10-16
 ---
 
 ## Developers
