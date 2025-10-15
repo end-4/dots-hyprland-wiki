@@ -1,0 +1,72 @@
+---
+title: Gallery
+lastUpdated: 2025-10-14
+---
+
+<div align="center">
+    <h1>Maintenu</h1>
+</div>
+
+
+## illogical-impulse <sup>Quickshell</sup>
+![image](/screenshots/iiqs.2.jpg)
+![image](/screenshots/iiqs.3.jpg)
+![image](/screenshots/iiqs.4.jpg)
+![image](/screenshots/iiqs.5.jpg)
+
+---
+
+<div align="center">
+    <h1>Non maintenu</h1>
+</div>
+
+:::caution
+La version AGS d'illogical impulse n'est plus supportée.
+
+Bien qu'elle puisse encore fonctionner, vous devrez résoudre les problèmes par vous-même.
+
+Les nouveaux signalements concernant la version AGS seront très probablement fermés comme non planifiés.
+:::
+
+## illogical-impulse <sup>AGS</sup>
+![image](/screenshots/i-i.2.png)
+![image](/screenshots/i-i.3.png)
+![image](/screenshots/i-i.4.png)
+![image](/screenshots/i-i.5.png)
+
+---
+
+<div align="center">
+    <h1>Cassé</h1>
+</div>
+
+:::caution[Attention]
+Les éléments ci-dessous :
+- Actuellement, ils ne fonctionnent PAS (voir [#99](https://github.com/end-4/dots-hyprland/issues/99))
+- Les images sont principalement là pour votre plaisir visuel
+- Les fichiers sont toujours disponibles, n'hésitez pas à les récupérer depuis la branche [`archive`](https://github.com/end-4/dots-hyprland/tree/archive) si vous êtes prêt à voir du code spaghetti et à dépanner
+:::
+
+:::tip[Astuce]
+Cliquez sur l'image pour voir les vidéos de présentation.
+:::
+
+## m3ww
+<a href="https://streamable.com/85ch8x">
+ <img src="/screenshots/m3ww.1.png" alt="Material Eww!">
+</a>
+
+## NovelKnock
+<a href="https://streamable.com/7vo61k">
+ <img src="/screenshots/n-k.1.png" alt="Aperçu du bureau">
+</a>
+
+## Hybrid
+<a href="https://streamable.com/4oogot">
+ <img src="/screenshots/hybrid.1.png" alt="cliquez sur les cercles !">
+</a>
+
+## Windoes
+<a href="https://streamable.com/5qx614">
+ <img src="/screenshots/windoes.1.png" alt="Aperçu du bureau">
+</a>
