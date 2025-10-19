@@ -3,11 +3,11 @@ title: Install scripts
 layout: /src/layouts/autonum.astro
 sidebar:
   order: 20
-lastUpdated: 2025-10-16
+lastUpdated: 2025-10-19
 ---
 # Help wanted
 ## Support on each distro
-`./install.sh` detects the distro ID and try to use `./sdist/<DISTRO_ID>/install-deps.sh` for dependency installation if it exists.
+`./setup install` detects the distro ID and try to use `./sdist/<DISTRO_ID>/install-deps.sh` for dependency installation if it exists.
 
 **We need more scripts `sdist/<DISTRO_ID>/install-deps.sh`** to support specific distro using their system package manager.
 
@@ -21,14 +21,17 @@ Requirements:
 - This script should reflect or cover the equivalents of the packages which `./sdist/arch/install-deps.sh` installed.
   - They are mainly from the value of array `depends` inside those `./sdist/arch/*/PKGBUILD`.
   - Some of them are built locally following the PKGBUILD.
-- If needed, also create `./sdist/<DISTRO_ID>/install-setups.sh`. When it does not exist, `install.sh` will use `./sdist/fallback/install-setups.sh` instead, which may be not suitable for your distro.
+- If needed, also create `./sdist/<DISTRO_ID>/install-setups.sh`. When it does not exist, `./setup install` will use `./sdist/fallback/install-setups.sh` instead, which may be not suitable for your distro.
 
 :::tip[Tips when writing the script]
-- Environment variables and functions defined inside `scriptdata/lib/` can be used.
+- Environment variables and functions defined inside `sdata/lib/` can be used.
   - The functions `v()`, `showfun()` and `x()` are especially important.
-- Run `./install.sh --skip-allgreeting --skip-allfiles --skip-allsetups` to test `sdist/<DISTRO_ID>/install-deps.sh` quickly.
+  - `v()` asks user before executing and also catch errors, `x()` only catches errors.
+  - For normall commands, just use `v()`.
+  - For custom function, first use `showfun()` and then `v()`, and use `x()` for lines inside the definition of function, so that user will be able to save their time by only answer one time for a function.
+- Run `./setup install --skip-allgreeting --skip-allfiles --skip-allsetups` to test `sdist/<DISTRO_ID>/install-deps.sh` quickly.
 - To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
-- (WIP) Helpful information inside `scriptdata/deps-info.md`: [issue#2102](https://github.com/end-4/dots-hyprland/issues/2102)
+- (WIP) Helpful information inside `sdata/deps-info.md`: [issue#2102](https://github.com/end-4/dots-hyprland/issues/2102)
 :::
 
 Optional:
@@ -40,11 +43,11 @@ Optional:
 :::tip[outdate-detect-mode]
 `sdist/<DISTRO_ID>/outdate-detect-mode` is a text file. Just use `AUTO` as its content in your PR.
 
-For possible values, see the definition of function `outdate_detect()` in [1.install-deps-selector.sh](https://github.com/end-4/dots-hyprland/blob/main/scriptdata/step/1.install-deps-selector.sh).
+For possible values, see the definition of function `outdate_detect()` in [1.install-deps-selector.sh](https://github.com/end-4/dots-hyprland/blob/main/sdata/step/1.install-deps-selector.sh).
 :::
 
 ## Cross-distro support via Nix
-When `--via-nix` is passed to `install.sh`, `./sdist/nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
+When `--via-nix` is passed to `./setup install`, `./sdist/nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
 
 **We need help on `sdist/nix/install-deps.sh`.**
 
@@ -52,25 +55,25 @@ See [issue #1061](https://github.com/end-4/dots-hyprland/issues/1061).
 
 
 # Main method
-The related scripts and files around `install.sh` belongs to "main method", which is developed and maintained mainly by clsty.
+The related scripts and files around `./setup install` belongs to "main method", which is developed and maintained mainly by clsty.
 ## Idempotent
 The scripts are and should be **idempotent**, i.e. capable for running multiple times.
 
 This is useful for debugging and a resumable installation, and also provide updating function somehow.
 ## Structure
-- Main script: `install.sh`
-- `scriptdata/`: 
-  - `scriptdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
-  - `scriptdata/step/`: Scripts containing the actual steps for installing to be sourced when proceeding.
-  - `scriptdata/uv/`: For python dependencies handled by uv.
-- `sdist/<DISTRO_ID>/`: The core part is collection of the distro specific install scripts which `install.sh` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
+- Main script: `./setup install`
+- `sdata/`: 
+  - `sdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
+  - `sdata/step/`: Scripts containing the actual steps for installing to be sourced when proceeding.
+  - `sdata/uv/`: For python dependencies handled by uv.
+- `sdist/<DISTRO_ID>/`: The core part is collection of the distro specific install scripts which `./setup install` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
 - `sdist/nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
 ## Online script
-`setup.sh`:
+`setup`:
 - Stored in the repo of dots-hyprland-wiki to be served by the doc site directly.
-- When executed, it downloads the dots-hyprland repo and then executes the `install.sh`.
+- When executed, it downloads the dots-hyprland repo and then executes the `./setup install`.
 
 ## Nix (WIP)
 See [issue#1061](https://github.com/end-4/dots-hyprland/issues/1061) for detail.
