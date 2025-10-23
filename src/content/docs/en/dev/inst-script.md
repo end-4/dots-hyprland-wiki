@@ -29,8 +29,9 @@ Requirements:
   - `v()` asks user before executing and also catch errors, `x()` only catches errors.
   - For normall commands, just use `v()`.
   - For custom function, first use `showfun()` and then `v()`, and use `x()` for lines inside the definition of function, so that user will be able to save their time by only answer one time for a function.
-- Run `./setup install --skip-allgreeting --skip-allfiles --skip-allsetups` to test `sdist/<DISTRO_ID>/install-deps.sh` quickly.
+- Run `./setup install-deps` to test `sdist/<DISTRO_ID>/install-deps.sh` quickly.
 - To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
+- [jordansissel/fpm](https://github.com/jordansissel/fpm) might be helpful in converting Arch packages to other packages such as rpm.
 - (WIP) Helpful information inside `sdata/deps-info.md`: [issue#2102](https://github.com/end-4/dots-hyprland/issues/2102)
 :::
 
