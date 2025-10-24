@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { docsLoader, i18nLoader } from "@astrojs/starlight/loaders";
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
-import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 export const collections = {
 	docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
