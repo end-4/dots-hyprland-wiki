@@ -1,47 +1,50 @@
 ---
-const { title } = Astro.props.frontmatter;
+const { title } = Astro.props.frontmatter || Astro.props;
 ---
 <style is:global>
-/* For astro, the total title i.e. the "Metadata title" for the markdown file is counted as `h1' as well. */
-/* Of course, it's not the h1 we really want. so we just make its counter value as -1, not the default 0 */
-.sl-markdown-content body {
-    counter-reset: h1 -1;
+
+.sl-markdown-content {
+  counter-reset: ch1 0;
 }
 
 .sl-markdown-content h1 {
-    counter-increment: h1;
-    counter-reset: h2;
+  counter-reset: ch2;
+}
+.sl-markdown-content h1:not(#_top) {
+  counter-increment: ch1;
 }
 
 .sl-markdown-content h2 {
-    counter-increment: h2;
-    counter-reset: h3
+  counter-reset: ch3;
+}
+.sl-markdown-content h2:not(#starlight__on-thispage) {
+  counter-increment: ch2;
 }
 
 .sl-markdown-content h3 {
-    counter-increment: h3;
-    counter-reset: h4
+  counter-reset: ch4;
+}
+.sl-markdown-content h3 {
+  counter-increment: ch3;
 }
 
 .sl-markdown-content h4 {
-    counter-increment: h4;
+  counter-increment: ch4;
 }
 
-.sl-markdown-content h1:before {
-    content: counter(h1) "  "
+.sl-markdown-content h1:not(#_top)::before {
+  content: counter(ch1) "  ";
+}
+.sl-markdown-content h2:not(#starlight__on-thispage)::before {
+  content: counter(ch1) "." counter(ch2) "  ";
+}
+.sl-markdown-content h3::before {
+  content: counter(ch1) "." counter(ch2) "." counter(ch3) "  ";
+}
+.sl-markdown-content h4::before {
+  content: counter(ch1) "." counter(ch2) "." counter(ch3) "." counter(ch4) "  ";
 }
 
-.sl-markdown-content h2:before {
-    content: counter(h1) "." counter(h2) "  "
-}
-
-.sl-markdown-content h3:before {
-    content: counter(h1) "." counter(h2) "." counter(h3) "  "
-}
-
-.sl-markdown-content h4:before {
-    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "  "
-}
 </style>
 
 <slot />
