@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import catppuccin from "@catppuccin/starlight";
+import starlightThemeNova from 'starlight-theme-nova';
 
 // https://starlight.astro.build/reference/configuration
 export default defineConfig({
@@ -9,16 +9,7 @@ export default defineConfig({
   integrations: [
     starlight({
       plugins: [
-        // https://starlight.catppuccin.com
-        catppuccin({
-          // See below for available flavors and accents
-          // https://github.com/catppuccin/starlight/blob/main/packages/catppuccin-starlight/index.ts
-          // type DarkFlavor = "mocha" | "macchiato" | "frappe";
-          // type LightFlavor = "latte";
-          // type Accent = | "rosewater" | "flamingo" | "pink" | "mauve" | "red" | "maroon" | "peach" | "yellow" | "green" | "teal" | "sky" | "sapphire" | "blue" | "lavender";
-          light: { flavor: "latte", accent: "lavender" },
-          dark: { flavor: "frappe", accent: "sky" },
-        })
+        starlightThemeNova(/* options */), 
       ],
       title: 'illogical-impulse',
       logo: { src: './src/assets/illogical-impulse.svg', replacesTitle: false, },
