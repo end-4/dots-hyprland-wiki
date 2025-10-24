@@ -1,8 +1,8 @@
 ---
 title: Install / Update / Uninstall
-layout: /src/layouts/autonum.astro
 lastUpdated: 2025-10-24
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Installing
 :::caution[Before we start]
@@ -42,16 +42,31 @@ then perform installation.
 Make a choice between the two below, then follow the prompts.
 
 :::caution[What's the difference?]
-- Choice 1 is a wrapper for Choice 2, but understandably you might not be comfortable with piping an online script directly into your shell.
-- Additionally, regardless of your choice, you are encouraged to read and understand the latter, as it is the very basics a Hyprland user should know.
+- Choice 1 is a wrapper of Choice 2, but understandably you might not be comfortable with piping an online script directly into your shell.
+- Regardless of your choice, you are encouraged to read and understand Choice 2, as it is the very basics a Hyprland user should know.
 :::
 
-**Choice 1**: The lazy, enraging way
+<Tabs>
+<TabItem label="Choice 1: Use online script">
+
+Run the command below:
 ```bash
 bash <(curl -s https://ii.clsty.link/setup)
 ```
 
-**Choice 2**: The manual-ish, you-know-what-you're-doing way
+It clones the repo to `~/.cache/dots-hyprland` by default and run `./install setup` for you.
+
+:::tip[Custom clone target path]
+To clone to somewhere else, just append the path, e.g.
+```bash
+bash <(curl -s https://ii.clsty.link/setup) ~/Downloads/dots-hyprland
+```
+:::
+
+</TabItem>
+<TabItem label="Choice 2: Clone, cd and run">
+
+Run the commands below:
 ```bash
 cd ~/.cache                                      # Your choice, doesn't matter
 git clone https://github.com/end-4/dots-hyprland # Clone the repo
@@ -59,23 +74,15 @@ cd dots-hyprland                                 # Go to the cloned repo
 ./setup install                                  # Run the install script
 ```
 
-:::note[Changed domain]
-You might've noticed that the domain of this wiki (with the script above) has changed from `end-4.github.io` to `ii.clsty.link`. This gives you a shorter link to type in case you're doing this from a tty, and content is still served by GitHub Pages. If you add the `-L` flag to the above `curl` command and use the link `https://end-4.github.io/dots-hyprland-wiki/setup` it would also work. More info at [issue#28](https://github.com/end-4/dots-hyprland-wiki/issues/28).
-:::
+</TabItem>
+</Tabs>
 
-:::tip[Using subcommand install]
+:::tip[Using subcommand: install]
 The subcommand `install` of `./setup` is idempotent and interactive.
 
-You can always re-run it and choose to only perform certain actions.
+You can always re-run `./setup install` and choose to only perform certain actions.
 
 It's useful when you want to resume a failed attempt or update.
-:::
-
-:::tip[Clone to a different path]
-To clone to somewhere else, just append the path, e.g.
-```bash
-bash <(curl -s https://ii.clsty.link/setup) ~/Downloads/dots-hyprland
-```
 :::
 
 ## Forks
