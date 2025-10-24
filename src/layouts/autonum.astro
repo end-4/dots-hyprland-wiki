@@ -2,49 +2,43 @@
 const { title } = Astro.props.frontmatter || Astro.props;
 ---
 <style is:global>
-
 .sl-markdown-content {
   counter-reset: ch1 0;
 }
-
-.sl-markdown-content h1 {
+.sl-markdown-content .sl-heading-wrapper.level-h1 {
+  counter-increment: ch1;
   counter-reset: ch2;
 }
-.sl-markdown-content h1:not(#_top) {
-  counter-increment: ch1;
-}
-
-.sl-markdown-content h2 {
-  counter-reset: ch3;
-}
-.sl-markdown-content h2:not(#starlight__on-thispage) {
-  counter-increment: ch2;
-}
-
-.sl-markdown-content h3 {
-  counter-reset: ch4;
-}
-.sl-markdown-content h3 {
-  counter-increment: ch3;
-}
-
-.sl-markdown-content h4 {
-  counter-increment: ch4;
-}
-
 .sl-markdown-content h1:not(#_top)::before {
   content: counter(ch1) "  ";
+}
+.sl-markdown-content .sl-heading-wrapper.level-h2 {
+  counter-increment: ch2;
+  counter-reset: ch3;
 }
 .sl-markdown-content h2:not(#starlight__on-thispage)::before {
   content: counter(ch1) "." counter(ch2) "  ";
 }
+.sl-markdown-content .sl-heading-wrapper.level-h3 {
+  counter-increment: ch3;
+  counter-reset: ch4;
+}
 .sl-markdown-content h3::before {
   content: counter(ch1) "." counter(ch2) "." counter(ch3) "  ";
+}
+.sl-markdown-content .sl-heading-wrapper.level-h4 {
+  counter-increment: ch4;
 }
 .sl-markdown-content h4::before {
   content: counter(ch1) "." counter(ch2) "." counter(ch3) "." counter(ch4) "  ";
 }
-
+.sl-markdown-content h1::before,
+.sl-markdown-content h2::before,
+.sl-markdown-content h3::before,
+.sl-markdown-content h4::before {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
 </style>
-
 <slot />
