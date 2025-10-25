@@ -136,7 +136,7 @@ echo "--   └─root   = \"$base/${locale[i]}\""
     notif_final=${notif_final/LASTUPDATED_OF_TRANSLATED/$trl_lastUpdated}
     echo "${h2}notif_final: ${notif_final}"
     # Match unique marks
-    line_beg=$(awk '/^:::caution\[l10n-notify\]$/{print NR;exit}' $trl_path)
+    line_beg=$(awk '/^:::danger\[l10n-notify\]$/{print NR;exit}' $trl_path)
     line_end=$(awk '/^:::$/{print NR;exit}' $trl_path)
 
     # If unique mark not found
@@ -148,10 +148,10 @@ echo "--   └─root   = \"$base/${locale[i]}\""
         echo "${h}Frontmatter not found or not ended. Aborting...";exit 1
       else
         echo "${h}Frontmatter end at $fr_end ."
-      # And create the caution aside right after the frontmatter, which ends with "---"
+      # And create the danger aside right after the frontmatter, which ends with "---"
         sed -i "$((fr_end+1))i:::" "$trl_path"
         sed -i "$((fr_end+1))i${notif_final}" "$trl_path"
-        sed -i "$((fr_end+1))i:::caution[l10n-notify]" "$trl_path"
+        sed -i "$((fr_end+1))i:::danger[l10n-notify]" "$trl_path"
       fi
 
     # If unique mark found, but it has no end (weird...), then abort
