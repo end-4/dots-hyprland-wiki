@@ -127,7 +127,7 @@ If target language directory does not exists, `mkdir` to create it first.
 Target language directory has exact the same folder structure and filename as the source language directory,
 and non-existing files and directory in target language directory will fallback to source language (English).
 
-E.g. for Simplified Chinese, `src/content/docs/zh-cn/general/showcase.md` is the translated version of `src/content/docs/en/general/showcase.md`.
+E.g. for Simplified Chinese, `src/content/docs/zh-cn/general/showcase.mdx` is the translated version of `src/content/docs/en/general/showcase.mdx`.
 
 :::note
 Again, don't translate Dev Notes under `src/content/docs/en/dev/`, i.e. let them fallback to English.
@@ -142,7 +142,7 @@ Again, please pay attention to lowercase problem, e.g. `zh-cn` and `zh-CN`.
   - This value is used for comparison with the original document by GitHub Action to automatically generate outdated notice when applicable.
 
 Example:
-```md title="foo.md" del={5} ins={6}
+```md title="foo.mdx" del={5} ins={6}
 ---
 title: 示例文档
 sidebar:
