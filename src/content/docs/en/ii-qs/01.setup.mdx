@@ -1,7 +1,7 @@
 ---
 title: Install / Update / Uninstall
 layout: /src/layouts/autonum.astro
-lastUpdated: 2025-10-24
+lastUpdated: 2025-10-26
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -232,8 +232,8 @@ Run `./setup install -h` to see more usage.
 
 :::caution[If you installed manually]
 Though highly unrecommended, if you installed manually, then:
-- `cd` to the repo directory
-- Run `git pull` to fetch the latest changes.
+- `cd` to the repo directory and run `git pull` to fetch the latest changes.
+- Ensure again that all dependencies are installed cuz the update may involve needed dependencies too.
 - Grab files you want. Typically you may want to grab the `dots/.config/quickshell` folder.
 :::
 
@@ -249,18 +249,5 @@ See also https://github.com/end-4/dots-hyprland/issues/838#issuecomment-24062200
 
 - You can try using `./setup exp-uninstall`, but it's not perfect and not actively maintained.
 - Manual uninstallation hint for Arch Linux:
-  - Run `pacman -Q | grep illogical-impulse` for a list of packages the dotfiles requires
-  - Run `yay -Rs PACKAGE_NAME` for each package from the above command
-- Here goes a long explanation if you care:
-
-> The point is that this repo is not a typical "software", but a set of config,
-> so it's very hard to make a proper uninstallation script,
-> which should revert all changes made by the installation script.
-> 
-> For example, the installation script will install `yay` (AUR-helper) for you if you don't have one.
-> However, what should the uninstallation script do to revert this changes?
-> - Remove `yay` or `yay-bin`? Not proper, because you may already have one of them installed by yourself (not by the installation script).
-> - Even if the installation script had logged the package list installed by the script, it's still not proper to remove `yay` or `yay-bin` when the log showed `yay` or `yay-bin` is installed by the script, because the script can't log its future, and you may have reinstalled `yay` or `yay-bin` another day after the installation script finished, thus they are actually not installed by installation script anymore.
-> 
-> In conclusion, it's nearly not possible to write a proper uninstallation script.
-> You'd better make reverted changes manually as you need.
+  - Run `pacman -Q | grep illogical-impulse` for a list of packages the dotfiles requires.
+  - Run `yay -Rs PACKAGE_NAME` for each package from the above command.
