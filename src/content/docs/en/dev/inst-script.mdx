@@ -62,12 +62,12 @@ The scripts are and should be **idempotent**, i.e. capable for running multiple 
 
 This is useful for debugging and a resumable installation, and also provide updating function somehow.
 ## Structure
-- Main script: `./setup install`
+- Main script: `./setup`
 - `sdata/`: 
   - `sdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
-  - `sdata/step/`: Scripts containing the actual steps for installing to be sourced when proceeding.
+  - `sdata/subcmd-*/`: Scripts containing the actual steps for subcommands.
   - `sdata/uv/`: For python dependencies handled by uv.
-- `sdata/dist-<DISTRO_ID>/`: The core part is collection of the distro specific install scripts which `./setup install` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
+- `sdata/dist-<DISTRO_ID>/`: Contains the collection of the distro specific install scripts which `./setup install` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
 - `sdata/dist-nix/`: Used when `--via-nix` is passed. Still WIP.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
