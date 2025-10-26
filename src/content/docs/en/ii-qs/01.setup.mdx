@@ -38,7 +38,7 @@ Here's a preview about the distro support status.
   - [CachyOS](https://cachyos.org/) uses repositories different from official Arch, but it's designed to be compatible with AUR so ideally it should work.
   - Other [Arch-based distros](https://wiki.archlinux.org/title/Arch-based_distributions) using repositories different from official Arch are only partially supported, especially [Manjaro](https://manjaro.org/) which has relatively poor compatibility with AUR.
 - **Supported by community:**
-  - [Gentoo](https://www.gentoo.org/) (see [sdist/gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdist/gentoo/README.md) for extra information).
+  - [Gentoo](https://www.gentoo.org/) (see [sdata/dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-gentoo/README.md) for extra information).
   - Other distros: We welcome contributions! See [this page](../../dev/inst-script/#help-wanted) if you're willing to help.
 :::
 
@@ -122,20 +122,20 @@ cd "$t"
 
 ### Install the dependencies
 For Arch(-based) distros:
-- Install all packages listed as the value of array `depends` inside those `./sdist/arch/*/PKGBUILD`. Just use an AUR helper such as `yay`.
+- Install all packages listed as the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`. Just use an AUR helper such as `yay`.
   - You may also instead install suitable alternatives as you've found out.
 
 For non-Arch distros:
-- Figure out the equivalents of the packages which `sdist/arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./sdist/arch/*/PKGBUILD`, and then install them.
+- Figure out the equivalents of the packages which `sdata/dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`, and then install them.
 - To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
-- `sdist/fallback/install-deps.sh` also contains some installing functions for some dependencies as alternative, which are not distro-specific but out of control from the system package manager. Better avoid using them if possible.
-- If you've successfully finished installation on some non-Arch(-based) Linux distro, you may create an `sdist/<DISTRO_ID>/` directory and submit a PR. For details see [this page](../../dev/inst-script/#help-wanted).
+- `sdata/dist-fallback/install-deps.sh` also contains some installing functions for some dependencies as alternative, which are not distro-specific but out of control from the system package manager. Better avoid using them if possible.
+- If you've successfully finished installation on some non-Arch(-based) Linux distro, you may create an `sdata/dist-<DISTRO_ID>/` directory and submit a PR. For details see [this page](../../dev/inst-script/#help-wanted).
   - Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`.
 
 ### Setups for permission/services etc
-Read the content of `sdist/arch/install-setups.sh`.
+Read the content of `sdata/dist-arch/install-setups.sh`.
 - If you think it's just fine, then just run `./install -f --skip-alldeps --skip-allfiles` which will run this script.
-  - Do not run `sdist/arch/install-setups.sh` directly because it's meant to be sourced by `./setup install`.
+  - Do not run `sdata/dist-arch/install-setups.sh` directly because it's meant to be sourced by `./setup install`.
 - Or, run the lines in this script manually with your tweaks.
 
 ### Copying config files
