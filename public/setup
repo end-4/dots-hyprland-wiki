@@ -35,17 +35,23 @@ function detect_distro_id(){
 }
 function auto_install_git(){
   echo "$me: Detecting command \"git\"..."
-  command -v git && exit 0
+  command -v git && return
   echo "$me: Command \"git\" not found, try to install..."
 
   if [[ "$OS_DISTRO_ID" == "arch" || "$OS_DISTRO_ID_LIKE" == "arch" || "$OS_DISTRO_ID" == "cachyos" ]]; then
-    x sudo pacman -S --noconfirm --needed git
+    x sudo pacman -Syu
+    x sudo pacman -S --noconfirm git
   elif [[ "$OS_DISTRO_ID" == "debian" || "$OS_DISTRO_ID_LIKE" == "debian" ]]; then
     x sudo apt install git
-  else
-    echo "$me: Command \"git\" not found. Please install Git and retry. Aborting..."
-    exit 1
+  elif [[ "$OS_DISTRO_ID" == "gentoo" ]]; then
+    x sudo emerge --sync
+    x sudo emerge -auvDN @world
+    x sudo emerge dev-vcs/git
   fi
+
+  command -v git && return
+  echo "$me: Failed in installing Git. Please install Git by yourself and then retry. Aborting..."
+  exit 1
 }
 
 if [ -z "$1" ]; then
