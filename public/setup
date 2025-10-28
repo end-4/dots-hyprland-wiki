@@ -25,6 +25,28 @@ function x() {
     1) echo -e "\e[31m$me: Command \"\e[32m$@\e[31m\" has failed. Exiting...\e[0m";exit 1;;
   esac
 }
+function detect_distro_id(){
+  export OS_RELEASE_FILE=${OS_RELEASE_FILE:-/etc/os-release}
+  test -f ${OS_RELEASE_FILE} || ( echo "${OS_RELEASE_FILE} does not exist. Aborting..." ; exit 1 ; )
+  export OS_DISTRO_ID=$(awk -F'=' '/^ID=/ { gsub("\"","",$2); print tolower($2) }' ${OS_RELEASE_FILE} 2> /dev/null)
+  export OS_DISTRO_ID_LIKE=$(awk -F'=' '/^ID_LIKE=/ { gsub("\"","",$2); print tolower($2) }' ${OS_RELEASE_FILE} 2> /dev/null)
+  echo "$me: OS_DISTRO_ID: $OS_DISTRO_ID"
+  echo "$me: OS_DISTRO_ID_LIKE: $OS_DISTRO_ID_LIKE"
+}
+function auto_install_git(){
+  echo "$me: Detecting command \"git\"..."
+  command -v git && exit 0
+  echo "$me: Command \"git\" not found, try to install..."
+
+  if [[ "$OS_DISTRO_ID" == "arch" || "$OS_DISTRO_ID_LIKE" == "arch" || "$OS_DISTRO_ID" == "cachyos" ]]; then
+    x sudo pacman -S --noconfirm --needed git
+  elif [[ "$OS_DISTRO_ID" == "debian" || "$OS_DISTRO_ID_LIKE" == "debian" ]]; then
+    x sudo apt install git
+  else
+    echo "$me: Command \"git\" not found. Please install Git and retry. Aborting..."
+    exit 1
+  fi
+}
 
 if [ -z "$1" ]; then
   path=~/.cache/dots-hyprland
@@ -32,6 +54,8 @@ else
   path="$1"
 fi
 
+detect_distro_id
+auto_install_git
 echo "$me: Downloading repo to $path ..."
 x mkdir -p $path
 x cd $path
