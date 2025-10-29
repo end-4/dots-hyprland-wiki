@@ -62,6 +62,17 @@ Alternatively, in the config file, edit `time.format`. See https://doc.qt.io/qt-
 
 # Misc
 
+## Color theming
+
+### Vscode
+
+- Install the [Material Code](https://marketplace.visualstudio.com/items?itemName=rakib13332.material-code) extension, then select a wallpaper.
+- Optional tweaks
+  - You can change the "material-code.syntaxTheme" option, which has a really weird default.
+  - Run "Material Code: Apply styles" to inject yummy rounded corners. If vscode says the installation is corrupt, you can safely select "Don't show again".
+
+This works with Microsoft's proprietary build. If you use some schizo version we don't guarantee it will work. Well, actually it's just about differing file paths, so feel free to PR that for the vscode fork you use. The script that handles the color is in `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`
+
 ## Change UI scale
 
 To change the scale of the shell, open `~/.config/quickshell/ii/shell.qml` and adjust this line
