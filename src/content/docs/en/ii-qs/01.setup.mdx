@@ -148,15 +148,15 @@ For non-Arch distros:
 
 ### Setups for permission/services etc
 Read the content of `sdata/dist-arch/install-setups.sh`.
-- If you think it's just fine, then just run `./install -f --skip-alldeps --skip-allfiles` which will run this script.
-  - Do not run `sdata/dist-arch/install-setups.sh` directly because it's meant to be sourced by `./setup install`.
+- If you think it's just fine, then just run `./setup install-setups` which will run this script.
+  - Do not run `sdata/dist-arch/install-setups.sh` directly because it's meant to be sourced by `./setup`.
 - Or, run the lines in this script manually with your tweaks.
 
 ### Copying config files
 - Copy `dots/*` to your `$HOME/` (review before doing this or you might have your own config files undesirably overwritten)
-- Or, read `sdata/step/3.install-files.sh`.
-  - If you think it's just fine, then just run `./setup install --skip-alldeps --skip-allsetups` which will run this script.
-  - Do not run `sdata/step/3.install-files.sh` directly because it's meant to be sourced by `./setup install`.
+- Or, read `sdata/subcmd-install/3.files.sh`.
+  - If you think it's just fine, then just run `./setup install-files` which will run this script.
+  - Do not run `sdata/subcmd-install/3.files.sh` directly because it's meant to be sourced by `./setup`.
 
 ### Finish
 - Once you're done, log in again into Hyprland.

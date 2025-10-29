@@ -44,7 +44,7 @@ Optional:
 :::tip[outdate-detect-mode]
 `sdata/dist-<DISTRO_ID>/outdate-detect-mode` is a text file. Just use `AUTO` as its content in your PR.
 
-For possible values, see the definition of function `outdate_detect()` in [1.install-deps-selector.sh](https://github.com/end-4/dots-hyprland/blob/main/sdata/step/1.install-deps-selector.sh).
+For possible values, see the definition of function `outdate_detect()` in [1.deps-selector.sh](https://github.com/end-4/dots-hyprland/blob/main/sdata/subcmd-install/1.deps-selector.sh).
 :::
 
 ## Cross-distro support via Nix
@@ -53,7 +53,6 @@ When `--via-nix` is passed to `./setup install`, `./sdata/dist-nix/install-deps.
 **We need help on `sdata/dist-nix/install-deps.sh`.**
 
 See [issue #1061](https://github.com/end-4/dots-hyprland/issues/1061).
-
 
 # Main method
 The related scripts and files around `./setup install` belongs to "main method", which is developed and maintained mainly by clsty.
