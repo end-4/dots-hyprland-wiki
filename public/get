@@ -54,11 +54,28 @@ function auto_install_git(){
   exit 1
 }
 
-if [ -z "$1" ]; then
-  path=~/.cache/dots-hyprland
-else
-  path="$1"
+path=~/.cache/dots-hyprland
+path_using_default_value=true
+if [ ! -z "$1" ]; then
+  while true; do
+    echo "para=$1"
+    case "$1" in
+      "")break;;
+      --)shift;break;;
+      -*)echo "syntax: $0 <path-to-clone> -- <args-to-pass>";exit 1;;
+      *)
+        if "$path_using_default_value";then
+          path="$1";path_using_default_value=false
+        else
+          echo "syntax: $0 <path-to-clone> -- <args-to-pass>";exit 1
+        fi
+        shift;;
+    esac
+  done
 fi
+
+echo "$me: path to clone: $path"
+echo "$me: params to pass: $@"
 
 detect_distro_id
 auto_install_git

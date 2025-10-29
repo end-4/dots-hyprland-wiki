@@ -54,15 +54,24 @@ Make a choice between the two below, then follow the prompts.
 
 Run the command below:
 ```bash
-bash <(curl -s https://ii.clsty.link/setup)
+bash <(curl -s https://ii.clsty.link/get)
 ```
 
 It clones the repo to `~/.cache/dots-hyprland` by default and run `./install setup` for you.
 
-:::tip[Custom clone target path]
+:::tip[Custom behavior]
 To clone to somewhere else, just append the path, e.g.
 ```bash
-bash <(curl -s https://ii.clsty.link/setup) ~/Downloads/dots-hyprland
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
+```
+If you want a more minimal installation which mainly involves Hyprland and Quickshell,
+pass `--core` to the local install script (`./setup install`) by running:
+```bash
+bash <(curl -s https://ii.clsty.link/get) -- --core
+```
+To combine the two behaviors above, run
+```bash
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland -- --core
 ```
 :::
 
@@ -78,7 +87,7 @@ cd dots-hyprland                                 # Go to the cloned repo
 ```
 
 :::tip[More minimal installation]
-If you want a more minimal installation which mainly involves hyprland and quickshell dotfiles,
+If you want a more minimal installation which mainly involves Hyprland and Quickshell,
 run `./setup install --core` instead.
 :::
 
