@@ -130,6 +130,31 @@ See [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuratio
 
 See [This Hyprland Wiki FAQ entry](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
 
+## Sidebar Wi-Fi toggle doesn't work
+- Make sure you have `NetworkManager` installed and running 
+  ```bash
+  sudo pacman -Q NetworkManager
+  sudo pacman -S NetworkManager  # if not installed
+  sudo systemctl status NetworkManager
+
+  # if not running, enable and start it
+  sudo systemctl enable NetworkManager
+  sudo systemctl start NetworkManager
+  ```
+  Restart quickshell to apply the changes
+
+- If for whatever reason you ended up using another network manager (like `iwd`) to configure the Wi-Fi (because sidebar toggle doesn't work), you can configure `NetworkManager` to use `iwd` as a backend so that it doesn't confuse itself (you can't have 2 services control the Wi-Fi at the same time).
+  - Create backend config file for `NetworkManager`:
+    ```bash
+    sudo nano /etc/NetworkManager/conf.d/wifi_backend.conf
+    ```
+  - Put this inside it:
+    ```ini
+    [device]
+    wifi.backend=iwd
+    ```
+  - Save the file and restart quickshell to apply the changes.
+
 # Configuration-related questions
 
 ## How do I prevent Telegram or other messaging apps from stealing focus on new message?
