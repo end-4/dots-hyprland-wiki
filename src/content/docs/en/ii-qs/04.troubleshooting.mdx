@@ -9,6 +9,38 @@ On this page, press `Ctrl`+`F` to search or see the right sidebar to find your p
 :::
 
 # General troubleshooting
+
+## Quickshell not launching (no status bar)
+
+Firstly run it in a terminal to get the logs.
+```bash
+pkill qs; qs -c ii
+```
+Read through it a bit. usually the relevant error message is near the bottom. Consult one of the below cases.
+
+### Common errors
+
+#### Module "Quickshell.SOME_MODULE" is not installed
+
+Example trace tail:
+```sh
+  ERROR:   caused by @services/PolkitService.qml[6:1]: module "Quickshell.Services.Polkit" is not installed
+  WARN: QThreadStorage: entry 1 destroyed before end of thread 0x7f4e91a18830
+```
+**Solution**: Update Quickshell by running the install script again, skipping everything but the Quickshell installation.
+
+#### Module "qs.modules.common.widgets.shapes" is not installed
+
+Example trace tail:
+```sh
+  ERROR:   caused by @modules/common/widgets/MaterialShape.qml[1:1]: module "qs.modules.common.widgets.shapes" is not installed
+```
+**Solution**: The repo was not properly cloned with submodules. Either:
+- Install script users: You should not skip the step that asks to update git submodules.
+- Manual installed configs: 
+  - You must clone the repo with `--recurse-submodules` flag. Simply using the download button does *not* work.
+  - Alternatively, from an existing cloned repo, run `git submodule update --init --recursive`
+
 ## Python virtual environment
 
 The environment variable `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` must be set properly, or some features of the Quickshell config will not work. In the provided default config, `~/.config/hypr/hyprland/env.conf`, which is sourced by `~/.config/hypr/hyprland.conf`, already contains this environment variable. 
@@ -32,10 +64,6 @@ Where `user` is your username.
 - Restart Hyprland, or reboot your system, which is necessary for applying environment variable changes.
 - Running `./setup install` again to ensure everything is installed properly. As the script is idempotent, you can run it as much as you like to check stuff or update the dotfiles.
 
-## How to get logs
-- If there's a problem with something, open a terminal (`Super`+`Enter`) and run it. Look for errors/warnings that could be problematic.
-- The bar and other shell elements are powered by Quickshell (ITS NOT WAYBAR 😭). If there's something wrong with them, run the following in a terminal: `pkill qs; qs -c ii`.
-
 ## Help
 
 1. Search this page, then [issues](https://github.com/end-4/dots-hyprland/issues) and [discussions](https://github.com/end-4/dots-hyprland/discussions).
@@ -43,7 +71,7 @@ Where `user` is your username.
 
 While [@end-4](https://github.com/end-4) is most active on Discord (@end_4), GitHub is preferred as [@clsty](https://github.com/clsty) has a better understanding of the install scripts and Arch Linux-related problems.
 
-# Common issues
+# Common misc issues
 ## Themes don't look right
 
 Switch a wallpaper by pressing `Super+Ctrl+T` and choosing a picture in prompted window. If it doesn't work, run `~/.config/quickshell/ii/scripts/switchwall.sh` in a terminal, follow the same procedure, see the logs and figure out the problem yourself or send it in an issue/discussion 
