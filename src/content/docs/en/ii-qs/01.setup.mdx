@@ -234,9 +234,9 @@ So, here comes the DM (Display Manager, also called "LM", i.e. Login Manager).
     - The desktop files under these directories contain the information of the graphical environments.
 
 # Updating
-- `cd` into the repo directory
+- `cd` into the repo directory.
 - Run `git pull` to fetch the latest changes.
-- Run `./setup install` again
+- Run `./setup install` again.
   - Skip the steps you don't want (especially the `rsync ...` ones because it will **override your files under its target path**).
     Typically you may want the `rsync` step which involves `dots/.config/quickshell`.
 
@@ -246,7 +246,7 @@ Run `./setup install -h` to see more usage.
 
 :::caution[If you installed manually]
 Though highly unrecommended, if you installed manually, then:
-- `cd` to the repo directory and run `git pull` to fetch the latest changes.
+- `cd` to the repo directory and run `git pull && git submodule update --init --recursive` to fetch the latest changes.
 - Ensure again that all dependencies are installed cuz the update may involve needed dependencies too.
 - Grab files you want. Typically you may want to grab the `dots/.config/quickshell` folder.
 :::
