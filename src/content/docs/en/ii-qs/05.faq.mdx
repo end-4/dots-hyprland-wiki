@@ -1,13 +1,13 @@
 ---
-title: Random questions
-lastUpdated: 2025-10-10
+title: Meta-ish questions
+lastUpdated: 2025-10-31
 ---
 
-_For real problems, see the Troubleshooting/FAQ page. This page is for random bs._
+_For real problems, see the Troubleshooting/FAQ page. This page is for meta-ish Q&A._
 
 ---
-- **Q: How much time did you spend on this??**
-- A: Roughly 2 months before it was merged into main branch. I pretty much spent all the time I had when not eating, sleeping, or studying.
+- **Q: How much time did [@end-4](https://github.com/end-4) spend on this??**
+- A (by [@end-4](https://github.com/end-4)): "Roughly 2 months before it was merged into main branch. I pretty much spent all the time I had when not eating, sleeping, or studying."
 ---
 - **Q: Why the switch from AGS to Quickshell?**
 - A: See [#1276 (comment)](https://github.com/end-4/dots-hyprland/pull/1276#issuecomment-2860016485)
@@ -17,5 +17,19 @@ _For real problems, see the Troubleshooting/FAQ page. This page is for random bs
 ---
 - **Q: Why does the wiki use `ii.clsty.link` as domain?**
 - A: See [issue#28](https://github.com/end-4/dots-hyprland-wiki/issues/28).
+---
+- **Q: Why not upload PKGBUILDs to AUR?**
+- A: Short answer: because they are **designed** to be **local** PKGBUILDs shipped within the Git repo.
+- **Q: Why local?**
+- A:
+  - **1.** It's convenient to custom and modify, thus suits the need for the dotfiles as dynamic as possible. Consider someone who forks the repo and modifies something in these PKGBUILDs. It just works. However if the PKGBUILDs are on AUR then this user will have to download PKGBUILDs and upload them to AUR with a new name... What if many users are doing this altogether? That's just unacceptable. Even if this user choose to build the PKGBUILDs manually it's still inconvenient.
+  - **2.** These local PKGBUILDs are actually only for illogical-impulse and does not add new actual "packages". It's unsuitable to upload them to AUR which is a public place for holding packages for everyone.
+  - **3.** The dependencies are deeply related to dotfiles. If you only upgrade the dependencies but not dotfiles, then things are more likely to not work as expected.
+
+- **Q: Why are there already some illogical-impulse packages on AUR?**
+- A: None of them has been uploaded officially. We have no control over them.
+
+- **Q: Got it. But how to get rid of ":: Packages not in AUR: illogical-impulse-xxx" when upgrading system?**
+- A: Sorry for the annoyance but it seems impossible to get rid of such info with reliable and convenient method currently. Please just ignore them as it actually does no harm anyway.
 ---
 

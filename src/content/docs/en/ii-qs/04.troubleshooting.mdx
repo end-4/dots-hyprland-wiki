@@ -159,18 +159,19 @@ See [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuratio
 See [This Hyprland Wiki FAQ entry](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
 
 ## Sidebar Wi-Fi toggle doesn't work
-- Make sure you have `NetworkManager` installed and running 
+- Make sure you have `NetworkManager` installed. For Arch(-based) distro run:
   ```bash
   sudo pacman -Q NetworkManager
   sudo pacman -S NetworkManager  # if not installed
+  ```
+- Make sure you have `NetworkManager` running.
+  ```bash
   sudo systemctl status NetworkManager
-
   # if not running, enable and start it
   sudo systemctl enable NetworkManager
   sudo systemctl start NetworkManager
   ```
-  Restart quickshell to apply the changes
-
+  Restart quickshell to apply the changes.
 - If for whatever reason you ended up using another network manager (like `iwd`) to configure the Wi-Fi (because sidebar toggle doesn't work), you can configure `NetworkManager` to use `iwd` as a backend so that it doesn't confuse itself (you can't have 2 services control the Wi-Fi at the same time).
   - Create backend config file for `NetworkManager`:
     ```bash
@@ -188,7 +189,7 @@ See [This Hyprland Wiki FAQ entry](https://wiki.hypr.land/FAQ/#my-monitor-has-fl
 ## How do I prevent Telegram or other messaging apps from stealing focus on new message?
 - Set Hyprland's `misc:focus_on_activate` variable to `false`
 
-## How to disable anime shit?
+## How to disable anime related things?
 - Open settings app (`Super`+`I`), go to General, select "No" for "Weeb" policy
 
 ## How to disable AI or restrict it to local models?
@@ -216,28 +217,3 @@ See [#1991](https://github.com/end-4/dots-hyprland/discussions/1991)
 ## I want to [do this very specific thing]
 
 Try https://deepwiki.com/end-4/dots-hyprland
-
-# Designation related
-## Why not upload PKGBUILDs to AUR
-### Short answer
-Because they are designed to be **local** PKGBUILDs shipped within the Git repo.
-
-### Why local? 
-
-**1.** cuz it's convenient to custom and modify, thus suits the need for the dotfiles as dynamic as possible.
-
-Consider someone who forks the repo and modifies something in these PKGBUILDs. It just works.
-However if the PKGBUILDs are on AUR then this user will have to download PKGBUILDs and upload them to AUR with a new name... What if many users are doing this altogether? That's just unacceptable. Even if this user choose to build the PKGBUILDs manually it's still inconvenient.
-
-**2.** These local PKGBUILDs are actually only for illogical-impulse and does not add new actual "packages". It's unsuitable to upload them to AUR which is a public place for holding packages for everyone.
-
-**3.** The dependencies are deeply related to dotfiles. If you only upgrade the dependencies but not dotfiles, then things are more likely to not work as expected.
-
-### Why are there already some illogical-impulse packages on AUR?
-
-None of them has been uploaded officially. We have no control over them.
-
-### How to get rid of ":: Packages not in AUR: illogical-impulse-xxx" when upgrading system?
-
-Sorry for the annoyance but it seems impossible to get rid of such info with reliable and convenient method currently.
-Please just ignore them as it actually does no harm anyway.
