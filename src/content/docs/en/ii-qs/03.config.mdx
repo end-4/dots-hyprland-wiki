@@ -125,7 +125,40 @@ The command `loginctl lock-session` will send signal to the running `hypridle` p
 :::
 
 ## Cloudflare WARP
-- This might help you bypass your ISP's restrictions and provide a faster internet
-- There will be a button on the right sidebar to toggle WARP if it's installed
-- To install it, follow this guide: https://pranavk-official.gitlab.io/posts/post-2/
+- This might help you bypass your ISP's restrictions and provide a faster internet.
+- You can also use the button in the right sidebar to toggle it.
+- To install and configure WARP:
+  1. Install the package from AUR:
+    ```bash
+    yay -S cloudflare-warp-bin
+    ```
+  2. Enable and start the WARP service:
+    ```bash
+    sudo systemctl enable warp-svc
+    sudo systemctl start warp-svc
+    ```
+  3. Register your device:
+    ```bash
+    warp-cli registration new
+    ```
+  It will require you to accept the ToS, just press `y` and hit Enter.
+  4. Test the connection:
+    ```bash
+    warp-cli connect
+    warp-cli disconnect
+    ```
+  You should see `Success` as the output for both commands.
+  5. To make sure the sidebar button works, you can click the sidebar button, and check the status:
+    ```bash
+    warp-cli status
+    ```
+  It should show `Status update :` followed by `Connected` or `Disconnected` depending on the current status.  
+  You can also check the connection status externally by visiting [1.1.1.1 Connection Information](https://1.1.1.1/help) page.
+  6. (Optional) If you wish to configure the WARP operating mode (for example, have it establish a tunnel via WARP and use DNS-over-TLS for DNS queries), you can run:
+    ```bash
+    warp-cli mode warp+dot
+    ```
+  See `warp-cli mode --help` for more information.
+  
+
 
