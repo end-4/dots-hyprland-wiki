@@ -4,15 +4,15 @@
 domain=ii.clsty.link
 url="https://${domain}/get"
 set -e
-echo -e "\e[31mNotice: Setup has moved to ${url}\e[0m"
+echo -e "\e[31mNotice: The online install script has moved to ${url}\e[0m"
 echo -e "\e[33mYou should switch to the new location by using \e[2mbash <(curl -s ${url})\e[0m"
-echo -e "\e[32mYou may still run the setup below! \e[1mBut, this could be \e[31mremoved\e[32m at any time.\e[0m"
-echo -e "  r = Run the setup (DEFAULT) (runs \e[2mbash <(curl -s ${url})\e[0m)"
+echo -e "\e[32mYou may still run the online install script below! \e[1mBut, this could be \e[31mremoved\e[32m at any time.\e[0m"
+echo -e "  r = Run the install script (DEFAULT) (runs \e[2mbash <(curl -s ${url})\e[0m)"
 echo -e "  e = Exit now"
 read -p " [R/e]: " p
 case $p in
     [eE]) echo -e "\e[34mAlright, will exit.\e[0m";exit 1;;
-    *) echo -e "\e[34mOK, running setup...\e[0m"
+    *) echo -e "\e[34mOK, running install script...\e[0m"
         bash <(curl -s ${url})
         ;;
 esac
