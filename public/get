@@ -87,8 +87,8 @@ if [ -z "$(ls -A)" ]; then
   x git remote add origin https://github.com/$remote_repo
 fi
 git remote get-url origin|grep -q $remote_repo || { echo "Dir \"$path\" is not empty, nor a git repo of $remote_repo. Aborting..."; exit 1 ; }
-x git branch --set-upstream-to=origin/main main
 x git pull origin main && git submodule update --init --recursive
+x git branch --set-upstream-to=origin/main main
 echo "$me: Downloaded."
 echo "$me: Running \"./setup install\"."
 x ./setup install "$@" || { echo "$me: Error occured when running \"./setup install\"."; exit 1 ; }
