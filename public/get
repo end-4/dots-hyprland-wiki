@@ -54,6 +54,24 @@ function auto_install_git(){
   exit 1
 }
 
+start_ts="$(date +%s)"
+function print_runtime() {
+  local end_ts
+  end_ts="$(date +%s)"
+  local elapsed=$((end_ts - start_ts))
+  local days=$((elapsed / 86400))
+  local hours=$(( (elapsed % 86400) / 3600 ))
+  local minutes=$(( (elapsed % 3600) / 60 ))
+  local seconds=$(( elapsed % 60 ))
+  local human=""
+  if [ "$days" -gt 0 ]; then human="${human}${days}d "; fi
+  if [ "$hours" -gt 0 ]; then human="${human}${hours}h "; fi
+  if [ "$minutes" -gt 0 ]; then human="${human}${minutes}m "; fi
+  human="${human}${seconds}s"
+  echo -e "\e[34m$me: Total runtime: $human (${elapsed} seconds)\e[0m"
+}
+trap print_runtime EXIT
+
 path=~/.cache/dots-hyprland
 path_using_default_value=true
 if [ ! -z "$1" ]; then
