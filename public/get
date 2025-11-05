@@ -36,13 +36,20 @@ function detect_distro_id(){
 function auto_install_git(){
   echo "$me: Detecting command \"git\"..."
   command -v git && return
-  echo "$me: Command \"git\" not found, try to install..."
+  echo "$me: Command \"git\" not found, try to install Git after 5 seconds..."
+  sleep 5
 
   if [[ "$OS_DISTRO_ID" == "arch" || "$OS_DISTRO_ID_LIKE" == "arch" || "$OS_DISTRO_ID" == "cachyos" ]]; then
-    x sudo pacman -Syu
+    x sudo pacman -Syu --noconfirm
     x sudo pacman -S --noconfirm git
   elif [[ "$OS_DISTRO_ID" == "debian" || "$OS_DISTRO_ID_LIKE" == "debian" ]]; then
+    x sudo apt update -y
     x sudo apt install git
+  elif [[ "$OS_DISTRO_ID" == "fedora" || "$OS_DISTRO_ID_LIKE" == "fedora" ]]; then
+    x sudo dnf install -y git
+  elif [[ "$OS_DISTRO_ID" =~ ^(opensuse-leap|opensuse-tumbleweed)$ ]] || [[ "$OS_DISTRO_ID_LIKE" =~ ^(opensuse|suse)(\ (opensuse|suse))?$ ]]; then
+    x sudo zypper refresh
+    x sudo zypper -n install git
   elif [[ "$OS_DISTRO_ID" == "gentoo" ]]; then
     x sudo emerge --sync
     x sudo emerge -auvDN @world
