@@ -237,11 +237,19 @@ So, here comes the DM (Display Manager, also called "LM", i.e. Login Manager).
     - The desktop files under these directories contain the information of the graphical environments.
 
 # Updating
-- `cd` into the repo directory.
-- Run `git pull` to fetch the latest changes.
-- Run `./setup install` again.
-  - Skip the steps you don't want (especially the `rsync ...` ones because it will **override your files under its target path**).
-    Typically you may want the `rsync` step which involves `dots/.config/quickshell`.
+:::note[TL;DR]
+Assuming you've used the online install script on Arch(-based) distros during installation, you can run the command below to update:
+```bash
+cd ~/.cache/dots-hyprland && git stash && git pull && ./setup install
+```
+:::
+
+As of now we don't have an update checker nor an automated update system. Since the install script is designed to be idempotent, in order to update the dotfiles you have to run the install script again whenever you wish to update, after pulling the latest changes from the repository.
+1. `cd` into the repo directory. By default it should be on `~/.cache/dots-hyprland`, unless you cloned the repo somewhere else.
+2. Run `git stash` to save your local changes. On Arch(-based) distros, installation usually creates local PKGBUILD files, so you need to stash them before pulling the latest changes.
+3. Run `git pull` to fetch and pull the latest changes from the repo.
+4. Run `./setup install` again.
+    - Skip the steps you don't want the script to update (especially the `rsync ...` ones because it will **override your files under its target path**). Typically you may want the `rsync` step which involves `dots/.config/quickshell` to go through.
 
 :::tip
 Run `./setup install -h` to see more usage.
@@ -261,7 +269,7 @@ Since we're now using local PKGBUILDs for Arch(-based) distros,
 the `./setup exp-uninstall` is capable of a suitable uninstallation for Arch/AUR packages, 
 but deleting configuration files is still not perfect.
 
-See also https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007
+See also [this comment on issue #838](https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007).
 :::
 
 - You can try using `./setup exp-uninstall`, but it's not perfect and not actively maintained.
