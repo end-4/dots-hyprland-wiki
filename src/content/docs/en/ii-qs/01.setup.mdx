@@ -146,8 +146,7 @@ For non-Arch distros:
 - Figure out the equivalents of the packages which `sdata/dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`, and then install them.
 - To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
 - `sdata/dist-fallback/install-deps.sh` also contains some installing functions for some dependencies as alternative, which are not distro-specific but out of control from the system package manager. Better avoid using them if possible.
-- If you've successfully finished installation on some non-Arch(-based) Linux distro, you may create an `sdata/dist-<DISTRO_ID>/` directory and submit a PR. For details see [this page](../../dev/inst-script/#help-wanted).
-  - Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`.
+- If you've successfully finished installation on some non-Arch(-based) Linux distro, you may submit a PR. For details see [this page](../../dev/inst-script/#help-wanted).
 
 ### Setups for permission/services etc
 Read the content of `sdata/subcmd-install/2.setups.sh`.
