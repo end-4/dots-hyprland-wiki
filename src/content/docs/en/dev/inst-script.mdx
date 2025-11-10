@@ -11,9 +11,13 @@ lastUpdated: 2025-10-19
 
 **We need more scripts `sdata/dist-<OS_GROUP_ID>/install-deps.sh`** to support specific distro using their system package manager.
 
-Note: The `OS_GROUP_ID` is similar to `OS_DISTRO_ID` but correspond to a group of distros.
-- e.g. Arch Linux, EndeavourOS, CachyOS and other Arch(-based) distros corresponds to `OS_GROUP_ID=arch`.
-- e.g. Opensuse Leap and Opensuse Tumbleweed should corresponds to `OS_GROUP_ID=suse`.
+:::tip[What is OS_GROUP_ID?]
+The `OS_GROUP_ID` is similar to `OS_DISTRO_ID` but corresponds to a group of distros, which allows easier support for a group of similar distros.
+
+Examples:
+- `OS_GROUP_ID=arch` corresponds to Arch Linux, EndeavourOS, CachyOS and other Arch(-based) distros.
+- `OS_GROUP_ID=suse` does not exist yet, but it *should* correspond to Opensuse Leap and Opensuse Tumbleweed.
+:::
 
 Requirements:
 - This script should be written in Bash.
