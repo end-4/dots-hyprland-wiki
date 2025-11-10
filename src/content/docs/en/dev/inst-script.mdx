@@ -7,13 +7,9 @@ lastUpdated: 2025-10-19
 ---
 # Help wanted
 ## Support on each distro
-`./setup install` detects the distro ID and try to use `./sdata/dist-<DISTRO_ID>/install-deps.sh` for dependency installation if it exists.
+`./setup install` use `sdata/lib/dist-determine` to determine `$OS_GROUP_ID` and then use `./sdata/dist-<OS_GROUP_ID>/install-deps.sh` for dependency installation.
 
-**We need more scripts `sdata/dist-<DISTRO_ID>/install-deps.sh`** to support specific distro using their system package manager.
-
-:::tip[Distro ID]
-- Run `./diagnose` to get the actual value of `<DISTRO_ID>` after `distro ID:`, such as `fedora`.
-:::
+**We need more scripts `sdata/dist-<OS_GROUP_ID>/install-deps.sh`** to support specific distro using their system package manager.
 
 Requirements:
 - This script should be written in Bash.
