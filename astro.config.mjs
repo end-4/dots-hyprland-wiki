@@ -89,7 +89,7 @@ export default defineConfig({
         {
           label: 'illogical-impulse (on AGS)',
           collapsed: true,
-          autogenerate: { directory: 'i-i' },
+          autogenerate: { directory: 'ii-ags' },
         },
         {
           label: 'Old stuff',
