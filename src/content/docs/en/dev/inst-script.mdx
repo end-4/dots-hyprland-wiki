@@ -21,7 +21,7 @@ Requirements:
 - This script should reflect or cover the equivalents of the packages which `./sdata/dist-arch/install-deps.sh` installed.
   - They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`.
   - Some of them are built locally following the PKGBUILD.
-- If needed, also create `./sdata/dist-<DISTRO_ID>/install-setups.sh`. When it does not exist, `./setup install` will use `./sdata/dist-fallback/install-setups.sh` instead, which may be not suitable for your distro.
+- If needed, also modify `./sdata/subcmd-install/2.setups.sh` to handle special cases for your distro.
 
 :::tip[Tips when writing the script]
 - Environment variables and functions defined inside `sdata/lib/` can be used.
@@ -48,7 +48,7 @@ For possible values, see the definition of function `outdate_detect()` in [1.dep
 :::
 
 ## Cross-distro support via Nix
-When `--via-nix` is passed to `./setup install`, `./sdata/dist-nix/install-deps.sh` (still WIP) will be used. It's not for NixOS, but for nearly every distro.
+When `--via-nix` is passed to `./setup install`, `./sdata/dist-nix/install-deps.sh` (still experimental) will be used. It's not for NixOS, but for nearly every distro.
 
 **We need help on `sdata/dist-nix/install-deps.sh`.**
 
@@ -64,14 +64,14 @@ This is useful for debugging and a resumable installation, and also provide upda
 - Main script: `./setup`
 - `sdata/`: 
   - `sdata/lib/`: Scripts containing reusable codes to be sourced at the beginning.
-  - `sdata/subcmd-*/`: Scripts containing the actual steps for subcommands.
+  - `sdata/subcmd-install/`: Scripts containing the actual steps for subcommand `install`.
   - `sdata/uv/`: For python dependencies handled by uv.
 - `sdata/dist-<DISTRO_ID>/`: Contains the collection of the distro specific install scripts which `./setup install` select to use according to the current distro. It also contains other files needed by or related to the distro specific scripts.
-- `sdata/dist-nix/`: Used when `--via-nix` is passed. Still WIP.
+- `sdata/dist-nix/`: Used when `--via-nix` is passed. Still experimental.
 - `cache/`: When the script build something from source, they're stored under `./cache/`. It's included in `.gitignore`.
 
 ## Online script
-`setup`:
+`get`:
 - Stored in the repo of dots-hyprland-wiki to be served by the doc site directly.
 - When executed, it downloads the dots-hyprland repo and then executes the `./setup install`.
 
