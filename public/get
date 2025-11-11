@@ -1,8 +1,15 @@
-#!/bin/bash
 # Online script for install dots-hyprland.
+#
+# By design this script is for running via curl and pipe:
+#   bash <(curl -s https://ii.clsty.link/get) [parameters]
+# Therefore shebang and execute permission are not needed.
+#
+# When debugging locally, run
+#   bash get [parameters]
 
 me="-->online-setup<--"
 remote_repo=end-4/dots-hyprland
+local_path=~/.cache/dots-hyprland
 set -e
 function try { "$@" || sleep 0; }
 function x() {
@@ -32,6 +39,17 @@ function detect_distro_id(){
   export OS_DISTRO_ID_LIKE=$(awk -F'=' '/^ID_LIKE=/ { gsub("\"","",$2); print tolower($2) }' ${OS_RELEASE_FILE} 2> /dev/null)
   echo "$me: OS_DISTRO_ID: $OS_DISTRO_ID"
   echo "$me: OS_DISTRO_ID_LIKE: $OS_DISTRO_ID_LIKE"
+  if [[ "$OS_DISTRO_ID" == "arch" || "$OS_DISTRO_ID_LIKE" == "arch" || "$OS_DISTRO_ID" == "cachyos" ]]; then
+    export OS_GROUP_ID="arch"
+  elif [[ "$OS_DISTRO_ID" == "debian" || "$OS_DISTRO_ID_LIKE" == "debian" ]]; then
+    export OS_GROUP_ID="debian"
+  elif [[ "$OS_DISTRO_ID" == "fedora" || "$OS_DISTRO_ID_LIKE" == "fedora" ]]; then
+    export OS_GROUP_ID="fedora"
+  elif [[ "$OS_DISTRO_ID" =~ ^(opensuse-leap|opensuse-tumbleweed)$ ]] || [[ "$OS_DISTRO_ID_LIKE" =~ ^(opensuse|suse)(\ (opensuse|suse))?$ ]]; then
+    export OS_GROUP_ID="suse"
+  elif [[ "$OS_DISTRO_ID" == "gentoo" ]] || [[ "$OS_DISTRO_ID_LIKE" == "gentoo" ]]; then
+    export OS_GROUP_ID="gentoo"
+  fi
 }
 function auto_install_git(){
   echo "$me: Detecting command \"git\"..."
@@ -39,22 +57,28 @@ function auto_install_git(){
   echo "$me: Command \"git\" not found, try to install Git after 5 seconds..."
   sleep 5
 
-  if [[ "$OS_DISTRO_ID" == "arch" || "$OS_DISTRO_ID_LIKE" == "arch" || "$OS_DISTRO_ID" == "cachyos" ]]; then
-    x sudo pacman -Syu --noconfirm
-    x sudo pacman -S --noconfirm git
-  elif [[ "$OS_DISTRO_ID" == "debian" || "$OS_DISTRO_ID_LIKE" == "debian" ]]; then
-    x sudo apt update -y
-    x sudo apt install git
-  elif [[ "$OS_DISTRO_ID" == "fedora" || "$OS_DISTRO_ID_LIKE" == "fedora" ]]; then
-    x sudo dnf install -y git
-  elif [[ "$OS_DISTRO_ID" =~ ^(opensuse-leap|opensuse-tumbleweed)$ ]] || [[ "$OS_DISTRO_ID_LIKE" =~ ^(opensuse|suse)(\ (opensuse|suse))?$ ]]; then
-    x sudo zypper refresh
-    x sudo zypper -n install git
-  elif [[ "$OS_DISTRO_ID" == "gentoo" ]]; then
-    x sudo emerge --sync
-    x sudo emerge -auvDN @world
-    x sudo emerge dev-vcs/git
-  fi
+  case $OS_GROUP_ID in
+    "arch")
+      x sudo pacman -Syu --noconfirm
+      x sudo pacman -S --noconfirm git
+      ;;
+    "debian")
+      x sudo apt update -y
+      x sudo apt install git
+      ;;
+    "fedora")
+      x sudo dnf install -y git
+      ;;
+    "suse")
+      x sudo zypper refresh
+      x sudo zypper -n install git
+      ;;
+    "gentoo")
+      x sudo emerge --sync
+      x sudo emerge -auvDN @world
+      x sudo emerge dev-vcs/git
+      ;;
+  esac
 
   command -v git && return
   echo "$me: Failed in installing Git. Please install Git by yourself and then retry. Aborting..."
@@ -79,7 +103,6 @@ function print_runtime() {
 }
 trap print_runtime EXIT
 
-path=~/.cache/dots-hyprland
 path_using_default_value=true
 if [ ! -z "$1" ]; then
   while true; do
@@ -111,7 +134,7 @@ if [ -z "$(ls -A)" ]; then
   x git init -b main
   x git remote add origin https://github.com/$remote_repo
 fi
-git remote get-url origin|grep -q $remote_repo || { echo "Dir \"$path\" is not empty, nor a git repo of $remote_repo. Aborting..."; exit 1 ; }
+git remote get-url origin|grep -q $remote_repo || { echo "Dir \"$local_path\" is not empty, nor a git repo of $remote_repo. Aborting..."; exit 1 ; }
 x git pull origin main && git submodule update --init --recursive
 x git branch --set-upstream-to=origin/main main
 echo "$me: Downloaded."
