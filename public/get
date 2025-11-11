@@ -1,10 +1,10 @@
 # Online script for install dots-hyprland.
 #
-# By design this script is for running via curl and pipe:
+# By design this script is for running via piping to bash:
 #   bash <(curl -s https://ii.clsty.link/get) [parameters]
 # Therefore shebang and execute permission are not needed.
 #
-# When debugging locally, run
+# When running locally for testing, run
 #   bash get [parameters]
 
 me="-->online-setup<--"
