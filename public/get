@@ -113,7 +113,7 @@ if [ ! -z "$1" ]; then
       -*)echo "syntax: $0 <path-to-clone> -- <args-to-pass>";exit 1;;
       *)
         if "$path_using_default_value";then
-          path="$1";path_using_default_value=false
+          local_path="$1";path_using_default_value=false
         else
           echo "syntax: $0 <path-to-clone> -- <args-to-pass>";exit 1
         fi
@@ -122,14 +122,14 @@ if [ ! -z "$1" ]; then
   done
 fi
 
-echo "$me: path to clone: $path"
+echo "$me: path to clone: $local_path"
 echo "$me: params to pass: $@"
 
 detect_distro_id
 auto_install_git
-echo "$me: Downloading repo to $path ..."
-x mkdir -p $path
-x cd $path
+echo "$me: Downloading repo to $local_path ..."
+x mkdir -p $local_path
+x cd $local_path
 if [ -z "$(ls -A)" ]; then
   x git init -b main
   x git remote add origin https://github.com/$remote_repo
