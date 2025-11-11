@@ -3,7 +3,7 @@
 
 domain=ii.clsty.link
 url="https://${domain}/get"
-url_old="https://${domain}/setup"
+url_old="https://${domain}/setup.sh"
 set -e
 echo -e "\e[31mNotice: The online install script has been moved from ${url_old} to ${url}\e[0m"
 echo -e "\e[32mCurrently, ${url_old} still provides redirection to the correct ${url}.\e[1m But it could be \e[31mremoved\e[32m at any time.\e[0m"
