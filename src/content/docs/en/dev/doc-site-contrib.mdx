@@ -64,6 +64,12 @@ Of course, before making every change, you should know what you're doing.
 
 **As for l10n (translation), follow the steps below:**
 ### Manage locales
+:::caution
+This section important if you're adding support for a new language.
+
+Do not skip unless you're just improving existed translation.
+:::
+
 On your local machine, go to the forked repo, edit `astro.config.mjs` and find the languages under `locales: `.
 
 If your language is not listed or is commented, add your language.
@@ -106,7 +112,7 @@ Example:
 Please pay attention to the formatting of `mjs` and do not omit commas, quotation marks, or parentheses.
 :::
 
-You should also translate the message in `l10n-notify/l10n-notify.json`, e.g. for `zh-CN`:
+You must also translate the message in `l10n-notify/l10n-notify.json`, e.g. for `zh-CN`:
 ```json title="l10n-notify/l10n-notify.json" ins={4}
 {
   "en": "<b>This page is an outdated translation.</b> The original version in English was last updated on <b>LASTUPDATED_OF_ORIGINAL</b>, but this translated version was last updated on <b>LASTUPDATED_OF_TRANSLATED</b>.",

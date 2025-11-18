@@ -262,13 +262,13 @@ Though highly unrecommended, if you installed manually, then:
 
 :::note[Current state]
 Since we're now using local PKGBUILDs for Arch(-based) distros, 
-the `./setup exp-uninstall` is capable of a suitable uninstallation for Arch/AUR packages, 
+the `./setup uninstall` is capable of a suitable uninstallation for Arch/AUR packages, 
 but deleting configuration files is still not perfect.
 
 See also [this comment on issue #838](https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007).
 :::
 
-- You can try using `./setup exp-uninstall`, but it's not perfect and not actively maintained.
+- You can try using `./setup uninstall`, but it's not perfect and not actively maintained.
 - Manual uninstallation hint for Arch Linux:
   - Run `pacman -Q | grep illogical-impulse` for a list of packages the dotfiles requires.
   - Run `yay -Rs PACKAGE_NAME` for each package from the above command.
