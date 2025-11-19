@@ -105,7 +105,7 @@ export default defineConfig({
             'es': 'Archivos (no mantenidos)',
             'ru': 'Прошлые версии (не поддерживаются)',
             'fr': 'Archives (non maintenues)',
-            'pt-BR': "Arquivos (não mantidos)',
+            'pt-BR': 'Arquivos (não mantidos)',
           },
           autogenerate: { directory: 'archives' },
         },
