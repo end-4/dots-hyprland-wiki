@@ -27,6 +27,7 @@ Requirements:
   - They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`.
   - Some of them are built locally following the PKGBUILD.
 - If needed, also modify `./sdata/subcmd-install/2.setups.sh` to handle special cases for your distro.
+- Create `sdata/dist-<OS_GROUP_ID>/.gitignore` if files generated during building should not be tracked by Git, for example binary, cache, fetched source tree or archive.
 
 :::tip[Tips when writing the script]
 - Environment variables and functions defined inside `sdata/lib/` can be used.
@@ -42,7 +43,7 @@ Requirements:
 Optional:
 - Create "meta packages" using the prefix `illogical-impulse-`, so that user can remove them easily without unexpectedly removing the packages that installed by the user for other purposes.
 - Create `sdata/dist-<OS_GROUP_ID>/README.md`.
-- Create `sdata/dist-<OS_GROUP_ID>/.gitignore` if files generated during building should not be tracked by git, for example binary, cache, fetched source tree or archive.
+- Create `sdata/dist-<OS_GROUP_ID>/uninstall-deps.sh` which will be sourced if exists when running `./setup uninstall`.
 - Subscribe [discussion#2140](https://github.com/end-4/dots-hyprland/discussions/2140) to get notifications about updates on `sdata/dist-arch/` by GitHub Action bot in future.
 
 :::tip[outdate-detect-mode]
