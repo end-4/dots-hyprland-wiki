@@ -69,7 +69,7 @@ export default defineConfig({
         },
         'pt-br': {
           label: 'Português do Brasil', //Brazilian Portuguese
-          lang: 'pt-br',
+          lang: 'pt-BR',
         },
       },
       sidebar: [
