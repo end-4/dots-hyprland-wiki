@@ -4,5 +4,7 @@
   "vi": "<b>Bản dịch cũ cần được cập nhật.</b> Bản gốc (tiếng Anh) được cập nhật lần cuối vào <b>LASTUPDATED_OF_ORIGINAL</b>, Còn bản dịch này cập nhật lần cuối vào <b>LASTUPDATED_OF_TRANSLATED</b>.",
   "es": "<b>Esta página tiene una traducción desactualizada.</b> La versión original en inglés fue actualizada por última vez en <b>LASTUPDATED_OF_ORIGINAL</b>, pero esta versión traducida fue actualizada por última vez en <b>LASTUPDATED_OF_TRANSLATED</b>.",
   "ru": "<b>Перевод этой страницы устарел.</b> Последнее обновление оригинальной страницы на английском было в <b>LASTUPDATED_OF_ORIGINAL</b>, а этой переведённой версии — в <b>LASTUPDATED_OF_TRANSLATED</b>.",
-  "fr": "<b>Cette page contient une traduction obsolète.</b> La version originale en anglais a été mise à jour pour la dernière fois le <b>LASTUPDATED_OF_ORIGINAL</b>, mais cette version traduite a été mise à jour pour la dernière fois le <b>LASTUPDATED_OF_TRANSLATED</b>."
+  "fr": "<b>Cette page contient une traduction obsolète.</b> La version originale en anglais a été mise à jour pour la dernière fois le <b>LASTUPDATED_OF_ORIGINAL</b>, mais cette version traduite a été mise à jour pour la dernière fois le <b>LASTUPDATED_OF_TRANSLATED</b>.",
+  "pt-br": "<b>Essa página contém uma tradução desatualizada.</b> A versão original em inglês recebeu sua última atualização em <b>LASTUPDATED_OF_ORIGINAL</b>, mas essa tradução foi atualizada pela última vez em <b>LASTUPDATED_OF_TRANSLATED</b>."
 }
+

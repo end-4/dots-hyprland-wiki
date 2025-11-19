@@ -1,0 +1,52 @@
+---
+title: Eww (multiplós)
+layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Deprecado
+    variant: caution
+lastUpdated: 2024-02-18
+---
+
+:::danger[Alerta]
+Estes conjuntos de configuração não são mais mantidos. Nós recomendamos contra usá-los.
+:::
+
+# Descrição
+Múltiplos conjuntos de configurações, incluindo `windoes`, `hybrid` and `NovelKnock`, etc.
+# Instação
+- Dependências: Veja a lista de dependências especificas para cada derivação.
+- Copie estes
+    - `.config`, `.local` para sua pasta home
+    - Pastas em `.local/share/icons` para sua `/usr/share/icons`
+    - Coisas na pasta `Import manually` se precisar.
+
+ ## Performance
+|  ⌄  | Use | Não recomendado | Notas                 |
+| --- | ------ | ----------- | ------------------------- |
+| Kernel |     | cachyos, xanmod | Não abuse de economizadores de energia. Aliás, não tenho certeza de o que infernos estou dizendo. - Isso é de experiência pessoal. |
+| Shell de login  | bash/zsh | fish | Não tem problema usar fish em um terminal - é o que end-4 faz. |
+
+ ## Setup
+ - Configurações eww apenas funcionam corretamente em `~/.config/eww`
+ - Inicie eww com `eww daemon`
+ - Para abrir a barra no topo: `eww open bar`
+ - Para abrir a barra de Windows: `eww open winbar` (`windoes`/`hybrid` derivação)
+ - Para abrir a linha de baixo: `eww open bottomline` (para que a janela de música abra se você clicar no canto inferior da tela)
+ - Abrir a visão geral (click do meio nas áreas de trabalho) e espere 10 segundos (para ela gerar o cache de pesquisa de apps, ou ícones não aparecerão corretamente.)
+ ## Uso
+ - Controles de música: Click do meio para Play/Pause, Click direito para próxima faixa, scroll para mudar o volume.
+ - Para abrir a visão geral, clique do meio ou direito nos indicadores da área de trabalho, ou rode `eww open overview`
+ - Na visão geral, digite para pesquisar aplicativos. (veja mais abaixo)
+ ## Search
+ - Digite para pesquisar aplicativos.
+ - Digite matemática (deve começar com número) para calcular usando `qalc`
+ - `>save THEME`: Salva o esquema de cores atual, com THEME como nome.
+ - `>load THEME`: Carrega um tema salvo. Temas disponíveis serão apresentados enquanto digita.
+ - `>music`: Pegue o esquema de cores da thumbnail de mídia atual.
+ - `>wall`: Pegue o esquema de cores do wallpaper localizado em `~/.config/eww/images/wallpaper/wallpaper`
+ - `>light`: Lembre-se de usar o modo claro para as próximas gerações de cores.
+ - `>dark`: Lembre-se de usar o modo escuro para as próximas gerações de cores.
+ - `>one`: Lembre-se de usar apenas uma cor para as próximas gerações de cores.
+ - `>multi`: Lembre-se de usar múltiplas cores para as próximas gerações de cores.
+ - `>r`: Recarregar (mata e abre eww novamente com a barra padrão.)
