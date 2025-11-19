@@ -80,8 +80,8 @@ export default defineConfig({
             'zh-CN': '通用',
             'es': 'General',
             'ru': 'Общее',
-            'fr': 'Général'
-            'pt-BR': 'Geral'
+            'fr': 'Général',
+            'pt-BR': 'Geral',
           },
           autogenerate: { directory: 'general' },
         },
@@ -104,8 +104,8 @@ export default defineConfig({
             'zh-CN': '存档（不再维护）',
             'es': 'Archivos (no mantenidos)',
             'ru': 'Прошлые версии (не поддерживаются)',
-            'fr': 'Archives (non maintenues)'
-            'pt-BR': "Arquivos (não mantidos)'
+            'fr': 'Archives (non maintenues)',
+            'pt-BR': "Arquivos (não mantidos)',
           },
           autogenerate: { directory: 'archives' },
         },
@@ -118,8 +118,8 @@ export default defineConfig({
             'zh-CN': '开发者笔记',
             'es': 'Notas de desarrollo',
             'ru': 'Для разработчиков',
-            'fr': 'Notes de développement'
-            'pt-BR': 'Notas de desenvolvimento'
+            'fr': 'Notes de développement',
+            'pt-BR': 'Notas de desenvolvimento',
           },
           autogenerate: { directory: 'dev' },
         },
@@ -131,7 +131,7 @@ export default defineConfig({
             'es': 'Traducir esta wiki',
             'ru': 'Помогите перевести вики',
             'fr': 'Traduire ce wiki',
-            'pt-BR': 'Traduza essa wiki'
+            'pt-BR': 'Traduza essa wiki',
           },
           link: '/dev/doc-site-contrib',
         },
