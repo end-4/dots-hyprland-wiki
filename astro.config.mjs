@@ -81,7 +81,7 @@ export default defineConfig({
             'es': 'General',
             'ru': 'Общее',
             'fr': 'Général'
-            'pt-br': 'Geral'
+            'pt-BR': 'Geral'
           },
           autogenerate: { directory: 'general' },
         },
@@ -105,7 +105,7 @@ export default defineConfig({
             'es': 'Archivos (no mantenidos)',
             'ru': 'Прошлые версии (не поддерживаются)',
             'fr': 'Archives (non maintenues)'
-            'pt-br': "Arquivos (não mantidos)'
+            'pt-BR': "Arquivos (não mantidos)'
           },
           autogenerate: { directory: 'archives' },
         },
@@ -119,7 +119,7 @@ export default defineConfig({
             'es': 'Notas de desarrollo',
             'ru': 'Для разработчиков',
             'fr': 'Notes de développement'
-            'pt-br': 'Notas de desenvolvimento'
+            'pt-BR': 'Notas de desenvolvimento'
           },
           autogenerate: { directory: 'dev' },
         },
@@ -131,7 +131,7 @@ export default defineConfig({
             'es': 'Traducir esta wiki',
             'ru': 'Помогите перевести вики',
             'fr': 'Traduire ce wiki',
-            'pt-br': 'Traduza essa wiki'
+            'pt-BR': 'Traduza essa wiki'
           },
           link: '/dev/doc-site-contrib',
         },
