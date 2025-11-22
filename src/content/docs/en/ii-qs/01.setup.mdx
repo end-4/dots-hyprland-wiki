@@ -1,7 +1,7 @@
 ---
 title: Install / Update / Uninstall
 layout: /src/layouts/autonum.astro
-lastUpdated: 2025-11-10
+lastUpdated: 2025-11-22
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -140,9 +140,7 @@ For Arch(-based) distros:
   - You may also instead install suitable alternatives as you've found out.
 
 For non-Arch distros:
-- Figure out the equivalents of the packages which `sdata/dist-arch/install-deps.sh` installed. They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`, and then install them.
-- To get info of a package (e.g. what executable(s) it provides), search it on [Arch Linux Packages](https://archlinux.org/packages) or the [AUR](https://aur.archlinux.org/packages).
-- `sdata/dist-fallback/install-deps.sh` also contains some installing functions for some dependencies as alternative, which are not distro-specific but out of control from the system package manager. Better avoid using them if possible.
+- Figure out the equivalents of the packages listed in [deps-info.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/deps-info.md) and install them.
 - If you've successfully finished installation on some non-Arch(-based) Linux distro, you may submit a PR. For details see [this page](../../dev/inst-script/#help-wanted).
 
 ### Setups for permission/services etc
