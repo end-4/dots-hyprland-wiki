@@ -22,10 +22,7 @@ Examples:
 Requirements:
 - This script should be written in Bash.
 - This script should be idempotent.
-- This script should reflect or cover the equivalents of the packages which `./sdata/dist-arch/install-deps.sh` installed.
-  - Please also read `sdata/deps-info.md`.
-  - They are mainly from the value of array `depends` inside those `./sdata/dist-arch/*/PKGBUILD`.
-  - Some of them are built locally following the PKGBUILD.
+- This script should reflect or cover the equivalents of the packages listed in [deps-info.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/deps-info.md).
 - If needed, also modify `./sdata/subcmd-install/2.setups.sh` to handle special cases for your distro.
 - Create `sdata/dist-<OS_GROUP_ID>/.gitignore` if files generated during building should not be tracked by Git, for example binary, cache, fetched source tree or archive.
 
