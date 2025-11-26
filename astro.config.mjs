@@ -92,7 +92,7 @@ export default defineConfig({
           autogenerate: { directory: 'ii-qs' },
         },
         {
-          label: 'illogical-impulse (on AGS)',
+          label: 'illogical-impulse (AGS)',
           collapsed: true,
           autogenerate: { directory: 'ii-ags' },
         },
