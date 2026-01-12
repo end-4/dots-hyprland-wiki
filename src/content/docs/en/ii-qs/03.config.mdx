@@ -73,14 +73,30 @@ Alternatively, in the config file, edit `time.format`. See https://doc.qt.io/qt-
 
 This works with Microsoft's proprietary build. If you use some schizo version we don't guarantee it will work. Well, actually it's just about differing file paths, so feel free to PR that for the vscode fork you use. The script that handles the color is in `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`
 
-## Change UI scale
+## Change UI scale (everything)
 
-To change the scale of the shell, open `~/.config/quickshell/ii/shell.qml` and adjust this line
+To change the scale of everything on your screen(s), see [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/)
+
+Alternatively, for a GUI, you can use `nwg-look`. It should work out of the box with these dotfiles.
+
+## Change UI scale (shell)
+
+This works by adjusting the `QT_SCALE_FACTOR` environment variable. There are 2 methods, namely Quickshell pragma and Hyprland environment variables. The former affects only the shell, but is not update-friendly. The latter affects all Qt apps, but is update-friendly.
+
+### Quickshell pragma
+
+Open `~/.config/quickshell/ii/shell.qml` and adjust this line. Restart Quickshell (Ctrl+Super+R) to apply
 ```qml
 //@ pragma Env QT_SCALE_FACTOR=1
 ```
 
-To change the scale of everything on your screen, see [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/)
+### Hyprland environment variables
+
+Edit `~/.config/hypr/custom/env.conf` to include the following line. You'll need to restart Hyprland (by relogging)
+
+```ini
+env = QT_SCALE_FACTOR, 1
+```
 
 ## Change font size
 
