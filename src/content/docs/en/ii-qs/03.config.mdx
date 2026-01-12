@@ -75,9 +75,9 @@ This works with Microsoft's proprietary build. If you use some schizo version we
 
 ## Change UI scale (everything)
 
-To change the scale of everything on your screen(s), see [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/)
+To change the scale of everything on your screen(s), make changes to `~/.config/hypr/custom/general.conf` following the instructions on [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/). 
 
-Alternatively, for a GUI, you can use `nwg-look`. It should work out of the box with these dotfiles.
+Alternatively, for a GUI, you can use `nwg-look` (needs to be installed separately). It should work out of the box with these dotfiles.
 
 ## Change UI scale (shell)
 
@@ -92,11 +92,15 @@ Open `~/.config/quickshell/ii/shell.qml` and adjust this line. Restart Quickshel
 
 ### Hyprland environment variables
 
-Edit `~/.config/hypr/custom/env.conf` to include the following line. You'll need to restart Hyprland (by relogging)
+Edit `~/.config/hypr/custom/env.conf` to include the following line (remember to adjust it to your needs). You'll need to restart Hyprland (by relogging)
 
 ```ini
 env = QT_SCALE_FACTOR, 1
 ```
+
+:::tip[Tip: find the desired value first]
+You might want to use the Quickshell pragma method to find that sweet spot before applying the env var this way to avoid having to relog multiple times.
+:::
 
 ## Change font size
 
