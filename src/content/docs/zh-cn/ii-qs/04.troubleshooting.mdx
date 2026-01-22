@@ -1,0 +1,214 @@
+---
+title: 故障排除/常见问题
+layout: /src/layouts/autonum.astro
+lastUpdated: 2025-10-31
+---
+
+:::tip[提示]
+在此页按 `Ctrl`+`F` 搜索，或查看右侧边栏以查找你的问题
+:::
+
+# 常规故障排除
+
+## Quickshell 无法启动（没有状态栏）
+
+首先在终端中运行以获取日志。
+```bash
+pkill qs; qs -c ii
+```
+浏览日志，通常相关的错误信息在末尾。参考下面的情况排查。
+
+### 常见错误
+
+#### 模块 "Quickshell.SOME_MODULE" 未安装
+
+示例日志尾部：
+```sh
+  ERROR:   caused by @services/PolkitService.qml[6:1]: module "Quickshell.Services.Polkit" is not installed
+  WARN: QThreadStorage: entry 1 destroyed before end of thread 0x7f4e91a18830
+```
+**解决办法**：通过再次运行安装脚本更新 Quickshell，且跳过除 Quickshell 以外的步骤。
+
+#### 模块 "qs.modules.common.widgets.shapes" 未安装
+
+示例日志尾部：
+```sh
+  ERROR:   caused by @modules/common/widgets/MaterialShape.qml[1:1]: module "qs.modules.common.widgets.shapes" is not installed
+```
+**解决办法**：仓库未正确用子模块克隆。可选：
+- 若使用安装脚本：不要跳过提示中更新 git 子模块的步骤。
+- 若手动安装配置：
+  - 克隆仓库时必须加上 `--recurse-submodules` 标志，单纯使用下载按钮不可行。
+  - 或者在已克隆的仓库内运行 `git submodule update --init --recursive`
+
+## Python 虚拟环境
+
+环境变量 `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` 必须正确设置，否则 Quickshell 配置的某些功能将无法工作。默认配置中的 `~/.config/hypr/hyprland/env.conf`（由 `~/.config/hypr/hyprland.conf` 引入）已经包含了此环境变量。
+
+如果它不在你的配置中，请在 Hyprland 配置中添加并重启 Hyprland：
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
+```
+
+你可以运行 `./diagnose` 重新检查该值。
+
+预期输出示例：
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/user/.local/state/quickshell/.venv"
+[---SUCCESS---]
+```
+其中 `user` 为你的用户名。
+
+## 至少尝试过的操作
+- 重启 Hyprland，或重启系统（应用环境变量变更通常需要重新登录）。
+- 运行 `git pull` 然后再次运行 `./setup install`（安装脚本是幂等的，可多次运行以检查或更新）。
+
+## 求助
+
+1. 先搜索本页，然后搜索 [issues](https://github.com/end-4/dots-hyprland/issues) 与 [discussions](https://github.com/end-4/dots-hyprland/discussions)。
+2. 若仍无结果，请创建新的 discussion。
+
+虽然 [@end-4](https://github.com/end-4) 在 Discord 上更活跃（@end_4），但优先在 GitHub 上提问，因为 [@clsty](https://github.com/clsty) 对安装脚本和 Arch Linux 相关问题更熟悉。
+
+# 常见杂项问题
+## 主题看起来不对
+
+按 `Super+Ctrl+T` 切换壁纸并选择一张图片。如果无效，可在终端运行 `~/.config/quickshell/ii/scripts/switchwall.sh`，按提示操作并查看日志以定位问题，或在 issue/discussion 中求助。
+
+## 某些应用在 dock/概览中图标缺失
+
+要达到完美图标覆盖几乎不可能。图标是根据每个应用的 class 猜测的，而这并不总是与图标名称一致。
+
+可能的解决办法：
+### GTK 应用：使用 `gsettings` 设置图标主题
+
+也许你的应用图标不在默认图标包中，这时可以切换到其他图标主题。
+
+例如可以使用 [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)。默认不使用它是出于 @end-4 的偏好，但它覆盖面很广。
+
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+
+当然需先安装该主题（在 Arch 上用 `sudo pacman -S papirus-icon-theme`）。
+
+### Qt 应用：编辑 kde-material-you-colors 配置
+
+打开 `~/.config/kde-material-you-colors/config.conf`，找到并按需修改下列行：
+```ini
+# ...
+iconslight = breeze-plus
+# ...
+iconsdark = breeze-plus-dark
+```
+
+## 音乐控制不显示
+
+参考： [end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168)（注意：旧问题，针对 AGS 版本）
+
+- 确保你的播放器支持 MPRIS（参考列表见 Arch Wiki 的 MPRIS 页面）。
+- 若是浏览器，请安装 Plasma Integration 扩展：
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+  - [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+
+确保已安装 `plasma-browser-integration` 包（在 Arch 上，其他发行版请自行找到对应包）。
+
+当 firefox 正在播放媒体时，运行：
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+输出应包含：
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+只有 "plasma-browser-integration" 相关的名字会起作用，其他的不行。
+
+若 firefox 仍未显示 `org.mpris.MediaPlayer2.plasma-browser-integration`，可尝试：
+1. 使用 `firefox --ProfileManager` 创建新配置文件。
+2. 用新配置文件启动 firefox 并重新安装 Plasma Integration 扩展。
+3. 用新配置文件重启 firefox 再试一次。
+- _提示：`playerctl -F metadata` 也可能有助于调试。_
+
+## 出现奇怪的图标名称而不是图标
+- 确保已安装 Material Symbols 字体（而非 Material Icons）。
+  - 在 Arch 上，使用 `ttf-material-symbols-variable-git` 包。
+  - 若发行版没有该包，可手动安装：
+    - 从 [Material Symbols 仓库](https://github.com/google/material-design-icons/tree/master/variablefont) 下载 .ttf 文件
+    - 放到 `~/.local/share/fonts`
+    - 刷新字体缓存 `fc-cache -fv`
+    - 用 `Ctrl`+`Super`+`R` 重启 shell
+
+## `loginctl lock-session` 无反应
+> 参考：[end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+根据 Arch 论坛的一篇帖子：
+> 需要有某个程序监听 systemd-logind 的 dbus 信号才能使其工作。
+
+Hypridle 可以充当这个“程序”，因此请确保它正在运行，然后 `loginctl lock-session` 会向 hypridle 发送信号，hypridle 会执行其配置 `~/.config/hypr/hypridle.conf` 中定义的 `$lock_cmd` 来锁屏。
+
+参见 [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuration) 获取更多信息。
+
+## 屏幕亮度闪烁
+
+参见该条目在 Hyprland Wiki 的 FAQ：[This Hyprland Wiki FAQ entry](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
+
+## 侧栏 Wi-Fi 切换不起作用
+- 确保已安装 `NetworkManager`。在 Arch 上运行：
+  ```bash
+  sudo pacman -Q NetworkManager
+  sudo pacman -S NetworkManager  # 若未安装
+  ```
+- 确保 `NetworkManager` 正在运行：
+  ```bash
+  sudo systemctl status NetworkManager
+  # 若未运行，启用并启动它
+  sudo systemctl enable NetworkManager
+  sudo systemctl start NetworkManager
+  ```
+  重启 Quickshell 以应用变更。
+- 如果你使用了其他网络管理器（例如 `iwd`）配置 Wi‑Fi，导致侧栏切换无法工作，可将 `NetworkManager` 配置为使用 `iwd` 作为后端，以避免冲突（不能同时有两个服务控制 Wi‑Fi）。
+  - 为 `NetworkManager` 创建后端配置文件：
+    ```bash
+    sudo nano /etc/NetworkManager/conf.d/wifi_backend.conf
+    ```
+  - 写入以下内容：
+    ```ini
+    [device]
+    wifi.backend=iwd
+    ```
+  - 保存并重启 Quickshell 应用更改。
+
+# 配置相关问题
+
+## 如何防止 Telegram 或其他聊天应用在新消息时抢占焦点？
+- 将 Hyprland 的 `misc:focus_on_activate` 变量设为 `false`
+
+## 如何禁用与动漫相关的功能？
+- 打开设置应用（`Super`+`I`），进入 General，将 “Weeb” 策略设为 “No”。
+
+## 如何禁用 AI 或仅限制为本地模型？
+
+打开设置应用（`Super`+`I`），进入 General，在 General 部分更改 “AI” 策略。
+
+## 如何移除屏幕的伪圆角效果？
+
+设置应用内有相关选项，去探索即可。
+
+## 终端配色不太可读
+
+在设置应用的 “Advanced” 部分，降低 Terminal Harmony 的值。
+
+## 有快速的代理/VPN 设置吗？（例如在俄罗斯想看被屏蔽内容）
+
+如果只是想绕过内容限制，Shell 提供了 Cloudflare WARP 的快速切换（前提是你已安装）。详见配置页面相关章节。
+
+## 如何启用透明效果？
+
+参见讨论 [#1991](https://github.com/end-4/dots-hyprland/discussions/1991)
+
+# 折腾
+
+## 我想要 [做这个非常具体的事情]
+
+试试 https://deepwiki.com/end-4/dots-hyprland

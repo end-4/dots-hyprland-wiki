@@ -1,0 +1,162 @@
+---
+title: 配置
+layout: /src/layouts/autonum.astro
+lastUpdated: 2025-11-10
+---
+
+# 配置 Hyprland
+
+Hyprland 负责管理：
+- 键位绑定
+- 环境变量
+- 显示/显示器/工作区
+- 窗口动画
+- …
+
+有关一般配置说明，请参阅 [Hyprland Wiki](https://wiki.hypr.land/)。以下仅记录与本 dotfiles 特定相关的细节。
+
+- `~/.config/hypr/` 是 Hyprland 的配置文件夹
+  - `hyprland` 子文件夹包含默认配置
+  - `custom` 子文件夹用于你的额外配置
+
+你可以在前者子文件夹中直接修改，但如果你决定更新 dotfiles，这些更改会被覆盖。
+
+:::note
+要覆盖默认配置，你可能需要使用一些技巧，例如对键位使用 `unbind`。
+
+如果仍无法覆盖某些项，你可以把默认配置文件从 `~/.config/hypr/hyprland/` 复制到 `~/.config/hypr/custom/`，并编辑 `~/.config/hypr/hyprland.conf` 注释掉引入默认配置文件的那一行。
+
+但如果在使用 `./setup install` 更新后发现 Hyprland 出现问题，需要重新检查 `~/.config/hypr/hyprland.conf`，看被注释掉的默认配置文件中是否包含一些必要的更改。
+:::
+
+# 配置 Quickshell
+
+Quickshell 负责 shell 相关的元素，例如状态栏和侧边栏。
+
+## 简单配置
+
+### 图形界面
+
+按 `Super`+`I` 或在右侧边栏点击齿轮按钮打开设置。大多数常用设置都在此处。如果找不到想要的选项，可尝试下述方法。
+
+### 编辑配置文件
+
+配置文件位于 `~/.config/illogical-impulse/config.json`
+
+有关选项与默认值的说明，见 `~/.config/quickshell/ii/modules/common/Config.qml`
+
+:::note
+对于不只限于 Quickshell 的配置，请参见“杂项”部分。
+:::
+
+### 日期与时间格式
+
+可在 设置 > 服务 > 时间 中切换 24 小时与 12 小时格式。
+
+或者，在配置文件中编辑 `time.format`。有关格式说明，见 https://doc.qt.io/qt-6/qtime.html#toString。
+
+## 高级配置
+
+- 编辑 `~/.config/quickshell/ii` 下的文件
+- 参阅 [Quickshell 文档](https://quickshell.outfoxxed.me/docs/types/)
+  - 建议至少阅读 Introduction、Positioning 和 QML Language 页面
+
+# 杂项
+
+## 颜色主题
+
+### Vscode
+
+- 安装 [Material Code](https://marketplace.visualstudio.com/items?itemName=rakib13332.material-code) 扩展，然后选择壁纸。
+- 可选调整：
+  - 你可以更改 `material-code.syntaxTheme` 选项（默认值比较奇怪）。
+  - 运行 “Material Code: Apply styles” 以注入圆角样式。如果 vscode 提示安装损坏，可以安全地选择“不再提示”。
+
+此方法适用于 Microsoft 的官方构建。如果你使用的是某个分叉版本，可能需要调整路径；欢迎为你使用的 vscode 分叉提交 PR。处理配色的脚本位于 `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`。
+
+## 更改 UI 缩放
+
+要更改 shell 的缩放，打开 `~/.config/quickshell/ii/shell.qml` 并调整这一行：
+```qml
+//@ pragma Env QT_SCALE_FACTOR=1
+```
+
+要更改屏幕上所有内容的缩放，请参阅 [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/)
+
+## 更改字体大小
+
+### GTK 应用
+
+- 如果需要图形化的字体选择器，可使用 `gnome-tweaks`
+- 否则可以使用 `gsettings`
+```bash
+# 语法
+gsettings set org.gnome.desktop.interface font-name 'FONT_NAME FONT_SIZE'
+# 本 dotfiles 的默认值
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+### Qt 应用
+可使用 KDE 系统设置 应用自定义字体
+
+## 屏幕锁定 / 超时
+
+### 超时
+
+参考：[Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
+
+编辑 `~/.config/hypr/hypridle.conf` 以满足你的需求。
+
+### 使用其他锁屏程序
+参考：[Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+以 `swaylock` 为例。
+
+编辑 `~/.config/hypr/hypridle.conf` 并按如下修改 `$lock_cmd` 的值：
+```ini
+$lock_cmd = swaylock
+```
+
+在修改后重启 `hypridle`（`pkill hypridle; hypridle & disown`）。
+
+现在 `loginctl lock-session` 会调用 `swaylock` 来锁屏。
+
+:::note[工作原理]
+命令 `loginctl lock-session` 会向运行中的 `hypridle` 进程发送信号，`hypridle` 随后会执行其配置中 `$lock_cmd` 的命令来锁屏。
+:::
+
+## Cloudflare WARP
+- 这可能帮助你绕过 ISP 限制并提供更快的网络。
+- 你也可以使用右侧边栏的按钮来切换它。
+- 安装与配置 WARP：
+  1. 如果尚未安装，请自行安装软件包。若使用基于 Arch 的发行版，可通过 AUR（例如 `yay`）安装：
+        ```bash
+        yay -S cloudflare-warp-bin
+        ```
+  2. 启用并启动 WARP 服务：
+        ```bash
+        sudo systemctl enable warp-svc
+        sudo systemctl start warp-svc
+        ```
+  3. 注册设备：
+        ```bash
+        warp-cli registration new
+        ```
+        这会要求你接受服务条款，输入 `y` 并回车。
+  4. 测试连接：
+        ```bash
+        warp-cli connect
+        warp-cli disconnect
+        ```
+        两个命令的输出都应显示 `Success`。
+  5. 为确保侧边栏按钮可用，点击侧边栏按钮并检查状态：
+        ```bash
+        warp-cli status
+        ```
+        输出应包含 `Status update :` 之后的 `Connected` 或 `Disconnected`，表示当前连接状态。
+        你也可以通过访问 [1.1.1.1 Connection Information](https://1.1.1.1/help) 页面在外部检查连接状态。
+  6.（可选）若你希望配置 WARP 的工作模式（例如同时启用 WARP 隧道并使用 DNS-over-TLS），可运行：
+        ```bash
+        warp-cli mode warp+dot
+        ```
+        更多信息见 `warp-cli mode --help`。
