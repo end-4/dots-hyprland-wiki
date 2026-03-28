@@ -1,0 +1,51 @@
+---
+title: Homepage
+description: The documentation for illogical-impulse
+template: splash
+hero:
+  title: |
+    <p style="font-size: 60px; font-weight: 300">illogical-impulse</p>
+  tagline: |
+    <p style="font-size: 22px;">Usability-first dotfiles. Probably.</p>
+  image:
+    html: "<img alt='A screenshot.' src='/screenshots/ii-qs.1.jpg' width='600' />"
+  actions:
+    - text: Showcase
+      link: ./general/showcase
+      icon: star
+      variant: primary
+    - text: Quick Start
+      link: ./ii-qs/01setup#automated-installation
+      icon: rocket
+      variant: primary
+    - text: GitHub Repo (end-4/dots-hyprland)
+      link: https://github.com/end-4/dots-hyprland
+      variant: minimal
+      icon: external
+lastUpdated: false
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="[‎ ‎ [‎ Window overview ‎] ‎ ‎]">
+    Effortlessly manage your workspaces with drag-and-drop.
+	</Card>
+  <Card title="+//+ Quality of life +//+">
+    Circle to Search. Flashbang mitigation. Superpaste.
+	</Card>
+	<Card title=">>× AI ×<<">
+    Gemini and Ollama. No web app. One keybind away.
+	</Card>
+	<Card title="•• Material 3 Expressive ••">
+    Dynamic theming, satisfying animations. And cookie!
+	</Card>
+  <Card title="~>< Speaks your language ><~">
+    Human and AI-generated translations.
+	</Card>
+  <Card title="$>_ Easy installation _<$">
+    Idempotent install across multiple distros.
+	</Card>
+</CardGrid>
+
+> [This wiki](https://github.com/end-4/dots-hyprland-wiki) is open for [contribution](https://ii.clsty.link/en/dev/doc-site-contrib).
