@@ -10,6 +10,15 @@ On this page, press `Ctrl`+`F` to search or see the right sidebar to find your p
 
 # General troubleshooting
 
+## Dependencies broken after upgrading system packages
+Take Arch Linux as example, after running `sudo pacman -Syu` it upgrades your system packages, without upgrading illogical-impulse's locally built packages.
+
+Run the following to reinstall the dependencies:
+```sh
+git stash && git pull  # Upgrade the git repo
+./setup install-deps
+```
+
 ## Quickshell not launching (no status bar)
 
 Firstly run it in a terminal to get the logs.
