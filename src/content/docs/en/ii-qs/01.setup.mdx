@@ -1,7 +1,7 @@
 ---
 title: Install / Update / Uninstall
 layout: /src/layouts/autonum.astro
-lastUpdated: 2025-11-22
+lastUpdated: 2026-04-01
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -165,6 +165,15 @@ Read the content of `sdata/subcmd-install/2.setups.sh`.
 
 ### Prevent notification daemon conflicts
 - Notification daemons like `dunst` and `mako` may come with your distro's customizations and can interfere with Quickshell's implementation. It is recommended to uninstall them if you don't use them anywhere else.
+
+### Avoid AUR conflict (Arch(-based) distro only)
+The problem: See [this comment](https://github.com/end-4/dots-hyprland/discussions/3165#discussion-9788226).
+
+The solution: Edit your `/etc/pacman.conf` manually (we're not editing this file automatically since it's kinda risky) and add
+```conf
+IgnoreGroup=illogical-impulse
+```
+See also [Arch Wiki - Pacman](https://wiki.archlinux.org/title/Pacman#Skip_package_group_from_being_upgraded) about Pacman configuration.
 
 ## Optional stuff
 
