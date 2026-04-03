@@ -81,7 +81,37 @@ Handled with the `trans` commandline tool. Not much to say here...
 
 - `Super`+`Shift`+`S`: Screen snip | left-drag to copy to clipboard, right-drag to annotate
 - `Super`+`Shift`+`A`: Google Lens search
-- `Super`+`Shift`+`T`: Text recognition
+- `Super`+`Shift`+`X`: Text recognition
+
+# Screen translation
+
+Translates screen contents using Google's Cloud Vision and Translation API. This section will guide you through the (somewhat involved) setup process.
+
+## Prerequisites
+
+- You have a Google Account
+- While you will not be charged unless you activate a full account, Google requires a credit/debit card to prevent fraud. A virtual one containing one cent should work, as long as it's legit.
+
+## Setting it up
+
+- Go to [Google Cloud Console](https://console.cloud.google.com/) and create or select a project. This can be the same project you use for the Gemini API if you've set that up for the sidebar chat.
+- Enable the following APIs:
+  - [Cloud Vision API](https://console.cloud.google.com/marketplace/product/google/vision.googleapis.com)
+  - [Cloud Translation API](https://console.cloud.google.com/marketplace/product/google/translate.googleapis.com)
+- From the left navigation menu, go to the **Billing** section. Press **Link a billing account** and enter your details as required.
+- From the left navigation menu, go to **IAM & Admin** > **Service Accounts**. Press **Create service account**, then:
+  - Step 1: Enter names. It does not matter what you enter.
+  - Step 2: Permission: add the **Service Usage Consumer** role and press **Continue**
+  - Step 3: Just press Done
+- You should now see a service account in the shown list. Click the 3-dots menu on the right side of it and then **Manage keys**
+  - Click **Add key** > **Create new key**
+  - Select JSON key type (should be the default) and press **Create**. A JSON file will be downloaded.
+- Open the downloaded JSON file and copy its contents
+- Open the screen translator with `Super`+`Shift`+`T`, then:
+  - Click the Key input button at the bottom of the screen
+  - Paste the JSON contents in there and press Enter. Translation will start.
+- And you might want to delete that JSON key file afterwards, now that it's stored safely in the keyring.
+  - Note: Currently, to view it again, you'll have to inspect the illogical-impulse Safe Storage keyring entry.
 
 # Workspace Groups
 
