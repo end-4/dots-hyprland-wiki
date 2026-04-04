@@ -1,0 +1,255 @@
+---
+title: Устранение неполадок/FAQ
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-04
+---
+
+:::tip[Совет]
+Нажмите `Ctrl`+`F` для поиска или найдите свою проблему на правой панели
+:::
+
+# Устранение общих неполадок
+
+## Зависимости сломались после обновления системы
+
+К примеру, в Arch Linux, после запуска `sudo pacman -Syu` системные пакеты обновляются, не обновляя пакеты illogical-impulse, которые собираются локально.
+
+Запустите эту команду, чтобы переустановить все зависимости:
+
+```sh
+git stash && git pull # подтянуть актуальный репозиторий
+./setup install-deps
+```
+
+## Quickshell не запускается (нет верхней панели)
+
+Сначала запустите его в терминале, чтобы посмотреть логи.
+
+```bash
+pkill qs; qs -c ii
+```
+
+Прочитайте их. Обычно понятное сообщение одно из последних. Смотрите решение некоторых проблем ниже.
+
+### Стандартные ошибки
+
+#### Module "Quickshell.SOME_MODULE" is not installed
+
+Пример вывода ошибки:
+
+```sh
+  ERROR:   caused by @services/PolkitService.qml[6:1]: module "Quickshell.Services.Polkit" is not installed
+  WARN: QThreadStorage: entry 1 destroyed before end of thread 0x7f4e91a18830
+```
+
+**Решение**: Обновите Quickshell, запустив скрипт установки еще раз. Пропускайте все этапы, кроме установки Quickshell.
+
+#### Module "qs.modules.common.widgets.shapes" is not installed
+
+Пример вывода ошибки:
+
+```sh
+  ERROR:   caused by @modules/common/widgets/MaterialShape.qml[1:1]: module "qs.modules.common.widgets.shapes" is not installed
+```
+
+**Решение**: Репозиторий был неправильно клонирован. Возможные причины:
+
+- При установке скрипта: Вы не должны пропускать этапы обновления подмодулей git (git submodules).
+- При ручной установке:
+  - Вы должны клонировать репозиторий с флагом `--recurse-submodules`. Простое скачивание _не_ работает.
+  - Или в уже клонированном репозитории напишите `git submodule update --init --recursive`
+
+## Виртуальное окружение Python
+
+Переменная окружения `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` должна быть инициализирована правильно, иначе некоторые из настроек Quickshell работать не будут. Основной файл конфигураций, `~/.config/hypr/hyprland/env.conf`, который подключен в `~/.config/hypr/hyprland.conf`, уже содержит эту переменную
+
+Если ее почему-то нет, добавьте эту строчку в конфиг Hyprland, а затем перезапустите его
+
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
+```
+
+Вы можете запустить `./diagnose`, чтобы проверить значение.
+
+Ожидаемый вывод:
+
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/user/.local/state/quickshell/.venv"
+[---SUCCESS---]
+```
+
+где `user` - ваше имя пользователя.
+
+## Также можно попробовать один раз:
+
+- Перезапустить Hyprland или перезагрузить ПК, чтобы применить изменения переменных окружения.
+- Запустить `git pull`, а потом `./setup install` еще раз, чтобы убедиться, что все установлено правильно. Вы можете запускать скрипт сколько хотите, чтобы обновлять настройки или проверять правильность установки.
+
+## Помощь
+
+1. Ищите свою проблему на этой странице, а потом на странице [ошибок](https://github.com/end-4/dots-hyprland/issues) и [обсуждений](https://github.com/end-4/dots-hyprland/discussions).
+2. Если ничего не нашли, создайте новое обсуждение.
+
+[@end-4](https://github.com/end-4) активен в основном в Discord (@end_4), а на GitHub в основном [@clsty](https://github.com/clsty), который лучше понимает скрипты и знает о проблемах, связанных с Arch Linux.
+
+# Прочие неполадки
+
+## Тема выглядит неправильно
+
+Смените обои, нажав `Super+Ctrl+T` и выберите картинку в открывшемся окне. Если это не сработает, запустите `~/.config/quickshell/ii/scripts/switchwall.sh` в терминале, и сделайте то же самое, посмотрите логи и разберитесь сами, либо откройте новое обсуждение в Issues или Discussions.
+
+## Иконка какого-либо приложения неправильно отображается на панели/в обзоре
+
+Невозможно идеально установить все иконки. Иконки устанавливаются по классу приложения, не названию самих иконок.
+
+Возможные решения:
+
+### GTK-приложения: Используйте `gsettings`, чтобы установить тему иконок
+
+Возможно, для вашего приложения нет иконки в стандартном наборе. Тогда просто смените его на другой
+
+Например, можете использовать [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
+Он не используется по умолчанию из-за предпочтений @end-4, но имеет иконки для большинства приложений
+
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+
+Само собой, сначала вы должны установить набор. В случае с Arch так: `sudo pacman -S papirus-icon-theme`.
+
+### Qt-приложения: Редактируйте конфиг kde-material-you-colors
+
+Откройте `~/.config/kde-material-you-colors/config.conf`
+Найдите эти строки и изменяйте их
+
+```ini
+# ...
+iconslight = breeze-plus
+# ...
+iconsdark = breeze-plus-dark
+```
+
+## Управление медиа не появляется
+
+> Исходная проблема: [end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168) (Обратите внимание: Старая проблема для версии на AGS)
+
+- Убедитесь, что ваш плеер поддерживает Mpris (здесь список: [MPRIS - Arch Wiki](https://wiki.archlinux.org/title/MPRIS))
+- Если это браузер, установите расширение Plasma Integration:
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+  - [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+
+Убедитесь, что пакет `plasma-browser-integration` (на Arch. Если у вас не Arch, ищите нужный пакет сами) установлен
+
+Затем, когда в firefox включено воспроизведение, напишите:
+
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+
+в выводе должно быть:
+
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+
+Только "plasma-browser-integration" будет работать. другие не будут.
+
+Если почему-то в dbus Firefox все еще нет `org.mpris.MediaPlayer2.plasma-browser-integration`, следуйте шагам:
+
+1. Создайте новый профиль командой `firefox --ProfileManager`.
+2. Запустите новый профиль и установите расширение Plasma Integration снова.
+3. Перезапустите Firefox с новым профилем и попробуйте еще раз.
+
+- _Примечание: вывод `playerctl -F metadata` может быть также полезен для отладки._
+
+## Странные названия иконок вместо самих иконок
+
+- Убедитесь, что установлен шрифт Material Symbols (не Material Icons).
+  - На Arch это пакет `ttf-material-symbols-variable-git`
+  - Если для вашего дистрибутива нет такого пакета, установите шрифт вручную:
+    - Скачайте файлы .ttf из [репозитория Material Symbols](https://github.com/google/material-design-icons/tree/master/variablefont)
+    - Переместите их в `~/.local/share/fonts`
+    - Обновите кэш шрифтов `fc-cache -fv`
+    - Перезапустите оболочку сочетанием `Ctrl`+`Super`+`R`
+
+## `loginctl lock-session` ничего не делает
+
+> Исходная проблема: [end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+Смотрите [этот пост на форуме Arch Linux](https://bbs.archlinux.org/viewtopic.php?pid=1311990#p1311990):
+
+> Чтобы все работало, что-то должно слушать dbus-сигналы от systemd-logind.
+
+Этим "чем-то" обычно является hypridle "thing", поэтому вам стоит убедиться, что он запущен,
+а `loginctl lock-session` отправляет туда сигнал,
+в результате hypridle будет блокировать экран, запуская `$lock_cmd` из конфига `~/.config/hypr/hypridle.conf`.
+
+Смотрите [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuration) для подробностей.
+
+## Экран мерцает
+
+Смотрите [этот раздел FAQ на Hyprland Wiki](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
+
+## Переключение Wi-Fi на панели не работает
+
+- Убедитесь, что `NetworkManager` установлен. Для Arch-дистрибутивов запустите:
+  ```bash
+  sudo pacman -Q NetworkManager
+  sudo pacman -S NetworkManager  # если не установлен
+  ```
+- Убедитесь, что сервис `NetworkManager` запущен.
+  ```bash
+  sudo systemctl status NetworkManager
+  # если нет, включите и запустите его
+  sudo systemctl enable NetworkManager
+  sudo systemctl start NetworkManager
+  ```
+  Перезапустите quickshell, чтобы применить изменения.
+- Если вы по какой-либо причине хотите использовать что-то другое (например `iwd`) чтобы настраивать Wi-Fi (потому что панель не работает), вы можете настроить `NetworkManager` на использование `iwd`, чтобы оно не путалось (нельзя запускать 2 сервиса Wi-Fi одновременно).
+  - Создайте файл настроек бекенда для `NetworkManager`:
+    ```bash
+    sudo nano /etc/NetworkManager/conf.d/wifi_backend.conf
+    ```
+  - Добавьте туда:
+    ```ini
+    [device]
+    wifi.backend=iwd
+    ```
+  - Сохраните, а затем перезапустите quickshell для применения изменения.
+
+# Вопросы, связанные с конфигурацией
+
+## Как заставить Telegram или другие мессенджеры перехватывать фокус?
+
+- Установите опцию `misc:focus_on_activate` на `false` в конфигурации Hyprland
+
+## Как отключить функции связанные с аниме?
+
+- Откройте настройки (`Super`+`I`), в "Общее" выберите "Нет" для политики "Аниме-боору"
+
+## Как отключить ИИ или разрешить только локальные модели?
+
+Откройте настройки (`Super`+`I`), в "Общее" измените "ИИ" политики.
+
+## Как убрать скругление углов экрана?
+
+Ищите опцию в приложении настроек
+
+## Цвета терминала нечитаемые
+
+В настройках перейдите в раздел "Прочее". Уменьшите значение "Терминал: гармония"
+
+## Есть ли быстрая настройка Proxy/VPN? Я из России и мой провайдер не хочет, чтобы я смотрел хентай
+
+Для обхода ограничений предлагается Cloudflare Warp, если он установлен. Вы можете найти соответствующую секцию в настройках.
+
+## Как включить прозрачность?
+
+См. [#1991](https://github.com/end-4/dots-hyprland/discussions/1991)
+
+# Хакинг
+
+## Я хочу [сделать что-то крайне специфичное]
+
+Попробуйте https://deepwiki.com/end-4/dots-hyprland
