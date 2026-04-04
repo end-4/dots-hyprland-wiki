@@ -1,7 +1,7 @@
 ---
 title: Установка / Обновление / Удаление
 layout: /src/layouts/autonum.astro
-lastUpdated: 2025-11-22
+lastUpdated: 2026-04-04
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
@@ -189,6 +189,18 @@ cd "$t"
 ### Решение возможных конфликтов с демонами уведомлений
 
 - Демоны, такие как `dunst` и `mako`, которые могли быть в вашей системе раньше, могут конфликтовать с реализацией Quickshell. Рекомендуется их удалить, если они не используются где-либо еще.
+
+### Решение конфликта AUR пакетов (только Arch-репозитории)
+
+Проблема: см. [этот комментарий](https://github.com/end-4/dots-hyprland/discussions/3165#discussion-9788226)
+
+Решение: Измените файл `/etc/pacman.conf` (мы не изменяем его автоматически, так как это опасно) и добавьте:
+
+```conf
+IgnoreGroup=illogical-impulse
+```
+
+Также смотрите [Arch Wiki - Pacman](https://wiki.archlinux.org/title/Pacman#Skip_package_group_from_being_upgraded) чтобы узнать больше о настройке Pacman.
 
 ## Опциональные настройки
 
