@@ -60,7 +60,7 @@ Quickshell отвечает за элементы окружения, такие
 
 - Редактируйте файлы в `~/.config/quickshell/ii`
 - См. [документацию Quickshell](https://quickshell.outfoxxed.me/docs/types/)
-  - Рекомендуется прочитать, по крайне мере, страницы Введение, Позиционирование и Язык QML.
+  - Рекомендуется прочитать, по крайней мере, страницы Введение, Позиционирование и Язык QML.
 
 # Другое
 
@@ -87,7 +87,7 @@ Quickshell отвечает за элементы окружения, такие
 
 ### Quickshell pragma
 
-Open `~/.config/quickshell/ii/shell.qml` и измените эту строчку. Перезапустите Quickshell (Ctrl+Super+R), чтобы применить
+Откройте `~/.config/quickshell/ii/shell.qml` и измените эту строчку. Перезапустите Quickshell (Ctrl+Super+R), чтобы применить
 
 ```qml
 //@ pragma Env QT_SCALE_FACTOR=1
@@ -158,9 +158,9 @@ $lock_cmd = swaylock
 - Чтобы установить и настроить WARP:
   1. Установите пакет, если еще этого не сделали.  
       На Arch-дистрибутивах можете установить его с помощью `yay`:
-     `bash
-yay -S cloudflare-warp-bin
-`
+     ```bash
+     yay -S cloudflare-warp-bin
+     ```
   2. Включите и запустите сервис WARP:
      ```bash
      sudo systemctl enable warp-svc
@@ -181,10 +181,14 @@ yay -S cloudflare-warp-bin
      ```bash
      warp-cli status
      ```
-     Вывод должен содержать `Status update :` и `Connected` либо `Disconnected` в зависимости от статуса соединения.  
-      Также можете проверить соединение по информации на странице [1.1.1.1 Информация о соединении](https://1.1.1.1/help).
+     Вывод должен содержать `Status update :` и `Connected` либо `Disconnected` в зависимости от статуса соединения.
+     Также можете проверить соединение по информации на странице [1.1.1.1 Информация о соединении](https://1.1.1.1/help).
   6. _(Опционально)_ Если хотите настроить режим WARP (например, установить туннель через WARP и использовать DNS-over-TLS для DNS-запросов), вы можете запустить:
      ```bash
      warp-cli mode warp+dot
      ```
      См. `warp-cli mode --help` для подробной информации.
+
+```
+
+```
