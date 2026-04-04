@@ -1,0 +1,219 @@
+---
+title: Fehlerbehebung/FAQ
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-03-28
+---
+
+:::tip[Hinweis]
+Auf dieser Seite kannst du `Strg`+`F` drücken, um zu suchen oder die rechte Seitenleiste für dein Problem zu nutzen
+:::
+
+# Allgemeine Fehlersuche
+
+## Quickshell not launching (no status bar)
+
+Firstly run it in a terminal to get the logs.
+```bash
+pkill qs; qs -c ii
+```
+Read through it a bit. usually the relevant error message is near the bottom. Consult one of the below cases.
+
+### Common errors
+
+#### Module "Quickshell.SOME_MODULE" is not installed
+
+Example trace tail:
+```sh
+  ERROR:   caused by @services/PolkitService.qml[6:1]: module "Quickshell.Services.Polkit" is not installed
+  WARN: QThreadStorage: entry 1 destroyed before end of thread 0x7f4e91a18830
+```
+**Solution**: Update Quickshell by running the install script again, skipping everything but the Quickshell installation.
+
+#### Module "qs.modules.common.widgets.shapes" is not installed
+
+Example trace tail:
+```sh
+  ERROR:   caused by @modules/common/widgets/MaterialShape.qml[1:1]: module "qs.modules.common.widgets.shapes" is not installed
+```
+**Solution**: The repo was not properly cloned with submodules. Either:
+- Install script users: You should not skip the step that asks to update git submodules.
+- Manual installed configs: 
+  - You must clone the repo with `--recurse-submodules` flag. Simply using the download button does *not* work.
+  - Alternatively, from an existing cloned repo, run `git submodule update --init --recursive`
+
+## Python virtual environment
+
+The environment variable `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` must be set properly, or some features of the Quickshell config will not work. In the provided default config, `~/.config/hypr/hyprland/env.conf`, which is sourced by `~/.config/hypr/hyprland.conf`, already contains this environment variable. 
+
+If somehow it isn't there, add the following to your Hyprland config and restart it
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
+```
+
+You can run `./diagnose` to recheck the value.
+
+Expected example:
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/user/.local/state/quickshell/.venv"
+[---SUCCESS---]
+```
+Where `user` is your username.
+
+## Things to try at least once
+- Restart Hyprland, or reboot your system, which is necessary for applying environment variable changes.
+- Run `git pull` and then `./setup install` again to ensure everything is installed properly. As the script is idempotent, you can run it as much as you like to check stuff or update the dotfiles.
+
+## Help
+
+1. Search this page, then [issues](https://github.com/end-4/dots-hyprland/issues) and [discussions](https://github.com/end-4/dots-hyprland/discussions).
+2. If you can't find anything, open a new discussion. 
+
+While [@end-4](https://github.com/end-4) is most active on Discord (@end_4), GitHub is preferred as [@clsty](https://github.com/clsty) has a better understanding of the install scripts and Arch Linux-related problems.
+
+# Common misc issues
+## Themes don't look right
+
+Switch a wallpaper by pressing `Super+Ctrl+T` and choosing a picture in prompted window. If it doesn't work, run `~/.config/quickshell/ii/scripts/switchwall.sh` in a terminal, follow the same procedure, see the logs and figure out the problem yourself or send it in an issue/discussion 
+
+## Icon of some application missing in dock/overview
+
+It's technically not possible to have perfect icons. The icons are guessed from each app's class, which is not necessarily the name of its icon.
+
+Possible solutions:
+### GTK apps: Use `gsettings` to set icon theme
+
+Maybe your app's icon isn't available in the default icon pack. In that case you can change it to another.
+
+For example you can use [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme). 
+It is not used by default because of @end-4's preference, but it has very good coverage of apps.
+
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+
+Of course you must install it first, for Arch Linux use `sudo pacman -S papirus-icon-theme`.
+
+### Qt apps: Edit kde-material-you-colors config
+
+Open `~/.config/kde-material-you-colors/config.conf`
+Find these lines and edit to your liking
+```ini
+# ...
+iconslight = breeze-plus
+# ...
+iconsdark = breeze-plus-dark
+```
+
+## Music controls don't show up
+
+> Reference: [end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168) (Note: Old issue for AGS version)
+
+- Make sure your player has Mpris support (here's a list: [MPRIS - Arch Wiki](https://wiki.archlinux.org/title/MPRIS))
+- If it's a browser, install the Plasma Integration extension: 
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+  - [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+
+Make sure `plasma-browser-integration` package (for Arch, figure out the corresponding package yourself if not on Arch) is installed
+
+Then, when firefox is playing media, the following command
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+the output should include
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+Only "plasma-browser-integration" names will work. others won't.
+
+If for some reason, firefox still does not have dbus `org.mpris.MediaPlayer2.plasma-browser-integration` showing up,
+consider the following steps:
+1. Create a new profile using `firefox --ProfileManager`.
+2. Launch firefox with the newprofile and install the Plasma Integration extension again.
+3. Restart firefox with the new profile and try again.
+- _Note: `playerctl -F metadata` may also be helpful for debugging._
+
+## Weird icon names instead of icons show up
+- Make sure the Material Symbols font (not Material Icons) is installed. 
+  - On Arch, use the `ttf-material-symbols-variable-git` package
+  - If your distro does not have a package for it, install manually:
+    - Download the .ttf files from [Material Symbols' repo](https://github.com/google/material-design-icons/tree/master/variablefont)
+    - Put them in `~/.local/share/fonts`
+    - Refresh font cache with `fc-cache -fv`
+    - Restart the shell with `Ctrl`+`Super`+`R`
+
+## `loginctl lock-session` does nothing
+> Reference: [end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+According to [this post on Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?pid=1311990#p1311990):
+> Something needs to listen to systemd-logind's dbus signals for this to work.
+
+Hypridle is capable to be this "thing", which means you should ensure that it is running,
+and then `loginctl lock-session` will send signal to hypridle,
+as a result hypridle will lock the screen by executing the `$lock_cmd` defined in its config `~/.config/hypr/hypridle.conf`.
+
+See [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuration) for more.
+
+## Screen brightness flickers
+
+See [This Hyprland Wiki FAQ entry](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
+
+## Sidebar Wi-Fi toggle doesn't work
+- Make sure you have `NetworkManager` installed. For Arch(-based) distro run:
+  ```bash
+  sudo pacman -Q NetworkManager
+  sudo pacman -S NetworkManager  # if not installed
+  ```
+- Make sure you have `NetworkManager` running.
+  ```bash
+  sudo systemctl status NetworkManager
+  # if not running, enable and start it
+  sudo systemctl enable NetworkManager
+  sudo systemctl start NetworkManager
+  ```
+  Restart quickshell to apply the changes.
+- If for whatever reason you ended up using another network manager (like `iwd`) to configure the Wi-Fi (because sidebar toggle doesn't work), you can configure `NetworkManager` to use `iwd` as a backend so that it doesn't confuse itself (you can't have 2 services control the Wi-Fi at the same time).
+  - Create backend config file for `NetworkManager`:
+    ```bash
+    sudo nano /etc/NetworkManager/conf.d/wifi_backend.conf
+    ```
+  - Put this inside it:
+    ```ini
+    [device]
+    wifi.backend=iwd
+    ```
+  - Save the file and restart quickshell to apply the changes.
+
+# Configuration-related questions
+
+## How do I prevent Telegram or other messaging apps from stealing focus on new message?
+- Set Hyprland's `misc:focus_on_activate` variable to `false`
+
+## How to disable anime related things?
+- Open settings app (`Super`+`I`), go to General, select "No" for "Weeb" policy
+
+## How to disable AI or restrict it to local models?
+
+Open settings app (`Super`+`I`), go to General, and change the "AI" policy in the "General" section of the settings app
+
+## How to remove the fake rounding of the screen?
+
+There's an option in the settings app, explore it
+
+## Terminal colors aren't very readable
+
+In the settings app go to "Advanced" section. Decrease Terminal Harmony value
+
+## Is there a quick Proxy/VPN setting? I'm in Russia and my ISP doesn't want me to watch hentai
+
+For content restriction bypassing, the shell offers a quick toggle for Cloudflare Warp if you have it installed. You can see the relevant section on the Configuration page.
+
+## How to enable transparency?
+
+See [#1991](https://github.com/end-4/dots-hyprland/discussions/1991)
+
+# Hacking
+
+## I want to [do this very specific thing]
+
+Try https://deepwiki.com/end-4/dots-hyprland

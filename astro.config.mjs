@@ -71,6 +71,10 @@ export default defineConfig({
           label: 'Português do Brasil', //Brazilian Portuguese
           lang: 'pt-BR',
         },
+        'de-de': {
+          label: 'Deutsch', //German
+          lang: 'de-DE',
+        },
       },
       sidebar: [
         {
@@ -82,6 +86,7 @@ export default defineConfig({
             'ru': 'Общее',
             'fr': 'Général',
             'pt-BR': 'Geral',
+            'de-DE': 'Allgemein',
           },
           autogenerate: { directory: 'general' },
         },
@@ -106,6 +111,7 @@ export default defineConfig({
             'ru': 'Прошлые версии (не поддерживаются)',
             'fr': 'Archives (non maintenues)',
             'pt-BR': 'Arquivos (não mantidos)',
+            'de-DE': 'Alte Inhalte',
           },
           autogenerate: { directory: 'archives' },
         },
@@ -120,6 +126,7 @@ export default defineConfig({
             'ru': 'Для разработчиков',
             'fr': 'Notes de développement',
             'pt-BR': 'Notas de desenvolvimento',
+            'de-DE': 'Entwickler Notizen',
           },
           autogenerate: { directory: 'dev' },
         },
@@ -132,6 +139,7 @@ export default defineConfig({
             'ru': 'Помогите перевести вики',
             'fr': 'Traduire ce wiki',
             'pt-BR': 'Traduza essa wiki',
+            'de-DE': 'Übersetze dieses Wiki'
           },
           link: '/dev/doc-site-contrib',
         },

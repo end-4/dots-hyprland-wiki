@@ -1,0 +1,182 @@
+---
+title: Konfiguration
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-03-28
+---
+
+# Hyprland konfigurieren
+
+Hyprland ist zuständig für...
+- Tastenkürzel
+- Umgebungsvariablen
+- Anzeige/Monitore/Arbeitsflächen
+- Fensteranimationen
+- ...
+
+Sieh dir die [Hyprland Wiki](https://wiki.hypr.land/) für allgemeine Konfigurationsanleitungen an. Nur dotfile-spezifische Details sind unten dokumentiert.
+
+- `~/.config/hypr/` is Hyprland's config folder
+  - The `hyprland` subfolder contains the default configs
+  - The `custom` subfolder is for your extra configs
+
+You can make changes in the former subfolder, but they will be overwritten if you decide to update the dotfiles.
+
+:::note
+To override the default configs, you may need to use some techniques, such as `unbind` for keybinds.
+
+And if you're not able to override something, you can copy the default config file from `~/.config/hypr/hyprland/` to `~/.config/hypr/custom/`, and edit `~/.config/hypr/hyprland.conf` to comment out the line which source the default config file.
+
+But if you find something wrong with Hyprland after updating using `./setup install`, you need to re-check `~/.config/hypr/hyprland.conf` to see if the commented-out default config file contains some neccessary changes.
+:::
+
+# Configuring Quickshell
+
+Quickshell is responsible for shell elements such as the bar and sidebars
+
+## Simple configuration
+
+### Graphical
+
+Hit `Super`+`I` or press the gear button on the right sidebar to open settings. Most common settings are there. If you can't find what you want, you can try the below
+
+### Editing the config file
+
+The config file is `~/.config/illogical-impulse/config.json`
+
+For explanation of the options and defaults, see `~/.config/quickshell/ii/modules/common/Config.qml`
+
+:::note
+For configs that are not limited to Quickshell, see the "Misc" section.
+:::
+### Date and time format
+
+You can change the time format between 24h and 12h in the Settings > Services > Time.
+
+Alternatively, in the config file, edit `time.format`. See https://doc.qt.io/qt-6/qtime.html#toString for the format.
+
+## Advanced configuration
+
+- Edit files in `~/.config/quickshell/ii`
+- See [Quickshell Docs](https://quickshell.outfoxxed.me/docs/types/)
+  - It is recommended that you at least go through the Introduction, Positioning, and QML Language pages
+
+# Misc
+
+## Color theming
+
+### Vscode
+
+- Install the [Material Code](https://marketplace.visualstudio.com/items?itemName=rakib13332.material-code) extension, then select a wallpaper.
+- Optional tweaks
+  - You can change the "material-code.syntaxTheme" option, which has a really weird default.
+  - Run "Material Code: Apply styles" to inject yummy rounded corners. If vscode says the installation is corrupt, you can safely select "Don't show again".
+
+This works with Microsoft's proprietary build. If you use some schizo version we don't guarantee it will work. Well, actually it's just about differing file paths, so feel free to PR that for the vscode fork you use. The script that handles the color is in `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`
+
+## Change UI scale (everything)
+
+To change the scale of everything on your screen(s), make changes to `~/.config/hypr/custom/general.conf` following the instructions on [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/). 
+
+Alternatively, for a GUI, you can use `nwg-look` (needs to be installed separately). It should work out of the box with these dotfiles.
+
+## Change UI scale (shell)
+
+This works by adjusting the `QT_SCALE_FACTOR` environment variable. There are 2 methods, namely Quickshell pragma and Hyprland environment variables. The former affects only the shell, but is not update-friendly. The latter affects all Qt apps, but is update-friendly.
+
+### Quickshell pragma
+
+Open `~/.config/quickshell/ii/shell.qml` and adjust this line. Restart Quickshell (Ctrl+Super+R) to apply
+```qml
+//@ pragma Env QT_SCALE_FACTOR=1
+```
+
+### Hyprland environment variables
+
+Edit `~/.config/hypr/custom/env.conf` to include the following line (remember to adjust it to your needs). You'll need to restart Hyprland (by relogging)
+
+```ini
+env = QT_SCALE_FACTOR, 1
+```
+
+:::tip[Tip: find the desired value first]
+You might want to use the Quickshell pragma method to find that sweet spot before applying the env var this way to avoid having to relog multiple times.
+:::
+
+## Change font size
+
+### GTK Apps
+
+- Use `gnome-tweaks` if you want a graphical UI with a font picker
+- Otherwise, you can use `gsettings`
+```bash
+# Syntax
+gsettings set org.gnome.desktop.interface font-name 'FONT_NAME FONT_SIZE'
+# Default of these dotfiles
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+### Qt Apps
+You can use the KDE System Settings app to customize fonts
+
+## Screen lock/timeout
+
+### Timeout
+
+Reference: [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
+
+Edit `~/.config/hypr/hypridle.conf` to your needs.
+
+### Use another lock screen program
+Reference: [Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+Take `swaylock` as example.
+
+Edit `~/.config/hypr/hypridle.conf` and modify the value of `$lock_cmd` as follows:
+```ini
+$lock_cmd = swaylock
+```
+
+Restart `hypridle` after you make changes (`pkill hypridle; hypridle & disown`).
+
+Now `loginctl lock-session` will call `swaylock` to lock the screen.
+
+:::note[How it works]
+The command `loginctl lock-session` will send signal to the running `hypridle` process, and then `hypridle` will trigger the command from the value of `$lock_cmd`.
+:::
+
+## Cloudflare WARP
+- This might help you bypass your ISP's restrictions and provide a faster internet.
+- You can also use the button in the right sidebar to toggle it.
+- To install and configure WARP:
+  1. Install the package by yourself if you haven't already.  
+  If you're on Arch(-based) distro, you can install it from AUR with `yay`:
+        ```bash
+        yay -S cloudflare-warp-bin
+        ```
+  2. Enable and start the WARP service:
+        ```bash
+        sudo systemctl enable warp-svc
+        sudo systemctl start warp-svc
+        ```
+  3. Register your device:
+        ```bash
+        warp-cli registration new
+        ```
+        It will require you to accept the ToS, just press `y` and hit Enter.  
+  4. Test the connection:
+        ```bash
+        warp-cli connect
+        warp-cli disconnect
+        ```
+        You should see `Success` as the output for both commands.  
+  5. To make sure the sidebar button works, you can click the sidebar button, and check the status:
+        ```bash
+        warp-cli status
+        ```
+        It should output `Status update :` followed by `Connected` or `Disconnected` depending on the current connection status.  
+        You can also check the connection status externally by visiting [1.1.1.1 Connection Information](https://1.1.1.1/help) page.  
+  6. *(Optional)* If you wish to configure the WARP operating mode (for example, have it establish a tunnel via WARP and use DNS-over-TLS for DNS queries), you can run:
+        ```bash
+        warp-cli mode warp+dot
+        ```
+        See `warp-cli mode --help` for more information.
