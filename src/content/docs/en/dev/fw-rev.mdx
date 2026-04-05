@@ -7,17 +7,11 @@ sidebar:
 lastUpdated: 2024-02-18
 ---
 
-This note contains some references, experiences and opinions on the frameworks.
-
-:::note[Frameworks?]
-The frameworks here refer to the programs/platforms on Wayland that provide "bar" thingy, but not limited to bars.
-Simple "bar" program will still be called a "Framework" here, despite it's actually not.
-:::
+Basically [Status Bars](https://wiki.hypr.land/Useful-Utilities/Status-Bars/) section on Hyprland wiki without holding back for neutrality.
 
 :::caution[Clarification]
-This note may contain personal subjective opinions. Objectivity is not excluded, but it is still difficult to guarantee.
-Some contents come from personal experiences, so it is difficult to guarantee topicality and correctness.
-However, feel free to discuss it [here](https://github.com/end-4/dots-hyprland-wiki/discussions).
+This note contains opinions, which are subjective by nature.
+Feel free to discuss [here](https://github.com/end-4/dots-hyprland-wiki/discussions).
 :::
 
 References: [Arch Wiki](https://wiki.archlinux.org/title/List_of_applications/Other#Taskbars)
@@ -35,7 +29,7 @@ _These widget systems provide a declarative way to create widgets and put them o
   - ...but at the same time incredibly slow when you create complex widgets. This is because it destroys and recreates the widgets every time their used variables are updated. It's worst when you use loops...
   - No internal way to update variables. It's all done through shell.
 
-## AGS
+## AGS (v1 + Gtk3)
 - [GitHub](https://github.com/Aylur/ags) • [Docs](https://aylur.github.io/ags-docs)
 
 - Pros
@@ -46,19 +40,27 @@ _These widget systems provide a declarative way to create widgets and put them o
   - For icon sizes, it's often a pain having to wait for the CSS to load before being able to retrieve some font-size-scalable data.
   - Working with looped widgets in an imperative way could be a pain if you forget to set a widget reference to null after destroying.
 
+## AGS (v3 + Gtk4)
+- [GitHub](https://github.com/Aylur/ags) • [Docs](https://aylur.github.io/ags/)
+
+- Pros
+  - Gtk4 should be less memory-hungry than Qt... probably?
+  - Window previews might come at some point, so it's worth reconsidering
+
+- Cons
+  - We do not know when the syntax will stop changing
+  - Freaking XML
+
 ## Quickshell
 - [GitHub](https://github.com/outfoxxed/quickshell)
-- A QtQuick-based desktop shell toolkit inspired by AGS
-- This is something I'm excited about, but haven't tried yet and will soon. It's largely WIP, and is actively being developed.
-- Dev guy says he has plans for window thumbnails, which would be a killer feature.
 
-## Fabric
-- [GitHub](https://github.com/Fabric-Development/fabric)
-- A GTK Python widget framework
+- Pros
+  - Qt is extremely advanced compared to Gtk. Always surprisingly customizable without reinventing the wheel
+  - Has window previews
 
-## Potato
-- [GitHub](https://github.com/T0kyoB0y/PotatoWidgets)
-- Another GTK Python widget framework
+- Cons
+  - `qmlls`, the LSP for QML, is terrible
+  - Memory-hungry
 
 # Simple bars
 _These are simple bars with premade modules. You can change the order of the widgets fully horizontally or vertically and give them some styles, but that's about it._
@@ -66,9 +68,3 @@ _These are simple bars with premade modules. You can change the order of the wid
 ## Waybar
 - [GitHub](https://github.com/Alexays/Waybar) • [Docs](https://github.com/Alexays/Waybar/wiki)
 - A simple, widely used bar for Wayland.
-
-## HybridBar
-- [GitHub](https://github.com/vars1ty/HybridBar)
-
-## Polybar
-- [GitHub](https://github.com/polybar/polybar)
