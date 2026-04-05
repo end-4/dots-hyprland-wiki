@@ -7,4 +7,6 @@
     border-radius: 40px;
 }
 
-
+.actions {
+    gap: 10px;
+}
