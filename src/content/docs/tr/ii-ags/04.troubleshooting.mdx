@@ -1,0 +1,245 @@
+---
+title: Sorun Giderme
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-12
+---
+
+:::caution
+illogical impulse'ın AGS sürümü artık desteklenmiyor.
+
+Hâlâ çalışabilir ama sorunları kendin çözmen gerekecek.
+
+AGS sürümüyle ilgili yeni issue'lar büyük ihtimalle planlanmıyor olarak kapatılacak.
+:::
+
+:::tip[İpucu]
+Bu sayfada arama için `Ctrl`+`F` yapabilir veya sorunun için sağ kenar çubuğuna bakabilirsin
+:::
+
+# Mutlaka oku
+
+## Ortam değişkeni önkoşulu
+
+:::note
+`install.sh` içinde bununla ilgili uyarı verdik ama bazı kullanıcılar issue açarken bunu görmezden geldi.
+:::
+
+`$ILLOGICAL_IMPULSE_VIRTUAL_ENV` ortam değişkeni doğru ayarlanmalı, aksi halde AGS yapılandırması çalışmaz.
+
+Varsayılan yapılandırmayı `~/.config/hypr/hyprland/env.conf` içine koyduk, ancak bu dosyanın `~/.config/hypr/hyprland.conf` içinde dahil edildiğinden emin olman gerekiyor. Çoğu zaman Hyprland'ı yeniden başlatmak gerekir.
+
+Değeri tekrar kontrol etmek için `./diagnose` çalıştırabilirsin.
+
+### Beklenen örnek
+
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/myself/.local/state/ags/.venv"
+[---SUCCESS---]
+```
+
+Buradaki `myself`, gerçek kullanıcı adını temsil eder.
+
+### Beklenmeyen örnek 1
+
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+./diagnose: line 30: declare: ILLOGICAL_IMPULSE_VIRTUAL_ENV: not found
+[---EXIT 1---]
+```
+
+Yukarıdaki durum için:
+
+- Büyük ihtimalle eski `~/.config/hypr/hyprland.conf` dosyasını kullanıyorsun ve içeriği `~/.config/hypr/hyprland.conf.new` ile değiştirmeyi unuttun. Şunu çalıştır: `cd ~/.config/hypr;mv hyprland.conf{,.old};mv hyprland.conf{.new,}`.
+- Hyprland'ı yeniden başlattığından emin ol.
+
+### Beklenmeyen örnek 2
+
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="\$XDG_STATE_HOME/ags/.venv"
+[---SUCCESS---]
+```
+
+Bu durumda `$XDG_STATE_HOME` genişletilmemiş; bu oldukça garip (belki Hyprland bug'ı?).
+
+- `install.sh` çalıştırırken `install-python-packages()` adımını atlamadığından ve düzgün çalıştırdığından emin ol; bu adım `~/.local/state/ags/.venv` klasörünü dolu şekilde üretmeli.
+- Değeri doğrudan `~/.config/hypr/custom/env.conf` içine şu şekilde yazabilirsin:
+
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, /home/myself/.local/state/ags/.venv
+```
+
+Ve `myself` yerine gerçek kullanıcı adını yazmayı unutma.
+
+## En az bir kez denemen gerekenler
+
+- Ortam değişkeni değişikliklerinin uygulanması için Hyprland'ı yeniden başlat veya sistemi yeniden aç.
+- AGS (yani "bar"lar) ile ilgili sorun varsa `Super+Ctrl+T` ile duvar kâğıdı değiştirip açılan pencerede bir görsel seç. Her zaman çözmez; özellikle kurulum veya ortam değişkeni tarafında sorun varsa.
+- `install.sh` betiği eşgüçlüdür (tekrar tekrar çalıştırıldığında aynı sonucu verir). İstediğin zaman tekrar çalıştırabilirsin.
+
+## Log nasıl alınır
+
+- Bir şeyde sorun varsa terminal aç (`Super`+`T`) ve ilgili şeyi kabukta çalıştır. Sorunlu olabilecek hata/uyarılara bak.
+- Bar, yan paneller, kısayol rehberi vb. AGS ile çalışır. (İpucu: Waybar değil.) Terminalde `pkill agsv1; agsv1` çalıştır.
+
+## Çeşitli bilgiler
+
+- Bu wiki'de (özellikle bu sayfada), ayrıca mevcut [issue](https://github.com/end-4/dots-hyprland/issues) ve [discussion](https://github.com/end-4/dots-hyprland/discussions) içeriklerinde ara.
+- Biraz sağduyu kullan. Yine de çözemezsen yardım için [discussion aç](https://github.com/end-4/dots-hyprland/discussions).
+
+# Bazı sorunlar ve çözümler/geçici çözümler
+
+## AGS / bar tema-ikon-CSS bozuldu/çalışmıyor
+
+> Referans: [end-4/dots-hyprland#1010](https://github.com/end-4/dots-hyprland/issues/1010)
+
+`Super+Ctrl+T` ile duvar kâğıdı değiştirip açılan pencereden görsel seç.
+
+## Bazı uygulamaların ikonu dock veya genel bakış üzerinde yok
+
+> Referans: [end-4/dots-hyprland#497 yorum](https://github.com/end-4/dots-hyprland/issues/497#issuecomment-2108212444) [end-4/dots-hyprland#487](https://github.com/end-4/dots-hyprland/issues/487)
+
+Aşağıdaki çözümleri/geçici çözümleri dene:
+
+### İkon temasını `gsettings` ile ayarla
+
+:::note
+Şu durum için uygundur:
+
+- Uygulama pencere class'ının ikon teması A'da birebir eşleşen ikonu var, ama B'de yok.
+- Sen B ikon temasını kullanıyorsun; A'ya geçince sorun çözülüyor.
+  :::
+
+Örneğin [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) (çok uygulamayı kapsadığı için önerilir):
+
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+
+Elbette önce kurmuş olman gerekir; Arch Linux için `sudo pacman -S papirus-icon-theme`.
+
+### AGS `user_options.jsonc` içinde ikon eşleştirmesi ayarla
+
+:::note
+Şu durum için uygundur:
+
+- Uygulamanın birden fazla pencere class adı var (örn. `foot` ve `footclient`) ama bunlardan yalnızca biri (örn. `foot`) mevcut ikon temasında birebir eşleşiyor.
+- Bu farklı class'lar için aynı ikonu kullanmak senin için sorun değilse (örn. `foot` ve `footclient` aynı ikon).
+  :::
+
+`~/.config/ags/user_options.jsonc` dosyasını aç, `icons.substitutions` içine örneğin şu girdiyi ekle:
+
+```js
+    'icons': {
+        substitutions: {
+            'footclient': "foot",
+        },
+    },
+```
+
+:::note
+Bu dosyayı ilk kez düzenliyorsan önce `user_options.jsonc` başındaki yönergeleri oku.
+:::
+
+### İkon arama yolunu ayarla
+
+İkon dosyasını ayrı tutuyorsan bu yöntem uygundur.
+
+`~/.config/ags/user_options.jsonc` içindeki `icons.searchPaths` değerini uygun şekilde düzenle.
+
+## Müzik kontrolleri görünmüyor
+
+> Referans: [end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168)
+
+- Oynatıcının Mpris desteği olduğundan emin ol (liste: [Arch Wiki link](https://wiki.archlinux.org/title/MPRIS))
+- Tarayıcıysa Plasma Integration eklentisini kur: [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/) veya [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai) ve ayrıca `plasma-browser-integration` (bu paket Arch içindir)
+
+Sonra firefox medya oynatırken şu komut:
+
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+
+çıktısında şunlardan biri olmalı:
+
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+
+Sadece "plasma-browser-integration" isimleri çalışır, diğerleri çalışmaz.
+
+Her şeye rağmen firefox dbus'ta `org.mpris.MediaPlayer2.plasma-browser-integration` göstermiyorsa şu adımları dene:
+
+1. `firefox --ProfileManager` ile yeni profil oluştur.
+2. Firefox'u yeni profille aç ve Plasma Integration eklentisini tekrar kur.
+3. Yeni profille Firefox'u yeniden başlatıp tekrar dene.
+
+- _Not: Hata ayıklamada `playerctl -F metadata` de yardımcı olabilir._
+
+## İkonlar görünmüyor, garip yazılar çıkıyor
+
+- Material Symbols fontu eksik. Fontu manuel indirip `~/.local/share/fonts` içine koyabilirsin
+- Material <u>**Symbols**</u> olmalı, Material <u>**Icons**</u> değil!
+- Font önbelleğini yenilemek için `fc-cache -fv` çalıştırmayı unutma. Yeniden başlatmak da işe yarar.
+
+## `loginctl lock-session` hiçbir şey yapmıyor
+
+> Referans: [end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+[Arch Linux forumundaki bu gönderiye](https://bbs.archlinux.org/viewtopic.php?pid=1311990#p1311990) göre:
+
+> Bunun çalışması için bir şeyin systemd-logind'in dbus sinyallerini dinlemesi gerekiyor.
+
+Hypridle bu "şey" olabilir; yani çalıştığından emin olmalısın.
+Bundan sonra `loginctl lock-session` hypridle'a sinyal gönderir,
+sonuç olarak hypridle `~/.config/hypr/hypridle.conf` içindeki `$lock_cmd` komutunu çalıştırarak ekranı kilitler.
+
+Detay için [Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/#configuration).
+
+## Terminal: Neden Ctrl+C ile kesemiyorum?
+
+- `foot` içinde Ctrl+C metin kopyalamaya ayarlı. Kesmek için Ctrl+Shift+C kullan
+- Bunu istemiyor musun?
+  - Bu kısayolu kaldırmak için: `~/.config/foot/foot.ini` içinde `clipboard-copy=Control+c` satırını yorum satırı yap veya sil
+  - Terminal uygulamalarını çok kullanıyorsan daha zengin özellikli bir terminal tercih etmek iyi fikir olabilir
+
+## Rastgele donma
+
+:::note
+Teknik olarak bu illogical-impulse ile ilgili değil.
+:::
+Bkz: https://github.com/end-4/dots-hyprland/issues/746 .
+
+# Kullanımdan kalkmış sorun çözümleri/geçici çözümler
+
+Aşağıdaki içerikler artık çok faydalı değil çünkü bazı şeyler değişti.
+
+Yine de ileride tekrar gerekirse diye burada tutuluyor.
+
+## AGS kurulumu başarısız
+
+### `PermissionError: [Errno 13] Permission denied: '/usr/local/lib/libgvc.so'`
+
+Bu dosyanın bir pakete ait olup olmadığını kontrol et (çok büyük ihtimalle değildir, çünkü `/usr/local` altında):
+
+```bash
+pacman -Qo /usr/local/lib/libgvc.so
+```
+
+Ait değilse büyük ihtimalle güvenle kaldırabilirsin. Bunun için:
+
+```bash
+sudo mv /usr/local/lib/libgvc.so /tmp/
+```
+
+### Diğer hatalar
+
+`./cache/ags` klasörünü silip tekrar kur.
+
+## Hyprland kurulumu başarısız
+
+Bazen AUR paketi tüm bağımlılıkları otomatik kurmuyor. Hyprland sürekli geliştiği için yeni bir şey eklendiğinde bu durum yaşanabiliyor.
+
+- Loglara bak; bir şey kurmanı söylüyorsa kurup tekrar derlemeyi dene.
+- Not: `~/.cache/yay` temizlemen gerekebilir.

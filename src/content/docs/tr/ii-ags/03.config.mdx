@@ -1,0 +1,163 @@
+---
+title: Yapılandırma
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-12
+---
+
+:::caution
+illogical impulse'ın AGS sürümü artık desteklenmiyor.
+
+Hâlâ çalışabilir ama sorunları kendin çözmen gerekecek.
+
+AGS sürümüyle ilgili yeni issue'lar büyük ihtimalle planlanmıyor olarak kapatılacak.
+:::
+
+# Hyprland yapılandırması
+Aşağıdakiler ve daha fazlası Hyprland tarafından yönetilir.
+- genel kısayollar
+- ortam değişkenleri
+- ekran/monitör/çalışma alanı
+- pencere animasyonları/dekorasyonları
+- ...
+
+Referans: [Hyprland Wiki](https://wiki.hyprland.org/)
+
+Hyprland yapılandırmak için `~/.config/hypr/hyprland.conf` dosyasından içe aktarılan `~/.config/hypr/custom/` altındaki dosyaları düzenle.
+- Hyprland `hyprland.conf` dosyasını okur. `source` anahtarını görünce ilgili dosyayı okur, sonra devam eder.
+
+`install.sh` betiği `~/.config/hypr/custom/` klasörünün üstüne **yazmaz**.
+
+Ayrıca `~/.config/hypr/hyprland.conf` mevcutsa onun üstüne yazılmaz; bunun yerine `~/.config/hypr/hyprland.conf.new` üretilir. `*.new` dosyası sadece format referansıdır, hiçbir etkisi yoktur.
+
+:::caution
+Varsayılan yapılandırmaları ezmek için `unbind` gibi teknikler gerekebilir.
+
+Ve bir şeyi ezemiyorsan, varsayılan yapılandırma dosyasını `~/.config/hypr/hyprland/` içinden `~/.config/hypr/custom/` içine kopyalayıp `~/.config/hypr/hyprland.conf` içindeki ilgili `source` satırını yorum satırı yapabilirsin.
+
+Ama `install.sh` ile güncelledikten sonra Hyprland tarafında bir sorun yaşarsan, yorumladığın varsayılan dosyada gerekli değişiklikler var mı diye `~/.config/hypr/hyprland.conf` dosyasını tekrar kontrol et.
+:::
+
+## Uygulamalar için blur açma
+`~/.config/hypr/hyprland/rules.conf` içinde şu satırı yorum satırı yap (`#`) ya da kaldır:
+```ini
+windowrule = noblur,.*  # Pencerelerde blur'u kapatır. Performansı belirgin artırır.
+```
+
+# AGS yapılandırması
+Aşağıdakiler ve bazı diğer öğeler AGS tarafından yönetilir.
+- üst bar
+- yan paneller
+- kısayol rehberi
+- bildirim
+- genel bakış bileşeni
+
+## Son kullanıcılar için
+`~/.config/ags/user_options.jsonc` dosyasını düzenle; güncellemede `install.sh` bunun üstüne yazmaz.
+Şunları ayarlayabilirsin:
+- Varsayılan ChatGPT benzeri asistan sağlayıcısı
+- Animasyon hızı
+- Saat formatı
+- ...
+
+:::note
+Sadece AGS ile sınırlı olmayan ayarlar için "Çeşitli" bölümüne bak.
+:::
+### Tarih ve saat biçimini ayarlama
+
+`~/.config/ags/user_options.jsonc` içinde "time" bölümünü [şu formata](https://docs.gtk.org/glib/method.DateTime.format.html) göre düzenle.
+Saat biçimi için ayrıca `man date` kullanabilirsin.
+
+### Hava durumu bileşeni için şehir ayarlama
+Pil algılanmazsa (genelde masaüstü bilgisayar), pil bileşeni ve araç bileşeni gösterilmez.
+Onun yerine bu konumda hava durumu bileşeni görünür.
+
+Hava durumu şehri varsayılan olarak `curl ipinfo.io` ile algılanır ya da `~/.config/ags/user_options.jsonc` içinde açıkça belirlenebilir.
+
+:::note
+Şehir adından emin değilsen,
+hava bilgisi için [wttr.in](https://github.com/chubin/wttr.in) kullandığımızdan cevabı orada bulabilirsin.
+:::
+
+### Kısayolları ayarlama
+Ayarlanabilir kısayol sayısı sınırlı ve tuş adları için gdk dokümanına bakman gerekiyor, ama çalışıyor.
+
+Daha fazlası için [#5](https://github.com/end-4/dots-hyprland-wiki/issues/5).
+### Özel bileşen
+Bir bileşen için bir bash betiğinin çıktısını kullanabilirsin. `~/.cache/ags/user/scripts/custom-module-poll.sh` varsa AGS varsayılan olarak her 5000ms'de çıktıyı okuyup sistem kaynak göstergelerinin yerine gösterir.
+
+Örneğin `/` yolunun boş alanını göstermek için:
+```bash title="~/.cache/ags/user/scripts/custom-module-poll.sh"
+#!/bin/bash
+export LANG=C
+disk_info=$(df -h /)
+available=$(echo "$disk_info" | awk 'NR==2 {print $4}')
+total=$(echo "$disk_info" | awk 'NR==2 {print $2}')
+echo "$available/$total"
+```
+Daha az özelleştirilebilir ama iki satırlık bir sürüm istersen:
+```bash title="~/.cache/ags/user/scripts/custom-module-poll.sh"
+#!/bin/bash
+LANG=C df -h / | awk 'NR==2 {printf "%s/%s\n", $4, $2}'
+```
+
+:::note
+Betiğine çalıştırma izni vermeyi unutma!
+```bash
+chmod +x ~/.cache/ags/user/scripts/*.sh
+```
+:::
+
+Daha fazla özelleştirme:
+- Sorgulama aralığı (ms): `~/.cache/ags/user/scripts/custom-module-interval.txt` (varsayılan = 5000)
+- Sol tık eylem betiği: `~/.cache/ags/user/scripts/custom-module-leftclick.sh`
+- Sağ tık eylem betiği: `~/.cache/ags/user/scripts/custom-module-rightclick.sh`
+## Uzmanlar için (ki muhtemelen öylesindir)
+- [AGS Docs](https://aylur.github.io/ags-docs)'a bak
+- Ayrıca Geliştirici Notları'na da bak (yan menüde)
+
+
+# Çeşitli
+## Arayüz ölçeğini / yazı boyutunu değiştirme
+Yazı boyutunu değiştirmek AGS arayüz ölçeğini de değiştirir.
+- `gsettings` ile:
+```bash
+# Sözdizimi
+gsettings set org.gnome.desktop.interface font-name 'FONT_NAME FONT_SIZE'
+# Bu dotfiles'ın varsayılanı
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+## Ekran kilidini yapılandırma
+### Otomatik ekran kilidi
+Referans: [Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/)
+
+`~/.config/hypr/hypridle.conf` dosyasını ihtiyacına göre düzenle.
+### Özel Hyprlock
+Referans: [Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/)
+
+Hyprlock varsayılan ekran kilidi sağlayıcısıdır.
+
+`~/.config/hypr/hyprlock.conf` dosyasını istediğin gibi düzenle.
+
+Örneğin tarih/saat formatı için, **kilide karşılık gelen** `text` değerini değiştir.
+### Başka bir ekran kilidi sağlayıcısı kullanma
+Referans: [Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+Örnek olarak `swaylock`:
+
+`~/.config/hypr/hypridle.conf` dosyasında `$lock_cmd` değerini şöyle değiştir:
+```ini
+$lock_cmd = swaylock
+```
+Ve hypridle'ın çalıştığından emin ol (genelde Hyprland yapılandırması içinde `exec-once = hypridle` varsa otomatik başlar).
+
+Böylece `loginctl lock-session` ekran kilitlemek için `swaylock` çağırır.
+
+:::note[Nasıl]
+`loginctl lock-session` komutu çalışan `hypridle` sürecine sinyal gönderir, ardından `hypridle` `$lock_cmd` değerindeki komutu tetikler.
+:::
+
+## Cloudflare WARP
+- Bu, ISS kısıtlamalarını aşmana yardımcı olabilir ve daha hızlı internet sağlayabilir
+- Kuruluysa sağ kenar çubuğunda WARP'ı aç/kapat düğmesi görünür
+- Cloudflare WARP kurmak için: `yay -S cloudflare-warp-bin && sudo systemctl enable warp-svc --now`
