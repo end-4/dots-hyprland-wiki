@@ -1,0 +1,18 @@
+## Sözlük
+- `fork`: `fork`
+- `repository`: `depo`
+- `issue`: `issue`
+- `discussion`: `discussion`
+- `hacker`: `kurcalayıcı`
+- `workspace`: `çalışma alanı`
+- `overview`: `genel bakış`
+- `launcher`: `başlatıcı`
+- `script`: `betik`
+- `idempotent`: `eşgüçlü`
+- `widget`: `bileşen`
+- `cheatsheet`: `kısayol rehberi`
+- `pill`: `gösterge`
+- `substitution`: `ikon eşleştirmesi`
+- `dispatcher`: `dağıtıcı`
+- `ricing`: `pirinçleme`
+- `rice`: `pirinç`

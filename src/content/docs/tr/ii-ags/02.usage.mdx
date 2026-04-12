@@ -1,0 +1,162 @@
+---
+title: Kullanım
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-12
+---
+
+:::caution
+illogical impulse'ın AGS sürümü artık desteklenmiyor.
+
+Hâlâ çalışabilir ama sorunları kendin çözmen gerekecek.
+
+AGS sürümüyle ilgili yeni issue'lar büyük ihtimalle planlanmıyor olarak kapatılacak.
+:::
+
+# Genel
+
+Önce, kısayol listesi için `Super`+`/` tuşlarına bas.
+
+Ayrıca başlatıcı için bazı aksiyonlar da tanımlanmış.
+
+## Genel Bakış ve Başlatıcı
+
+Açmak için `Super` veya `Super`+`Tab`.
+
+- **Pencereler**
+  - Farklı çalışma alanlarına taşımak için sürükle
+  - Birkaç seçenek için sağ tıkla
+- **Arama**
+  - <u>Hesaplama</u>: Sayıyla başlayan bir şey yaz
+  - <u>Komutlar</u>: Yazdığında algılanıp listelenir.
+    - Varsayılan olarak arka planda çalıştırılır
+    - Komut `sudo` ile başlıyorsa `foot` terminalinde açılır.
+  - <u>Dizin arama</u>: `~` veya `/` ile başlayan bir dizin yaz.
+    - Yol doğruysa alt dizinler görünür. Etkinleştirince klasör/dosya açılır
+    - Girilen klasör/dosyayı doğrudan açmak için o girdide Enter'a bas
+  - <u>Aksiyonlar</u>: Her aksiyon `>` ile başlar. Liste için **kısayol rehberi** bölümüne bak
+  - Ve tabii varsayılan olarak <u>Uygulamalar</u>!
+
+## Bar kontrolleri
+
+- Medya:
+  - Sağ üst köşe
+    - Orta tık: oynat/duraklat
+    - Sağ tık: sonraki parça
+    - Kaydırma: ses seviyesi
+  - Kontrol penceresi için müzik göstergesine tıkla
+- Parlaklık: Sol üst köşede kaydır
+- Başlatıcı / Genel Bakış: Çalışma alanı aracına sağ tık
+- Sanal klavye: Çalışma alanı aracına orta tık
+- Bildirimdeki metni kopyala: Yaklaşık 800ms tıkla ve basılı tut (referans: [#224](https://github.com/end-4/dots-hyprland/issues/224#issuecomment-1923706599))
+- **Çalışma alanları**:
+  - Kaydırarak çalışma alanı değiştir
+  - Odaklamak için çalışma alanına tıkla
+  - Özel çalışma alanını (scratchpad) aç/kapat için yan tuşa tıkla (oyuncu farelerinde)
+
+# API'ler
+
+_Sol kenar çubuğunda mevcut_
+
+## AI servisleri
+
+- Her AI servisi bir API anahtarı gerektirir
+  - Anahtarın yoksa tıkladığında sağlayıcının web sitesine götüren bir istem çıkacak
+  - O sitedeki adımları tamamlayıp anahtarı aldıktan sonra kenar çubuğu sohbet kutusuna yapıştırıp gönder; kaydedilir. Üstteki istem kaybolur ve API'yi kullanabilirsin
+  - Anahtarı değiştirmen gerekirse `/key` komutunu kullan. Ne yapacağını söyler.
+
+## Waifu servisleri
+
+- API anahtarı gerekmiyor, yaşasın!
+- "Waifus" sekmesi için bir kategori gir. Liste için dokümana bak: https://waifu.pics/docs
+- "Anime Booru" sekmesi için:
+  - yande.re moduna geçmek için `/mode yandere` (genel görseller) [ Varsayılan ]
+  - Konachan moduna geçmek için `/mode konachan` (duvar kâğıdı)
+  - Boşlukla ayrılmış etiketleri gir, 20 görsel gelir (varsayılan, değiştirilebilir)
+  - Belirli bir sayfaya gitmek için sayı ekle
+  - <sub>
+      <sub>
+        <sub>Neden doğrudan web arayüzü değil? API'de filtreler varsayılan olarak kapalı</sub>
+      </sub>
+    </sub>
+
+# Duvar kâğıdı ve renkler
+
+- Duvar kâğıdı seçmek için `Ctrl`+`Super`+`T` basıp bir görsel seç. Bileşenler, Gtk uygulamaları (yeniden başlattıktan sonra) ve Qt uygulamaları (bkz. [doğru kurulum](https://ii.clsty.link/en/ii-ags/01setup/#not-so-optional-stuff)) Material renkleriyle temalanır.
+- Daha canlı veya daha sakin renkler istersen Material renk paletini değiştirebilirsin
+  - Renk paleti panelini açmak için `Super`+`,` bas. Seçenekler için sağ alt köşedeki küçük oka tıkla.
+  - İstediğin paleti seç: Tonal Spot (normal), Neutral (daha sakin), Vibrant...
+
+# Çalışma Alanı Grupları
+
+## Giriş
+
+Varsayılan olarak bar en fazla 10 çalışma alanı gösterir. Ama birçok kullanıcı 10 çalışma alanı sınırından fazlasına ihtiyaç duyuyor. Açık uygulama sayısı arttıkça çalışma alanı karmaşası ve pencere düzenleme işi yorucu hale geliyor.
+
+Çalışma Alanı Gruplandırma, Hyprland sınırları içinde sınırsız sayıda çalışma alanını gruplar hâlinde düzenleyerek esnek bir gezinme ve yönetim sistemi sunar.
+
+- **Temel özellikler**
+  - **Ölçeklenebilir Çalışma Alanları**: Çalışma alanı çubuğunu veya genel bakış aracını kalabalıklaştırmadan 10 sınırını aş. Organizasyonu bozmadan istediğin kadar çalışma alanı oluştur.
+  - **Çalışma Alanı Grupları**: Çalışma alanları otomatik olarak 10'luk gruplara bölünür (örn. 1-10, 11-20, 21-30). Aktif çalışma alanı, barda görünür grubu belirler.
+  - **Kısayol Desteği**: Hyprland kısayolları bu özellikle sorunsuz çalışacak şekilde ayarlı
+    - `Super` + `3`, mevcut çalışma alanın 1-10 aralığındaysa seni çalışma alanı 3'e; 11-20 aralığındaysa çalışma alanı 13'e götürür
+
+- **Faydalar**
+  - **Çoklu görev ustalığı**: Çalışma alanı gruplarını farklı görev/projelere ayırarak aralarında rahatça geçiş yap
+  - **Daha düzenli masaüstü**: Çalışma alanı sayısı yüksek olsa bile temiz ve düzenli bir deneyim
+  - **Çoklu monitör gücü**: [awesome-wm](https://awesomewm.org/) tarzı akış için monitör bazlı çalışma alanı grupları
+    - Örn. monitör-1 için 1-10, monitör-2 için 11-20, monitör-3 için 21-30...
+
+## Gezinme ve Çalışma Alanı Yönetimi
+
+- **Bir grup içinde gezinme / taşıma**: Standart Hyprland kısayolları geçerli.
+  - `Super` + `2` → çalışma alanı **2**, eğer **1-10 (grup 1)** içindeysen.
+  - `Super` + `2` → çalışma alanı **12**, eğer **11-20 (grup 2)** içindeysen.
+  - `Super` + `Alt` + `3` odaktaki pencereyi sessizce taşır → çalışma alanı **3**, eğer **1-10 (grup 1)** içindeysen.
+  - `Super` + `Alt` + `3` odaktaki pencereyi sessizce taşır → çalışma alanı **13**, eğer **11-20 (grup 2)** içindeysen.
+
+- **Gruplar arasında gezinme**:
+  - Mevcut grubun son çalışma alanını aşıp bir sonrakinde yeni çalışma alanı oluştur. Örn. `Super` + `0` ile çalışma alanı 10'a git, sonra `Control` + `Super` + `Right` ile bir sonraki çalışma alanına, yani sonraki gruptaki 11'e geç.
+  - Alternatif olarak çalışma alanı çubuğunun üstünde fareyi kaydırarak bir sonraki gruba hızlıca geçebilirsin.
+  - Komşu çalışma alanı gruplarına atlamak için şu Hyprland kısayollarını eklemeyi düşünebilirsin
+    ```ini title="~/.config/hypr/hyprland/keybinds.conf"
+    bind = SUPER ALT, Z, workspace, r-10
+    bind = SUPER ALT, X, workspace, r+10
+    ```
+- Genel bakış aracı da esnek pencere/çalışma alanı yönetimi sağlar. `SUPER` ile bir grup içindeki tüm pencere ve çalışma alanlarını gör, pencereleri sürükle-bırakla taşı, pencereye sağ tıklayıp ek seçenekleri kullan.
+  :::tip
+  İstersen kısayolları değiştirebilir veya çalışma alanı gezintisine [daha fazla özellik](https://wiki.hyprland.org/Configuring/Dispatchers/) ekleyebilirsin. Bunun için doğrudan `hyprctl dispatch` kullanmak yerine `${HOME}/.config/ags/scripts/hyprland/workspace_action.sh` betiğini kullanmalısın. Bu betik, o anki çalışma alanı numarasını baz alarak hangi grupta olduğunuzu tespit eder ve ilgili komutu doğru çalışma alanına yönlendirir.
+  :::
+
+## Çoklu Monitör Notları
+
+Çoklu monitör yönetimi için şu stratejileri düşünebilirsin:
+
+- Grup 1'i (çalışma alanı 1-10) ana monitöre, grup 2'yi (çalışma alanı 11-20) ikinci monitöre ayır.
+  - Başlangıçta ikinci monitördeki başlangıç çalışma alanını ikinci gruba (örn. çalışma alanı 11) elle taşı: `Super` + `0`, sonra `Ctrl` + `Super` + `Right`.
+  - Bu sayede monitör başına ayrı çalışma alanı araçları oluşur.
+- Belirli çalışma alanlarını belirli monitörlerde sabitlemek için [çalışma alanı bağlama (workspace binding)](https://wiki.hyprland.org/Configuring/Workspace-Rules/#rules) kullan. Monitör adlarını `hyprctl monitors | grep Monitor` ile öğren.
+
+  ```ini title="~/.config/custom/general.conf"
+  # Çalışma alanı 1-10'u (grup 1) ana monitöre bağla
+  workspace = 1, monitor:eDP-1, default:true
+  workspace = 2, monitor:eDP-1, default:true
+  ...
+
+  # Çalışma alanı 11-20'yi (grup 2) ikinci monitöre bağla
+  workspace = 11, monitor:HDMI-A-1, default:true
+  workspace = 12, monitor:HDMI-A-1, default:true
+  ...
+  ```
+
+- Her monitörde aynı anda iki çalışma alanına odaklanıp pencereleri monitörler/gruplar arasında taşı/değiştir (`Super` + `Left/Right/Up/Down` veya `Super` + `Shift` + `Left/Right/Up/Down`).
+
+:::note
+Çalışma alanı grupları Hyprland, AGS ya da Waybar/Polybar gibi bar programlarında doğal olarak desteklenmiyor. Bu yapılandırma, Hyprland dağıtıcısı ve birkaç özel AGS modülüyle bunu pratik şekilde sağlamaya çalışır. Daha iyi olabilecek bir nokta görürsen [Discussion](https://github.com/end-4/dots-hyprland/discussions) açabilir veya PR gönderebilirsin.
+:::
+
+# Odak modu
+
+- Aç/kapat için `Ctrl` + `Alt` + `/`
+- Bar genişliği yarıya iner
+- Sadece numarasız çalışma alanı göstergesi kalır
+- Pil azsa kırmızıya döner

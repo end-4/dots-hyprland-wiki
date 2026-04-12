@@ -1,0 +1,220 @@
+---
+title: Kurulum / Güncelleme / Kaldırma
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-12
+---
+
+:::caution
+illogical impulse'ın AGS sürümü artık desteklenmiyor.
+
+Hâlâ çalışabilir ama sorunları kendin çözmen gerekecek.
+
+AGS sürümüyle ilgili yeni issue'lar büyük ihtimalle planlanmıyor olarak kapatılacak.
+:::
+
+# Kurulum
+
+## Başlamadan önce
+
+- Bu sadece **kullanıcı düzeyi özelleştirme** sağlar. Süreçte GNOME kurulumu ağ, bluetooth vb. bazı (temel) sistem bileşenleri getirebilir; ama bunları zaten kendin ayarladığın varsayılır
+- Uğraşı azaltmak için EndeavourOS önerilir
+  - Diğer Arch dağıtımlarında da gayet iyi çalışır
+  - Arch dışı dağıtım mı kullanıyorsun? [Discussions](https://github.com/end-4/dots-hyprland/discussions) sayfasında kendi dağıtımını ara
+  - Dotfiles için sistemi yeniden kurman asla gerekmez
+
+## Otomatik kurulum (sadece Arch dağıtımları için)
+
+Repoyu klonla, `ii-ags` branch'ine geç ve kurulum betiğini çalıştır:
+
+```bash
+t=~/.cache/dots-hyprland   # Home klasörünü çöplüğe çevirmeyelim
+git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
+git -C "$t" checkout ii-ags
+"$t"/install.sh
+```
+
+:::tip[İpucu]
+`install.sh` betiği eşgüçlüdür (tekrar tekrar çalıştırıldığında aynı sonucu verir) ve etkileşimlidir.
+Birden fazla kez çalıştırabilir, sadece belli adımları seçebilirsin.
+:::
+
+## NixOS için (deneysel)
+
+- Şu an bu dotfiles henüz bir Nix flake yapısı olarak sunulmuyor (sunulacak mı, bilinmez).
+- Yine de [end_4'ün NixOS flake'ine](https://github.com/end-4/CirnOS) bakabilirsin
+  - İçinde home-manager yapılandırması da var. `homes` klasörüne bakmak isteyebilirsin.
+
+- Ayrıca bkz: https://github.com/end-4/dots-hyprland/discussions/1093
+
+## OpenSUSE için (deneysel)
+
+- Bkz: https://github.com/end-4/dots-hyprland/discussions/485
+
+## Fedora için (deneysel)
+
+- [EisregenHaha/fedora-hyprland deposunun F42-ags branch'ine](https://github.com/EisregenHaha/fedora-hyprland/tree/F42-ags) bak
+- Ayrıca (eski tartışma): https://github.com/end-4/dots-hyprland/discussions/840
+
+## Manuel kurulum (temelde tüm dağıtımlar)
+
+:::note[Arch dışı dağıtımlar için not]
+Bağımlılık kurarken `scriptdata/arch-packages/*/PKGBUILD` dosyalarındaki `depends` dizisinde geçen paketlerin kendi dağıtımındaki karşılıklarını bulman gerekecek.
+
+- Bir paket hakkında bilgi almak için (örn. hangi çalıştırılabilir dosyayı sağlıyor), [Arch Linux Packages](https://archlinux.org/packages) veya [AUR](https://aur.archlinux.org/packages) üzerinde ara.
+- Arch tabanlı olmayan bir Linux dağıtımında kurulumu başarıyla tamamladıysan, paket listesini (gerekirse ek adımlarla beraber) [Discussions](https://github.com/end-4/dots-hyprland/discussions) bölümünde paylaşırsan çok seviniriz. İleride o dağıtım için kurulumu otomatikleştirebiliriz. Teşekkürler!
+  :::
+
+- Klonla ve dizine gir
+  ```bash
+  t=~/.cache/dots-hyprland   # Home klasörünü çöplüğe çevirmeyelim
+  git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
+  cd "$t"
+  ```
+- Paketleri kur: `scriptdata/arch-packages/*/PKGBUILD` içindeki `depends` dizilerinde listelenen tüm paketleri kur. Arch Linux'ta bunun için `yay` gibi bir AUR yardımcısı kullanabilirsin.
+
+- Kalan bağımlılıkları kurmak için `manual-install-helper.sh` çalıştır.
+  - İstersen kendi bulduğun uygun alternatifleri de kurabilirsin; ama AGS kurarken gerekli commit'e `git checkout` yaptığından emin ol.
+- Kullanıcıyı `video` ve `input` grubuna ekle
+  ```bash
+  sudo usermod -aG video,input "$(whoami)" # bu bir şekilde çalışmazsa "$(whoami)" yerine kullanıcı adını yaz
+  ```
+- `.config`, `.local` klasörlerini home klasörüne kopyala (önce kontrol et; yoksa kendi yapılandırma dosyalarının üstüne istemeden yazabilirsin)
+
+- Şu kısayollarla başla
+  - Duvar kâğıdı seçmek için `Ctrl`+`Super`+`T`
+  - Kısayol listesi için `Super`+`/`. İyi eğlenceler!
+
+# Kurulum sonrası
+
+## Pek de opsiyonel olmayanlar
+
+### Qt temalandırma
+
+- Çalıştırınca açılan pencerelerde KVantum'u seç:
+
+```sh
+kcmshell6 kcm_style
+kcmshell6 kcm_colors
+```
+
+### Bildirim daemon çakışmalarını engelleme
+
+- `dunst` ve `mako` gibi bildirim daemon'ları dağıtım özelleştirmeleriyle gelebilir ve AGS ile çakışabilir (özellikle önce onlar başlarsa). Başka yerde kullanmıyorsan kaldırman önerilir.
+
+## Opsiyonel şeyler
+
+### Ek yapılandırmalar
+
+`Extras` klasöründe ilgini çeken bir şey var mı diye bak.
+
+### Tarayıcı ile medya entegrasyonu
+
+Tarayıcıdan medya küçük görseli gelsin istiyorsan "Plasma browser integration" eklentisini kur.
+
+- [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai) için
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/) için
+
+### ZSH için renk şeması
+
+ZSH'de renk şeması desteği için `~/.zshrc` dosyana şu satırı ekle:
+
+```bash
+source ~/.config/zshrc.d/dots-hyprland.zsh
+```
+
+## Hyprland başlatma
+
+- Hyprland başlatmak için DM (Display Manager) veya doğrudan `tty` kullanabilirsin.
+- Hyprland wiki, Hyprland'ı uswm yönetimli oturumla başlatmayı öneriyor; ben önermiyorum. Bu yöntemi kullanman dotfiles'ı bozmaz ama diğer masaüstü ortamlarından otomatik başlayan gereksiz şeyleri (örn. çift kimlik doğrulama penceresi) alabilirsin.
+
+Detaylar için [Hyprland wiki](https://wiki.hyprland.org/Getting-Started/Master-Tutorial/#launching-hyprland)'ye bak. Aşağıda birkaç ek ipucu var.
+
+### `tty1`'e giriş yaptıktan sonra Hyprland nasıl otomatik başlatılır?
+
+ZSH veya BASH için, `~/.zshrc` veya `~/.bashrc` dosyanın **en altına** şu satırı ekle:
+
+```bash
+source ~/.config/zshrc.d/auto-Hypr.sh
+```
+
+FISH için, `~/.config/fish/config.fish` dosyanın **en altına** şu satırı ekle:
+
+```fish
+source ~/.config/fish/auto-Hypr.fish
+```
+
+Not: Hyprland'ı tty üzerinden başlatmak istiyorsan DM'yi devre dışı bırakman önerilir.
+
+### Yeni başlıyorum. tty ve DM nedir?
+
+Hızlıca fikir vermesi için kısa bir anlatım, ama birebir teknik doğruluk bekleme.
+
+`tty`'yi Linux sisteminin bir nevi "temeli" gibi düşünebilirsin.
+Genelde 7 tane `tty` olur: `tty1` ile `tty7`. `Ctrl+Alt+F<n>` ile `tty<n>`'e geçip kullanıcı adı/parola girerek oturum açabilirsin.
+
+Giriş yaptıktan sonra komutla grafik ortam başlatabilirsin, örneğin `Hyprland`.
+Aslında çoğu grafik arayüz, sadece giriş yaptıktan **sonra** açılabilir.
+
+Peki giriş ekranının kendisi de grafik olsun istersek?
+
+Burada DM (Display Manager, yani "LM" / Login Manager) devreye girer.
+
+- Yaygın kullanılan bazı DM'ler:
+  - `sddm`: Genelde KDE Plasma ile.
+  - `gdm`: Genelde Gnome ile.
+- Sistem seviyesinde etkinleştirilir ve sistem açıldıktan sonra (giriş yapılmadan) otomatik başlar.
+  - systemd tabanlı dağıtımlarda DM genellikle bir systemd servisidir. Hangi DM'nin aktif olduğunu görmek için:
+    ```bash
+    grep 'ExecStart=' /etc/systemd/system/display-manager.service
+    ```
+    Çıktı `No such file or directory` ise DM etkin değildir ya da bu dağıtım systemd tabanlı değildir.
+- Oturum açmak ve grafik ortam seçmek için (örn. Hyprland) grafik arayüz sunar.
+  - DM hangi grafik ortamların mevcut olduğunu nasıl anlar?
+    - Normalde X11 için `/usr/share/xsessions`, Wayland için `/usr/share/wayland-sessions` dizinlerini tarar.
+    - Bu dizinlerdeki desktop dosyaları grafik ortam bilgilerini içerir.
+
+# Güncelleme
+
+## Otomatik kurulum yaptıysan
+
+- Repo dizinine `cd` ile gir
+- En güncel değişiklikleri çekmek için `git pull` çalıştır
+- `./install.sh` komutunu tekrar çalıştır
+  - İstemediğin adımları geçebilirsin (özellikle `rsync ...` adımlarını; çünkü **hedef yoldaki dosyalarının üstüne yazar**).
+    Genelde `.config/ags` içeren `rsync` adımını isteyebilirsin.
+
+Diğer kullanım seçenekleri için `./install.sh -h` çalıştır.
+
+## Manuel kurulum yaptıysan
+
+- Repo dizinine `cd` ile gir
+- En güncel değişiklikleri çekmek için `git pull` çalıştır
+- İstediğin dosyaları al. Genelde `.config/ags` klasörünü almak istersin.
+- Bazı bağımlılıkları güncellemek için `manual-install-helper.sh` çalıştır.
+
+# Kaldırma
+
+- **Manuel kaldırma** şiddetle önerilir
+- Şu anda kaldırma için bir betik var ama mükemmelden uzak ve aktif olarak bakımı yapılmıyor.
+- Merak ediyorsan uzun açıklama şöyle:
+
+> Asıl mesele şu: Bu repo tipik bir "yazılım" değil, bir yapılandırma seti.
+> Bu yüzden düzgün bir kaldırma betiği yazmak çok zor,
+> çünkü kurulum betiğinin yaptığı tüm değişiklikleri geri alması gerekir.
+>
+> Örneğin kurulum betiği, sende yoksa `yay` (AUR helper) kuruyor.
+> Peki kaldırma betiği bunu nasıl geri almalı?
+>
+> - `yay` veya `yay-bin` kaldırsın mı? Sağlıklı değil; bunlardan biri zaten sende önceden kurulu olabilir (kurulum betiğiyle değil).
+> - Diyelim kurulum betiği kurduğu paketleri logluyor; yine de `yay`/`yay-bin` silmek doğru olmaz. Çünkü betik geleceği loglayamaz. Kurulumdan sonra başka bir gün sen tekrar `yay` kurmuş olabilirsin; o zaman artık betiğin kurduğu paket sayılmaz.
+>
+> Sonuç olarak düzgün bir kaldırma betiği yazmak neredeyse mümkün değil.
+> İhtiyacına göre değişiklikleri elle geri almak çok daha doğru.
+
+:::note[Güncel durum]
+Artık Arch(-tabanlı) dağıtımlar için yerel PKGBUILD kullandığımızdan,
+`uninstall.sh` Arch/AUR paketleri için uygun bir kaldırma yapabiliyor,
+ama yapılandırma dosyalarının silinmesi hâlâ tam kusursuz değil.
+
+Ayrıca bkz: https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007
+:::

@@ -1,0 +1,36 @@
+---
+title: m3ww
+layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Kullanımdan Kaldırıldı
+    variant: caution
+lastUpdated: 2026-04-12
+---
+
+:::danger[Uyarı]
+Bu yapılandırma setinin bakımı artık yapılmıyor. Kullanmanızı önermiyoruz.
+:::
+
+# Açıklama
+- [Material Design 3](https://m3.material.io/) stilini takip eden, Eww tabanlı en güncel kurulum
+# Kurulum
+- Bağımlılıkları kurun ve kullanıcıyı `video` grubuna ekleyin
+```bash
+# Normal paketler
+sudo pacman -S bc blueberry bluez boost boost-libs cliphist coreutils curl findutils fish fuzzel fzf gawk gnome-control-center gnome-keyring grim ibus imagemagick libqalculate light networkmanager network-manager-applet nlohmann-json pavucontrol plasma-browser-integration playerctl procps polkit-gnome ripgrep slurp socat sox starship udev upower util-linux xorg-xrandr wget wireplumber yad tesseract
+# AUR paketleri - yay ile kurulum
+yay -S cava eww-tray-wayland-git geticons gojq gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-desktop-entry-lib python-poetry python-build python-pillow swww ttf-material-symbols-git wlogout
+# Kullanıcıyı `video` grubuna ekle
+sudo usermod -aG video $(whoami)
+```
+- Şunları kopyalayın
+    - `.config`, `.local` klasörlerini home klasörünüze
+    - `.local/share/icons` altındaki klasörleri `/usr/share/icons` konumuna
+    - Gerekiyorsa `Import manually` klasöründekileri
+
+- Opsiyonel
+   - Not: Birden fazla klavye düzenine ihtiyacın yoksa `~/.config/hypr/execs.conf` içinde ibus ile ilgili satırları yorum satırı yap. İhtiyacın varsa fcitx5 kullanmak isteyebilirsin (yalnız bar üzerindeki ikonla entegre çalışmaz)
+   - Tarayıcıdan medya küçük görseli göstermek istiyorsan "Plasma browser integration" eklentisini kur
+     - [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai) için
+     - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/) için

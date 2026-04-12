@@ -1,0 +1,52 @@
+---
+title: Eww (çoklu)
+layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Kullanımdan Kaldırıldı
+    variant: caution
+lastUpdated: 2026-04-12
+---
+
+:::danger[Uyarı]
+Bu yapılandırma setlerinin bakımı artık yapılmıyor. Kullanmanızı önermiyoruz.
+:::
+
+# Açıklama
+`windoes`, `hybrid` ve `NovelKnock` dahil birden fazla yapılandırma seti.
+# Kurulum
+- Bağımlılıklar: Branch'e özel bağımlılık listesine bakın
+- Şunları kopyalayın
+    - `.config`, `.local` klasörlerini home klasörünüze
+    - `.local/share/icons` altındaki klasörleri `/usr/share/icons` konumuna
+    - Gerekiyorsa `Import manually` klasöründekileri
+
+ ## Performans
+|  ⌄  | Kullan | Önerilmez | Notlar                 |
+| --- | ------ | ----------- | ------------------------- |
+| Kernel |     | cachyos, xanmod | Güç tasarrufu ayarlarını abartma. Ayrıca ne dediğimden ben de çok emin değilim, tamamen kişisel deneyim. |
+| Login shell  | bash/zsh | fish | Fish'i terminalde kullanmanda sorun yok, end_4 de öyle yapıyor |
+
+ ## Kurulum sonrası
+ - eww yapılandırmaları sadece `~/.config/eww` içinde düzgün çalışır
+ - eww'yi `eww daemon` ile başlat
+ - Üst barı açmak için: `eww open bar`
+ - Windows barını açmak için: `eww open winbar` (`windoes`/`hybrid` branch)
+ - Alt çizgiyi açmak için: `eww open bottomline` (ekranın alt kenarına tıklayınca müzik penceresi açılsın diye)
+ - Genel Bakış'ı aç (çalışma alanlarına orta tık) ve 10 saniye bekle (uygulama arama önbelleği oluşturulsun; yoksa ikonlar düzgün görünmez)
+ ## Kullanım
+ - Müzik kontrolleri: Orta tık Play/Pause, sağ tık sonraki parça, kaydırma ile ses seviyesi
+ - Genel Bakış'ı açmak için çalışma alanı göstergelerine orta/sağ tıkla veya `eww open overview` çalıştır
+ - Genel Bakış içinde uygulama aramak için yaz (aşağıda detay var)
+ ## Arama
+ - Uygulama aramak için yaz
+ - Matematik işlemi yaz (`qalc` kullanması için sayı ile başlamalı)
+ - `>save THEME`: Geçerli renk temasını `THEME` adıyla kaydeder.
+ - `>load THEME`: Kayıtlı temayı yükler. Yazdıkça uygun temalar gösterilir.
+ - `>music`: Geçerli medya küçük görselinden renk teması alır
+ - `>wall`: `~/.config/eww/images/wallpaper/wallpaper` duvar kâğıdından renk teması alır
+ - `>light`: Sonraki renk üretimlerinde açık modu kullan
+ - `>dark`: Sonraki renk üretimlerinde koyu modu kullan
+ - `>one`: Sonraki renk üretimlerinde bar ikonlarında tek renk kullan
+ - `>multi`: Sonraki renk üretimlerinde bar ikonlarında çok renk kullan
+ - `>r`: Yeniden yükle (eww'yi öldürüp varsayılan bar ile tekrar başlatır)

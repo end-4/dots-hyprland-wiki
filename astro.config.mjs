@@ -55,10 +55,10 @@ export default defineConfig({
           label: 'Русский', //Russian
           lang: 'ru',
         },
-        // 'tr': {
-        //   label: 'Turkish', //Turkish
-        //   lang: 'tr',
-        // },
+        'tr': {
+          label: 'Türkçe', //Turkish
+          lang: 'tr',
+        },
         'vi': {
           label: 'Tiếng Việt', // Vietnamese
           lang: 'vi',
@@ -87,6 +87,7 @@ export default defineConfig({
             'fr': 'Général',
             'pt-BR': 'Geral',
             'de-DE': 'Allgemein',
+            'tr': 'Genel',
           },
           autogenerate: { directory: 'general' },
         },
@@ -112,6 +113,7 @@ export default defineConfig({
             'fr': 'Archives (non maintenues)',
             'pt-BR': 'Arquivos (não mantidos)',
             'de-DE': 'Alte Inhalte',
+            'tr': 'Arşiv (bakımı yok)',
           },
           autogenerate: { directory: 'archives' },
         },
@@ -127,6 +129,7 @@ export default defineConfig({
             'fr': 'Notes de développement',
             'pt-BR': 'Notas de desenvolvimento',
             'de-DE': 'Entwickler Notizen',
+            'tr': 'Geliştirici Notları',
           },
           autogenerate: { directory: 'dev' },
         },
@@ -139,7 +142,8 @@ export default defineConfig({
             'ru': 'Помогите перевести вики',
             'fr': 'Traduire ce wiki',
             'pt-BR': 'Traduza essa wiki',
-            'de-DE': 'Übersetze dieses Wiki'
+            'de-DE': 'Übersetze dieses Wiki',
+            'tr': 'Bu wikiyi çevir'
           },
           link: '/dev/doc-site-contrib',
         },
