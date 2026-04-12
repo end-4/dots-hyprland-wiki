@@ -27,7 +27,7 @@ Clone the repo, switch to branch `ii-ags` and run the install script:
 ```bash
 t=~/.cache/dots-hyprland   # Let's not trash your home folder
 git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
-git checkout ii-ags
+git -C "$t" checkout ii-ags
 "$t"/install.sh
 ```
 
