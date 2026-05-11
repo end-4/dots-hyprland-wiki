@@ -1,0 +1,163 @@
+---
+title: 設定
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+:::caution
+illogical-impulse 的 AGS 版本已不再支援。
+
+雖然仍可使用，但你必須自行處理遇到的問題。
+
+關於 AGS 版本的新 Issue 很可能會被關閉為「非計畫中」。
+:::
+
+# 設定 Hyprland
+以下以及許多其他功能由 Hyprland 驅動。
+- 全域快捷鍵
+- 環境變數
+- 顯示器 / 螢幕 / 工作區
+- 視窗動畫 / 裝飾
+- ...
+
+參考：[Hyprland Wiki](https://wiki.hyprland.org/)
+
+要設定 Hyprland，編輯 `~/.config/hypr/custom/` 中的檔案，這些檔案由 `~/.config/hypr/hyprland.conf` 引用）。
+- Hyprland 讀取 `hyprland.conf`。當它看到 `source` 關鍵字時，會讀取被引用的檔案，然後繼續。
+
+`install.sh` 腳本**不會**覆蓋 `~/.config/hypr/custom/`。
+
+另外，對於 `~/.config/hypr/hyprland.conf`，當它存在時不會被覆蓋，但會產生 `~/.config/hypr/hyprland.conf.new`。`*.new` 檔案僅供格式參考，完全沒有作用。
+
+:::caution
+要覆蓋預設設定，你可能需要使用一些技巧，例如快捷鍵的 `unbind`。
+
+如果你無法覆蓋某個設定，可以將預設設定檔從 `~/.config/hypr/hyprland/` 複製到 `~/.config/hypr/custom/`，並編輯 `~/.config/hypr/hyprland.conf` 以註解掉引用預設設定檔的那行。
+
+但如果你在使用 `install.sh` 更新後發現 Hyprland 有問題，你需要重新檢查 `~/.config/hypr/hyprland.conf`，看看被註解掉的預設設定檔是否包含一些必要的變更。
+:::
+
+## 為應用程式啟用模糊效果
+在 `~/.config/hypr/hyprland/rules.conf` 中，用 `#` 註解掉或移除以下行
+```ini
+windowrule = noblur,.*  # Disables blur for windows. Substantially improves performance.
+```
+
+# 設定 AGS
+以下以及一些其他功能由 AGS 驅動。
+- 頂部工作列
+- 側邊欄
+- 速查表
+- 通知
+- 總覽小工具
+
+## 一般使用者
+編輯 `~/.config/ags/user_options.jsonc`，在你更新時 `install.sh` 不會覆蓋它
+你可以設定以下內容
+- 預設的 ChatGPT 類型助理提供者
+- 動畫速度
+- 時間格式
+- ...
+
+:::note
+不限於 AGS 的設定，請參閱「其他」章節。
+:::
+### 設定日期和時間格式
+
+在 `~/.config/ags/user_options.jsonc` 中，根據[此格式](https://docs.gtk.org/glib/method.DateTime.format.html)編輯「time」區段。
+你也可以執行 `man date` 查看時間格式。
+
+### 為天氣小工具設定城市
+當偵測不到電池時（通常是桌上型電腦），電池小工具和工具小工具將不會顯示。
+取而代之的是，天氣小工具會出現在這個位置。
+
+天氣的城市預設透過 `curl ipinfo.io` 偵測，或在 `~/.config/ags/user_options.jsonc` 中明確設定。
+
+:::note
+如果你不確定城市的名稱，
+由於我們使用 [wttr.in](https://github.com/chubin/wttr.in) 提供天氣資訊，你可以在那裡找到答案。
+:::
+
+### 設定快捷鍵
+可設定的快捷鍵有限，你需要參考 gdk 文件來了解按鍵，但它確實有效。
+
+詳情請參閱 [#5](https://github.com/end-4/dots-hyprland-wiki/issues/5)。
+### 自訂小工具
+你可以使用 bash 腳本的輸出作為小工具。如果 `~/.cache/ags/user/scripts/custom-module-poll.sh` 存在，AGS 將預設每 5000 毫秒顯示其輸出，取代系統資源指示器
+
+例如，顯示路徑 `/` 的可用儲存空間：
+```bash title="~/.cache/ags/user/scripts/custom-module-poll.sh"
+#!/bin/bash
+export LANG=C
+disk_info=$(df -h /)
+available=$(echo "$disk_info" | awk 'NR==2 {print $4}')
+total=$(echo "$disk_info" | awk 'NR==2 {print $2}')
+echo "$available/$total"
+```
+如果你喜歡，這裡有一個較不靈活的 2 行版本：
+```bash title="~/.cache/ags/user/scripts/custom-module-poll.sh"
+#!/bin/bash
+LANG=C df -h / | awk 'NR==2 {printf "%s/%s\n", $4, $2}'
+```
+
+:::note
+記得讓你的腳本可以執行！
+```bash
+chmod +x ~/.cache/ags/user/scripts/*.sh
+```
+:::
+
+進一步自訂：
+- 輪詢間隔（毫秒）：`~/.cache/ags/user/scripts/custom-module-interval.txt`（預設 = 5000）
+- 左鍵點擊操作腳本：`~/.cache/ags/user/scripts/custom-module-leftclick.sh`
+- 右鍵點擊操作腳本：`~/.cache/ags/user/scripts/custom-module-rightclick.sh`
+## 進階使用者（懷疑你不是的話）
+- 參閱 [AGS 文件](https://aylur.github.io/ags-docs)
+- 也請參閱開發者筆記（見側邊欄）
+
+
+# 其他
+## 調整 UI 大小 / 變更字型大小
+變更字型大小也會變更 AGS 的 UI 縮放。
+- 使用 `gsettings`：
+```bash
+# 語法
+gsettings set org.gnome.desktop.interface font-name 'FONT_NAME FONT_SIZE'
+# 這些 dotfiles 的預設值
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+## 設定螢幕鎖定
+### 自動螢幕鎖定
+參考：[Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/)
+
+根據你的需求編輯 `~/.config/hypr/hypridle.conf`。
+### 自訂 Hyprlock
+參考：[Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/)
+
+Hyprlock 是預設的鎖屏提供者。
+
+根據你的需求編輯 `~/.config/hypr/hyprlock.conf`。
+
+例如，要設定日期和時間格式，變更**對應鎖屏**的 `text` 值。
+### 使用其他鎖屏提供者
+參考：[Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+以 `swaylock` 為例。
+
+編輯 `~/.config/hypr/hypridle.conf` 並如下修改 `$lock_cmd` 的值：
+```ini
+$lock_cmd = swaylock
+```
+並確保 hypridle 正在執行（通常如果你在 Hyprland 設定中有 `exec-once = hypridle`，它應該會自動啟動）。
+
+結果，`loginctl lock-session` 將呼叫 `swaylock` 來鎖定螢幕。
+
+:::note[原理]
+指令 `loginctl lock-session` 會向正在執行的 `hypridle` 行程發送訊號，然後 `hypridle` 將觸發 `~/.config/hypr/hypridle.conf` 中 `$lock_cmd` 所定義的指令。
+:::
+
+## Cloudflare WARP
+- 這可能幫助你繞過 ISP 的限制並提供更快的網路
+- 如果安裝了 WARP，右側邊欄會有一個按鈕可以切換
+- 要安裝 Cloudflare WARP，執行 `yay -S cloudflare-warp-bin && sudo systemctl enable warp-svc --now`

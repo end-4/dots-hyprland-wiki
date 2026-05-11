@@ -1,0 +1,163 @@
+---
+title: 使用方式
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+此頁面記錄了一些非顯而易見的細節。並非所有內容都在這裡，所以請自行探索...   
+此頁面預設您的語言被設置爲 `en-us`，您可以按下 `Ctrl`+`I`，使用雲端 LLM 將其配置爲 `zh-tw` 或者是其它您想要的語言。
+
+# 一般操作
+
+按下 `Super`+`/` 查看快捷鍵列表
+
+<details> 
+  <summary>如果無法使用，這裡有圖片說明</summary>
+
+  <img width="1412" height="828" alt="image" src="https://github.com/user-attachments/assets/8f7bd216-9e03-47e3-8709-0008772a4133" />
+
+</details>
+
+## 總覽
+
+- 使用 `Super` 或 `Super`+`Tab` 開啟
+- 將視窗拖曳到其他工作區以將其傳送過去
+- 中鍵點擊以關閉視窗
+
+## 啟動器
+
+- 與總覽整合。直接開始輸入即可。
+- 搜尋結果可包含：
+  - 應用程式搜尋
+  - 數學運算結果
+  - [前綴：`/`] 啟動器操作
+  - [前綴：`;`] 剪貼簿歷史
+  - [前綴：`:`] 表情符號
+  - 針對輸入內容的額外操作：執行指令、執行搜尋
+
+- 非自明的啟動器操作：
+  - /superpaste NUM_OF_ENTRIES[i]: 貼上最近 NUM_OF_ENTRIES 個剪貼簿項目。指定 `i` 表示圖片。
+  - /todo TASK: 新增待辦事項
+
+## 工作列控制
+- 媒體小工具：
+  - 中鍵點擊：播放 / 暫停
+  - 右鍵點擊：下一首
+  - 滑鼠鍵4 / 滑鼠鍵5：上一首 / 下一首
+- 亮度：捲動左上角
+- 音量：捲動右上角
+- 工作區：
+  - 滑鼠鍵4：切換特殊工作區
+  - 右鍵點擊：開啟總覽
+
+# 左側邊欄
+
+## 一般控制
+- Intelligence 和 Anime 分頁支援 Tab 自動完成
+  - 當輸入區域上方出現建議時，使用上下方向鍵選擇所需選項，然後按下 Tab 確認選擇。
+- 想把助理帶著走嗎？要將側邊欄分離為獨立視窗，請按下 `Super`+`Alt`+`A`。
+
+## AI 聊天
+
+- 輸入 `/model` 選擇模型。本地安裝的 Ollama 模型會被自動偵測。
+- 輸入 `/key` 取得線上模型 API 金鑰的說明。
+- 目前，具有工具功能的 Gemini 模型可以編輯你的 shell 設定。例如，你可以告訴它「隱藏我工作區上的應用程式圖示」。
+
+## 翻譯器
+
+透過 `trans` 命令列工具處理。這裡沒什麼好說的...
+
+## Anime (boorus)
+
+- 輸入 `/mode` 查看可用的提供者。
+- 輸入 1 個或多個標籤查看結果。輸入時會出現建議。
+- 輸入數字以選擇要查看的結果頁碼
+
+# 桌布與配色
+- 要選擇桌布，請按下 `Ctrl`+`Super`+`T` 並選擇一張圖片。這也會：
+  - 變更 shell、Qt 應用程式和 GTK 應用程式的配色
+  - 將背景時鐘的位置變更為圖片中最不繁忙的區域（目前僅在單螢幕下效果良好）
+
+# 截圖工具
+
+- `Super`+`Shift`+`S`：螢幕截圖 | 左鍵拖曳複製到剪貼簿，右鍵拖曳進行標註
+- `Super`+`Shift`+`A`：Google Lens 搜尋
+- `Super`+`Shift`+`X`：文字辨識
+
+# 螢幕翻譯
+
+使用 Google 的 Cloud Vision 和 Translation API 翻譯螢幕內容。本節將引導你完成（有些繁瑣的）設定流程。
+
+## 前置條件
+
+- 你有一個 Google 帳戶
+- 除非你啟用完整帳戶，否則不會被收費。但 Google 要求提供信用卡 / 金融卡以防止詐欺。只要合法，裡面有一分錢的虛擬卡應該也可以正常工作。
+
+## 設定步驟
+
+- 前往 [Google Cloud Console](https://console.cloud.google.com/) 並建立或選擇一個專案。如果你已經為側邊欄聊天設定了 Gemini API，可以使用同一個專案。
+- 啟用以下 API：
+  - [Cloud Vision API](https://console.cloud.google.com/marketplace/product/google/vision.googleapis.com)
+  - [Cloud Translation API](https://console.cloud.google.com/marketplace/product/google/translate.googleapis.com)
+- 從左側導覽選單，進入 **帳單** 區段。按下 **連結帳單帳戶** 並依指示輸入你的資料。
+- 從左側導覽選單，進入 **IAM 與管理** > **服務帳戶**。按下 **建立服務帳戶**，然後：
+  - 步驟 1：輸入名稱。輸入什麼都無所謂。
+  - 步驟 2：權限：新增 **Service Usage Consumer** 和 **Cloud Translation API User** 角色，然後按下 **繼續**
+  - 步驟 3：直接按下完成
+- 你現在應該能在顯示的列表中看到一個服務帳戶。點擊其右側的三點選單，然後點擊 **管理金鑰**
+  - 點擊 **新增金鑰** > **建立新金鑰**
+  - 選擇 JSON 金鑰類型（應該是預設值）並按下 **建立**。一個 JSON 檔案將被下載。
+- 開啟下載的 JSON 檔案並複製其內容
+- 使用 `Super`+`Shift`+`T` 開啟螢幕翻譯器，然後：
+  - 點擊螢幕底部的金鑰輸入按鈕
+  - 在那裡貼上 JSON 內容並按下 Enter。翻譯將開始。
+- 你可能會想在之後刪除那個 JSON 金鑰檔案，因為它已經安全地儲存在金鑰圈中了。
+  - 注意：目前要再次查看它，你必須檢查 illogical-impulse Safe Storage 金鑰圈項目。
+
+# 工作區群組
+
+## 導覽與工作區管理
+
+如果 10 個工作區對你來說不夠，你可以使用下一組工作區，最多到 Hyprland 的限制。首先，只需在工作列的工作區小工具上向右過度捲動（或使用快捷鍵）以切換到新群組。
+
+快捷鍵和 shell 小工具在聚焦的工作區群組中無縫運作。如果你不變更工作區指示器或總覽中顯示的工作區數量，不需要額外設定任何東西。
+
+- **在群組內導覽 / 移動工作區**：標準 Hyprland 快捷鍵適用。
+  - `Super` + `2` → 工作區 **12**（如果你在工作區 **11-20，即群組 2**）。
+  - `Super` + `Alt` + `3` 靜默移動聚焦的視窗 → 工作區 **23**（如果你在工作區 **21-30，即群組 3**）。
+
+- **在群組之間導覽**：
+  - 建議新增以下 Hyprland 快捷鍵以跳轉到相鄰的工作區群組
+    ```ini title="~/.config/hypr/custom/keybinds.conf"
+    bind = SUPER ALT, Z, workspace, r-10
+    bind = SUPER ALT, X, workspace, r+10
+    ```
+- **總覽**和**工作區指示器**會無縫適應。顯示的內容基於當前的工作區群組。
+  
+:::tip
+如果你想修改快捷鍵或為工作區導覽加入[更多功能](https://wiki.hypr.land/Configuring/Dispatchers/)，請使用 `~/.config/hypr/hyprland/scripts/workspace_action.sh` 腳本，而不是 `hyprctl dispatch`。這將使用活動工作區 ID 確定當前的工作區群組，並分派到正確的工作區。
+:::
+
+## 多螢幕注意事項
+
+請考慮以下策略以有效管理多螢幕：
+- 將群組 1（工作區 1-10）分配給主螢幕，群組 2（工作區 11-20）分配給次要螢幕：
+  - 啟動時，使用 `Super` + `0`，然後 `Ctrl` + `Super` + `Right` 手動將次要螢幕上的起始工作區移動到第二群組（例如工作區 11）。
+  - 實際上，這也會為每個螢幕建立獨立的總覽小工具。
+- 使用[工作區綁定](https://wiki.hypr.land/Configuring/Workspace-Rules/#rules)將特定工作區始終放置在特定螢幕上。使用 `hyprctl monitors | grep Monitor` 取得所有螢幕名稱。
+  ```ini title="~/.config/custom/general.conf"
+  # 將工作區 1-10（群組 1）綁定到主螢幕
+  workspace = 1, monitor:eDP-1, default:true
+  workspace = 2, monitor:eDP-1, default:true
+  ...
+
+  # 將工作區 11-20（群組 2）綁定到次要螢幕
+  workspace = 11, monitor:HDMI-A-1, default:true
+  workspace = 12, monitor:HDMI-A-1, default:true
+  ...
+  ```
+- 同時在每個螢幕上聚焦兩個工作區，並根據需要在螢幕 / 群組之間移動 / 交換視窗（使用 `Super` + `Left/Right/Up/Down` 或 `Super` + `Shift` + `Left/Right/Up/Down`）。
+
+:::note
+工作區群組並非由 Hyprland 或任何狀態列 / 小工具系統原生支援。此設定透過調整 Hyprland 分派器和 shell 設定來簡單實現。
+:::

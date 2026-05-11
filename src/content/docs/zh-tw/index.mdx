@@ -1,0 +1,51 @@
+---
+title: 首頁
+description: illogical-impulse 說明文件
+template: splash
+hero:
+  title: |
+    <p style="font-size: 60px; font-weight: 300">illogical-impulse</p>
+  tagline: |
+    <p style="font-size: 22px;">現代化，以實用優先，特性鮮明的 Hyprland dotfiles。</p>
+  image:
+    html: "<img alt='A screenshot.' src='/screenshots/ii-qs.1.jpg' width='600' />"
+  actions:
+    - text: 展示區
+      link: ./general/showcase
+      icon: star
+      variant: primary
+    - text: 快速開始
+      link: ./ii-qs/01setup#automated-installation
+      icon: rocket
+      variant: primary
+    - text: GitHub Repo (end-4/dots-hyprland)
+      link: https://github.com/end-4/dots-hyprland
+      variant: minimal
+      icon: external
+lastUpdated: false
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="[‎ ‎ [‎ 總覽 ‎] ‎ ‎]">
+    輕鬆透過拖放管理你的工作區。
+	</Card>
+  <Card title="+//+ 實用功能 +//+">
+    打圈搜尋。螢幕翻譯。防閃光彈。
+	</Card>
+	<Card title=">>× AI ×<<">
+    一個快捷鍵就能搞定 Gemini 以及 Ollama 的部署，無需網頁 App 即可訪問 LLMs。
+	</Card>
+	<Card title="•• Material 3 Expressive ••">
+    就像 Google Pixel 上一樣精緻的設計美學。
+	</Card>
+  <Card title="~>< 語言支援 ><~">
+    人工及 AI 生成的翻譯。
+	</Card>
+  <Card title="$>_ 簡易安裝 _<$">
+    跨多個發行版的幂等安裝腳本。
+	</Card>
+</CardGrid>
+
+> [此 wiki](https://github.com/end-4/dots-hyprland-wiki) 開放[貢獻](https://ii.clsty.link/en/dev/doc-site-contrib)。

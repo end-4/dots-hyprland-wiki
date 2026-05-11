@@ -1,0 +1,198 @@
+---
+title: 疑難排解
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+:::caution
+illogical-impulse 的 AGS 版本已不再支援。
+
+雖然仍可使用，但你必須自行處理遇到的問題。
+
+關於 AGS 版本的新 Issue 很可能會被關閉為「非計畫中」。
+:::
+
+:::tip[提示]
+在此頁面上，按下 `Ctrl`+`F` 搜尋或查看右側邊欄以尋找你的問題
+:::
+
+# 必讀
+## 環境變數的前置條件
+:::note
+我們已在 `install.sh` 中給你相關通知，但一些使用者在提交 Issue 時忽略了它。
+:::
+
+環境變數 `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` 必須正確設定，否則 AGS 設定將無法運作。
+
+我們已在 `~/.config/hypr/hyprland/env.conf` 中建立了預設設定，但你需要確保此設定檔被包含在 `~/.config/hypr/hyprland.conf` 中。通常需要重新啟動 Hyprland。
+
+你可以執行 `./diagnose` 重新檢查其值。
+
+### 預期範例
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/myself/.local/state/ags/.venv"
+[---SUCCESS---]
+```
+其中 `myself` 代表實際的使用者名稱。
+
+### 非預期範例 1
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+./diagnose: line 30: declare: ILLOGICAL_IMPULSE_VIRTUAL_ENV: not found
+[---EXIT 1---]
+```
+對於上述情況：
+- 你很可能仍在使用舊的 `~/.config/hypr/hyprland.conf`，忘記將其內容替換為 `~/.config/hypr/hyprland.conf.new`。只需執行 `cd ~/.config/hypr;mv hyprland.conf{,.old};mv hyprland.conf{.new,}`。
+- 確保你已重新啟動 Hyprland。
+
+### 非預期範例 2
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="\$XDG_STATE_HOME/ags/.venv"
+[---SUCCESS---]
+```
+對於上述情況，`$XDG_STATE_HOME` 未被展開，這看起來很奇怪（可能是 Hyprland 的 bug？）。
+- 確保你執行 `install.sh` 時沒有跳過且已正確執行 `install-python-packages()`，它應該會給你一個非空的 `~/.local/state/ags/.venv`。
+- 你可以在 `~/.config/hypr/custom/env.conf` 中直接指定其值：
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, /home/myself/.local/state/ags/.venv
+```
+記得將 `myself` 替換為實際的使用者名稱。
+
+## 你至少應該嘗試一次的操作
+- 重新啟動 Hyprland，或重新開機，這對於套用環境變數變更是必要的。
+- 如果與 AGS 相關的東西（即「工作列」）有問題，按下 `Super+Ctrl+T` 並在彈出視窗中選擇一張圖片來切換桌布。不過這不是 100% 有效，特別是當你的安裝或環境變數一開始就有問題時。
+- 腳本 `install.sh` 具有幂等性。你可以隨時再次執行它。
+
+## 如何取得日誌
+- 如果某個東西有問題，開啟終端機（`Super`+`T`）並在 shell 中執行它。尋找可能有問題的錯誤 / 警告。
+- 工作列、側邊欄、速查表等由 AGS 驅動。（提示：它不是 waybar。）開啟終端機並執行 `pkill agsv1; agsv1`。
+
+## 其他資訊
+- 在此 wiki 中搜尋（特別是此頁面），以及現有的 [issues](https://github.com/end-4/dots-hyprland/issues) 和 [discussions](https://github.com/end-4/dots-hyprland/discussions)。
+- 用點常識。如果你搞不定，[開啟 discussion](https://github.com/end-4/dots-hyprland/discussions) 尋求幫助。
+
+# 一些問題與解決方案 / 權宜之計
+## AGS / 工作列主題 / 圖示 / CSS 損壞 / 無法運作
+> 參考：[end-4/dots-hyprland#1010](https://github.com/end-4/dots-hyprland/issues/1010)
+
+按下 `Super+Ctrl+T` 並在彈出視窗中選擇一張圖片來切換桌布。
+
+## 某些應用程式的圖示在工作列 / 總覽中遺失
+> 參考：[end-4/dots-hyprland#497 comment](https://github.com/end-4/dots-hyprland/issues/497#issuecomment-2108212444) [end-4/dots-hyprland#487](https://github.com/end-4/dots-hyprland/issues/487)
+
+請嘗試以下解決方案 / 權宜之計：
+### 使用 `gsettings` 設定圖示主題
+:::note
+這適用於以下情況：
+- 應用程式視窗的 class 在圖示主題 A 中有完全匹配的圖示，但在 B 中沒有。
+- 你正在使用圖示主題 B，這意味著切換到圖示主題 A 後問題就解決了。
+:::
+
+例如 [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)（推薦，因為它覆蓋了大量應用程式）：
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+當然你必須先安裝它，在 Arch Linux 上使用 `sudo pacman -S papirus-icon-theme`。
+
+### 在 AGS `user_options.jsonc` 中設定替代
+:::note
+這適用於以下情況：
+- 應用程式有多種視窗 class 名稱（例如 `foot` 和 `footclient`），但只有一種（例如 `foot`）在當前圖示主題中有完全匹配的圖示。
+- 你願意為這些不同的視窗 class 使用相同的圖示（例如 `foot` 和 `footclient` 使用相同的圖示）。
+:::
+
+編輯 `~/.config/ags/user_options.jsonc`，在 `icons.substitutions` 內新增條目，例如：
+```js
+    'icons': {
+        substitutions: {
+            'footclient': "foot",
+        },
+    },
+```
+
+:::note
+第一次編輯此檔案時，請先閱讀 `user_options.jsonc` 開頭的說明。
+:::
+
+### 設定圖示搜尋路徑
+這適用於你有單獨的圖示檔案的情況。
+
+適當修改 `~/.config/ags/user_options.jsonc` 中的 `icons.searchPaths`。
+
+## 音樂控制沒有顯示
+
+> 參考：[end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168)
+
+- 確保你的播放器支援 Mpris（列表：[Arch Wiki 連結](https://wiki.archlinux.org/title/MPRIS)）
+- 如果是瀏覽器，請安裝 Plasma Integration 擴充功能：[Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/) 或 [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai) 以及 `plasma-browser-integration`（這是給 Arch 的）
+
+然後，當 firefox 正在播放媒體時，以下指令
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+輸出應包含
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+只有「plasma-browser-integration」名稱會運作。其他的不會。
+
+如果因某些原因，firefox 仍然沒有顯示 dbus `org.mpris.MediaPlayer2.plasma-browser-integration`，
+請考慮以下步驟：
+1. 使用 `firefox --ProfileManager` 建立新的設定檔。
+2. 使用新設定檔啟動 firefox 並再次安裝 Plasma Integration 擴充功能。
+3. 使用新設定檔重新啟動 firefox 並再次嘗試。
+- _注意：`playerctl -F metadata` 對於除錯也可能有幫助。_
+
+## 圖示沒有顯示。我看到奇怪的文字。
+- 你一定是缺少 Material Symbols 字型。你可以手動下載字型，然後放到 `~/.local/share/fonts`
+- 注意是 Material <u>**Symbols**</u>，不是 Material <u>**Icons**</u>！
+- 記得執行 `fc-cache -fv` 重新整理字型快取。重新開機也可以。
+
+## `loginctl lock-session` 沒有反應
+> 參考：[end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+根據 [Arch Linux 論壇的這篇貼文](https://bbs.archlinux.org/viewtopic.php?pid=1311990#p1311990)：
+> 需要有東西監聽 systemd-logind 的 dbus 訊號才能運作。
+
+Hypridle 可以充當這個「東西」，這意味著你應確保它正在執行，
+然後 `loginctl lock-session` 會向 hypridle 發送訊號，
+結果 hypridle 將透過執行其設定 `~/.config/hypr/hypridle.conf` 中定義的 `$lock_cmd` 來鎖定螢幕。
+
+詳情請參閱 [Hyprland Wiki](https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/#configuration)。
+
+## 終端機：為什麼我無法用 Ctrl+C 中斷？
+- 在 `foot` 中，Ctrl+C 被設定為複製文字。要中斷，使用 Ctrl+Shift+C
+- 不想要這個？
+  - 要移除此綁定：在 `~/.config/foot/foot.ini` 中，註解掉或移除 `clipboard-copy=Control+c` 這行
+  - 也許如果你經常使用終端機應用程式，使用功能更豐富的終端機是個好主意
+
+## 隨機當機
+:::note
+這在技術上與 illogical-impulse 無關。
+:::
+參閱 https://github.com/end-4/dots-hyprland/issues/746 。
+
+# 已棄用的問題解決方案與權宜之計
+以下內容已不再有用，因為情況已經改變。
+
+仍然保留在這裡，以防將來再次需要。
+## AGS 安裝失敗
+### `PermissionError: [Errno 13] Permission denied: '/usr/local/lib/libgvc.so'`
+執行以下指令檢查此檔案是否屬於任何套件（很可能不是，因為它在 `/usr/local` 中）
+```bash
+pacman -Qo /usr/local/lib/libgvc.so
+```
+如果沒有，那麼移除它可能是安全的。執行以下指令：
+```bash
+sudo mv /usr/local/lib/libgvc.so /tmp/
+```
+
+### 其他錯誤
+刪除 `./cache/ags` 並重新安裝。
+
+## Hyprland 安裝失敗
+有時 AUR 套件不會為你安裝所有依賴項。Hyprland 不斷發展，當有新東西加入時就會發生這種情況。
+- 檢查日誌，看看它是否告訴你安裝某個東西，然後嘗試重新建構。
+- 注意：你可能需要清除 `~/.cache/yay`。
