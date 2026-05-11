@@ -75,6 +75,10 @@ export default defineConfig({
           label: 'Deutsch', //German
           lang: 'de-DE',
         },
+        'zh-tw': {
+          label: '繁體中文（臺灣）', //Traditional Chinese (Taiwan)
+          lang: 'zh-TW',
+        },
       },
       sidebar: [
         {
@@ -88,6 +92,7 @@ export default defineConfig({
             'pt-BR': 'Geral',
             'de-DE': 'Allgemein',
             'tr': 'Genel',
+            'zh-TW': '一般',
           },
           autogenerate: { directory: 'general' },
         },
@@ -114,6 +119,7 @@ export default defineConfig({
             'pt-BR': 'Arquivos (não mantidos)',
             'de-DE': 'Alte Inhalte',
             'tr': 'Arşiv (bakımı yok)',
+            'zh-TW': '舊版內容（已停止維護）',
           },
           autogenerate: { directory: 'archives' },
         },
@@ -130,6 +136,7 @@ export default defineConfig({
             'pt-BR': 'Notas de desenvolvimento',
             'de-DE': 'Entwickler Notizen',
             'tr': 'Geliştirici Notları',
+            'zh-TW': '開發者筆記',
           },
           autogenerate: { directory: 'dev' },
         },
@@ -143,7 +150,8 @@ export default defineConfig({
             'fr': 'Traduire ce wiki',
             'pt-BR': 'Traduza essa wiki',
             'de-DE': 'Übersetze dieses Wiki',
-            'tr': 'Bu wikiyi çevir'
+            'tr': 'Bu wikiyi çevir',
+            'zh-TW': '翻譯此 wiki'
           },
           link: '/dev/doc-site-contrib',
         },

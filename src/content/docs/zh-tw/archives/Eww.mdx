@@ -1,0 +1,52 @@
+---
+title: Eww（多版本）
+layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: Deprecated
+    variant: caution
+lastUpdated: 2026-05-11
+---
+
+:::danger[警告]
+這些設定組已不再維護。我們不建議使用它們。
+:::
+
+# 說明
+多個設定組，包括 `windoes`、`hybrid` 和 `NovelKnock` 等。
+# 安裝
+- 依賴項：請參閱分支特定的依賴清單
+- 複製這些
+    - `.config`、`.local` 到你的 home 資料夾
+    - `.local/share/icons` 中的資料夾到 `/usr/share/icons`
+    - 如果你需要，`Import manually` 資料夾中的東西
+
+ ## 效能
+|  ⌄  | 建議使用 | 不建議使用 | 備註                 |
+| --- | ------ | ----------- | ------------------------- |
+| 核心 |     | cachyos, xanmod | 不要濫用省電模式。而且我不確定我在說什麼——這只是個人經驗。 |
+| 登入 shell  | bash/zsh | fish | 在終端機中使用 fish 是可以的——end_4 就是這樣做的 |
+
+ ## 設定
+ - eww 設定只能在 `~/.config/eww` 中正常運作
+ - 使用 `eww daemon` 啟動 eww
+ - 開啟頂部工作列：`eww open bar`
+ - 開啟 Windows 工作列：`eww open winbar`（`windoes`/`hybrid` 分支）
+ - 開啟底部線：`eww open bottomline`（這樣點擊螢幕底部邊緣時音樂視窗會開啟）
+ - 開啟總覽（中鍵點擊工作區）並等待 10 秒（讓它產生應用程式搜尋快取，否則圖示不會正確顯示）
+ ## 使用方式
+ - 音樂控制：中鍵點擊播放 / 暫停，右鍵點擊下一首，捲動變更音量
+ - 要開啟總覽，中 / 右鍵點擊工作區指示器或執行 `eww open overview`
+ - 在總覽中，輸入以搜尋應用程式（見下方更多說明）
+ ## 搜尋
+ - 輸入以搜尋應用程式
+ - 輸入數學運算（必須以數字開頭）使用 `qalc` 計算
+ - `>save THEME`：儲存當前配色方案，THEME 為名稱。
+ - `>load THEME`：載入已儲存的主題。輸入時會顯示可用的主題。
+ - `>music`：從當前媒體縮圖取得配色方案
+ - `>wall`：從位於 `~/.config/eww/images/wallpaper/wallpaper` 的桌布取得配色方案
+ - `>light`：記住下次配色生成使用淺色模式
+ - `>dark`：記住下次配色生成使用深色模式
+ - `>one`：記住下次配色生成為工作列圖示使用單一顏色
+ - `>multi`：記住下次配色生成為工作列圖示使用多種顏色
+ - `>r`：重新載入（終止並以預設工作列重新啟動 eww）

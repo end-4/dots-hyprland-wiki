@@ -1,0 +1,182 @@
+---
+title: 設定
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+# 設定 Hyprland
+
+Hyprland 負責...
+- 快捷鍵
+- 環境變數
+- 顯示器 / 螢幕 / 工作區
+- 視窗動畫
+- ...
+
+一般設定說明請參閱 [Hyprland Wiki](https://wiki.hypr.land/)。以下僅記錄與 dotfiles 相關的細節。
+
+- `~/.config/hypr/` 是 Hyprland 的設定資料夾
+  - `hyprland` 子資料夾包含預設設定
+  - `custom` 子資料夾用於你的額外設定
+
+你可以在前者中進行修改，但如果你決定更新 dotfiles，這些修改將被覆蓋。
+
+:::note
+要覆蓋預設設定，你可能需要使用一些技巧，例如快捷鍵的 `unbind`。
+
+如果你無法覆蓋某個設定，可以將預設設定檔從 `~/.config/hypr/hyprland/` 複製到 `~/.config/hypr/custom/`，並編輯 `~/.config/hypr/hyprland.conf` 以註解掉引用預設設定檔的那行。
+
+但如果你在使用 `./setup install` 更新後發現 Hyprland 有問題，你需要重新檢查 `~/.config/hypr/hyprland.conf`，看看被註解掉的預設設定檔是否包含一些必要的變更。
+:::
+
+# 設定 Quickshell
+
+Quickshell 負責 shell 元件，如工作列和側邊欄
+
+## 簡易設定
+
+### 圖形介面
+
+按下 `Super`+`I` 或點擊右側邊欄的齒輪按鈕以開啟設定。大多數常見設定都在那裡。如果你找不到想要的設定，可以嘗試以下方式
+
+### 編輯設定檔
+
+設定檔位於 `~/.config/illogical-impulse/config.json`
+
+選項說明和預設值請參閱 `~/.config/quickshell/ii/modules/common/Config.qml`
+
+:::note
+不限於 Quickshell 的設定，請參閱「其他」章節。
+:::
+### 日期和時間格式
+
+你可以在設定 > 服務 > 時間中變更 24 小時制和 12 小時制的時間格式。
+
+或者，在設定檔中編輯 `time.format`。格式說明請參閱 https://doc.qt.io/qt-6/qtime.html#toString
+
+## 進階設定
+
+- 編輯 `~/.config/quickshell/ii` 中的檔案
+- 參閱 [Quickshell 文件](https://quickshell.outfoxxed.me/docs/types/)
+  - 建議你至少閱讀 Introduction、Positioning 和 QML Language 頁面
+
+# 其他
+
+## 配色主題
+
+### Visual Studio Code
+
+- 安裝 [Material Code](https://marketplace.visualstudio.com/items?itemName=rakib13332.material-code) 擴充功能，然後選擇一張桌布。
+- 可選調整
+  - 你可以變更「material-code.syntaxTheme」選項，其預設值非常奇怪。
+  - 執行「Material Code: Apply styles」以注入精緻的圓角。如果 vscode 說安裝已損壞，你可以安全地選擇「不再顯示」。
+
+這適用於 Microsoft 的官方版本。如果你使用某個魔改版本，我們不保證它能運作。嗯，實際上只是檔案路徑不同，所以歡迎為你使用的 vscode fork 提交 PR。處理配色的腳本位於 `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`
+
+## 變更 UI 縮放（全部）
+
+要變更螢幕上所有內容的縮放比例，請依照 [Monitors - Hyprland wiki](https://wiki.hypr.land/Configuring/Monitors/) 的說明修改 `~/.config/hypr/custom/general.conf`。
+
+或者，如果想要圖形介面，可以使用 `nwg-look`（需要另外安裝）。它應該與這些 dotfiles 直接相容。
+
+## 變更 UI 縮放（shell）
+
+這是透過調整 `QT_SCALE_FACTOR` 環境變數來實現的。有 2 種方法：Quickshell pragma 和 Hyprland 環境變數。前者僅影響 shell，但不利於更新。後者影響所有 Qt 應用程式，但有利於更新。
+
+### Quickshell pragma
+
+開啟 `~/.config/quickshell/ii/shell.qml` 並調整這一行。重新啟動 Quickshell（Ctrl+Super+R）以套用
+```qml
+//@ pragma Env QT_SCALE_FACTOR=1
+```
+
+### Hyprland 環境變數
+
+編輯 `~/.config/hypr/custom/env.conf` 以包含以下行（記得根據你的需求調整）。你需要重新啟動 Hyprland（透過重新登入）
+
+```ini
+env = QT_SCALE_FACTOR, 1
+```
+
+:::tip[提示：先找到理想值]
+你可能會想先使用 Quickshell pragma 方法找到最佳值，再用此方式套用環境變數，以避免多次重新登入。
+:::
+
+## 變更字型大小
+
+### GTK 應用程式
+
+- 如果你想要帶有字型選擇器的圖形介面，請使用 `gnome-tweaks`
+- 否則，你可以使用 `gsettings`
+```bash
+# 語法
+gsettings set org.gnome.desktop.interface font-name 'FONT_NAME FONT_SIZE'
+# 這些 dotfiles 的預設值
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+### Qt 應用程式
+你可以使用 KDE 系統設定應用程式來自訂字型
+
+## 螢幕鎖定
+
+### 超時
+
+參考：[Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
+
+根據你的需求編輯 `~/.config/hypr/hypridle.conf`。
+
+### 使用其他鎖屏程式
+參考：[Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+以 `swaylock` 為例。
+
+編輯 `~/.config/hypr/hypridle.conf` 並如下修改 `$lock_cmd` 的值：
+```ini
+$lock_cmd = swaylock
+```
+
+修改後重新啟動 `hypridle`（`pkill hypridle; hypridle & disown`）。
+
+現在 `loginctl lock-session` 將呼叫 `swaylock` 來鎖定螢幕。
+
+:::note[運作原理]
+指令 `loginctl lock-session` 會向正在執行的 `hypridle` 行程發送訊號，然後 `hypridle` 將觸發 `~/.config/hypr/hypridle.conf` 中 `$lock_cmd` 所定義的指令。
+:::
+
+## Cloudflare WARP
+- 這可能幫助你繞過 ISP 的限制並提供更快的網路。
+- 你也可以使用右側邊欄的按鈕來切換它。
+- 要安裝和設定 WARP：
+  1. 如果你尚未安裝，請自行安裝套件。  
+  如果你在 Arch（衍生）發行版上，可以使用 `yay` 從 AUR 安裝：
+        ```bash
+        yay -S cloudflare-warp-bin
+        ```
+  2. 啟用並啟動 WARP 服務：
+        ```bash
+        sudo systemctl enable warp-svc
+        sudo systemctl start warp-svc
+        ```
+  3. 註冊你的裝置：
+        ```bash
+        warp-cli registration new
+        ```
+        它會要求你接受服務條款，只需按下 `y` 並按 Enter。  
+  4. 測試連線：
+        ```bash
+        warp-cli connect
+        warp-cli disconnect
+        ```
+        兩個指令的輸出都應該顯示 `Success`。  
+  5. 為了確保側邊欄按鈕正常運作，你可以點擊側邊欄按鈕，並檢查狀態：
+        ```bash
+        warp-cli status
+        ```
+        它應該輸出 `Status update :`，後面跟著 `Connected` 或 `Disconnected`，取決於當前的連線狀態。  
+        你也可以透過訪問 [1.1.1.1 Connection Information](https://1.1.1.1/help) 頁面從外部檢查連線狀態。  
+  6. *（可選）* 如果你希望設定 WARP 運作模式（例如，讓它透過 WARP 建立隧道並使用 DNS-over-TLS 進行 DNS 查詢），你可以執行：
+        ```bash
+        warp-cli mode warp+dot
+        ```
+        更多資訊請參閱 `warp-cli mode --help`。

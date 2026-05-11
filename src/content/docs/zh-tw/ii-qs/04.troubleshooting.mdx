@@ -1,0 +1,228 @@
+---
+title: 疑難排解 / 常見問題
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+:::tip[提示]
+在此頁面上，按下 `Ctrl`+`F` 搜尋或查看右側邊欄以尋找你的問題
+:::
+
+# 一般疑難排解
+
+## 升級系統套件後依賴項損壞
+以 Arch Linux 為例，執行 `sudo pacman -Syu` 後會升級系統套件，但不會升級 illogical-impulse 的本地構建套件。
+
+執行以下指令以重新安裝依賴項：
+```sh
+git stash && git pull  # 升級 git repo
+./setup install-deps
+```
+
+## Quickshell 無法啟動（沒有狀態列）
+
+首先在終端機中執行它以取得日誌。
+```bash
+pkill qs; qs -c ii
+```
+稍微閱讀一下。通常相關的錯誤訊息在底部附近。請參考以下其中一種情況。
+
+### 常見錯誤
+
+#### Module "Quickshell.SOME_MODULE" is not installed
+
+範例 trace 尾端：
+```sh
+  ERROR:   caused by @services/PolkitService.qml[6:1]: module "Quickshell.Services.Polkit" is not installed
+  WARN: QThreadStorage: entry 1 destroyed before end of thread 0x7f4e91a18830
+```
+**解決方案**：透過再次執行安裝腳本來更新 Quickshell，跳過除 Quickshell 安裝以外的所有步驟。
+
+#### Module "qs.modules.common.widgets.shapes" is not installed
+
+範例 trace 尾端：
+```sh
+  ERROR:   caused by @modules/common/widgets/MaterialShape.qml[1:1]: module "qs.modules.common.widgets.shapes" is not installed
+```
+**解決方案**：Repo 未正確 clone 子模組。解決方式：
+- 安裝腳本使用者：你不應跳過要求更新 git 子模組的步驟。
+- 手動安裝的設定：
+  - 你必須使用 `--recurse-submodules` 標誌來 clone Repo。僅使用下載按鈕*無法*運作。
+  - 或者，從已 clone 的 Repo 執行 `git submodule update --init --recursive`
+
+## Python 虛擬環境
+
+環境變數 `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` 必須正確設定，否則 Quickshell 設定的某些功能將無法運作。在提供的預設設定中，`~/.config/hypr/hyprland/env.conf`（由 `~/.config/hypr/hyprland.conf` 引用）已包含此環境變數。
+
+如果因故不存在，請將以下內容加入你的 Hyprland 設定並重新啟動
+```ini
+env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
+```
+
+你可以執行 `./diagnose` 重新檢查其值。
+
+預期範例：
+```
+[===diagnose===] declare -p ILLOGICAL_IMPULSE_VIRTUAL_ENV
+declare -x ILLOGICAL_IMPULSE_VIRTUAL_ENV="/home/user/.local/state/quickshell/.venv"
+[---SUCCESS---]
+```
+其中 `user` 是你的使用者名稱。
+
+## 至少嘗試一次的操作
+- 重新啟動 Hyprland，或重新開機，這對於套用環境變數變更是必要的。
+- 執行 `git pull` 然後再次 `./setup install` 以確保所有內容已正確安裝。由於腳本具有幂等性，你可以隨意執行它來檢查或更新 dotfiles。
+
+## 尋求幫助
+
+1. 搜尋此頁面，然後搜尋 [issues](https://github.com/end-4/dots-hyprland/issues) 和 [discussions](https://github.com/end-4/dots-hyprland/discussions)。
+2. 如果找不到任何內容，請開啟新的 Discussion。
+
+雖然 [@end-4](https://github.com/end-4) 在 Discord 上最活躍（@end_4），但 GitHub 是首選，因為 [@clsty](https://github.com/clsty) 對安裝腳本和 Arch Linux 相關問題有更好的理解。
+
+# 常見雜項問題
+## 主題看起來不對
+
+按下 `Super+Ctrl+T` 並在彈出視窗中選擇一張圖片來切換桌布。如果無效，在終端機中執行 `~/.config/quickshell/ii/scripts/switchwall.sh`，執行相同程序，查看日誌並自行找出問題或將其發送到 Issue / Discussion
+
+## 某些應用程式的圖示在工作列 / 總覽中遺失
+
+技術上不可能擁有完美的圖示。圖示是從每個應用程式的 class 猜測的，這不一定是其圖示的名稱。
+
+可能的解決方案：
+### GTK 應用程式：使用 `gsettings` 設定圖示主題
+
+也許你的應用程式的圖示在預設圖示集中不可用。在這種情況下，你可以換成另一個。
+
+例如，你可以使用 [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)。
+它之所以未被預設使用是因為 @end-4 的個人偏好，但它對應用程式的覆蓋率非常好。
+
+```sh
+gsettings set org.gnome.desktop.interface icon-theme Papirus
+```
+
+當然你必須先安裝它，在 Arch Linux 上使用 `sudo pacman -S papirus-icon-theme`。
+
+### Qt 應用程式：編輯 kde-material-you-colors 設定
+
+開啟 `~/.config/kde-material-you-colors/config.conf`
+找到以下行並根據你的喜好編輯
+```ini
+# ...
+iconslight = breeze-plus
+# ...
+iconsdark = breeze-plus-dark
+```
+
+## 音樂控制沒有顯示
+
+> 參考：[end-4/dots-hyprland#168](https://github.com/end-4/dots-hyprland/issues/168)（注意：這是 AGS 版本的舊 Issue）
+
+- 確保你的播放器支援 MPRIS（這裡有一個列表：[MPRIS - Arch Wiki](https://wiki.archlinux.org/title/MPRIS)）
+- 如果是瀏覽器，請安裝 Plasma Integration 擴充功能：
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+  - [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+
+確保 `plasma-browser-integration` 套件已安裝（對於 Arch，如果不是 Arch 請自行找出對應的套件）
+
+然後，當 firefox 正在播放媒體時，以下指令
+```bash
+dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames|grep mpris
+```
+輸出應包含
+```plain
+string "org.mpris.MediaPlayer2.plasma-browser-integration"
+```
+只有「plasma-browser-integration」名稱會運作。其他的不會。
+
+如果因某些原因，firefox 仍然沒有顯示 dbus `org.mpris.MediaPlayer2.plasma-browser-integration`，
+請考慮以下步驟：
+1. 使用 `firefox --ProfileManager` 建立新的設定檔。
+2. 使用新設定檔啟動 firefox 並再次安裝 Plasma Integration 擴充功能。
+3. 使用新設定檔重新啟動 firefox 並再次嘗試。
+- _注意：`playerctl -F metadata` 對於除錯也可能有幫助。_
+
+## 出現奇怪的圖示名稱而不是圖示
+- 確保已安裝 Material Symbols 字型（不是 Material Icons）。
+  - 在 Arch 上，使用 `ttf-material-symbols-variable-git` 套件
+  - 如果你的發行版沒有對應的套件，請手動安裝：
+    - 從 [Material Symbols 的 repo](https://github.com/google/material-design-icons/tree/master/variablefont) 下載 .ttf 檔案
+    - 將它們放到 `~/.local/share/fonts`
+    - 使用 `fc-cache -fv` 重新整理字型快取
+    - 使用 `Ctrl`+`Super`+`R` 重新啟動 shell
+
+## `loginctl lock-session` 沒有反應
+> 參考：[end-4/dots-hyprland#278](https://github.com/end-4/dots-hyprland/issues/278)
+
+根據 [Arch Linux 論壇的這篇貼文](https://bbs.archlinux.org/viewtopic.php?pid=1311990#p1311990)：
+> 需要有東西監聽 systemd-logind 的 dbus 訊號才能運作。
+
+Hypridle 可以充當這個「東西」，這意味著你應確保它正在執行，
+然後 `loginctl lock-session` 會向 hypridle 發送訊號，
+結果 hypridle 將透過執行其設定 `~/.config/hypr/hypridle.conf` 中定義的 `$lock_cmd` 來鎖定螢幕。
+
+詳情請參閱 [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/#configuration)。
+
+## 螢幕亮度閃爍
+
+請參閱 [Hyprland Wiki FAQ 條目](https://wiki.hypr.land/FAQ/#my-monitor-has-flickering-brightness-when-i-turn-on-vrr)
+
+## 側邊欄 Wi-Fi 設定無法運作
+- 確保你已安裝 `NetworkManager`。對於 Arch（及其衍生）發行版，執行：
+  ```bash
+  sudo pacman -Q NetworkManager
+  sudo pacman -S NetworkManager  # 如果未安裝
+  ```
+- 確保 `NetworkManager` 正在執行。
+  ```bash
+  sudo systemctl status NetworkManager
+  # 如果未執行，啟用並啟動它
+  sudo systemctl enable NetworkManager
+  sudo systemctl start NetworkManager
+  ```
+  重新啟動 quickshell 以套用變更。
+- 如果因某些原因你最終使用了另一個網路管理器（如 `iwd`）來設定 Wi-Fi（因為側邊欄切換無法運作），你可以設定 `NetworkManager` 使用 `iwd` 作為後端，以避免衝突（你不能同時有 2 個服務控制 Wi-Fi）。
+  - 為 `NetworkManager` 建立後端設定檔：
+    ```bash
+    sudo nano /etc/NetworkManager/conf.d/wifi_backend.conf
+    ```
+  - 在其中放入以下內容：
+    ```ini
+    [device]
+    wifi.backend=iwd
+    ```
+  - 儲存檔案並重新啟動 quickshell 以套用變更。
+
+# 設定相關問題
+
+## 如何防止 Telegram 或其他訊息應用程式在收到新訊息時搶佔焦點？
+- 將 Hyprland 的 `misc:focus_on_activate` 變數設為 `false`
+
+## 如何停用動漫相關功能？
+- 開啟設定應用程式（`Super`+`I`），前往一般，將「Weeb」原則選擇為「否」
+
+## 如何停用 AI 或將其限制為本地模型？
+
+開啟設定應用程式（`Super`+`I`），前往一般，並在設定應用程式的「一般」區段中變更「AI」原則
+
+## 如何移除螢幕的假圓角？
+
+設定應用程式中有一個選項，自己探索一下
+
+## 終端機配色不太易讀
+
+在設定應用程式中前往「進階」區段。降低 Terminal Harmony 值
+
+## 有沒有快速的 Proxy / VPN 設定？
+
+要繞過內容限制，如果你安裝了 Cloudflare Warp，shell 提供了快速切換功能。你可以在設定頁面上看到相關章節。
+
+## 如何啟用透明度？
+
+請參閱 [#1991](https://github.com/end-4/dots-hyprland/discussions/1991)
+
+# 駭客玩法
+
+## 我想做 [某個非常特定的事情]
+
+試試 https://deepwiki.com/end-4/dots-hyprland

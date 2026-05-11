@@ -1,0 +1,189 @@
+---
+title: 安裝 / 更新 / 解除安裝
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+
+:::caution
+illogical-impulse 的 AGS 版本已不再支援。
+
+雖然仍可使用，但你必須自行處理遇到的問題。
+
+關於 AGS 版本的新 Issue 很可能會被關閉為「非計畫中」。
+:::
+
+# 安裝
+## 開始之前
+
+-  此僅提供**使用者層級的自訂**。安裝過程中的 GNOME 安裝可能會給你一些（基本的）系統功能，如網路、藍牙等，但假設你已經自行處理了這些
+-  建議使用 EndeavourOS 以省去一些麻煩
+   - 其他 Arch 發行版也可以正常運作
+   - 使用非 Arch 發行版？請在 [Discussions](https://github.com/end-4/dots-hyprland/discussions) 頁面尋找你的發行版
+   - 為了 dotfiles 重新安裝系統是完全不必要的！
+
+## 自動安裝（僅限 Arch 發行版）
+
+Clone repo，切換到 `ii-ags` 分支並執行安裝腳本：
+```bash
+t=~/.cache/dots-hyprland   # 不要弄亂你的 home 資料夾
+git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
+git -C "$t" checkout ii-ags
+"$t"/install.sh
+```
+
+:::tip[提示]
+腳本 `install.sh` 具有幂等性且為互動式。
+你可以多次執行它並選擇只執行特定操作。
+:::
+
+## NixOS（實驗性）
+- 目前，這些 dotfiles 尚未作為 flake 提供。
+- 不過你可以查看 [end_4 的 NixOS flake](https://github.com/end-4/CirnOS)
+  - 它包含 home-manager 設定。你應該查看 `homes` 資料夾。
+
+- 另請參閱 https://github.com/end-4/dots-hyprland/discussions/1093
+
+## OpenSUSE（實驗性）
+- 參閱 https://github.com/end-4/dots-hyprland/discussions/485
+
+## Fedora（實驗性）
+- 參閱 [EisregenHaha/fedora-hyprland 的 F42-ags 分支](https://github.com/EisregenHaha/fedora-hyprland/tree/F42-ags)
+  
+- 另請參閱（較舊的討論）：https://github.com/end-4/dots-hyprland/discussions/840
+  
+## 手動安裝（基本上任何發行版）
+:::note[非 Arch 發行版的注意事項]
+稍後在安裝依賴項時，你需要自行找出 `scriptdata/arch-packages/*/PKGBUILD` 中 `depends` 陣列值所列套件的對應項目。
+- 要取得套件資訊（例如它提供了哪些可執行檔），請在 [Arch Linux Packages](https://archlinux.org/packages) 或 [AUR](https://aur.archlinux.org/packages) 上搜尋。
+- 如果你已在某些非 Arch（衍生）的 Linux 發行版上成功完成安裝，非常歡迎你在 [Discussions](https://github.com/end-4/dots-hyprland/discussions) 中分享套件清單（如果需要的話還有其他步驟），我們將來可以為其自動化安裝。謝謝！
+:::
+
+- Clone 並進入目錄
+  ```bash
+  t=~/.cache/dots-hyprland   # 不要弄亂你的 home 資料夾
+  git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
+  cd "$t"
+  ```
+- 取得套件：安裝所有列在 `scriptdata/arch-packages/*/PKGBUILD` 中 `depends` 陣列值的套件。對於 Arch Linux，只需使用 AUR helper 如 `yay`。
+
+- 執行 `manual-install-helper.sh` 以安裝其餘的依賴項。
+  - 你也可以改為安裝你找到的合適替代品，但在安裝 AGS 時請確保 `git checkout` 到所需的 commit。
+- 將使用者加入 `video` 和 `input` 群組
+  ```bash
+  sudo usermod -aG video,input "$(whoami)" # 如果這無法運作，將 "$(whoami)" 替換為你的使用者名稱
+  ```
+- 將 `.config`、`.local` 複製到你的 home 資料夾（執行前請先檢查，否則你自己的設定檔可能會被覆蓋）
+
+- 使用這些快捷鍵開始使用
+  - `Ctrl`+`Super`+`T` 選擇桌布
+  - `Super`+`/` 查看快捷鍵列表。祝你玩得開心！
+
+# 安裝後設定
+## 不太可選的項目
+### Qt 主題
+- 在執行以下指令後彈出的視窗中選擇 KVantum：
+```sh
+kcmshell6 kcm_style
+kcmshell6 kcm_colors
+```
+### 防止通知守護程式衝突
+- 像 `dunst` 和 `mako` 這類通知守護程式可能來自你發行版的自訂設定，如果它們先啟動的話可能會與 AGS 衝突。如果你沒有在其他地方使用它們，建議將其解除安裝。
+## 可選項目
+### 額外設定
+看看 `Extras` 資料夾中是否有你感興趣的內容。
+### 瀏覽器媒體整合
+如果你想顯示瀏覽器的媒體縮圖，請安裝「Plasma browser integration」擴充功能。
+- [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+
+### ZSH 的配色方案
+將以下這行加入你的 `~/.zshrc` 以支援 ZSH 的配色方案：
+```bash
+source ~/.config/zshrc.d/dots-hyprland.zsh
+```
+
+## 啟動 Hyprland
+- 你可以使用 DM（Display Manager）或直接使用 `tty` 來啟動 Hyprland。
+- Hyprland wiki 建議使用 uswm-managed session 啟動 Hyprland，但我不建議。使用此方式不會破壞 dotfiles，但請記住你可能會從其他桌面環境獲得自動啟動的垃圾項目（例如重複的驗證對話方塊）
+
+詳情請參閱 [Hyprland wiki](https://wiki.hyprland.org/Getting-Started/Master-Tutorial/#launching-hyprland)。以下是一些額外提示。
+
+### 如何在 `tty1` 登入後自動啟動 Hyprland？
+對於 ZSH 或 BASH，將以下這行加到你的 `~/.zshrc` 或 `~/.bashrc` 的**最底部**：
+```bash
+source ~/.config/zshrc.d/auto-Hypr.sh
+```
+
+對於 FISH，將以下這行加到你的 `~/.config/fish/config.fish` 的**最底部**：
+```fish
+source ~/.config/fish/auto-Hypr.fish
+```
+
+附註：如果你想透過 tty 啟動 Hyprland，建議停用 DM。
+
+### 我是新手。什麼是 tty 和 DM？
+
+以下是簡要介紹，讓你快速了解，但不完全精確。
+
+你可以將 `tty` 視為 Linux 系統的某種「基礎」。
+通常有 7 個 `tty`：`tty1` 到 `tty7`。你可以按下 `Ctrl+Alt+F<n>` 切換到 `tty<n>`，然後輸入帳號和密碼登入。
+
+登入後，你就能透過指令啟動圖形環境，例如 `Hyprland`。
+事實上，大多數圖形介面只能在你登入**之後**啟動。
+
+但如果我們想要一個圖形化的登入介面呢？
+
+因此，DM（Display Manager，也稱為「LM」，即 Login Manager）就出現了。
+- 一些常用的 DM：
+  - `sddm`：通常與 KDE Plasma 搭配使用。
+  - `gdm`：通常與 Gnome 搭配使用。
+- 它在系統層級啟用，並在系統開機後自動啟動（此時尚未登入）。
+  - 在基於 systemd 的發行版上，DM 通常作為 systemd 服務啟用。執行以下指令查看啟用了哪個 DM。
+    ```bash
+    grep 'ExecStart=' /etc/systemd/system/display-manager.service
+    ```
+    如果回傳「No such file or directory」，則表示未啟用 DM，或此發行版不是基於 systemd。
+- 它提供圖形介面讓你登入並選擇圖形環境（例如 Hyprland）。
+  - DM 如何知道有哪些圖形環境可用？
+    - 通常，它會搜尋 `/usr/share/xsessions` 路徑尋找 X11 環境，搜尋 `/usr/share/wayland-sessions` 路徑尋找 Wayland 環境。
+    - 這些目錄下的 desktop 檔案包含圖形環境的資訊。
+
+# 更新
+## 自動安裝的使用者
+- `cd` 到 Repo 目錄
+- 執行 `git pull` 以獲取最新變更。
+- 再次執行 `./install.sh`
+  - 跳過你不想執行的步驟（特別是 `rsync ...` 相關的步驟，因為它會**覆蓋目標路徑下的檔案**）。
+    通常你可能會想要執行涉及 `.config/ags` 的 `rsync` 步驟。
+
+執行 `./install.sh -h` 查看更多用法。
+## 手動安裝的使用者
+- `cd` 到 Repo 目錄
+- 執行 `git pull` 以獲取最新變更。
+- 取你需要的檔案。通常你可能會想要取得 `.config/ags` 資料夾。
+- 執行 `manual-install-helper.sh` 更新部分依賴項。
+
+# 解除安裝
+- **強烈建議**手動解除安裝
+- 目前有一個解除安裝腳本，但它遠非完美且未被積極維護。
+- 以下是詳細說明（如果你在意的話）：
+
+> 重點是這個 Repo 不是典型的「軟體」，而是一組設定，
+> 因此很難製作 proper 的解除安裝腳本，
+> 它應該還原安裝腳本所做的所有變更。
+> 
+> 例如，安裝腳本會在你沒有的情況下為你安裝 `yay`（AUR helper）。
+> 然而，解除安裝腳本應該怎麼做來還原這個變更？
+> - 移除 `yay` 或 `yay-bin`？不 proper，因為你自己可能已經安裝了其中一個（不是透過安裝腳本）。
+> - 即使安裝腳本記錄了腳本安裝的套件清單，當記錄顯示 `yay` 或 `yay-bin` 是由腳本安裝的，移除它們仍然不 proper，因為腳本無法記錄它的未來，而且你可能在安裝腳本完成後的某天重新安裝了 `yay` 或 `yay-bin`，因此它們實際上不再是由安裝腳本安裝的了。
+> 
+> 總之，幾乎不可能寫出一個 proper 的解除安裝腳本。
+> 最好根據需要手動進行還原變更。
+
+:::note[目前狀態]
+由於我們現在對 Arch（衍生）發行版使用本地 PKGBUILD，
+`uninstall.sh` 能夠對 Arch / AUR 套件進行適當的解除安裝，
+但刪除設定檔仍然不完美。
+
+另請參閱 https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007
+:::

@@ -1,0 +1,268 @@
+---
+title: 安裝 / 更新 / 解除安裝
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-05-11
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+# 安裝
+:::caution[開始之前]
+- **僅提供使用者層級的修改。**系統基本功能所需的其他軟體 / 設定需自行負責。
+- **不需重新安裝系統。**
+:::
+
+:::note[發行版支援]
+- 自動安裝：請參閱下方[自動安裝](#automated-installation)章節。
+- 手動安裝：請參閱下方[手動安裝](#manual-installation)章節。
+- Fork：請參閱下方 [Forks](#forks) 章節。
+:::
+
+:::tip[從 AGS 版本遷移]
+*如果你沒有使用舊的 AGS 版本，或沒有使用 Arch Linux（請自行處理），可跳過此段落。*
+
+Quickshell 版本在安裝後應可正常運作，但你可以在安裝新版本前先解除安裝舊套件：
+
+```sh
+sudo pacman -Rs $(pacman -Q | grep "illogical-impulse-" | awk '{print $1}')
+```
+
+然後執行安裝。
+:::
+
+## 自動安裝
+:::note[發行版支援]
+腳本會在開始前自動偵測發行版。
+以下是發行版支援狀態的概覽。
+- **開發者支援：**
+  - [Arch Linux](https://archlinux.org/) 及 [EndeavourOS](https://endeavouros.com/) 為開發者支援並使用的發行版。前者較為精簡，後者提供簡化的安裝流程。
+  - [CachyOS](https://cachyos.org/) 使用與官方 Arch 不同的軟體庫，但設計上與 AUR 相容，因此理想情況下應該可以運作。
+  - 其他使用與官方 Arch 不同軟體庫的 [Arch 衍生發行版](https://wiki.archlinux.org/title/Arch-based_distributions)僅提供部分支援，特別是 [Manjaro](https://manjaro.org/) 與 AUR 的相容性相對較差。
+- **社群支援：**
+  - [Gentoo](https://www.gentoo.org/)（額外資訊請參閱 [sdata/dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-gentoo/README.md)）。
+  - [Fedora](https://fedoraproject.org/)（額外資訊請參閱 [sdata/dist-fedora/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-fedora/README.md)）。
+  - 其他發行版：歡迎貢獻！如果你願意幫忙，請參閱[此頁面](../../dev/inst-script/#help-wanted)。
+- **開發中：**
+  - 開發中的 `dist-nix` 嘗試提供跨發行版支援。對於使用較舊套件的發行版如 [Debian](https://www.debian.org/)，這幾乎是安裝 illogical-impulse 的唯一方式。請參閱 [#2382](https://github.com/end-4/dots-hyprland/discussions/2382) 進行嘗試。
+:::
+
+在以下兩個選項中擇一，然後依照提示操作。
+
+:::caution[有什麼差別？]
+- 選項 1 是選項 2 的封裝。可以理解的是，你可能不放心直接將網路上的腳本 pipe 到你的 shell 中。
+- 無論你選擇哪個選項，都建議你閱讀並理解選項 2，因為這是 Hyprland 使用者應該知道的基本知識。
+:::
+
+<Tabs>
+<TabItem label="選項 1：使用線上腳本">
+
+執行以下指令：
+```bash
+bash <(curl -s https://ii.clsty.link/get)
+```
+
+預設情況下，它會將 Repo clone 到 `~/.cache/dots-hyprland` 並為你執行 `./setup install`。
+
+:::tip[自訂行為]
+要 clone 到其他位置，只需附加路徑即可，例如：
+```bash
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
+```
+要使用更精簡的安裝（主要包含 Hyprland 和 Quickshell），
+請透過以下指令傳遞 `--core` 給本地安裝腳本（`./setup install`）：
+```bash
+bash <(curl -s https://ii.clsty.link/get) -- --core
+```
+要同時使用以上兩種行為，請執行：
+```bash
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland -- --core
+```
+:::
+
+</TabItem>
+<TabItem label="選項 2：Clone、cd 並執行">
+
+執行以下指令：
+```bash
+cd ~/.cache                                      # 你的選擇，無所謂
+git clone https://github.com/end-4/dots-hyprland # Clone repo
+cd dots-hyprland                                 # 進入已 clone 的 repo
+./setup install                                  # 執行安裝腳本
+```
+
+:::tip[更精簡的安裝]
+如果你想要更精簡的安裝（主要包含 Hyprland 和 Quickshell），
+請改為執行 `./setup install --core`。
+:::
+
+</TabItem>
+</Tabs>
+
+:::tip[使用子指令：install]
+`./setup` 的 `install` 子指令具有幂等性且為互動式。
+
+你可以隨時重新執行 `./setup install` 並選擇只執行特定操作。
+
+當你想恢復失敗的嘗試或進行更新時非常有用。
+:::
+
+## Forks
+以下是社群為其他發行版建立的 Fork 連結。
+:::caution
+- 它們是在安裝腳本尚不支援非 Arch 發行版的舊時期建立的。
+- 其中一些是為了舊的 AGS 版本的 illogical-impulse。
+:::
+
+- NixOS
+  - 請參閱 [discussion #1093](https://github.com/end-4/dots-hyprland/discussions/1093)
+- OpenSUSE
+  - 請參閱 [discussion #485](https://github.com/end-4/dots-hyprland/discussions/485)
+  
+## 手動安裝
+發行版支援：基本上任何發行版都支援。
+
+:::caution
+此章節僅供展示。
+
+強烈不建議使用，因為可能會浪費你大量時間。
+:::
+
+### Clone 並進入目錄
+
+```bash
+t=~/.cache/dots-hyprland   # 不要弄亂你的 home 資料夾
+git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none --recurse-submodules
+cd "$t"
+```
+
+### 安裝依賴項
+對於 Arch（衍生）發行版：
+- 安裝所有列在 `./sdata/dist-arch/*/PKGBUILD` 中 `depends` 列的套件。只需使用 AUR helper 如 `yay` 即可。
+  - 你也可以改為安裝你找到的合適替代品。
+
+對於非 Arch 發行版：
+- 找出 [deps-info.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/deps-info.md) 中所列套件的原品或替代品並安裝它們。
+- 如果你已在某些非 Arch（以及 Arch 衍生）的 Linux 發行版上成功完成安裝，歡迎提交 PR。詳情請參閱[此頁面](../../dev/inst-script/#help-wanted)。
+
+### 權限 / 服務等設定
+閱讀 `sdata/subcmd-install/2.setups.sh` 的內容。
+- 如果你覺得沒問題，只需執行 `./setup install-setups` 即可執行此腳本。
+  - 請勿直接執行 `sdata/subcmd-install/2.setups.sh`，因為它是設計給 `./setup` source 使用的。
+- 或者，你可以手動執行此腳本中的指令並進行調整。
+
+### 複製設定檔
+- 將 `dots/*` 複製到你的 `$HOME/`（執行前請先檢查，否則你自己的設定檔可能會被覆蓋）
+- 或者，閱讀 `sdata/subcmd-install/3.files.sh`。
+  - 如果你覺得沒問題，只需執行 `./setup install-files` 即可執行此腳本。
+  - 請勿直接執行 `sdata/subcmd-install/3.files.sh`，因為它是設計給 `./setup` source 使用的。
+
+### 完成
+- 完成後，重新登入 Hyprland。
+  - `Ctrl`+`Super`+`T` 選擇桌布。
+  - `Super`+`/` 查看快捷鍵列表。祝你玩得開心！
+
+# 安裝後設定
+## 不太可選的項目
+
+### 防止通知 daemon 衝突
+- 像 `dunst` 和 `mako` 這類通知 daemon 可能來自你發行版的自訂設定，並可能與 Quickshell 的運作衝突。如果你沒有在其他地方使用它們，建議將其解除安裝。
+
+### 避免 AUR 衝突（僅限 Arch 衍生發行版）
+問題說明：請參閱[這個 Discussion](https://github.com/end-4/dots-hyprland/discussions/3165#discussion-9788226)。
+
+解決方案：手動編輯你的 `/etc/pacman.conf`（我們不會自動編輯此檔案，因為這有些風險）並新增：
+```conf
+IgnoreGroup=illogical-impulse
+```
+另請參閱 [Arch Wiki - Pacman](https://wiki.archlinux.org/title/Pacman#Skip_package_group_from_being_upgraded) 了解 Pacman 設定。
+
+## 可選項目
+
+### 額外設定
+看看 `dots-extra/` 資料夾中是否有你感興趣的內容。
+
+### 瀏覽器媒體整合
+如果你想顯示瀏覽器的媒體縮圖，請安裝「Plasma browser integration」擴充功能。
+- [Chromium](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+
+### ZSH 的配色方案
+將以下這行加入你的 `~/.zshrc` 以支援 ZSH 的配色方案：
+```bash
+source ~/.config/zshrc.d/dots-hyprland.zsh
+```
+
+## 啟動 Hyprland
+- 你可以使用 DM（Display Manager，顯示管理器）或直接使用 `tty` 來啟動 Hyprland。
+- Hyprland wiki 建議使用 uswm-managed session 啟動 Hyprland，但我們不建議。使用此方式不會破壞 dotfiles，但你可能會從其他桌面環境獲得自動啟動的垃圾項目（例如重複的驗證對話方塊）。
+
+詳情請參閱 [Hyprland wiki](https://wiki.hypr.land/Getting-Started/Master-Tutorial/#launching-hyprland)。以下是一些額外提示。
+
+### 如何在 `tty1` 登入後自動啟動 Hyprland？
+對於 ZSH 或 BASH，將以下這行加到你的 `~/.zshrc` 或 `~/.bashrc` 的**最底部**：
+```bash
+source ~/.config/zshrc.d/auto-Hypr.sh
+```
+
+對於 FISH，將以下這行加到你的 `~/.config/fish/config.fish` 的**最底部**：
+```fish
+source ~/.config/fish/auto-Hypr.fish
+```
+
+附註：如果你想透過 tty 啟動 Hyprland，建議停用 DM。
+
+### 我是新手。什麼是 tty 和 DM？
+
+以下是簡要介紹，讓你快速了解，但**不完全精確**。
+
+你可以將 `tty` 視為 Linux 系統的某種「基礎」。
+通常有 7 個 `tty`：`tty1` 到 `tty7`。你可以按下 `Ctrl+Alt+F<n>` 切換到 `tty<n>`，然後輸入帳號和密碼登入。
+
+登入後，你就能透過指令啟動圖形環境，例如 `Hyprland`。
+通常，圖形介面只能在你登入**之後**啟動。
+
+但如果我們想要一個圖形化的登入介面呢？
+
+因此，DM（也稱為「LM」，即 Login Manager，登錄管理器）就出現了。
+- 一些常用的 DM：
+  - `sddm`：通常與 KDE Plasma 搭配使用。
+  - `gdm`：通常與 Gnome 搭配使用。
+- 它在系統層級啟用，並在系統開機後自動啟動（此時尚未登入）。
+  - 在基於 systemd 的發行版上，DM 通常作為 systemd 服務啟用。執行以下指令查看啟用了哪個 DM。
+    ```bash
+    grep 'ExecStart=' /etc/systemd/system/display-manager.service
+    ```
+    如果回傳 `No such file or directory`，則表示未啟用 DM，或此發行版不是基於 systemd。
+- 它提供圖形介面讓你登入並選擇圖形環境（例如 Hyprland）。
+  - DM 如何知道有哪些圖形環境可用？
+    - 通常，它會搜尋 `/usr/share/xsessions` 路徑尋找 X11 環境，搜尋 `/usr/share/wayland-sessions` 路徑尋找 Wayland 環境。
+    - 這些目錄下的 desktop 檔案包含圖形環境的資訊。
+
+# 更新
+:::note[太長不看]
+假設你在安裝時使用了 Arch（衍生）發行版的線上安裝腳本，你可以執行以下指令來更新：
+```bash
+cd ~/.cache/dots-hyprland && git stash && git pull && ./setup install
+```
+:::
+
+目前我們沒有更新檢查器或自動更新系統。由於安裝腳本設計為具有幂等性，要更新 dotfiles，你必須在拉取最新變更後再次執行安裝腳本。
+1. `cd` 進入 Repo 目錄。預設情況下應該在 `~/.cache/dots-hyprland`，除非你將 Repo clone 到了其他地方。
+2. 執行 `git stash` 儲存你的本地變更。理想情況下安裝不會修改 Git 追蹤的本地檔案，但這可能會意外發生，因此你需要在拉取最新變更前先 stash 它們。
+3. 執行 `git pull` 從 Repo 獲取並拉取最新變更。
+4. 再次執行 `./setup install`。
+    - 跳過你不想讓腳本更新的步驟（特別是 `rsync ...` 相關的步驟，因為它會**覆蓋目標路徑下的檔案**）。通常你可能會想要執行涉及 `dots/.config/quickshell` 的 `rsync` 步驟。
+
+:::tip
+執行 `./setup install -h` 查看更多用法。
+:::
+
+:::caution[如果你是手動安裝的]
+雖然強烈不建議，但如果你是手動安裝的，那麼：
+- `cd` 到 Repo 目錄並執行 `git pull && git submodule update --init --recursive` 以獲取最新變更。
+- 再次確認所有依賴項已安裝，因為更新可能也涉及所需的依賴項。
+- 拉取你需要的檔案。通常你可能會想要取得 `dots/.config/quickshell` 資料夾。
+:::
+
+# 解除安裝
+
+只需執行 `./setup uninstall`，但請注意它並不完美且未被積極維護，因此在回答提示時需要謹慎選擇。
