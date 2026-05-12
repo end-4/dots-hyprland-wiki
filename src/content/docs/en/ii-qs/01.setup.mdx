@@ -6,16 +6,16 @@ lastUpdated: 2026-04-01
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 # Installing
-:::caution[Before we start]
+### Before we start
 - **Only user-level customization** is provided. You are responsible for other software/configuration for basic functionality of your system.
 - **It is not necessary to reinstall your system.**
-:::
 
-:::note[Distro support]
+
+### Distro support
 - Automated: see the section [Automated Installation](#automated-installation) below.
 - Manually: see the section [Manual Installation](#manual-installation) below.
 - Forks: see the section [Forks](#forks) below.
-:::
+
 
 :::tip[Migration from AGS version]
 *Skip this if you aren't using the old AGS version or figure out yourself if not using Arch Linux*
@@ -30,30 +30,32 @@ then perform installation.
 :::
 
 ## Automated installation
-:::note[Distro support]
+
+:::caution[Hyprland 0.55?]
+If your distro has not shipped Hyprland 0.55 and/or you're not ready for it, you should switch to the Pre-Hyprland Luaification release. Example installation:
+```
+git clone --recursive https://github.com/end-4/dots-hyprland && cd dots-hyprland && git checkout 2026.05.11 && ./setup install
+```
+:::
+
+### Distro support
 The script auto detects the distro before proceeding.
 Here's a preview about the distro support status.
 - **Supported by developers:**
-  - [Arch Linux](https://archlinux.org/) and [EndeavourOS](https://endeavouros.com/) are supported and used by the developers. The former is more minimal, while the latter offers a simplified installation.
-  - [CachyOS](https://cachyos.org/) uses repositories different from official Arch, but it's designed to be compatible with AUR so ideally it should work.
-  - Other [Arch-based distros](https://wiki.archlinux.org/title/Arch-based_distributions) using repositories different from official Arch are only partially supported, especially [Manjaro](https://manjaro.org/) which has relatively poor compatibility with AUR.
+  - [Arch Linux](https://archlinux.org/) and [EndeavourOS](https://endeavouros.com/) are most well-supported
+  - [CachyOS](https://cachyos.org/) should work fine, though in rare cases differences in packages can be an issue for inexperienced users. Same goes for other Arch-based distros.
 - **Supported by community:**
   - [Gentoo](https://www.gentoo.org/) (see [sdata/dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-gentoo/README.md) for extra information).
   - [Fedora](https://fedoraproject.org/) (see [sdata/dist-fedora/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-fedora/README.md) for extra information).
   - Other distros: We welcome contributions! See [this page](../../dev/inst-script/#help-wanted) if you're willing to help.
 - **WIP:**
   - The work-in-progress `dist-nix` tries to provide cross-distro support. For distros using relatively old packages such as [Debian](https://www.debian.org/), this is almost the only way to install illogical-impulse. See [#2382](https://github.com/end-4/dots-hyprland/discussions/2382) to have a try.
-:::
 
-Make a choice between the two below, then follow the prompts.
 
-:::caution[What's the difference?]
-- Choice 1 is a wrapper of Choice 2, but understandably you might not be comfortable with piping an online script directly into your shell.
-- Regardless of your choice, you are encouraged to read and understand Choice 2, as it is the very basics a Hyprland user should know.
-:::
+Use either methods below. The former is a more convenient wrapper for the latter, though questionable for some people.
 
 <Tabs>
-<TabItem label="Choice 1: Use online script">
+<TabItem label="Use online script">
 
 Run the command below:
 ```bash
@@ -62,7 +64,7 @@ bash <(curl -s https://ii.clsty.link/get)
 
 It clones the repo to `~/.cache/dots-hyprland` by default and run `./setup install` for you.
 
-:::tip[Custom behavior]
+### Advanced: Customize installation
 To clone to somewhere else, just append the path, e.g.
 ```bash
 bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
@@ -76,10 +78,10 @@ To combine the two behaviors above, run
 ```bash
 bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland -- --core
 ```
-:::
+
 
 </TabItem>
-<TabItem label="Choice 2: Clone, cd and run">
+<TabItem label="Clone, cd and run">
 
 Run the commands below:
 ```bash
@@ -89,10 +91,9 @@ cd dots-hyprland                                 # Go to the cloned repo
 ./setup install                                  # Run the install script
 ```
 
-:::tip[More minimal installation]
+### More minimal installation
 If you want a more minimal installation which mainly involves Hyprland and Quickshell,
 run `./setup install --core` instead.
-:::
 
 </TabItem>
 </Tabs>
@@ -106,11 +107,7 @@ It's useful when you want to resume a failed attempt or update.
 :::
 
 ## Forks
-The following links are about community forks for other distros.
-:::caution
-- They were created at the old time when install scripts did not support non-Arch distros.
-- Some of them are for the old AGS-powered illogical-impulse.
-:::
+The following links are community forks for other distros. **These were created when cross-distro support was limited. Some of them are for the old AGS-powered version of the dotfiles.**
 
 - NixOS
   - See [discussion #1093](https://github.com/end-4/dots-hyprland/discussions/1093)
@@ -118,7 +115,8 @@ The following links are about community forks for other distros.
   - See [discussion #485](https://github.com/end-4/dots-hyprland/discussions/485)
   
 ## Manual installation
-Distro support: basically any distro.
+
+For basically any distro
 
 :::caution
 This section only exists for demonstration. 
@@ -240,6 +238,17 @@ So, here comes the DM (Display Manager, also called "LM", i.e. Login Manager).
     - The desktop files under these directories contain the information of the graphical environments.
 
 # Updating
+
+:::caution[Update to Hyprland 0.55]
+Hyprland 0.55 introduces configuration in Lua instead of Hyprlang. While you can still use the old format, there is already some breaking changes with the relocation of some variables. Hyprland will only give you two months to migrate to Lua.
+
+- If you choose to stick with 0.54 for now, scroll up to the "Hyprland 0.55?" note in the Automated installation section. 
+- If you're ready for 0.55, here's the procedure:
+  - Move `~/.config/hypr/custom` to somewhere else and delete that folder
+  - Run `git pull` and `./setup install` as usual
+  - Using the old files and the new config files given by the dotfiles as a reference, rewrite your old config files in the new .lua files
+:::
+
 :::note[TL;DR]
 Assuming you've used the online install script on Arch(-based) distros during installation, you can run the command below to update:
 ```bash
@@ -264,6 +273,7 @@ Though highly unrecommended, if you installed manually, then:
 - Ensure again that all dependencies are installed cuz the update may involve needed dependencies too.
 - Grab files you want. Typically you may want to grab the `dots/.config/quickshell` folder.
 :::
+
 
 # Uninstalling
 
