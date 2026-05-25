@@ -52,12 +52,11 @@ Example trace tail:
 
 ## Python virtual environment
 
-The environment variable `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` must be set properly, or some features of the Quickshell config will not work. In the provided default config, `~/.config/hypr/hyprland/env.conf`, which is sourced by `~/.config/hypr/hyprland.conf`, already contains this environment variable. 
+The environment variable `$ILLOGICAL_IMPULSE_VIRTUAL_ENV` must be set properly, or some features of the Quickshell config will not work. In the provided default config, `~/.config/hypr/hyprland/env.lua`, which is sourced by `~/.config/hypr/hyprland.lua`, already contains this environment variable. 
 
 If somehow it isn't there, add the following to your Hyprland config and restart it
 ```ini
-env = ILLOGICAL_IMPULSE_VIRTUAL_ENV, ~/.local/state/quickshell/.venv
-```
+hl.env("ILLOGICAL_IMPULSE_VIRTUAL_ENV", home_dir .. "/.local/state/quickshell/.venv")```
 
 You can run `./diagnose` to recheck the value.
 
