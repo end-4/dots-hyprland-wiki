@@ -1,23 +1,56 @@
 ---
 title: 致谢
-lastUpdated: 2025-10-10
+lastUpdated: 2025-10-16
 ---
 ## 开发者
 - [end_4](https://github.com/end-4): 仓库持有者以及作者。
-  - 创造了此项目的主体部分，比如 Hyprland 和 AGS 的配置，并且维护它们。
+  - 创造了各种版本的Ricing作为这个项目的主要部分。
+    - 现在维护最新版本，即Quickshell上的illogical-impulse。
+  - 诸如处理问题、PR 或讨论，以及更新或翻译文档等琐碎事务。
+  - 还有像设计illogical-impulse标志之类的事情。
   - 自 2023 年 1 月至今。
-- [clsty](https://github.com/clsty): 辅助开发者。
-  - 重构了安装脚本，创建了此文档站，并且维护它们。
+- [clsty](https://github.com/clsty): 仓库协作者。
+  - 开发并持续维护安装脚本及本网站。
+  - 诸如处理 Issue、PR 或讨论，以及更新或翻译文档等琐碎事务。
+  - 其他事项包括通过诊断功能提供的议题模板、l10n-notify 工作流、提供 `ii.clsty.link` 域名等。
   - 自 2024 年 1 月至今。
 
-## 谢谢你
-- [@midn8hustlr](https://github.com/midn8hustlr): 大幅改善了颜色生成系统，设计并实现了“工作区组”工作流。
-- [@outfoxxed](https://github.com/outfoxxed/) 在创建 Quickshell 版本的配置文件时提供的无价支持。
-- Quickshell：[Soramane](https://github.com/caelestia-dots/shell/)，[FridayFaerie](https://github.com/FridayFaerie/quickshell)，[nydragon](https://github.com/nydragon/nysh)。
-- AGS：[Aylur's config](https://github.com/Aylur/dotfiles/tree/ags-pre-ts)，[kotontrion's config](https://github.com/kotontrion/dotfiles)。
-- EWW：[fufexan 的配置](https://github.com/fufexan/dotfiles)（顺便他在那里感谢了更多人）。
-- 人工智能：提供了有用的例子。
+## 致谢
+
+:::tip[谢谢！]{icon="heart"}
+如果没有以下人员，该项目不可能达到目前的状况。
+:::
+
+**敬业的开发人员：** _请参阅上一节。_
+
+- [@midn8hustlr](https://github.com/midn8hustlr): 大幅改进色彩生成系统并实现工作区组工作流程。
+- [@ZeyadMoustafaKamal](https://github.com/ZeyadMoustafaKamal) 引入 `uv` 来为 Python 项目创建虚拟环境。[^1]
+- [@xiaomeng2004](https://github.com/xiaomeng2004) 实现 illogical-impulse 的 AGS 和 Quickshell 版本的多语言。
+- [@Makrennel](https://github.com/Makrennel) 为 Arch Linux 引入包含本地 PKGBUILD 的元软件包。
+- [@moetayuko](https://github.com/moetayuko) 创建许多修复 AGS/Hyprland/Quickshell 配置的 PR。
+- 跨Distro兼容：
+  - Gentoo: 来自 [@jwihardi](https://github.com/jwihardi).
+  - Fedora: 来自 [@ririko6z](https://github.com/ririko6z).
+    - 亦 [@EisregenHaha](https://github.com/EisregenHaha) 为 Fedora 维护了一个时间长达约 9 个月的分支版本。
+- 和 [诸多贡献者](https://github.com/end-4/dots-hyprland/graphs/contributors) (另见 [文档网站的贡献者](https://github.com/end-4/dots-hyprland-wiki/graphs/contributors)) 他们的名字虽未列于上文，但也投入时间让这个项目更出色。
+
+**分享了自己配置的人：**[^2]
+- Quickshell: [Soramane](https://github.com/caelestia-dots/shell/), [FridayFaerie](https://github.com/FridayFaerie/quickshell), [nydragon](https://github.com/nydragon/nysh).
+- AGS: [Aylur](https://github.com/Aylur/dotfiles/tree/ags-pre-ts), [kotontrion](https://github.com/kotontrion/dotfiles).
+- EWW: [fufexan](https://github.com/fufexan/dotfiles).
+
+**最后但绝非最不重要的：**
+- [慷慨的end_4赞助者](https://github.com/sponsors/end-4) 在维持长期发展方面所提供的关键支持。
+- [@outfoxxed](https://github.com/outfoxxed/) 感谢他在创建 Quickshell 版本配置文件过程中提供的宝贵支持。
+- 列为依赖项的各开源项目的开发者。
+- 提供实用示例的AI。
+- 社区中每一位热心参与讨论与提供支持、营造友好氛围的成员。
 
 ## 灵感来源/复制
  - 灵感来源：osu!lazer, Windows 11, Material Design 3, AvdanOS（概念）
- - 复制：再分发与二次创作都是完全可以的，只要你遵照许可（GNU GPL v3.0）。
+ - 复制：完全允许进行再分发和再创作，只要您遵守许可证（GNU GPL v3.0）。
+
+---
+
+[^1]: 感谢 [PR#1060](https://github.com/end-4/dots-hyprland/pull/1060) 和 clsty 的后续工作，dots-hyprland 项目最终摆脱了近乎瘫痪的状态——此前，由于无法从 AUR 安装 Python 依赖项，许多用户都无法完成依赖安装。
+[^2]: 这些配置提供了有益的参考。顺便提一下，他们在代码仓库中致谢了更多的人。

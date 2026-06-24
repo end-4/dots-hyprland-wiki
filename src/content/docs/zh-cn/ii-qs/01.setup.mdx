@@ -1,21 +1,20 @@
 ---
 title: 安装 / 更新 / 卸载
 layout: /src/layouts/autonum.astro
-lastUpdated: 2025-10-06
+lastUpdated: 2026-06-18
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 # 安装
-
-:::caution[开始之前]
+### 贴士
 - 这里**只提供用户级别的更改**。你需要负责系统基本功能的其他软件/配置。
 - **不需要重新安装你的系统**。
-:::
 
-:::note[发行版支持]
-- 自动化：请参见下方 [自动化安装](#自动化安装) 部分。
-- 手动：请参见下方 [手动安装](#手动安装) 部分。
-- 复刻：请参见下方 [复刻](#复刻) 部分。
-:::
+### 安装方式
+- [自动化安装](#自动化安装): 使用脚本
+- [手动安装](#手动安装)：手动克隆与复制
+- [社区分支](#分支): 针对特定发行版的安装
+- [第三方发行版](#第三方发行版): 开箱即提供“illogical-impulse”特性的操作系统
 
 :::tip[从 AGS 版本迁移]
 *如果你没有使用旧的 AGS 版本，或者不使用 Arch Linux，则可以跳过此步骤*
@@ -31,79 +30,93 @@ sudo pacman -Rs $(pacman -Q | grep "illogical-impulse-" | awk '{print $1}')
 
 ## 自动化安装
 
-:::note[发行版支持]
-- **官方支持：**
-  - Arch Linux
-    - [clsty](https://github.com/clsty)（安装脚本的开发者）使用并推荐 Arch Linux：“原生 Arch Linux 就够了。EndeavourOS 也可以，因为它使用与 Arch Linux 几乎相同的软件包仓库（除了[这个](https://github.com/endeavouros-team/repo)）。"
-  - EndeavourOS
-    - [end-4](https://github.com/end-4)（配置文件的开发者）使用并推荐 EndeavourOS："这不是必须的，但相比普通的 Arch 会更容易。"
-- **部分支持：**
-  - 其他 Arch 系发行版如 CachyOS、Manjaro 等。
-    - 这些发行版使用与 Arch Linux 不同的软件包仓库，因此可能无法按预期工作。
-    - 我们特别不推荐 Manjaro，因为它与 AUR 的兼容性相对较差。
-- **社区提供：**
-  - Gentoo（详见 [dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/dist-gentoo/README.md)）。
+:::caution[Hyprland 0.55?]
+如果您的发行版尚未发布 Hyprland 0.55 和/或您还没有准备好，您应该切换到 Pre-Hyprland Luaification 版本。安装示例：
+```
+git clone --recursive https://github.com/end-4/dots-hyprland && cd dots-hyprland && git checkout 2026.05.11 && ./setup install
+```
 :::
 
-:::caution[欢迎为其他发行版支持提交 PR]
-`install.sh` 新增了自动选择发行版的设计，
-我们需要帮助来支持其他发行版。
+### 发行版支持
+该脚本在继续执行前会自动检测发行版。
+以下是关于发行版支持情况的概览。
+- **开发者支持：**
+  - [Arch Linux](https://archlinux.org/) 和 [EndeavourOS](https://endeavouros.com/) 是最有力支持的
+  - [CachyOS](https://cachyos.org/) 应该能正常工作，不过在极少数情况下，软件包的差异可能会给缺乏经验的用户带来问题。基于 Arch 的其他发行版也是如此。
+- **由社区支持：**
+  - [Gentoo](https://www.gentoo.org/) (查看 [sdata/dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-gentoo/README.md) 以获取更多信息).
+  - [Fedora](https://fedoraproject.org/) (查看 [sdata/dist-fedora/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-fedora/README.md) 以获取更多信息).
+  - 其他发行版：欢迎贡献！请参阅 [this page](../../dev/inst-script/#help-wanted) 如果你愿意帮忙的话。
+- **制作中：**
+  - 目前正在开发中的 `dist-nix` 旨在提供跨发行版支持。对于像 [Debian](https://www.debian.org/) 这样软件包版本相对较旧的发行版来说，这几乎是安装 illogical-impulse 的唯一途径。欢迎查看 [#2382](https://github.com/end-4/dots-hyprland/discussions/2382) 进行尝试。
 
-详见 [此页面](../../dev/inst-script/#help-wanted)。
-:::
+请使用以下任一方法。前者是后者的一个更便捷的封装，尽管有些人对此存疑。
 
-只需运行这一行：
+<Tabs>
+<TabItem label="使用在线脚本">
+
+运行以下命令：
 ```bash
 bash <(curl -s https://ii.clsty.link/get)
 ```
-就是这样！
-- 按照提示操作直到完成。
-- 它所做的只不过是将仓库克隆到 `~/.cache/dots-hyprland` 并进入该目录，然后运行 `./install.sh`。作为替代，你也可以手动执行：
-  ```bash
-  cd ~/Downloads # 任意你想要的位置
-  git clone https://github.com/end-4/dots-hyprland
-  cd dots-hyprland
-  ./install.sh
-  ```
 
-:::note[域名变更]
-你可能已经注意到这个 wiki（连同上面的脚本）的域名已从 `end-4.github.io` 更改为 `ii.clsty.link`。这使得你在 tty 执行此操作时能输入更短的链接，不过其本质上仍然由 GitHub Pages 提供服务。如果你在上述 `curl` 命令中添加 `-L` 参数并改用 `https://end-4.github.io/dots-hyprland-wiki/setup` 也一样可行。更多信息请见 [issue#28](https://github.com/end-4/dots-hyprland-wiki/issues/28)。
-:::
+它默认将仓库克隆到 `~/.cache/dots-hyprland`，并为您运行 `./setup install`。
 
-:::tip[使用 install.sh]
-脚本 `./install.sh` 是幂等且交互式的。
-
-你可以随时重新运行它并选择执行某些操作。
-
-这在想要恢复失败的尝试或更新时很有用。
-:::
-
-:::tip[克隆到不同路径]
-要克隆到其他位置，只需附加路径即可，例如：
+### 高级：自定义安装
+若要克隆到其他位置，只需在后面加上路径，例如：
 ```bash
 bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
 ```
+若要采用主要包含 Hyprland 和 Quickshell 的精简安装，
+请在运行本地安装脚本（`./setup install`）时传入 `--core` 参数：
+```bash
+bash <(curl -s https://ii.clsty.link/get) -- --core
+```
+要结合上述两种行为，请运行
+```bash
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland -- --core
+```
+
+
+</TabItem>
+<TabItem label="克隆、进入目录并运行">
+
+运行以下命令：
+```bash
+cd ~/.cache                                      # 随你选，都无所谓。
+git clone https://github.com/end-4/dots-hyprland # 克隆仓库
+cd dots-hyprland                                 # 进入克隆的仓库
+./setup install                                  # 运行安装脚本
+```
+
+### 更精简的安装
+如果您想要一个更精简的安装（主要包含 Hyprland 和 Quickshell），
+请改为运行 `./setup install --core`。
+
+</TabItem>
+</Tabs>
+
+:::tip[使用子命令：install]
+`./setup` 的子命令 `install` 是幂等的且交互式的。
+
+您可以随时重新运行 `./setup install`，并选择仅执行某些操作。
+
+当您想要恢复失败的安装尝试或进行更新时，此功能非常有用。
 :::
 
 ## 复刻
 
 以下链接是关于其他发行版的社区复刻。
-:::caution
-- 它们是在安装脚本不支持非 Arch 系发行版的旧时期创建的。
-- 其中一些是针对旧的 AGS 版 illogical-impulse 的。
-:::
+**它们是在安装脚本不支持非 Arch 系发行版的旧时期创建的。其中一些是针对旧的 AGS 版 illogical-impulse 的。**
 
 - NixOS
   - 请参见 [discussion #1093](https://github.com/end-4/dots-hyprland/discussions/1093)
 - OpenSUSE
   - 请参见 [discussion #485](https://github.com/end-4/dots-hyprland/discussions/485)
-- Fedora
-  - 请参见 [EisregenHaha/fedora-hyprland](https://github.com/EisregenHaha/fedora-hyprland)
-  - 也可参见（较早的讨论）：[discussion #840](https://github.com/end-4/dots-hyprland/discussions/840)
 
 ## 手动安装
 
-发行版支持：基本上任何发行版。
+适用于几乎任何发行版
 
 :::caution
 此节仅用于演示。
@@ -114,54 +127,66 @@ bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
 ### 克隆并进入目录
 
 ```bash
-t=~/.cache/dots-hyprland   # 让我们避免弄乱你的主文件夹
-git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none
+t=~/.cache/dots-hyprland   # 别让我们把你的主文件夹弄得一团糟
+git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none --recurse-submodules
 cd "$t"
 ```
 
 ### 安装依赖包
 
 对于 Arch 系发行版：
-- 安装所有在那些 `./dist-arch/*/PKGBUILD` 中 `depends` 数组中列出的软件包。只需使用 AUR 助手如 `yay`。
+- 安装 `./sdata/dist-arch/*/PKGBUILD` 文件中 `depends` 数组所列出的所有软件包。只需使用像 `yay` 这样的 AUR 辅助工具即可。
   - 你也可以安装你所发现的合适的替代品。
 
 对于非 Arch 发行版：
-- 找出 `dist-arch/install-deps.sh` 安装的软件包的等效项。它们主要来自那些 `./dist-arch/*/PKGBUILD` 中 `depends` 数组的值，然后安装它们。
-- 要获取软件包的信息（例如它提供了什么可执行文件），请在 [Arch Linux Packages](https://archlinux.org/packages) 或 [AUR](https://aur.archlinux.org/packages) 中搜索。
-- `dist-fallback/install-deps.sh` 包含了一些能够安装依赖项的函数作为替代，这些不是发行版特定的，但不受系统包管理器控制。如果可能的话最好避免使用它们。
-- 如果你在某些非 Arch 系 Linux 发行版上成功完成了安装，你可以创建一个 `install-<DISTRO_ID>/` 目录并提交 PR。详见[此页面](../../dev/inst-script/#help-wanted)
-  - 运行 `./diagnose` 获取实际的 `<DISTRO_ID>` 值（在 `distro ID:` 后面）。
+- 找出 [deps-info.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/deps-info.md) 中所列软件包的对应版本并进行安装。
+- 如果您已成功在非 Arch（或基于 Arch）的 Linux 发行版上完成安装，欢迎提交 PR。详情请参阅[此页面](../../dev/inst-script/#help-wanted)。
 
 ### 权限/服务设置等
 
-阅读 `dist-arch/install-setups.sh` 的内容。
-- 如果你认为它没问题，那么只需运行 `./install -f --skip-alldeps --skip-allfiles` ，这样就能运行此脚本。
-  - 不要直接运行 `dist-arch/install-setups.sh`，因为它是为了被 `install.sh` 引用而设计的。
+阅读 `sdata/subcmd-install/2.setups.sh` 的内容。
+- 如果你认为它没问题，那么只需运行 `./setup install-setups` ，这样就能运行此脚本。
+  - 不要直接运行 `sdata/subcmd-install/2.setups.sh`，因为它是为了被 `./setup` 引用而设计的。
 - 或者，手动运行此脚本中的行并进行调整。
 
 ### 复制配置文件
-- 将 `.config`、`.local` 复制到你的主文件夹（在执行前请先查看，以免意外覆盖你自己的配置文件）
-- 或者，阅读 `scriptdata/install-files.sh`。
-  - 如果你认为它没问题，那么只需运行 `./install.sh --skip-alldeps --skip-allsetups` ，这样就能运行此脚本。
-  - 不要直接运行 `scriptdata/install-files.sh`，因为它是为了被 `install.sh` 引用而设计的。
+- 将 `dots/*` 复制到 `$HOME/`（在执行前请先查看，以免意外覆盖你自己的配置文件）
+- 或者，阅读 `sdata/subcmd-install/3.files.sh`。
+  - 如果你认为它没问题，那么只需运行 `./setup install-files` ，这样就能运行此脚本。
+  - 不要直接运行 `sdata/subcmd-install/3.files.sh`，因为它是为了被 `./setup` 引用而设计的。
 
 ### 完成
 - 完成后，重新登录 Hyprland。
   - `Ctrl`+`Super`+`T` 选择壁纸。
   - `Super`+`/` 查看快捷键列表。玩得开心！
 
-# 安装后
+## 3rd-party distros
 
+**我们在此列出这些发行版仅供参考。我们并不直接为其背书，请在选择操作系统时自行审慎判断。**
+
+- [El3ssar's illogical-impulse-iso](https://github.com/El3ssar/illogical-impulse-iso)：原样提供 illogical-impulse 且未作任何修改的 Arch ISO
+
+
+# 安装后
 ## 不那么可选的东西
 
 ### 防止通知守护进程冲突
-- 诸如 `dunst` 和 `mako` 等通知守护进程可能随你的发行版自带配置一起出现，并可能干扰 Quickshell 的实现。如果你在其他地方不使用它们，建议卸载它们。
+- 诸如 `dunst` 和 `mako` 之类的通知守护进程可能是您所用发行版预装的组件，它们可能会干扰 Quickshell 的运行。如果您在其他地方不使用这些程序，建议将其卸载。
+
+### 避免 AUR 冲突（仅限 Arch（及其衍生发行版））
+问题所在：请参阅[此评论](https://github.com/end-4/dots-hyprland/discussions/3165#discussion-9788226)。
+
+解决方案：手动编辑 `/etc/pacman.conf` 文件（由于自动修改该文件存在一定风险，我们不进行自动操作），并添加
+```conf
+IgnoreGroup=illogical-impulse
+```
+关于 Pacman 的配置，也可参阅 [Arch Wiki - Pacman](https://wiki.archlinux.org/title/Pacman#Skip_package_group_from_being_upgraded)。
 
 ## 可选的东西
 
 ### 额外配置
 
-查看你是否对 `Extras` 文件夹中的任何内容感兴趣。
+查看你是否对 `dots-extra/` 文件夹中的任何内容感兴趣。
 
 ### 与浏览器的媒体集成
 
@@ -224,46 +249,41 @@ source ~/.config/fish/auto-Hypr.fish
 
 # 更新
 
-- `cd` 到仓库目录
-- 运行 `git pull` 获取最新更改。
-- 再次运行 `./install.sh`
-  - 跳过你不想执行的步骤（特别是 `rsync ...` 步骤，因为它会**覆盖目标路径下的文件**）。
-    通常你可能想运行涉及 `.config/quickshell` 的 `rsync` 步骤。
+:::caution[Update to Hyprland 0.55]
+Hyprland 0.55 引入了基于 Lua 的配置方式，以取代原有的 Hyprlang。尽管旧格式仍可使用，但由于部分变量位置的变动，已出现了一些破坏性变更。Hyprland 仅提供两个月的过渡期供用户迁移至 Lua 配置。
 
-:::tip
-运行 `./install.sh -h` 查看更多用法。
+- 如果您决定暂时继续使用 0.54 版本，请向上滚动查看“自动安装”章节中的“Hyprland 0.55?”提示。
+- 如果您准备升级到 0.55 版本，请按以下步骤操作：
+  - 将 `~/.config/hypr/custom` 移动到其他位置，并删除该文件夹 
+  - 照常运行 `git pull` 和 `./setup install`
+  - 参考旧配置文件以及 dotfiles 提供的最新配置文件，将您的旧配置改写到新的 .lua 文件中
 :::
 
-:::caution[如果你之前手动安装]
-虽然强烈不推荐，但如果你还是选择了手动安装：
-- `cd` 到仓库目录
-- 运行 `git pull` 获取最新更改。
-- 拿走你想要的文件。通常你可能想要获取 `.config/quickshell` 文件夹。
+:::note[TL;DR]
+如果您在安装 Arch（或基于 Arch 的）发行版时使用了在线安装脚本，可以运行以下命令进行更新：
+```bash
+cd ~/.cache/dots-hyprland && git stash && git pull && ./setup install
+```
+:::
+
+目前我们既没有更新检查器，也没有自动更新系统。由于安装脚本被设计为幂等的（idempotent），若要更新 dotfiles，您需要在从仓库拉取最新更改后，再次运行安装脚本。
+1. 进入仓库目录。默认路径应为 `~/.cache/dots-hyprland`，除非您将仓库克隆到了其他位置。
+2. 运行 `git stash` 以保存您的本地更改。理想情况下，安装过程不应修改由 Git 追踪的本地文件，但可能会发生意外情况，因此在拉取最新更改前，您需要先暂存（stash）这些更改。
+3. 运行 `git pull` 以获取并拉取仓库中的最新更改。
+4. 再次运行 `./setup install`。 
+- 跳过您不希望脚本更新的步骤（特别是涉及 `rsync ...` 的步骤，因为它们会**覆盖目标路径下的文件**）。通常，您可能希望执行涉及 `dots/.config/quickshell` 的 `rsync` 步骤。
+
+:::tip
+运行 `./setup install -h` 以查看更多用法。
+:::
+
+:::caution[如果您是手动安装的]
+尽管极不推荐，但如果你是手动安装的，请按以下步骤操作：
+- 进入仓库目录，运行 `git pull && git submodule update --init --recursive` 以获取最新更改。
+- 务必再次确认所有依赖项均已安装，因为更新可能涉及新的依赖项。
+- 获取你需要的文件。通常，你可能需要获取 `dots/.config/quickshell` 文件夹。
 :::
 
 # 卸载
 
-:::note[当前状态]
-由于我们现在对 Arch 系发行版使用本地 PKGBUILD，所以
-`uninstall.sh` 能够对 Arch/AUR 包进行合适的卸载，
-但对配置文件的删除仍然不完美。
-
-另见 https://github.com/end-4/dots-hyprland/issues/838#issuecomment-2406220007
-:::
-
-- 你可以尝试使用 `uninstall.sh`，但它不完美且未积极维护。
-- Arch Linux 手动卸载提示：
-  - 运行 `pacman -Q | grep illogical-impulse` 获取 dotfiles 所需的软件包列表
-  - 对于上述命令中的每个软件包运行 `yay -Rs PACKAGE_NAME`
-- 如果你在意，这里有详细的解释：
-
-> 问题是这个仓库不是一个典型的"软件"，而是一组配置，
-> 所以很难制作一个适当的卸载脚本，
-> 该脚本应该还原安装脚本所做的所有更改。
->
-> 例如，安装脚本会为你安装 `yay`（AUR 助手），但卸载脚本应该如何还原这些更改？
-> - 删除 `yay` 或 `yay-bin`？不正确，因为你可能已经自己安装了其中一个（不是由安装脚本安装的）。
-> - 即使安装脚本记录了脚本安装的软件包列表，也不应该在日志显示 `yay` 或 `yay-bin` 是由脚本安装时删除它们，因为脚本无法记录未来，你可能在安装脚本完成后几天重新安装了 `yay` 或 `yay-bin`，因此它们实际上不是由安装脚本安装的。
->
-> 总之，编写适当的卸载脚本几乎是不可能的。
-> 你最好根据需要手动进行还原更改。
+只需运行 `./setup uninstall` 即可，但请注意该脚本并不完美，且已不再积极维护，因此在响应提示时需要谨慎选择。
