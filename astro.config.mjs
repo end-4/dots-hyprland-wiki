@@ -30,33 +30,36 @@ export default defineConfig({
       // See also https://github.com/CloudCannon/pagefind/tree/main/pagefind_ui/translations
       locales: {
         'en': {
-          label: 'English', // Engligh
+          label: 'English', // English
           lang: 'en',
         },
-
+        'ko': {
+          label: '한국어', // Korean
+          lang: 'ko',
+        },
         'es': {
-          label: 'Español', //Spanish
+          label: 'Español', // Spanish
           lang: 'es',
         },
 
         'fr': {
-          label: 'Français', //French
+          label: 'Français', // French
           lang: 'fr',
         },
         // 'ja': {
-        //   label: 'Japanese', //Japanese
+        //   label: 'Japanese', // Japanese
         //   lang: 'ja',
         // },
         // 'pl': {
-        //   label: 'Polish', //Polish
+        //   label: 'Polish', // Polish
         //   lang: 'pl',
         // },
         'ru': {
-          label: 'Русский', //Russian
+          label: 'Русский', // Russian
           lang: 'ru',
         },
         'tr': {
-          label: 'Türkçe', //Turkish
+          label: 'Türkçe', // Turkish
           lang: 'tr',
         },
         'vi': {
@@ -64,19 +67,19 @@ export default defineConfig({
           lang: 'vi',
         },
         'zh-cn': {
-          label: '简体中文', //Simplified Chinese
+          label: '简体中文', // Simplified Chinese
           lang: 'zh-CN',
         },
         'pt-br': {
-          label: 'Português do Brasil', //Brazilian Portuguese
+          label: 'Português do Brasil', // Brazilian Portuguese
           lang: 'pt-BR',
         },
         'de-de': {
-          label: 'Deutsch', //German
+          label: 'Deutsch', // German
           lang: 'de-DE',
         },
         'zh-tw': {
-          label: '繁體中文（臺灣）', //Traditional Chinese (Taiwan)
+          label: '繁體中文（臺灣）', // Traditional Chinese (Taiwan)
           lang: 'zh-TW',
         },
       },
@@ -84,6 +87,7 @@ export default defineConfig({
         {
           label: 'General',
           translations: {
+            'ko': '일반',
             'vi': 'Chung',
             'zh-CN': '通用',
             'es': 'General',
@@ -102,6 +106,7 @@ export default defineConfig({
           badge: {
             text: {
               'en': 'New',
+              'ko': '신규',
               // 'vi': '',
               // 'zh-CN': '',
               'es': 'Nuevo',
@@ -125,6 +130,7 @@ export default defineConfig({
           label: 'Old stuff',
           collapsed: true,
           translations: {
+            'ko': '이전 버전 (지원 종료)',
             'vi': 'Kho lưu trữ (ko đc duy trì)',
             'zh-CN': '存档（不再维护）',
             'es': 'Archivos (no mantenidos)',
@@ -142,6 +148,7 @@ export default defineConfig({
           collapsed: true,
           badge: { text: 'Dev' },
           translations: {
+            'ko': '개발자 노트',
             'vi': 'Ghi chú cho dev',
             'zh-CN': '开发者笔记',
             'es': 'Notas de desarrollo',
@@ -159,6 +166,7 @@ export default defineConfig({
           badge: {
             text: {
               'en': 'Help wanted',
+              'ko': '도움 필요',
               // 'vi': '',
               // 'zh-CN': '',
               'es': 'Ayúdanos',
@@ -172,6 +180,7 @@ export default defineConfig({
             variant: 'note'
           },
           translations: {
+            'ko': '이 위키 번역하기',
             'zh-CN': '翻译此文档',
             'es': 'Traducir esta wiki',
             'ru': 'Помогите перевести вики',
