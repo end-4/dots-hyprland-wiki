@@ -127,7 +127,7 @@ Los atajos de teclado y los widgets de la consola funcionan sin problemas en el 
 
 - **Navegando entre grupos**:
   - Considera agregar los siguientes atajos de Hyprland para saltar a grupos de espacios de trabajo adyacentes.
-    ```ini title="~/.config/hypr/custom/keybinds.conf"
+    ```ini title="~/.config/hypr/custom/keybinds.lua"
     hl.bind("SUPER + ALT + Z", hl.dsp.focus({ workspace = "r-10" }))
     hl.bind("SUPER + ALT + X", hl.dsp.focus({ workspace = "r+10" }))
     ```
@@ -144,13 +144,13 @@ Considera estas estrategias para la gestión eficaz de múltiples monitores:
   - Al iniciar el sistema, mueve manualmente el espacio de trabajo inicial del monitor secundario al segundo grupo (por ejemplo, espacio de trabajo 11) usando `Super` + `0`, y luego `Ctrl` + `Super` + `Derecha`.
   - Esto también creará un widget de vista general independiente para cada monitor.
 - Usa la [vinculación de espacios de trabajo](https://wiki.hypr.land/Configuring/Workspace-Rules/#rules) para colocar siempre espacios de trabajo específicos en monitores específicos. Obtén los nombres de todos tus monitores usando `hyprctl monitors | grep Monitor`.
-  ```ini title="~/.config/custom/general.conf"
-  # Vincula los espacios de trabajo 1-10 (grupo 1) al monitor primario
+  ```ini title="~/.config/hypr/custom/general.lua"
+  -- Vincula los espacios de trabajo 1-10 (grupo 1) al monitor primario
   for i = 1, 10 do
     hl.workspace_rule({ workspace = tostring(i), monitor = "eDP-1", default = true })
   end
 
-  # Vincula los espacios de trabajo 11-20 (group 2) al monitor secundario
+  -- Vincula los espacios de trabajo 11-20 (group 2) al monitor secundario
   for i = 11, 20 do
     hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1", default = true })
   end

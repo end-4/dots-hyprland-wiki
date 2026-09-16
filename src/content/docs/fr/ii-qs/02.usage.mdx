@@ -86,7 +86,7 @@ Les raccourcis et widgets du shell fonctionnent de manière transparente dans le
 
 - **Naviguer entre les groupes** :
   - Considérez ajouter les raccourcis Hyprland suivants pour sauter aux groupes d'espaces de travail adjacents
-    ```ini title="~/.config/hypr/custom/keybinds.conf"
+    ```ini title="~/.config/hypr/custom/keybinds.lua"
     bind = SUPER ALT, Z, workspace, r-10
     bind = SUPER ALT, X, workspace, r+10
     ```
@@ -103,13 +103,13 @@ Considérez ces stratégies pour une gestion multi-moniteurs efficace :
   - Au démarrage, déplacez manuellement l'espace de travail de départ sur le moniteur secondaire dans le second groupe (par exemple, espace de travail 11) en utilisant `Super` + `0`, puis `Ctrl` + `Super` + `Right`.
   - En effet, cela va aussi créer un widget de vue d'ensemble séparé par moniteur.
 - Utilisez la [liaison d'espaces de travail](https://wiki.hypr.land/Configuring/Workspace-Rules/#rules) pour toujours placer des espaces de travail spécifiques sur des moniteurs spécifiques. Obtenez tous les noms de vos moniteurs en utilisant `hyprctl monitors | grep Monitor`.
-  ```ini title="~/.config/custom/general.conf"
-  # Lier les espaces de travail 1-10 (groupe 1) au moniteur principal
+  ```ini title="~/.config/hypr/custom/general.lua"
+  -- Lier les espaces de travail 1-10 (groupe 1) au moniteur principal
   workspace = 1, monitor:eDP-1, default:true
   workspace = 2, monitor:eDP-1, default:true
   ...
 
-  # Lier les espaces de travail 11-20 (groupe 2) au moniteur secondaire
+  -- Lier les espaces de travail 11-20 (groupe 2) au moniteur secondaire
   workspace = 11, monitor:HDMI-A-1, default:true
   workspace = 12, monitor:HDMI-A-1, default:true
   ...

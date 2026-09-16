@@ -85,7 +85,7 @@ lastUpdated: 2025-10-10
 
 - **在组之间导航**：
   - 考虑添加以下 Hyprland 快捷键以跳转到相邻的工作区组
-    ```ini title="~/.config/hypr/custom/keybinds.conf"
+    ```ini title="~/.config/hypr/custom/keybinds.lua"
     bind = SUPER ALT, Z, workspace, r-10
     bind = SUPER ALT, X, workspace, r+10
     ```
@@ -102,13 +102,13 @@ lastUpdated: 2025-10-10
   - 启动时，手动将副显示器上的起始工作区移动到第二组（例如工作区 11），使用 `Super` + `0` 然后 `Ctrl` + `Super` + `Right`。
   - 实际上，这也会为每个显示器创建单独的概览小工具。
 - 使用[工作区绑定](https://wiki.hypr.land/Configuring/Workspace-Rules/#rules)将特定工作区始终放置在特定显示器上。使用 `hyprctl monitors | grep Monitor` 获取所有显示器名称。
-  ```ini title="~/.config/custom/general.conf"
-  # 将工作区 1-10（组 1）绑定到主显示器
+  ```ini title="~/.config/hypr/custom/general.lua"
+  -- 将工作区 1-10（组 1）绑定到主显示器
   workspace = 1, monitor:eDP-1, default:true
   workspace = 2, monitor:eDP-1, default:true
   ...
 
-  # 将工作区 11-20（组 2）绑定到副显示器
+  -- 将工作区 11-20（组 2）绑定到副显示器
   workspace = 11, monitor:HDMI-A-1, default:true
   workspace = 12, monitor:HDMI-A-1, default:true
   ...

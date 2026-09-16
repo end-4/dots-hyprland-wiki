@@ -134,7 +134,7 @@ lastUpdated: 2026-04-04
 
 - **Навигация между группами**:
   - Можете добавить следующие бинды в конфиг Hyprland, чтобы переключаться между соседними группами
-    ```ini title="~/.config/hypr/custom/keybinds.conf"
+    ```ini title="~/.config/hypr/custom/keybinds.lua"
     bind = SUPER ALT, Z, workspace, r-10
     bind = SUPER ALT, X, workspace, r+10
     ```
@@ -153,13 +153,13 @@ lastUpdated: 2026-04-04
   - В таком случае виджет пространств и обзор также будут раздельными.
 - Используйте [бинды пространств](https://wiki.hypr.land/Configuring/Workspace-Rules/#rules) чтобы всегда располагать определенные пространства на определенном мониторе. Получить все названия мониторов можно через `hyprctl monitors | grep Monitor`.
 
-  ```ini title="~/.config/custom/general.conf"
-  # Закрепить пространства 1-10 (группа 1) на основном мониторе
+  ```ini title="~/.config/hypr/custom/general.lua"
+  -- Закрепить пространства 1-10 (группа 1) на основном мониторе
   workspace = 1, monitor:eDP-1, default:true
   workspace = 2, monitor:eDP-1, default:true
   ...
 
-  # Закрепить пространства 11-20 (группа 2) на втором мониторе
+  -- Закрепить пространства 11-20 (группа 2) на втором мониторе
   workspace = 11, monitor:HDMI-A-1, default:true
   workspace = 12, monitor:HDMI-A-1, default:true
   ...
