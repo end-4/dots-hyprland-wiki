@@ -1,0 +1,37 @@
+---
+title: m3ww
+layout: /src/layouts/autonum.astro
+sidebar:
+  badge:
+    text: 지원 중단됨
+    variant: caution
+lastUpdated: 2024-02-18
+---
+
+:::danger[경고]
+이 설정 모음은 더 이상 유지보수되지 않습니다. 사용하지 않는 것을 권장합니다.
+:::
+
+# 설명
+- [Material Design 3](https://m3.material.io/) 스타일을 따르는 최신 Eww 기반 설정입니다.
+
+# 설치
+- 의존성 패키지를 설치하고 사용자를 `video` 그룹에 추가합니다:
+```bash
+# 일반 패키지
+sudo pacman -S bc blueberry bluez boost boost-libs cliphist coreutils curl findutils fish fuzzel fzf gawk gnome-control-center gnome-keyring grim ibus imagemagick libqalculate light networkmanager network-manager-applet nlohmann-json pavucontrol plasma-browser-integration playerctl procps polkit-gnome ripgrep slurp socat sox starship udev upower util-linux xorg-xrandr wget wireplumber yad tesseract
+# AUR 패키지 - yay를 통한 설치
+yay -S cava eww-tray-wayland-git geticons gojq gtklock gtklock-playerctl-module gtklock-powerbar-module gtklock-userinfo-module hyprland-git lexend-fonts-git python-material-color-utilities python-pywal python-desktop-entry-lib python-poetry python-build python-pillow swww ttf-material-symbols-git wlogout
+# 사용자를 `video` 그룹에 추가
+sudo usermod -aG video $(whoami)
+```
+- 다음 항목들을 복사하세요:
+    - `.config`, `.local` 폴더를 홈 디렉토리로 복사
+    - `.local/share/icons` 안의 폴더들을 `/usr/share/icons` 경로로 복사
+    - 필요에 따라 `Import manually` 폴더 안의 항목들을 복사
+
+- 선택 사항
+   - 참고: 다중 키보드 레이아웃이 필요하지 않다면 `~/.config/hypr/execs.conf` 파일에서 ibus 관련 내용을 주석 처리하세요. 다중 레이아웃이 필요한 경우 fcitx5 사용을 고려해 볼 수 있습니다 (단, 상단 바 아이콘과의 연동은 되지 않습니다).
+   - 브라우저의 미디어 썸네일을 표시하고 싶다면 "Plasma browser integration" 확장 프로그램을 설치하세요:
+     - [Chromium용](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+     - [Firefox용](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)

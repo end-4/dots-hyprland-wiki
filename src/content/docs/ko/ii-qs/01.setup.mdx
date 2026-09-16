@@ -1,0 +1,285 @@
+---
+title: 설치 / 업데이트 / 삭제
+layout: /src/layouts/autonum.astro
+lastUpdated: 2026-04-01
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+# 설치하기
+### 팁
+- **사용자 수준의 커스터마이징만 제공됩니다.** 시스템의 기본 기능을 위한 기타 소프트웨어 및 설정은 직접 처리하셔야 합니다.
+- **시스템을 재설치할 필요는 없습니다.**
+
+
+### 설치 방법
+
+- [자동 설치](#자동-설치): 스크립트 사용
+- [수동 설치](#수동-설치): 직접 클론 및 복사
+- [커뮤니티 포크](#포크): 특정 배포판에 특화된 설치
+- [제3자 배포판](#3자-배포판): illogical-impulse가 기본 탑재된 OS
+
+:::tip[AGS 버전에서의 마이그레이션]
+*기존 AGS 버전을 사용하지 않거나 Arch Linux가 아닌 경우 직접 해결하실 수 있다면 이 단계를 건너뛰세요.*
+
+Quickshell 버전은 설치 후 바로 잘 작동하지만, 새 패키지를 설치하기 전에 이전 패키지를 삭제할 수 있습니다:
+
+```sh
+sudo pacman -Rs $(pacman -Q | grep "illogical-impulse-" | awk '{print $1}')
+```
+
+그 후 설치를 진행하세요.
+:::
+
+## 자동 설치
+
+:::caution[Hyprland 0.55 관련]
+사용 중인 배포판이 아직 Hyprland 0.55를 제공하지 않거나 준비되지 않았다면, Pre-Hyprland Luaification 릴리즈 버전으로 전환해야 합니다. 설치 예시:
+```
+git clone --recursive [https://github.com/end-4/dots-hyprland](https://github.com/end-4/dots-hyprland) && cd dots-hyprland && git checkout 2026.05.11 && ./setup install
+```
+:::
+
+### 배포판 지원 현황
+스크립트는 진행 전 배포판을 자동으로 감지합니다.
+배포판 지원 상태 미리보기입니다.
+- **개발자가 공식 지원:**
+  - [Arch Linux](https://archlinux.org/) 및 [EndeavourOS](https://endeavouros.com/)를 가장 잘 지원합니다.
+  - [CachyOS](https://cachyos.org/)도 잘 작동하지만, 드물게 패키지 차이로 인해 초보자에게 문제가 될 수 있습니다. 다른 Arch 기반 배포판도 마찬가지입니다.
+- **커뮤니티가 지원:**
+  - [Gentoo](https://www.gentoo.org/) (자세한 내용은 [sdata/dist-gentoo/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-gentoo/README.md) 참고).
+  - [Fedora](https://fedoraproject.org/) (자세한 내용은 [sdata/dist-fedora/README.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/dist-fedora/README.md) 참고).
+  - 기타 배포판: 기여를 환영합니다! 기여할 의향이 있다면 [이 페이지](../../dev/inst-script/#help-wanted)를 참고하세요.
+- **작업 진행 중 (WIP):**
+  - 개발 중인 `dist-nix`는 크로스 배포판 지원을 목표로 합니다. [Debian](https://www.debian.org/)과 같이 비교적 오래된 패키지를 사용하는 배포판의 경우 illogical-impulse를 설치할 수 있는 거의 유일한 방법입니다. 시도해 보려면 [#2382](https://github.com/end-4/dots-hyprland/discussions/2382)를 참고하세요.
+
+
+아래 두 가지 방법 중 하나를 사용하세요. 첫 번째 방법이 두 번째 방법보다 편리한 래퍼 역할을 합니다.
+
+<Tabs>
+<TabItem label="온라인 스크립트 사용">
+
+아래 명령어를 실행하세요:
+```bash
+bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get))
+```
+
+기본적으로 `~/.cache/dots-hyprland` 경로에 리포지토리를 클론하고 `./setup install`을 실행합니다.
+
+### 고급: 설치 커스터마이징
+다른 경로에 클론하려면 경로를 덧붙이세요:
+```bash
+bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) ~/Downloads/dots-hyprland
+```
+Hyprland와 Quickshell을 주로 포함하는 최소한의 설치를 원한다면, 로컬 설치 스크립트(`./setup install`)에 `--core` 옵션을 전달하도록 아래와 같이 실행하세요:
+```bash
+bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) -- --core
+```
+위의 두 동작을 함께 적용하려면 아래와 같이 실행하세요:
+```bash
+bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) ~/Downloads/dots-hyprland -- --core
+```
+
+
+</TabItem>
+<TabItem label="클론, 이동 후 실행">
+
+아래 명령어를 실행하세요:
+```bash
+cd ~/.cache                                      # 어디든 상관없습니다
+git clone [https://github.com/end-4/dots-hyprland](https://github.com/end-4/dots-hyprland) # 리포지토리 클론
+cd dots-hyprland                                 # 클론된 폴더로 이동
+./setup install                                  # 설치 스크립트 실행
+```
+
+### 경량화(Minimal) 설치
+Hyprland와 Quickshell 위주의 더 최소화된 설치를 원한다면, 대신 `./setup install --core`를 실행하세요.
+
+</TabItem>
+</Tabs>
+
+:::tip[하위 명령어 사용: install]
+`./setup`의 하위 명령어인 `install`은 멱등성(Idempotent)을 가지며 대화형입니다.
+
+언제든지 `./setup install`을 다시 실행하여 특정 작업만 수행하도록 선택할 수 있습니다.
+
+실패한 시도를 다시 재개하거나 업데이트할 때 유용합니다.
+:::
+
+## 포크
+다음 링크는 다른 배포판을 위한 커뮤니티 포크입니다. **이 포크들은 크로스 배포판 지원이 제한적이었을 때 작성되었습니다. 일부는 이전 AGS 기반 버전용입니다.**
+
+- NixOS
+  - [discussion #1093](https://github.com/end-4/dots-hyprland/discussions/1093) 참고
+- OpenSUSE
+  - [discussion #485](https://github.com/end-4/dots-hyprland/discussions/485) 참고
+  
+## 수동 설치
+
+사실상 모든 배포판에 적용 가능합니다.
+
+:::caution
+이 섹션은 단지 시연용으로만 존재합니다.
+
+시간이 많이 소요될 수 있으므로 사용을 강력히 권장하지 않습니다.
+:::
+
+### 클론 및 디렉토리 이동
+
+```bash
+t=~/.cache/dots-hyprland   # 홈 폴더를 더럽히지 않도록 합니다
+git clone [https://github.com/end-4/dots-hyprland.git](https://github.com/end-4/dots-hyprland.git) "$t" --filter=blob:none --recurse-submodules
+cd "$t"
+```
+
+### 의존성 설치
+Arch(및 Arch 기반) 배포판의 경우:
+- `./sdata/dist-arch/*/PKGBUILD` 내부의 `depends` 배열 값으로 나열된 모든 패키지를 설치하세요. `yay` 같은 AUR 헬퍼를 사용하면 됩니다.
+  - 직접 찾은 적절한 대체 패키지를 대신 설치하셔도 됩니다.
+
+Arch 이외의 배포판의 경우:
+- [deps-info.md](https://github.com/end-4/dots-hyprland/blob/main/sdata/deps-info.md)에 나열된 패키지에 해당하는 배포판별 패키지를 찾아 설치하세요.
+- Arch 기반이 아닌 다른 Linux 배포판에서 성공적으로 설치를 완료했다면 PR을 제출해 주셔도 됩니다. 자세한 내용은 [이 페이지](../../dev/inst-script/#help-wanted)를 참고하세요.
+
+### 권한 / 서비스 설정 등
+`sdata/subcmd-install/2.setups.sh` 내용을 읽어보세요.
+- 문제가 없다면 이 스크립트를 실행해 주는 `./setup install-setups`를 실행하세요.
+  - `sdata/subcmd-install/2.setups.sh`를 직접 실행하지 마세요. `./setup`에 의해 불러와지도록 설계되었습니다.
+- 또는 이 스크립트의 라인들을 직접 수정하여 실행하셔도 됩니다.
+
+### 설정 파일 복사
+- `dots/*`를 `$HOME/` 경로로 복사하세요 (진행 전 확인하세요. 원치 않게 기존 설정 파일이 덮어씌워질 수 있습니다).
+- 또는 `sdata/subcmd-install/3.files.sh`를 읽어보세요.
+  - 문제가 없다면 이 스크립트를 실행해 주는 `./setup install-files`를 실행하세요.
+  - `sdata/subcmd-install/3.files.sh`를 직접 실행하지 마세요. `./setup`에 의해 불러와지도록 설계되었습니다.
+
+### 완료
+- 모든 작업이 끝나면 Hyprland에 다시 로그인하세요.
+  - `Ctrl`+`Super`+`T`로 배경화면을 선택합니다.
+  - `Super`+`/`로 단축키 목록을 확인하세요. 즐거운 시간 되세요!
+
+## 3자 배포판
+
+**정보 제공 목적으로 여기에 해당 배포판을 나열합니다. 직접 보증하지는 않으므로 OS 선택 시 주의를 기울이시기 바랍니다.**
+
+- [El3ssar's illogical-impulse-iso](https://github.com/El3ssar/illogical-impulse-iso): 별도의 수정 없이 illogical-impulse가 적용된 Arch ISO입니다.
+
+# 설치 후 작업
+## 필수 권장 사항
+
+### 알림 데몬 충돌 방지
+- `dunst`나 `mako` 같은 알림 데몬은 사용 중인 배포판의 기본 설정과 함께 제공되어 Quickshell의 알림 구현과 충돌할 수 있습니다. 다른 곳에서 사용하지 않는다면 삭제하는 것을 권장합니다.
+
+### AUR 충돌 방지 (Arch 기반 배포판 전용)
+문제 상황: [이 댓글](https://github.com/end-4/dots-hyprland/discussions/3165#discussion-9788226)을 참고하세요.
+
+해결 방법: `/etc/pacman.conf` 파일을 직접 수정하여 (위험성이 있어 자동으로 수정하지 않음) 다음 라인을 추가하세요:
+```conf
+IgnoreGroup=illogical-impulse
+```
+Pacman 설정에 대한 자세한 내용은 [Arch Wiki - Pacman](https://wiki.archlinux.org/title/Pacman#Skip_package_group_from_being_upgraded)을 참고하세요.
+
+## 선택 사항
+
+### 추가 설정
+
+`dots-extra/` 폴더에 관심 있는 내용이 있는지 확인해 보세요.
+
+### 브라우저 미디어 연동
+
+브라우저의 미디어 썸네일을 표시하고 싶다면 "Plasma browser integration" 확장 프로그램을 설치하세요.
+- [Chromium용](https://chrome.google.com/webstore/detail/plasma-integration/cimiefiiaegbelhefglklhhakcgmhkai)
+- [Firefox용](https://addons.mozilla.org/en-US/firefox/addon/plasma-integration/)
+
+### ZSH용 컬러 스킴
+ZSH 컬러 스킴 지원을 위해 `~/.zshrc` 파일에 다음 라인을 추가하세요:
+```bash
+source ~/.config/zshrc.d/dots-hyprland.zsh
+```
+
+## Hyprland 실행하기
+- Hyprland를 실행하려면 DM(디스플레이 매니저)을 사용하거나 `tty`를 사용할 수 있습니다.
+- Hyprland 위키에서는 uwm 관리 세션으로 Hyprland를 실행하는 것을 권장하지만, 본 프로젝트에서는 권장하지 않습니다. 이를 사용하는 것이 닷파일을 망가뜨리지는 않지만, 다른 데스크톱 환경의 자동 실행 요소(예: 중복 인증 대화상자)가 실행될 수 있습니다.
+
+자세한 내용은 [Hyprland wiki](https://wiki.hypr.land/Getting-Started/Master-Tutorial/#launching-hyprland)를 참고하세요. 아래는 몇 가지 추가 힌트입니다.
+
+### `tty1` 로그인 후 Hyprland를 자동 실행하는 방법
+ZSH 또는 BASH의 경우 `~/.zshrc` 또는 `~/.bashrc` 파일 **맨 아래**에 다음 라인을 추가하세요:
+```bash
+source ~/.config/zshrc.d/auto-Hypr.sh
+```
+
+FISH의 경우 `~/.config/fish/config.fish` 파일 **맨 아래**에 다음 라인을 추가하세요:
+```fish
+source ~/.config/fish/auto-Hypr.fish
+```
+
+P.S. tty를 통해 Hyprland를 실행하려는 경우 DM을 비활성화하는 것을 권장합니다.
+
+### 초보자 안내: tty와 DM이 무엇인가요?
+
+이해를 돕기 위한 간단한 설명입니다 (엄밀한 학술적 정의와는 다를 수 있습니다).
+
+`tty`는 Linux 시스템의 기본적인 "콘솔 화면"으로 볼 수 있습니다.
+보통 `tty1`부터 `tty7`까지 7개의 `tty`가 존재합니다. `Ctrl+Alt+F<n>`을 눌러 `tty<n>`으로 이동한 뒤 사용자 이름과 비밀번호를 입력하여 로그인할 수 있습니다.
+
+로그인 후 명령어를 통해 `Hyprland`와 같은 그래픽 환경을 실행할 수 있습니다.
+일반적으로 그래픽 인터페이스는 로그인 **후**에 실행할 수 있습니다.
+
+하지만 로그인 화면 자체를 그래픽 인터페이스로 사용하고 싶다면 어떻게 해야 할까요?
+
+이때 사용되는 것이 DM(디스플레이 매니저, LM/로그인 매니저라고도 함)입니다.
+- 자주 사용되는 DM:
+  - `sddm`: 주로 KDE Plasma와 함께 사용됩니다.
+  - `gdm`: 주로 GNOME과 함께 사용됩니다.
+- 시스템 수준에서 활성화되며, 시스템 부팅 후(아직 로그인하기 전) 자동으로 실행됩니다.
+  - systemd 기반 배포판에서는 일반적으로 DM이 systemd 서비스로 활성화됩니다. 실행 중인 DM을 확인하려면 아래 명령어를 실행하세요:
+    ```bash
+    grep 'ExecStart=' /etc/systemd/system/display-manager.service
+    ```
+    `No such file or directory`가 출력되면 활성화된 DM이 없거나 systemd 기반 배포판이 아닌 것입니다.
+- DM은 로그인하고 그래픽 환경(예: Hyprland)을 선택할 수 있는 그래픽 인터페이스를 제공합니다.
+  - DM은 이용 가능한 그래픽 환경을 어떻게 찾을까요?
+    - 일반적으로 X11 환경은 `/usr/share/xsessions`, Wayland 환경은 `/usr/share/wayland-sessions` 경로를 검색합니다.
+    - 해당 디렉토리의 데스크톱 파일들(.desktop)이 그래픽 환경에 대한 정보를 담고 있습니다.
+
+# 업데이트하기
+
+:::caution[Hyprland 0.55 업데이트 안내]
+Hyprland 0.55부터는 Hyprlang 대신 Lua 구문으로 설정을 작성합니다. 기존 형식을 여전히 사용할 수는 있지만, 일부 변수의 위치 이동으로 인해 경미한 호환성 문제가 발생할 수 있습니다. Hyprland는 Lua 전환에 2개월의 유예 기간만 제공합니다.
+
+- 당분간 0.54 버전을 유지하고 싶다면, 자동 설치 섹션의 "Hyprland 0.55 관련" 안내를 확인하세요.
+- 0.55로 업데이트할 준비가 되었다면 다음 절차를 따르세요:
+  - `~/.config/hypr/custom` 폴더를 다른 곳으로 이동하거나 삭제합니다.
+  - 평소처럼 `git pull`과 `./setup install`을 실행합니다.
+  - 기존 파일과 닷파일에서 제공하는 새 설정 파일을 참고하여 이전 설정 파일들을 새로운 `.lua` 파일로 다시 작성하세요.
+:::
+
+:::note[요약 (TL;DR)]
+Arch(및 Arch 기반) 배포판에서 온라인 설치 스크립트를 사용해 설치했다고 가정하면, 아래 명령어를 실행하여 업데이트할 수 있습니다:
+```bash
+cd ~/.cache/dots-hyprland && git stash && git pull && ./setup install
+```
+:::
+
+현재는 업데이트 확인 프로그램이나 자동 업데이트 시스템이 없습니다. 설치 스크립트는 멱등성을 갖도록 설계되었으므로, 닷파일을 업데이트하려면 리포지토리에서 최신 변경 사항을 불러온(pull) 후 설치 스크립트를 다시 실행해야 합니다.
+1. 리포지토리 디렉토리로 이동(`cd`)합니다. 다른 곳에 클론하지 않았다면 기본값은 `~/.cache/dots-hyprland`입니다.
+2. `git stash`를 실행하여 로컬 변경 사항을 임시 저장합니다. 설치 스크립트가 Git으로 추적되는 로컬 파일을 수정하지 않는 것이 이상적이지만 예외가 발생할 수 있으므로, 최신 코드를 당겨오기 전에 stash를 수행해야 합니다.
+3. `git pull`을 실행하여 리포지토리에서 최신 변경 사항을 가저옵니다.
+4. `./setup install`을 다시 실행합니다.
+    - 스크립트가 업데이트하지 않기를 바라는 단계는 건너뛰세요 (특히 `rsync ...` 단계는 **대상 경로 하위의 파일을 덮어쓰므로** 주의해야 합니다). 일반적으로 `dots/.config/quickshell`이 포함된 `rsync` 단계는 그대로 진행하는 것이 좋습니다.
+
+:::tip
+`./setup install -h`를 실행하면 자세한 사용법을 볼 수 있습니다.
+:::
+
+:::caution[수동으로 설치한 경우]
+권장하지 않지만 수동으로 설치한 경우:
+- 리포지토리 디렉토리로 이동하여 `git pull && git submodule update --init --recursive`를 실행해 최신 변경 사항을 가져옵니다.
+- 업데이트 시 새로운 의존성이 추가되었을 수 있으므로 필요한 의존성이 모두 설치되었는지 다시 확인하세요.
+- 필요한 파일을 가져옵니다. 일반적으로 `dots/.config/quickshell` 폴더를 가져오게 됩니다.
+:::
+
+
+# 삭제하기
+
+`./setup uninstall`을 실행하세요. 단, 완벽하게 유지보수되고 있지는 않으므로 프롬프트 질의에 신중하게 답변을 선택하셔야 합니다.
