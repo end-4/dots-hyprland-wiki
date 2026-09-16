@@ -1,0 +1,51 @@
+---
+title: 홈페이지
+description: illogical-impulse 공식 문서
+template: splash
+hero:
+  title: |
+    <p style="font-size: 60px; font-weight: 300">illogical-impulse</p>
+  tagline: |
+    <p style="font-size: 22px;">사용자 편의성을 최우선으로 고려한 닷파일. 아마도요.</p>
+  image:
+    html: "<img alt='A screenshot.' src='/screenshots/ii-qs.1.jpg' width='600' />"
+  actions:
+    - text: 쇼케이스
+      link: ./general/showcase
+      icon: star
+      variant: primary
+    - text: 빠른 시작
+      link: ./ii-qs/01setup#automated-installation
+      icon: rocket
+      variant: primary
+    - text: GitHub 리포지토리 (end-4/dots-hyprland)
+      link: https://github.com/end-4/dots-hyprland
+      variant: minimal
+      icon: external
+lastUpdated: false
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="[‎ ‎ [‎ 창 개요 ‎] ‎ ‎]">
+    드래그 앤 드롭으로 워크스페이스를 손쉽게 관리하세요.
+	</Card>
+  <Card title="+//+ 편의 기능 +//+">
+    써클 투 서치, 화면 번역, 눈뽕 방지(Anti-flashbang).
+	</Card>
+	<Card title=">>× AI ×<<">
+    Gemini 및 Ollama 연동. 웹앱 없이 단축키 하나로 실행.
+	</Card>
+	<Card title="•• Material 3 Expressive ••">
+    스마트폰처럼 깔끔하고 세련된 머티리얼 3 디자인.
+	</Card>
+  <Card title="~>< 다국어 지원 ><~">
+    사람 및 AI가 생성한 다국어 번역 제공.
+	</Card>
+  <Card title="$>_ 간편한 설치 _<$">
+    여러 배포판을 지원하는 멱등성 있는 설치 스크립트.
+	</Card>
+</CardGrid>
+
+> [본 위키](https://github.com/end-4/dots-hyprland-wiki)는 [기여](https://ii.clsty.link/en/dev/doc-site-contrib)를 환영합니다.
