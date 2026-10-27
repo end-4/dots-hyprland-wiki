@@ -35,7 +35,7 @@ sudo pacman -Rs $(pacman -Q | grep "illogical-impulse-" | awk '{print $1}')
 :::caution[Hyprland 0.55 관련]
 사용 중인 배포판이 아직 Hyprland 0.55를 제공하지 않거나 준비되지 않았다면, Pre-Hyprland Luaification 릴리즈 버전으로 전환해야 합니다. 설치 예시:
 ```
-git clone --recursive [https://github.com/end-4/dots-hyprland](https://github.com/end-4/dots-hyprland) && cd dots-hyprland && git checkout 2026.05.11 && ./setup install
+git clone --recursive https://github.com/end-4/dots-hyprland && cd dots-hyprland && git checkout 2026.05.11 && ./setup install
 ```
 :::
 
@@ -60,7 +60,7 @@ git clone --recursive [https://github.com/end-4/dots-hyprland](https://github.co
 
 아래 명령어를 실행하세요:
 ```bash
-bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get))
+bash <(curl -s https://ii.clsty.link/get)
 ```
 
 기본적으로 `~/.cache/dots-hyprland` 경로에 리포지토리를 클론하고 `./setup install`을 실행합니다.
@@ -68,15 +68,15 @@ bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get))
 ### 고급: 설치 커스터마이징
 다른 경로에 클론하려면 경로를 덧붙이세요:
 ```bash
-bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) ~/Downloads/dots-hyprland
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland
 ```
 Hyprland와 Quickshell을 주로 포함하는 최소한의 설치를 원한다면, 로컬 설치 스크립트(`./setup install`)에 `--core` 옵션을 전달하도록 아래와 같이 실행하세요:
 ```bash
-bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) -- --core
+bash <(curl -s https://ii.clsty.link/get) -- --core
 ```
 위의 두 동작을 함께 적용하려면 아래와 같이 실행하세요:
 ```bash
-bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) ~/Downloads/dots-hyprland -- --core
+bash <(curl -s https://ii.clsty.link/get) ~/Downloads/dots-hyprland -- --core
 ```
 
 
@@ -86,7 +86,7 @@ bash <(curl -s [https://ii.clsty.link/get](https://ii.clsty.link/get)) ~/Downloa
 아래 명령어를 실행하세요:
 ```bash
 cd ~/.cache                                      # 어디든 상관없습니다
-git clone [https://github.com/end-4/dots-hyprland](https://github.com/end-4/dots-hyprland) # 리포지토리 클론
+git clone https://github.com/end-4/dots-hyprland # 리포지토리 클론
 cd dots-hyprland                                 # 클론된 폴더로 이동
 ./setup install                                  # 설치 스크립트 실행
 ```
@@ -127,7 +127,7 @@ Hyprland와 Quickshell 위주의 더 최소화된 설치를 원한다면, 대신
 
 ```bash
 t=~/.cache/dots-hyprland   # 홈 폴더를 더럽히지 않도록 합니다
-git clone [https://github.com/end-4/dots-hyprland.git](https://github.com/end-4/dots-hyprland.git) "$t" --filter=blob:none --recurse-submodules
+git clone https://github.com/end-4/dots-hyprland.git "$t" --filter=blob:none --recurse-submodules
 cd "$t"
 ```
 
