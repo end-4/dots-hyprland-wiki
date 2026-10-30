@@ -1,0 +1,182 @@
+---
+title: 설정
+layout: /src/layouts/autonum.astro
+lastUpdated: 2025-11-10
+---
+
+# Hyprland 설정하기
+
+Hyprland는 다음 항목들을 담당합니다...
+- 단축키
+- 환경 변수
+- 디스플레이/모니터/워크스페이스
+- 창 애니메이션
+- ...
+
+일반적인 설정 방법은 [Hyprland 위키](https://wiki.hypr.land/)를 참고하세요. 아래에는 이 닷파일 프로젝트에 특화된 세부 사항만 설명합니다.
+
+- `~/.config/hypr/` 폴더가 Hyprland의 설정 디렉토리입니다.
+  - `hyprland` 하위 폴더에는 기본 설정이 포함되어 있습니다.
+  - `custom` 하위 폴더는 사용자의 추가 설정을 위한 공간입니다.
+
+`hyprland` 하위 폴더의 내용을 직접 수정할 수도 있지만, 닷파일을 업데이트할 경우 덮어씌워질 수 있습니다.
+
+:::note
+기본 설정을 오버라이드하려면 단축키의 경우 `hl.unbind()`와 같은 기술을 사용해야 할 수 있습니다.
+
+오버라이드가 잘 되지 않는 경우, `~/.config/hypr/hyprland/`에서 기본 설정 파일을 `~/.config/hypr/custom/`으로 복사한 뒤, `~/.config/hypr/hyprland.conf`를 수정하여 해당 기본 설정 파일을 불러오는(source) 라인을 주석 처리할 수 있습니다.
+
+단, `./setup install`로 업데이트한 후 Hyprland에 문제가 발생하면, 주석 처리했던 기본 설정 파일(`~/.config/hypr/hyprland.lua`)에 필수적인 변경 사항이 추가되었는지 재확인해야 합니다.
+:::
+
+# Quickshell 설정하기
+
+Quickshell은 상단 바 및 사이드바와 같은 쉘 요소를 담당합니다.
+
+## 간단한 설정
+
+### 그래픽 UI
+
+`Super`+`I`를 누르거나 오른쪽 사이드바의 톱니바퀴 버튼을 누르면 설정 창이 열립니다. 대부분의 공통 설정이 여기에 있습니다. 원하는 항목을 찾을 수 없다면 아래 방법을 시도해 보세요.
+
+### 설정 파일 직접 수정
+
+설정 파일 경로는 `~/.config/illogical-impulse/config.json`입니다.
+
+각 옵션 및 기본값에 대한 설명은 `~/.config/quickshell/ii/modules/common/Config.qml` 파일을 참고하세요.
+
+:::note
+Quickshell에만 국한되지 않는 설정은 "기타 (Misc)" 섹션을 참고하세요.
+:::
+### 날짜 및 시간 형식
+
+시간 형식을 24시간제와 12시간제 사이에서 변경하려면 설정 > 서비스 > 시간 메뉴를 이용하세요.
+
+또는 설정 파일에서 `time.format`을 수정하세요. 형식에 대한 내용은 https://doc.qt.io/qt-6/qtime.html#toString 문서에서 확인할 수 있습니다.
+
+## 고급 설정
+
+- `~/.config/quickshell/ii` 내부의 파일들을 수정하세요.
+- [Quickshell 문서](https://quickshell.outfoxxed.me/docs/types/)를 참고하세요.
+  - 적어도 Introduction, Positioning, QML Language 페이지는 훑어보시는 것을 권장합니다.
+
+# 기타 (Misc)
+
+## 색상 테마
+
+### VS Code
+
+- [Material Code](https://marketplace.visualstudio.com/items?itemName=rakib13332.material-code) 확장 프로그램을 설치한 후 배경화면을 선택하세요.
+- 선택적 조정 사항
+  - 기본값이 특이하게 설정되어 있는 "material-code.syntaxTheme" 옵션을 변경할 수 있습니다.
+  - "Material Code: Apply styles" 명령을 실행하여 둥근 모서리 스타일을 적용하세요. VS Code가 설치 파일이 손상되었다고 경고하면 "다시 표시하지 않음"을 안심하고 선택하셔도 됩니다.
+
+이 기능은 Microsoft의 공식 빌드에서 작동합니다. 변형된 버전(예: VSCodium 등)을 사용하는 경우 파일 경로 차이로 인해 작동을 보장할 수 없습니다. 사용하는 VS Code 포크 버전을 위해 PR을 올려주셔도 좋습니다. 색상을 처리하는 스크립트는 `dots/.config/quickshell/ii/scripts/colors/code/material-code-set-color.sh`에 있습니다.
+
+## UI 스케일 변경 (전체)
+
+화면 전체 요소의 스케일을 변경하려면 [Monitors - Hyprland 위키](https://wiki.hypr.land/Configuring/Basics/Monitors/) 지침에 따라 `~/.config/hypr/custom/general.lua` 파일에서 설정하세요.
+
+또는 그래픽 UI를 제공하는 `nwg-look` 패키지(별도 설치 필요)를 사용할 수 있습니다. 이 닷파일 환경에서 별도 설정 없이 작동해야 합니다.
+
+## UI 스케일 변경 (쉘 전용)
+
+`QT_SCALE_FACTOR` 환경 변수를 조정하여 적용합니다. Quickshell pragma 방식과 Hyprland 환경 변수 방식 2가지가 있습니다. 전자는 쉘에만 영향을 미치지만 업데이트에 불리하며, 후자는 모든 Qt 앱에 영향을 미치지만 업데이트 친화적입니다.
+
+### Quickshell pragma 방식
+
+`~/.config/quickshell/ii/shell.qml` 파일을 열고 아래 라인을 수정하세요. 적용하려면 Quickshell을 재시작(`Ctrl`+`Super`+`R`)하세요.
+```qml
+//@ pragma Env QT_SCALE_FACTOR=1
+```
+
+### Hyprland 환경 변수 방식
+
+`~/.config/hypr/custom/env.lua` 파일에 다음 라인을 추가하세요 (필요에 맞게 수치를 조정하세요). 적용하려면 Hyprland를 다시 시작(재로그인)해야 합니다.
+
+```ini
+hl.env("QT_SCALE_FACTOR", "1")
+```
+
+:::tip[팁: 알맞은 수치 미리 찾기]
+여러 번 재로그인하는 불편을 피하기 위해, 먼저 Quickshell pragma 방식으로 적절한 수치를 찾은 후 환경 변수로 적용하는 것이 편리합니다.
+:::
+
+## 폰트 크기 변경
+
+### GTK 앱
+
+- 폰트 선택기가 포함된 GUI를 원하면 `gnome-tweaks`를 사용하세요.
+- 그렇지 않다면 `gsettings` 명령어를 사용할 수 있습니다:
+```bash
+# 구문
+gsettings set org.gnome.desktop.interface font-name '폰트이름 폰트크기'
+# 이 닷파일의 기본값
+gsettings set org.gnome.desktop.interface font-name 'Rubik 11'
+```
+
+### Qt 앱
+KDE System Settings 앱을 사용하여 폰트를 커스터마이징할 수 있습니다.
+
+## 화면 잠금 / 제한 시간 (Timeout)
+
+### 제한 시간 (Timeout)
+
+참고: [Hyprland Wiki](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
+
+`~/.config/hypr/hypridle.conf` 파일을 필요에 맞게 수정하세요.
+
+### 다른 화면 잠금 프로그램 사용하기
+참고: [Arch Wiki](https://wiki.archlinux.org/title/Session_lock)
+
+`swaylock`을 예시로 듭니다.
+
+`~/.config/hypr/hypridle.conf` 파일에서 `$lock_cmd` 값을 아래와 같이 수정하세요:
+```ini
+$lock_cmd = swaylock
+```
+
+수정 후 `hypridle`을 재시작하세요 (`pkill hypridle; hypridle & disown`).
+
+이제 `loginctl lock-session` 명령 실행 시 `swaylock`이 호출되어 화면이 잠기게 됩니다.
+
+:::note[작동 원리]
+`loginctl lock-session` 명령은 실행 중인 `hypridle` 프로세스에 신호를 보내고, `hypridle`은 `$lock_cmd`에 지정된 명령을 실행합니다.
+:::
+
+## Cloudflare WARP
+- 통신사 제한을 우회하고 인터넷 속도를 개선하는 데 도움이 될 수 있습니다.
+- 오른쪽 사이드바의 버튼을 사용하여 토글할 수도 있습니다.
+- WARP 설치 및 설정 방법:
+  1. 아직 설치하지 않았다면 패키지를 직접 설치합니다.  
+  Arch 기반 배포판의 경우 `yay`를 사용해 AUR에서 설치할 수 있습니다:
+        ```bash
+        yay -S cloudflare-warp-bin
+        ```
+  2. WARP 서비스를 활성화하고 시작합니다:
+        ```bash
+        sudo systemctl enable warp-svc
+        sudo systemctl start warp-svc
+        ```
+  3. 기기를 등록합니다:
+        ```bash
+        warp-cli registration new
+        ```
+        이용약관 동의를 요구하면 `y`를 누르고 Enter를 치세요.  
+  4. 연결을 테스트합니다:
+        ```bash
+        warp-cli connect
+        warp-cli disconnect
+        ```
+        두 명령어 모두 출력 결과에 `Success`가 표시되어야 합니다.  
+  5. 사이드바 버튼이 정상 작동하는지 확인하려면 버튼을 클릭 후 상태를 확인하세요:
+        ```bash
+        warp-cli status
+        ```
+        현재 연결 상태에 따라 `Status update :` 뒤에 `Connected` 또는 `Disconnected`가 출력되어야 합니다.  
+        외부 웹사이트 [1.1.1.1 연결 정보](https://1.1.1.1/help) 페이지를 방문하여 연결 상태를 확인할 수도 있습니다.  
+  6. *(선택 사항)* WARP 동작 모드를 변경하고 싶은 경우(예: 터널링은 WARP를 사용하고 DNS 쿼리는 DNS-over-TLS 사용):
+        ```bash
+        warp-cli mode warp+dot
+        ```
+        자세한 내용은 `warp-cli mode --help`를 참고하세요.
