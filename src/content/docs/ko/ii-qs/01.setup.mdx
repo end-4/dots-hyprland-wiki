@@ -1,7 +1,7 @@
 ---
-title: 설치 / 업데이트 / 삭제
+title: 설치·업데이트·삭제
 layout: /src/layouts/autonum.astro
-lastUpdated: 2026-04-01
+lastUpdated: 2026-10-31
 ---
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -53,7 +53,7 @@ git clone --recursive https://github.com/end-4/dots-hyprland && cd dots-hyprland
   - 개발 중인 `dist-nix`는 크로스 배포판 지원을 목표로 합니다. [Debian](https://www.debian.org/)과 같이 비교적 오래된 패키지를 사용하는 배포판의 경우 illogical-impulse를 설치할 수 있는 거의 유일한 방법입니다. 시도해 보려면 [#2382](https://github.com/end-4/dots-hyprland/discussions/2382)를 참고하세요.
 
 
-아래 두 가지 방법 중 하나를 사용하세요. 첫 번째 방법이 두 번째 방법보다 편리한 래퍼 역할을 합니다.
+아래 두 방법 중 하나를 선택하세요. 첫 번째 방법은 두 번째 방법을 간편하게 실행하는 래퍼입니다.
 
 <Tabs>
 <TabItem label="온라인 스크립트 사용">
@@ -261,10 +261,10 @@ cd ~/.cache/dots-hyprland && git stash && git pull && ./setup install
 ```
 :::
 
-현재는 업데이트 확인 프로그램이나 자동 업데이트 시스템이 없습니다. 설치 스크립트는 멱등성을 갖도록 설계되었으므로, 닷파일을 업데이트하려면 리포지토리에서 최신 변경 사항을 불러온(pull) 후 설치 스크립트를 다시 실행해야 합니다.
+현재 업데이트 확인 프로그램이나 자동 업데이트 시스템은 없습니다. 설치 스크립트는 멱등성을 갖도록 설계되어 있으므로, 닷파일을 업데이트하려면 리포지토리에서 최신 변경 사항을 가져온(pull) 뒤 설치 스크립트를 다시 실행하세요.
 1. 리포지토리 디렉토리로 이동(`cd`)합니다. 다른 곳에 클론하지 않았다면 기본값은 `~/.cache/dots-hyprland`입니다.
 2. `git stash`를 실행하여 로컬 변경 사항을 임시 저장합니다. 설치 스크립트가 Git으로 추적되는 로컬 파일을 수정하지 않는 것이 이상적이지만 예외가 발생할 수 있으므로, 최신 코드를 당겨오기 전에 stash를 수행해야 합니다.
-3. `git pull`을 실행하여 리포지토리에서 최신 변경 사항을 가저옵니다.
+3. `git pull`을 실행하여 리포지토리에서 최신 변경 사항을 가져옵니다.
 4. `./setup install`을 다시 실행합니다.
     - 스크립트가 업데이트하지 않기를 바라는 단계는 건너뛰세요 (특히 `rsync ...` 단계는 **대상 경로 하위의 파일을 덮어쓰므로** 주의해야 합니다). 일반적으로 `dots/.config/quickshell`이 포함된 `rsync` 단계는 그대로 진행하는 것이 좋습니다.
 
